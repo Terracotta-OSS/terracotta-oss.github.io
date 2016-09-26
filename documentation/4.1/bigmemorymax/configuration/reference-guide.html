@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/bigmemorymax/configuration/reference-guide.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <h1 id="bigmemory-max-configuration-reference-{#53258}">BigMemory Max Configuration Reference {#53258}</h1><div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#bigmemory-max-configuration-reference-{#53258}">
+                        <span class="toctext">BigMemory Max Configuration Reference {#53258}</span>
+                     </a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-2">
+                           <a href="#dynamically-changing-cache-configuration">
+                              <span class="toctext">Dynamically Changing Cache Configuration</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#how-server-settings-can-override-client-settings">
+                              <span class="toctext">How Server Settings Can Override Client Settings</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#passing-copies-instead-of-references">
+                              <span class="toctext">Passing Copies Instead of References</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#special-system-properties">
+                              <span class="toctext">Special System Properties</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-6">
+                           <a href="#non-blocking-disconnected-(nonstop)-cache">
+                              <span class="toctext">Non-Blocking Disconnected (Nonstop) Cache</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-7">
+                           <a href="#how-configuration-affects-element-eviction-{#30343}">
+                              <span class="toctext">How Configuration Affects Element Eviction {#30343}</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-8">
+                           <a href="#understanding-performance-and-cache-consistency-{#30971}">
+                              <span class="toctext">Understanding Performance and Cache Consistency {#30971}</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-9">
+                           <a href="#cache-events-in-a-terracotta-cluster-{#82378}">
+                              <span class="toctext">Cache Events in a Terracotta Cluster {#82378}</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-10">
+                           <a href="#configuring-caches-for-high-availability">
+                              <span class="toctext">Configuring Caches for High Availability</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-11">
+                           <a href="#working-with-transactional-caches-{#93038}">
+                              <span class="toctext">Working With Transactional Caches {#93038}</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-12">
+                           <a href="#working-with-osgi">
+                              <span class="toctext">Working With OSGi</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<p>BigMemory Max uses the standard Ehcache configuration file to set clustering and consistency behavior, optimize cached data, provide support for JTA and OSGi, and more.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc</td>
+      <td>2:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="dynamically-changing-cache-configuration">Dynamically Changing Cache Configuration</h2>
+<p>While most of the BigMemory Max configuration is not changeable after startup, certain cache configuration parameters can be modified dynamically at runtime. These include the following:</p>
+
+<ul>
+  <li>Expiration settings
+    <ul>
+      <li>
+        <p>timeToLive – The maximum number of seconds an element can exist in the cache regardless of access. The element expires at this limit and will no longer be returned from the cache. The default value is 0, which means no TTL eviction takes place (infinite lifetime).</p>
+      </li>
+      <li>
+        <p>timeToIdle – The maximum number of seconds an element can exist in the cache without being accessed. The element expires at this limit and will no longer be returned from the cache. The default value is 0, which means no TTI eviction takes place (infinite lifetime).</p>
+      </li>
+    </ul>
+
+    <p>Note that the <code class="highlighter-rouge">eternal</code> attribute, when set to “true”, overrides <code class="highlighter-rouge">timeToLive</code> and <code class="highlighter-rouge">timeToIdle</code> so that no expiration can take place.</p>
+  </li>
+  <li>Local sizing attributes
+    <ul>
+      <li>maxEntriesLocalHeap</li>
+      <li>maxBytesLocalHeap</li>
+      <li>maxEntriesLocalDisk</li>
+      <li>maxBytesLocalDisk.</li>
+    </ul>
+  </li>
+  <li>memory-store eviction policy</li>
+  <li>CacheEventListeners can be added and removed dynamically</li>
+</ul>
+
+<p>This example shows how to dynamically modify the cache configuration of a running cache:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Cache cache = manager.getCache("sampleCache");
+CacheConfiguration config = cache.getCacheConfiguration();
+config.setTimeToIdleSeconds(60);
+config.setTimeToLiveSeconds(120);
+config.setmaxEntriesLocalHeap(10000);
+config.setmaxEntriesLocalDisk(1000000);
+</code></pre>
+</div>
+
+<p>Dynamic cache configurations can also be disabled to prevent future changes:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Cache cache = manager.getCache("sampleCache");
+cache.disableDynamicFeatures();
+</code></pre>
+</div>
+
+<p>In <code class="highlighter-rouge">ehcache.xml</code>, you can disable dynamic configuration by setting the <code class="highlighter-rouge">&lt;ehcache&gt;</code> element’s <code class="highlighter-rouge">dynamicConfig</code> attribute to “false”.</p>
+
+<h3 id="dynamic-configuration-changes-for-distributed-bigmemory-max">Dynamic Configuration Changes for Distributed BigMemory Max</h3>
+<p>Just as for standalone BigMemory, mutating the configuration of distributed BigMemory requires access to the set methods of <code class="highlighter-rouge">cache.getCacheConfiguration()</code>.</p>
+
+<p>The following table provides information for dynamically changing common configuration options in a Terracotta cluster. The table’s Scope column, which specifies where the configuration is in effect, can have one of the following values:</p>
+
+<ul>
+  <li>Client – The Terracotta client where the CacheManager runs.</li>
+  <li>TSA – The Terracotta Server Array for the cluster.</li>
+  <li>BOTH – Both the client and the TSA.</li>
+</ul>
+
+<p>Note that configuration options whose scope covers “BOTH” are distributed and therefore affect a cache on all clients.</p>
+
+<table>
+<tr><th>Configuration Option</th><th>Dynamic</th><th>Scope</th><th>Notes</th></tr>
+<tr>
+<td>Cache name</td>
+<td>NO</td>
+<td>TSA</td>
+<td></td>
+</tr><tr>
+<td>Nonstop</td>
+<td>NO</td>
+<td>Client</td>
+<td>Enable High Availability</td>
+</tr><tr>
+<td>Timeout</td>
+<td>YES</td>
+<td>Client</td>
+<td>For nonstop.</td>
+</tr><tr>
+<td>Timeout Behavior</td>
+<td>YES</td>
+<td>Client</td>
+<td>For nonstop.</td>
+</tr><tr>
+<td>Immediate Timeout When Disconnected</td>
+<td>YES</td>
+<td>Client</td>
+<td>For nonstop.</td>
+</tr><tr>
+<td>Time to Idle</td>
+<td>YES</td>
+<td>BOTH</td>
+<td></td>
+</tr><tr>
+<td>Time to Live</td>
+<td>YES</td>
+<td>BOTH</td>
+<td></td>
+</tr><tr>
+<td>Maximum Entries or Bytes in Local Stores</td>
+<td>YES</td>
+<td>Client</td>
+<td>This and certain other sizing attributes may be pooled by the CacheManager, creating limitations on how they can be changed.</td>
+</tr><tr>
+<td>Maximum Entries in Cache</td>
+<td>YES</td>
+<td>TSA</td>
+<td></td>
+</tr><tr>
+<td>Persistence Strategy</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr><tr>
+<td>Disk Expiry Thread Interval</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr><tr>
+<td>Disk Spool Buffer Size</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr><tr>
+<td>Maximum Off-heap</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Maximum off-heap memory allotted to the TSA.</td>
+</tr><tr>
+<td>Eternal</td>
+<td>YES</td>
+<td>BOTH</td>
+<td></td>
+</tr><tr>
+<td>Pinning</td>
+<td>NO</td>
+<td>BOTH</td>
+<td>See <a href="/documentation/4.1/bigmemorymax/configuration/data-life">Pinning, Expiration, and Eviction</a>.</td>
+</tr><tr>
+<td>Clear on Flush</td>
+<td>NO</td>
+<td>Client</td>
+<td></td>
+</tr><tr>
+<td>Copy on Read</td>
+<td>NO</td>
+<td>Client</td>
+<td></td>
+</tr><tr>
+<td>Copy on Write</td>
+<td>NO</td>
+<td>Client</td>
+<td></td>
+</tr><tr>
+<td>Statistics</td>
+<td>YES</td>
+<td>Client</td>
+<td>Cache statistics. Change dynamically with <code>cache.setStatistics(boolean)</code> method.</td>
+</tr><tr>
+<td>Logging</td>
+<td>NO</td>
+<td>Client</td>
+<td>Ehcache and Terracotta logging is specified in configuration. However, <a href="/documentation/4.1/bigmemorymax/api/cluster-events">cluster events</a> can be set dynamically.</td>
+</tr><tr>
+<td>Consistency</td>
+<td>NO</td>
+<td>Client</td>
+<td>It is possible to switch to and from <a href="/documentation/4.1/bigmemorymax/api/bulk-loading">bulk mode</a>.</td>
+</tr><tr>
+<td>Synchronous Writes</td>
+<td>NO</td>
+<td>Client</td>
+<td></td>
+</tr>
+</table>
+
+<p>To apply non-dynamic L1 changes, remove the existing cache and then add (to the same CacheManager) a new cache with the same name as the removed cache, and which has the new configuration. Restarting the CacheManager with an updated configuration, where all cache names are the same as in the previous configuration, will also apply non-dynamic L1 changes.</p>
+
+<h2 id="how-server-settings-can-override-client-settings">How Server Settings Can Override Client Settings</h2>
+
+<p>The tc.property <code class="highlighter-rouge">ehcache.clustered.config.override.mode</code> allows you to determine if and how the cache settings on the server override the cache settings on the client. You can set this tc.property in the <code class="highlighter-rouge">tc-config.xml</code> or define it as a system property with the <code class="highlighter-rouge">com.tc.</code> prefix.</p>
+
+<p>The possible values are:</p>
+
+<ul>
+  <li>NONE - Default behavior: any discrepancy between the client and server versions of a cache configuration option causes the client to throw an exception.</li>
+  <li>GLOBAL - Allows any cache-wide settings from the server to override those from the client. For example, if a client were to join with a <code class="highlighter-rouge">TTI=10</code> while the server has a <code class="highlighter-rouge">TTI=15</code>, then
+    <ul>
+      <li>The server TTI value overrides the client TTI value</li>
+      <li>Local settings, such as <code class="highlighter-rouge">maxEntriesLocalHeap</code>, are not overriden.</li>
+    </ul>
+  </li>
+  <li>ALL - Causes the client to accept all values from the server’s configuration. This includes the cache-wide settings of GLOBAL as well as the local settings, such as <code class="highlighter-rouge">maxBytesLocalHeap</code>.</li>
+</ul>
+
+<h2 id="passing-copies-instead-of-references">Passing Copies Instead of References</h2>
+<p>By default, a <code class="highlighter-rouge">get()</code> operation on store data returns a reference to that data, and any changes to that data are immediately reflected in the memory store. In cases where an application requires a <em>copy</em> of data rather than a reference to it, you can configure the store to return a copy. This allows you to change a copy of the data without affecting the original data in the memory store.</p>
+
+<p>This is configured using the <code class="highlighter-rouge">copyOnRead</code> and <code class="highlighter-rouge">copyOnWrite</code> attributes of the &lt;cache&gt; and &lt;defaultCache elements in your configuration, or programmatically as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CacheConfiguration config = new CacheConfiguration("copyCache", 1000)
+                                   .copyOnRead(true).copyOnWrite(true);
+Cache copyCache = new Cache(config);
+</code></pre>
+</div>
+
+<p>The default configuration is “false” for both options.</p>
+
+<p>To copy elements on <code class="highlighter-rouge">put()</code>-like and/or <code class="highlighter-rouge">get()</code>-like operations, a copy strategy is used. The default implementation uses serialization to copy elements. You can provide your own implementation of <code class="highlighter-rouge">net.sf.ehcache.store.compound.CopyStrategy</code> using the &lt;copyStrategy&gt; element:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="copyCache"
+    maxEntriesLocalHeap="10"
+    eternal="false"
+    timeToIdleSeconds="5"
+    timeToLiveSeconds="10"
+    copyOnRead="true"
+    copyOnWrite="true"&gt;
+  &lt;copyStrategy class="com.company.ehcache.MyCopyStrategy"/&gt;
+&lt;/cache&gt;
+</code></pre>
+</div>
+
+<p>A single instance of your <code class="highlighter-rouge">CopyStrategy</code> is used per cache. Therefore, in your implementation of <code class="highlighter-rouge">CopyStrategy.copy(T)</code>, T has to be thread-safe.</p>
+
+<p>A copy strategy can be added programmatically in the following way:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CacheConfiguration cacheConfiguration = new CacheConfiguration("copyCache", 10);
+
+CopyStrategyConfiguration copyStrategyConfiguration = new CopyStrategyConfiguration();
+copyStrategyConfiguration.setClass("com.company.ehcache.MyCopyStrategy");
+
+cacheConfiguration.addCopyStrategy(copyStrategyConfiguration);
+</code></pre>
+</div>
+
+<h2 id="special-system-properties">Special System Properties</h2>
+
+<p>
+   <a id="net.sf.ehcache.disabled"></a>
+</p>
+<h3 id="netsfehcachedisabled">net.sf.ehcache.disabled</h3>
+<p>Setting this system property to <code class="highlighter-rouge">true</code> (using <code class="highlighter-rouge">java -Dnet.sf.ehcache.disabled=true</code> in the Java command line) disables caching in ehcache. If disabled, no elements can be added to a cache (puts are silently discarded).</p>
+
+<p>
+   <a id="net.sf.ehcache.use.classic.lru"></a>
+</p>
+<h3 id="netsfehcacheuseclassiclru">net.sf.ehcache.use.classic.lru</h3>
+<p>When LRU is selected as the eviction policy, set this system property to <code class="highlighter-rouge">true</code> (using <code class="highlighter-rouge">java -Dnet.sf.ehcache.use.classic.lru=true</code> in the Java command line) to use the older LruMemoryStore implementation. This is provided for ease of migration.</p>
+
+<p>
+   <a id="96087"></a>
+</p>
+<h2 id="non-blocking-disconnected-(nonstop)-cache">Non-Blocking Disconnected (Nonstop) Cache</h2>
+
+<p>A nonstop cache allows certain cache operations to proceed on clients that have become disconnected from the cluster or if a cache operation cannot complete by the nonstop timeout value. One way clients go into nonstop mode is when they receive a “cluster offline” event. Note that a nonstop cache can go into nonstop mode even if the node is not disconnected, such as when a cache operation is unable to complete within the timeout interval allotted by the nonstop configuration.</p>
+
+<h3 id="configuring-nonstop">Configuring Nonstop</h3>
+
+<p>Nonstop is configured in a <code class="highlighter-rouge">&lt;cache&gt;</code> block under the <code class="highlighter-rouge">&lt;terracotta&gt;</code> sub-element. In the following example, myCache has nonstop configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache" maxEntriesLocalHeap="10000" eternal="false"&gt;
+   &lt;persistence strategy="distributed"/&gt;
+   &lt;terracotta&gt;
+     &lt;nonstop immediateTimeout="false" timeoutMillis="30000"&gt;
+       &lt;timeoutBehavior type="noop" /&gt;
+     &lt;/nonstop&gt;
+   &lt;/terracotta&gt;
+&lt;/cache&gt;
+</code></pre>
+</div>
+
+<p>Nonstop is enabled by default or if <code class="highlighter-rouge">&lt;nonstop&gt;</code> appears in a cache’s <code class="highlighter-rouge">&lt;terracotta&gt;</code> block.</p>
+
+<h3 id="nonstop-timeouts-and-behaviors">Nonstop Timeouts and Behaviors</h3>
+
+<p>Nonstop caches can be configured with the following attributes:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">enabled</code> –  Enables (“true” DEFAULT) or disables (“false”) the ability of a cache to execute certain actions after a Terracotta client disconnects. This attribute is optional for enabling nonstop.</li>
+  <li><code class="highlighter-rouge">immediateTimeout</code> –  Enables (“true”) or disables (“false” DEFAULT) an immediate timeout response if the Terracotta client detects a network interruption (the node is disconnected from the cluster). If enabled, the first request made by a client can take up to the time specified by <code class="highlighter-rouge">timeoutMillis</code> and subsequent requests are timed out immediately.</li>
+  <li><code class="highlighter-rouge">timeoutMillis</code> –  Specifies the number of milliseconds an application waits for any cache operation to return before timing out. The default value is 30000 (thirty seconds). The behavior after the timeout occurs is determined by <code class="highlighter-rouge">timeoutBehavior</code>.</li>
+</ul>
+
+<p><code class="highlighter-rouge">&lt;nonstop&gt;</code> has one self-closing sub-element, &lt;timeoutBehavior&gt;. This subelement determines the response after a timeout occurs (<code class="highlighter-rouge">timeoutMillis</code> expires or an immediate timeout occurs). The response can be set by the &lt;timeoutBehavior&gt; attribute <code class="highlighter-rouge">type</code>. This attribute can have one of the values listed in the following table:</p>
+
+<table>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+</tr>
+<tr>
+<td>
+<code>exception</code>
+</td>
+<td>
+(DEFAULT) Throw <code>NonStopCacheException</code>. See <a href="#97568">When is NonStopCacheException Thrown?</a> for more information on this exception.
+</td>
+</tr>
+<tr>
+<td>
+<code>noop</code>
+</td>
+<td>
+Return null for gets. Ignore all other cache operations. Hibernate users may want to use this option to allow their application to continue with an alternative data source.
+</td>
+</tr>
+<tr>
+<td>
+<code>localReads</code>
+</td>
+<td>
+For caches with Terracotta clustering, allow inconsistent reads of cache data. Ignore all other cache operations. For caches without Terracotta clustering, throw an exception.
+</td>
+</tr>
+</table>
+
+<h4 id="tuning-nonstop-timeouts-and-behaviors-78696">Tuning Nonstop Timeouts and Behaviors {#78696}</h4>
+
+<p>You can tune the default timeout values and behaviors of nonstop caches to fit your environment.</p>
+
+<h5 id="network-interruptions">Network Interruptions</h5>
+<p>For example, in an environment with regular network interruptions, consider disabling <code class="highlighter-rouge">immediateTimeout</code> and increasing <code class="highlighter-rouge">timeoutMillis</code> to prevent timeouts for most of the interruptions.</p>
+
+<p>For a cluster that experiences regular but short network interruptions, and in which caches clustered with Terracotta carry read-mostly data or there is tolerance of potentially stale data, you might want to set <code class="highlighter-rouge">timeoutBehavior</code> to <code class="highlighter-rouge">localReads</code>.</p>
+
+<h5 id="slow-cache-operations">Slow Cache Operations</h5>
+<p>In an environment where cache operations can be slow to return and data is required to always be in sync, increase <code class="highlighter-rouge">timeoutMillis</code> to prevent frequent timeouts. Set <code class="highlighter-rouge">timeoutBehavior</code> to <code class="highlighter-rouge">noop</code> to force the application to get data from another source or <code class="highlighter-rouge">exception</code> if the application has stopped.</p>
+
+<p>For example, a <code class="highlighter-rouge">cache.acquireWriteLockOnKey(key)</code> operation might exceed the nonstop timeout while waiting for a lock. This would trigger nonstop mode only because the lock could not be acquired in time. To avoid this problem,use <code class="highlighter-rouge">cache.tryWriteLockOnKey(key, timeout)</code> with the method’s timeout set to less than the nonstop timeout.</p>
+
+<h5 id="bulk-loading">Bulk Loading</h5>
+<p>If a nonstop cache is bulk-loaded using the <a href="../api/bulk-loading">Bulk-Load API</a>, a multiplier is applied to the configured nonstop timeout whenever the method <code class="highlighter-rouge">net.sf.ehcache.Ehcache.setNodeBulkLoadEnabled(boolean)</code> is used. The default value of the multiplier is 10. You can tune the multiplier using the <code class="highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code> system property:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-Dnet.sf.ehcache.nonstop.bulkOpsTimeoutMultiplyFactor=10
+</code></pre>
+</div>
+
+<p>Note that when nonstop is enabled, the cache size displayed in the TMC is subject to the <code class="highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code>. Increasing this multiplier on the clients can facilitate more accurate size reporting.</p>
+
+<p>This multiplier also affects the methods <code class="highlighter-rouge">net.sf.ehcache.Ehcache.getAll()</code>, <code class="highlighter-rouge">net.sf.ehcache.Ehcache.removeAll()</code>, and <code class="highlighter-rouge">net.sf.ehcache.Ehcache.removeAll(boolean)</code>.</p>
+
+<h4 id="when-is-nonstopcacheexception-thrown-97568">When is NonStopCacheException Thrown? {#97568}</h4>
+
+<p>NonStopCacheException is usually thrown when it is the configured behavior for a nonstop cache in a client that disconnects from the cluster. In the following example, the exception would be thrown 30 seconds after the disconnection (or the “cluster offline” event is received):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;nonstop immediateTimeout="false" timeoutMillis="30000"&gt;
+&lt;timeoutBehavior type="exception" /&gt;
+&lt;/nonstop&gt;
+</code></pre>
+</div>
+
+<p>However, under certain circumstances the NonStopCache exception can be thrown even if a nonstop cache’s timeout behavior is <em>not</em> set to throw the exception. This can happen when the cache goes into nonstop mode during an attempt to acquire or release a lock. These lock operations are associated with certain lock APIs and special cache types such as <a href="../api/explicitlocking">Explicit Locking</a>, BlockingCache, SelfPopulatingCache, and UpdatingSelfPopulatingCache.</p>
+
+<p>A NonStopCacheException can also be thrown if the cache must fault in an element to satisfy a <code class="highlighter-rouge">get()</code> operation. If the Terracotta Server Array cannot respond within the configured nonstop timeout, the exception is thrown.</p>
+
+<p>A related exception, InvalidLockAfterRejoinException, can be thrown during or after client rejoin (see <a href="#71266">Using Rejoin to Automatically Reconnect Terracotta Clients</a>). This exception occurs when an unlock operation takes place on a lock obtained <em>before</em> the rejoin attempt completed.</p>
+
+<table>
+<caption>TIP: Use try-finally Blocks</caption>
+<tr>
+<td>
+To ensure that locks are released properly, application code using Ehcache lock APIs should encapsulate lock-unlock operations with try-finally blocks:
+
+    myLock.acquireLock();
+    try {
+      // Do some work.
+    } finally {
+      myLock.unlock();
+    }
+</td>
+</tr>
+</table>
+
+<h2 id="how-configuration-affects-element-eviction-{#30343}">How Configuration Affects Element Eviction {#30343}</h2>
+
+<p>Element eviction is a crucial part of keeping cluster resources operating efficiently. Element eviction and expiration are related, but an expired element is not necessarily evicted immediately and an evicted element is not necessarily an expired element. Cache elements might be evicted due to resource and configuration constraints, while expired elements are evicted from the Terracotta client when a <em>get</em> or <em>put</em> operation occurs on that element (sometimes called <em>inline</em> eviction).</p>
+
+<p>The Terracotta server array contains the full key set (as well as all values), while clients contain a subset of keys and values based on elements they have faulted in from the server array.</p>
+
+<p>Typically, an expired cache element is evicted, or more accurately flushed, from a client tier to a lower tier when a <code class="highlighter-rouge">get()</code> or <code class="highlighter-rouge">put()</code> operation occurs on that element. However, a client may also flush expired, and then unexpired elements, whenever a cache’s sizing limit for a specific tier is reached or it is under memory pressure. This type of eviction is intended to meet configured and real memory constraints.</p>
+
+<p>To learn about eviction and controlling the size of the cache, see <a href="/documentation/4.1/bigmemorymax/configuration/data-life">data life</a> and <a href="/documentation/4.1/bigmemorymax/configuration/cache-size">sizing tiers</a>.</p>
+
+<p>Flushing from clients does not mean eviction from the server array. Servers will evict expired elements and elements can become candidates for eviction from the server array when servers run low on allocated BigMemory. Unexpired elements can also be evicted if they meet the following criteria:</p>
+
+<ul>
+  <li>They are in a cache with infinite TTI/TTL (Time To Idle and Time To Live), or no explicit settings for TTI/TTL.
+  Enabling a cache’s <code class="highlighter-rouge">eternal</code> flag overrides any finite TTI/TTL values that have been set.</li>
+  <li>They are not resident on any Terracotta client.
+  These elements can be said to have been “orphaned”. Once evicted, they will have to be faulted back in from a system of record if requested by a client.</li>
+</ul>
+
+<p>For more information about Terracotta Server Array data eviction, refer to <a href="/documentation/4.1/terracotta-server-array/operations#automatic-resource-management">Automatic Resource Management</a>.</p>
+
+<h2 id="understanding-performance-and-cache-consistency-{#30971}">Understanding Performance and Cache Consistency {#30971}</h2>
+
+<p>Cache consistency modes are configuration settings and API methods that control the behavior of clustered caches with respect to balancing data consistency and application performance. A cache can be in one of the following consistency modes:</p>
+
+<ul>
+  <li>
+    <p><strong>Strong</strong> – This mode ensures that data in the cache remains consistent across the cluster at all times. It guarantees that a read gets an updated value only after all write operations to that value are completed, and that each put operation is in a separate transaction. The use of locking and transaction acknowledgments maximizes consistency at <strong>a potentially substantial cost in performance</strong>. This mode is set using the Ehcache configuration file and cannot be changed programmatically (see the attribute “consistency” in <a href="distributed-configuration#70873"><code class="highlighter-rouge">&lt;terracotta&gt;</code></a>).</p>
+  </li>
+  <li>
+    <p><strong>Eventual</strong> –  This mode guarantees that data in the cache will eventually be consistent. Read/write performance is substantially boosted at the cost of potentially having an inconsistent cache for brief periods of time. This mode is set using the Ehcache configuration file and cannot be changed programmatically (see the attribute “consistency” in <a href="distributed-configuration#70873"><code class="highlighter-rouge">&lt;terracotta&gt;</code></a>).</p>
+  </li>
+</ul>
+
+<p>To optimize consistency and performance, consider using eventually consistent caches while selectively using appropriate locking in your application where cluster-wide consistency is critical at all times. Eventual cache operations that are explicitly locked become strongly consistent with respect to each other (but not with respect to non locked operations). For example, a reservation system could be designed with an eventual cache that is only explicitly locked when a customer starts to make a reservation; with this design, eventually consistent data would be available during a customer’s search, but during the reservation process, reads and writes would be strongly consistent.</p>
+
+<ul>
+  <li><strong>Bulk Load</strong> –  This mode is optimized for bulk-loading data into the cache without the slowness introduced by locks or regular eviction. It is similar to the eventual mode, but has batching, higher write speeds, and weaker consistency guarantees. This mode is set using the bulk-load API only (see <a href="../api/bulk-loading">Bulk-Load API</a>). When turned off, allows the configured consistency mode (either strong or eventual) to take effect again.</li>
+</ul>
+
+<p>Use configuration to set the permanent consistency mode for a cache as required for your application, and the bulk-load mode only during the time when populating (warming) or refreshing the cache.</p>
+
+<p>The following APIs and settings also affect consistency:</p>
+
+<ul>
+  <li><strong>Explicit Locking</strong> –  This API provides methods for cluster-wide (application-level) locking on specific elements in a cache. There is guaranteed consistency across the cluster at all times for operations on elements covered by a lock. When used with the strong consistency mode in a cache, <em>each cache operation</em> is committed in a single transaction. When used with the eventual consistency mode in a cache, <em>all cache operations covered by an explicit lock</em> are committed in a single transaction. While explicit locking of elements provides fine-grained locking, there is still the potential for contention, blocked threads, and increased performance overhead from managing clustered locks. See <a href="../api/explicitlocking">Explicit Locking</a> for more information.</li>
+  <li><strong>UnlockedReadsView</strong> –  A cache decorator that allows dirty reads of the cache. This decorator can be used only with caches in the strong consistency mode. UnlockedReadsView raises performance for this mode by bypassing the requirement for a read lock. See <a href="../api/unlocked-reads-view">Unlocked Reads for Consistent Caches (UnlockedReadsView)</a> for more information.</li>
+  <li><strong>Bulk-loading methods</strong> – Bulk-loading Cache methods putAll(), getAll(), and removeAll() provide high-performance and eventual consistency. These can also be used with strong consistency. If you can use them, it’s unnecessary to use bulk-load mode.</li>
+  <li>
+    <p><strong>Atomic methods</strong> –  To guarantee write consistency at all times and avoid potential race conditions for put operations, use atomic methods. The following Compare and Swap (CAS) operations are available:</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">cache.replace(Element old, Element new)</code>  — Conditionally replaces the specified key’s old value with the new value, if the currently existing value matches the old value.</li>
+      <li><code class="highlighter-rouge">cache.replace(Element)</code> — Maps the specified key to the specified value, if the key is currently mapped to some value.</li>
+      <li><code class="highlighter-rouge">cache.putIfAbsent(Element)</code> — Puts the specified key/value pair into the cache only if the key has no currently assigned value. Unlike <code class="highlighter-rouge">put</code>, which can replace an existing key/value pair, <code class="highlighter-rouge">putIfAbsent</code> creates the key/value pair only if it is not present in the cache.</li>
+      <li><code class="highlighter-rouge">cache.removeElement(Element)</code> — Conditionally removes the specified key, if it is mapped to the specified value.</li>
+    </ul>
+
+    <p>Normally, these methods are used with strong consistency. Unless the property <code class="highlighter-rouge">org.terracotta.clusteredStore.eventual.cas.enabled</code> is set to “true”, these methods throw an UnsupportedOperationException if used with eventual consistency since a race condition cannot be prevented. Other ways to guarantee the return value in eventual consistency are to use the <a href="/documentation/4.1/bigmemorymax/api/cache-decorators">cache decorator</a> StronglyConsistentCacheAccessor, or to use locks (see <a href="../api/explicitlocking">Explicit Locking</a>). The StronglyConsistentCacheAccessor will use locks with its special substituted versions of the atomic methods. Note that using locks may impact performance.</p>
+  </li>
+</ul>
+
+<h2 id="cache-events-in-a-terracotta-cluster-{#82378}">Cache Events in a Terracotta Cluster {#82378}</h2>
+
+<p>Cache events are fired for certain cache operations:</p>
+
+<ul>
+  <li><strong>Evictions</strong> –  An eviction on a client generates an eviction event on that client. An eviction on a Terracotta server fires an event on a random client.</li>
+  <li><strong>Puts</strong> –  A <code class="highlighter-rouge">put()</code> on a client generates a put event on that client.</li>
+  <li><strong>Updates</strong> –  If a cache uses fast restart, then an update on a client generates a put event on that client.</li>
+  <li><strong>Orphan eviction</strong> –  An orphan is an element that exists only on the Terracotta Server Array. If an orphan is evicted, an eviction event is fired on a random client.</li>
+</ul>
+
+<p>See <a href="/documentation/4.1/bigmemorymax/configuration/distributed-configuration#20075">Cache Events Configuration</a> for more information on configuring the scope of cache events.</p>
+
+<h3 id="handling-cache-update-events">Handling Cache Update Events</h3>
+
+<p>Caches generate put events whenever elements are put or updated. If it is important for your application to distinguish between puts and updates, check for the existence of the element during <code class="highlighter-rouge">put()</code> operations:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if (cache.containsKey(key)) {
+  cache.put(element);
+  // Action in the event handler on replace.
+} else {
+  cache.put(element);
+  // Action in the event handler on new puts.
+}
+</code></pre>
+</div>
+
+<p>To protect against races, wrap the if block with explicit locks (see <a href="../api/explicitlocking">Explicit Locking</a>). You can also use the atomic cache methods putIfAbsent() or to check for the existence of an element:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Returns null if successful or returns the existing (old) element.
+if((olde = cache.putIfAbsent(element)) == null) {
+
+  // Action in the event handler on new puts.
+
+} else {
+  cache.replace(old, newElement); // Returns true if successful.
+  // Action in the event handler on replace.
+}
+</code></pre>
+</div>
+
+<p>If your code cannot use these approaches (or a similar workaround), you can force update events for cache updates by setting the Terracotta property <code class="highlighter-rouge">ehcache.clusteredStore.checkContainsKeyOnPut</code> at the top of the Terracotta configuration file (<code class="highlighter-rouge">tc-config.xml</code> by default) before starting the Terracotta Server Array:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+ &lt;property name="ehcache.clusteredStore.checkContainsKeyOnPut" value="true" /&gt;
+&lt;/tc-properties&gt;
+</code></pre>
+</div>
+
+<p>
+   <strong>Enabling this property can substantially degrade performance.</strong>
+</p>
+
+<h2 id="configuring-caches-for-high-availability">Configuring Caches for High Availability</h2>
+
+<p>Enterprise Ehcache caches provide the following High Availability (HA) settings:</p>
+
+<ul>
+  <li><strong>Non-blocking cache</strong> –  Also called nonstop cache. When enabled, this attribute gives the cache the ability to take a configurable action after the Terracotta client receives a cluster-offline event. See <a href="#96087">Non-Blocking Disconnected (Nonstop) Cache</a> for more information.</li>
+  <li><strong>Rejoin</strong> –  The rejoin attribute allows a Terracotta client to reconnect to the cluster after it receives a cluster-online event. See <a href="#71266">Using Rejoin to Automatically Reconnect Terracotta Clients</a> for more information.</li>
+</ul>
+
+<p>To learn about configuring HA in a Terracotta cluster, see <a href="/documentation/4.1/terracotta-server-array/high-availability">Configuring Terracotta Clusters For High Availability</a>.</p>
+
+<h3 id="using-rejoin-to-automatically-reconnect-terracotta-clients-71266">Using Rejoin to Automatically Reconnect Terracotta Clients {#71266}</h3>
+
+<p>A Terracotta client might disconnect and be timed out (ejected) from the cluster. Typically, this occurs because of network communication interruptions lasting longer than the configured HA settings for the cluster. Other causes include long GC pauses and slowdowns introduced by other processes running on the client hardware.</p>
+
+<p>You can configure clients to automatically rejoin a cluster after they are ejected. If the ejected client continues to run under nonstop cache settings, and then senses that it has reconnected to the cluster (receives a clusterOnline event), it can begin the rejoin process.</p>
+
+<p>Note the following about using the rejoin feature:</p>
+
+<ul>
+  <li>Rejoin is for CacheManagers with only nonstop caches. If one or more of a CacheManager’s caches is not set to be nonstop, and rejoin is enabled, an exception is thrown at initialization. An exception is also thrown in this case if a cache is created programmatically without nonstop.</li>
+  <li>Clients rejoin as new members and will wipe all cached data to ensure that no pauses or inconsistencies are introduced into the cluster.</li>
+  <li>Any nonstop-related operations that begin (and do not complete) before the rejoin operation completes may be unsuccessful and may generate a NonStopCacheException.</li>
+  <li>If a client with rejoin enabled is running in a JVM with Terracotta clients that do not have rejoin, then only that client will rejoin after a disconnection. The remaining clients cannot rejoin and may cause the application to behave unpredictably.</li>
+  <li>Once a client rejoins, the clusterRejoined event is fired on that client only.</li>
+</ul>
+
+<h4 id="configuring-rejoin">Configuring Rejoin</h4>
+
+<p>The rejoin feature is disabled by default. To enable the rejoin feature in an Enterprise Ehcache client, follow these steps:</p>
+
+<ol>
+  <li>Ensure that all of the caches in the Ehcache configuration file where rejoin is enabled have nonstop enabled.</li>
+  <li>Ensure that your application does not create caches on the client without nonstop enabled.</li>
+  <li>
+    <p>Enable the rejoin attribute in the client’s <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;terracottaConfig url="myHost:9510" rejoin="true" /&gt;
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>For more options on configuring <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code>, see the <a href="/documentation/4.1/bigmemorymax/configuration/distributed-configuration#35085">configuration reference</a>.</p>
+
+<h2 id="working-with-transactional-caches-{#93038}">Working With Transactional Caches {#93038}</h2>
+
+<p>Transactional caches add a level of safety to cached data and ensure that the cached data and external data stores are in sync. Distributed caches can support Java Transaction API (JTA) transactions as an XA resource. This is useful in JTA applications requiring caching, or where cached data is critical and must be persisted and remain consistent with System of Record data.</p>
+
+<p>However, transactional caches are slower than non-transactional caches due to the overhead from having to write transactionally. Transactional caches also have the following restrictions:</p>
+
+<ul>
+  <li>Data can be accessed only transactionally, even for read-only purposes.
+  You must encapsulate data access with <code class="highlighter-rouge">begin()</code> and <code class="highlighter-rouge">commit()</code> statements. This may not be necessary under certain circumstances (see, for example, the discussion on Spring in <a href="/documentation/4.1/bigmemorymax/api/jta#transactional-caches-with-spring">Transactions</a>).</li>
+  <li><code class="highlighter-rouge">copyOnRead</code> and <code class="highlighter-rouge">copyOnWrite</code> must be enabled.
+  These <code class="highlighter-rouge">&lt;cache&gt;</code> attributes are “false” by default and must set to “true”.</li>
+  <li>Caches must be strongly consistent.
+  A transactional cache’s <code class="highlighter-rouge">consistency</code> attribute must be set to “strong”.</li>
+  <li>Nonstop caches cannot be made transactional except in strict mode (xa_strict).
+  Transactional caches in other modes must <em>not</em> contain the <code class="highlighter-rouge">&lt;nonstop&gt;</code> subelement.</li>
+  <li>Decorating a transactional cache with UnlockedReadsView can return inconsistent results for data obtained through UnlockedReadsView.
+  Puts, and gets not through UnlockedReadsView, are not affected.</li>
+  <li>Objects stored in a transactional cache must override <code class="highlighter-rouge">equals()</code> and <code class="highlighter-rouge">hashCode()</code>.
+  If overriding <code class="highlighter-rouge">equals()</code> and <code class="highlighter-rouge">hashCode()</code> is not possible, see <a href="#48013">Implementing an Element Comparator</a>.</li>
+  <li>Caches can be dynamically changed to  bulk-load mode, but any attempt to perform a transaction when this is the case will throw a <code class="highlighter-rouge">CacheException</code>.</li>
+</ul>
+
+<p>For more information about transactional caches, see <a href="/documentation/4.1/bigmemorymax/api/jta">this API page</a>.</p>
+
+<p>You can choose one of three different modes for transactional caches:</p>
+
+<ul>
+  <li>Strict XA –  Has full support for XA transactions. May not be compatible with transaction managers that do not fully support JTA.</li>
+  <li>XA –  Has support for the most common JTA components, so likely to be compatible with most transaction managers. But unlike strict XA, may fall out of sync with a database after a failure (has no recovery). Integrity of cache data, however, is preserved.</li>
+  <li>Local –  Local transactions written to a local store and likely to be faster than the other transaction modes. This mode does not require a transaction manager and does not synchronize with remote data sources. Integrity of cache data is preserved in case of failure.</li>
+</ul>
+
+<table>
+<caption>NOTE: Deadlocks</caption>
+<tr>
+<td>
+Both the XA and local mode write to the underlying store synchronously and using pessimistic locking. Under certain circumstances, this can result in a deadlock, which generates a DeadLockException after a transaction times out and a commit fails. Your application should catch DeadLockException (or TransactionException) and call <code>rollback()</code>.
+
+Deadlocks can have a severe impact on performance. A high number of deadlocks indicates a need to refactor application code to prevent races between concurrent threads attempting to update the same data.
+</td>
+</tr>
+</table>
+
+<p>These modes are explained in the following sections.</p>
+
+<h3 id="strict-xa-support-for-all-jta-components">Strict XA (Support for All JTA Components)</h3>
+
+<p>Note that Ehcache as an XA resource:</p>
+
+<ul>
+  <li>Has an isolation level of ReadCommitted.</li>
+  <li>Updates the underlying store asynchronously, potentially creating update conflicts.
+  With this optimistic locking approach, Ehcache might force the transaction manager to roll back the entire transaction if a <code class="highlighter-rouge">commit()</code> generates a RollbackException (indicating a conflict).</li>
+  <li>Can work alongside other resources such as JDBC or JMS resources.</li>
+  <li>Guarantees that its data is always synchronized with other XA resources.</li>
+  <li>Can be configured on a per-cache basis (transactional and non-transactional caches can exist in the same configuration).</li>
+  <li>Automatically performs enlistment.</li>
+  <li>Can be used standalone or integrated with frameworks such as <a href="#45557">Hibernate</a>.</li>
+  <li>Is tested with the most common transaction managers by Atomikos, Bitronix, JBoss, WebLogic, and others.</li>
+</ul>
+
+<h4 id="configuration">Configuration</h4>
+
+<p>To configure a cache as an XA resource able to participate in JTA transactions, the following <code class="highlighter-rouge">&lt;cache&gt;</code> attributes must be set as shown:</p>
+
+<ul>
+  <li>transactionalMode=”xa_strict”</li>
+  <li>copyOnRead=”true”</li>
+  <li>copyOnWrite=”true”</li>
+</ul>
+
+<p>In addition, the <code class="highlighter-rouge">&lt;cache&gt;</code> subelement <code class="highlighter-rouge">&lt;terracotta&gt;</code> must not have clustering disabled.</p>
+
+<p>For example, the following cache is configured for JTA transactions with strict XA:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="com.my.package.Foo"
+     maxEntriesLocalHeap="500"
+     eternal="false"
+     copyOnRead="true"
+     copyOnWrite="true"
+     consistency="strong"
+     transactionalMode="xa_strict"&gt;
+   &lt;persistence strategy="distributed"/&gt;
+   &lt;terracotta /&gt;
+&lt;/cache&gt;
+</code></pre>
+</div>
+
+<p>Any other XA resource that could be involved in the transaction, such as a database, must also be configured to be XA compliant.</p>
+
+<h4 id="usage">Usage</h4>
+
+<p>Your application can directly use a transactional cache in transactions. This usage must occur after the transaction manager has been set to start a new transaction and before it has ended the transaction.</p>
+
+<p>For example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...
+myTransactionMan.begin();
+Cache fooCache = cacheManager.getCache("Foo");
+fooCache.put("1", "Bar");
+myTransactionMan.commit();
+...
+</code></pre>
+</div>
+
+<p>If more than one transaction writes to a cache, it is possible for an XA transaction to fail. See <a href="#67713">Avoiding XA Commit Failures With Atomic Methods</a> for more information.</p>
+
+<h4 id="setting-up-transactional-caches-in-hibernate-45557">Setting Up Transactional Caches in Hibernate {#45557}</h4>
+
+<p>If your application is using JTA, you can set up transactional caches in a second-level cache with Ehcache for Hibernate. To do so, ensure the following:</p>
+
+<h5 id="ehcache">Ehcache</h5>
+
+<ul>
+  <li>You are using Ehcache 2.1.0 or higher.</li>
+  <li>The attribute <code class="highlighter-rouge">transactionalMode</code> is set to "xa" or “xa-strict”.</li>
+  <li>
+    <p>The cache is clustered (the &lt;cache&gt; element has the subelement &lt;terracotta clustered="true"&gt;).
+For example, the following cache is configured to be transactional:</p>
+
+    <p>&lt;cache name=”com.my.package.Foo”
+       …
+       transactionalMode=”xa”&gt;
+     <terracotta></terracotta>
+  &lt;/cache&gt;</p>
+  </li>
+  <li>The cache UpdateTimestampsCache is not configured to be transactional.
+Hibernate updates to <code class="highlighter-rouge">org.hibernate.cache.UpdateTimestampsCache</code> prevent it from being able to participate in XA transactions.</li>
+</ul>
+
+<h5 id="hibernate">Hibernate</h5>
+
+<ul>
+  <li>You are using Hibernate 3.3.</li>
+  <li>The factory class used for the second-level cache is <code class="highlighter-rouge">net.sf.ehcache.hibernate.EhCacheRegionFactory</code>.</li>
+  <li>Query cache is turned off.</li>
+  <li>The value of <code class="highlighter-rouge">current_session_context_class</code> is <code class="highlighter-rouge">jta</code>.</li>
+  <li>The value of <code class="highlighter-rouge">transaction.manager_lookup_class</code> is the name of a TransactionManagerLookup class (see your Transaction Manager).</li>
+  <li>The value of <code class="highlighter-rouge">transaction.factory_class</code> is the name of a TransactionFactory class to use with the Hibernate Transaction API.</li>
+  <li>
+    <p>The cache concurrency strategy is set to TRANSACTIONAL.
+For example, to set the cache concurrency strategy for <code class="highlighter-rouge">com.my.package.Foo</code> in <code class="highlighter-rouge">hibernate.cfg.xml</code>:</p>
+
+    <class-cache class="com.my.package.Foo" usage="transactional"></class-cache>
+  </li>
+</ul>
+
+<p>Or in a Hibernate mapping file (hbm file):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache usage="transactional"/&gt;
+</code></pre>
+</div>
+
+<p>Or using annotations:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@Cache(usage=CacheConcurrencyStrategy.TRANSACTIONAL)
+public class Foo {...}
+</code></pre>
+</div>
+
+<p>
+   <strong>WARNING: Use the TRANSACTIONAL concurrency strategy with transactional caches only. Using with other types of caches will cause errors.</strong>
+</p>
+
+<h3 id="xa-basic-jta-support">XA (Basic JTA Support)</h3>
+
+<p>Transactional caches set to “xa” provide support for basic JTA operations. Configuring and using XA does not differ from using local transactions (see <a href="#20697">Local Transactions</a>), except that “xa” mode requires a transaction manager and allows the cache to participate in JTA transactions.</p>
+
+<table>
+<caption>NOTE: Atomikos Transaction Manager</caption>
+<tr>
+<td>
+When using XA with an Atomikos transaction Manager, be sure to set <code>com.atomikos.icatch.threaded_2pc=false</code> in the Atomikos configuration. This helps prevent unintended rollbacks due to a bug in the way Atomikos behaves under certain conditions.
+</td>
+</tr>
+</table>
+
+<p>For example, the following cache is configured for JTA transactions with XA:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="com.my.package.Foo"
+     maxEntriesLocalHeap="500"
+     eternal="false"
+     copyOnRead="true"
+     copyOnWrite="true"
+     consistency="strong"
+     transactionalMode="xa"&gt;
+   &lt;persistence strategy="distributed"/&gt;
+   &lt;terracotta /&gt;
+&lt;/cache&gt;
+</code></pre>
+</div>
+
+<p>Any other XA resource that could be involved in the transaction, such as a database, must also be configured to be XA compliant.</p>
+
+<h3 id="local-transactions-20697">Local Transactions {#20697}</h3>
+
+<p>Local transactional caches (with the <code class="highlighter-rouge">transactionalMode</code> attribute set to “local”) write to a local store using an API that is part of the Ehcache core API. Local transactions have the following characteristics:</p>
+
+<ul>
+  <li>Recovery occurs at the time an element is accessed.</li>
+  <li>Updates are written to the underlying store immediately.</li>
+  <li>Get operations on the underlying store may block during commit operations.</li>
+</ul>
+
+<p>To use local transactions, instantiate a TransactionController instance instead of a transaction manager instance:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>TransactionController txCtrl = cacheManager.getTransactionController();
+...
+txCtrl.begin();
+Cache fooCache = cacheManager.getCache("Foo");
+fooCache.put("1", "Bar");
+txCtrl.commit();
+...
+</code></pre>
+</div>
+
+<p>You can use <code class="highlighter-rouge">rollback()</code> to roll back the transaction bound to the current thread.</p>
+
+<table>
+<caption>TIP: Finding the Status of a Transaction on the Current Thread</caption>
+<tr>
+<td>
+You can find out if a transaction is in process on the current thread by calling
+
+`TransactionController.getCurrentTransactionContext()` and checking its return value. If the value isn't null, a transaction has started on the current thread.
+</td>
+</tr>
+</table>
+
+<h4 id="commit-failures-and-timeouts">Commit Failures and Timeouts</h4>
+
+<p>Commit operations can fail if the transaction times out. If the default timeout requires tuning, you can get and set its current value:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>int currentDefaultTransactionTimeout = txCtrl.getDefaultTransactionTimeout();
+...
+txCtrl.setDefaultTransactionTimeout(30); // in seconds -- must be greater than zero.
+</code></pre>
+</div>
+
+<p>You can also bypass the commit timeout using the following version of <code class="highlighter-rouge">commit()</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>txCtrl.commit(true); // "true" forces the commit to ignore the timeout.
+</code></pre>
+</div>
+
+<h3 id="avoiding-xa-commit-failures-with-atomic-methods-67713">Avoiding XA Commit Failures With Atomic Methods {#67713}</h3>
+
+<p>If more than one transaction writes to a cache, it is possible for an XA transaction to fail. In the following example, if a second transaction writes to the same key (“1”) and completes its commit first, the commit in the example may fail:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...
+myTransactionMan.begin();
+Cache fooCache = cacheManager.getCache("Foo");
+fooCache.put("1", "Bar");
+myTransactionMan.commit();
+...
+</code></pre>
+</div>
+
+<p>One approach to prevent this type of commit failure is to use one of the atomic put methods, such as <code class="highlighter-rouge">Cache.replace()</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>myTransactionMan.begin();
+int val = cache.get(key).getValue();  // "cache" is configured to be transactional.
+Element olde = new Element (key, val);
+
+// True only if the element was successfully replaced.
+if (cache.replace(olde, new Element(key, val + 1)) {
+ myTransactionMan.commit();
+}
+else { myTransactionMan.rollback(); }
+</code></pre>
+</div>
+
+<p>Another useful atomic put method is <code class="highlighter-rouge">Cache.putIfAbsent(Element element)</code>, which returns null on success (no previous element exists with the new element’s key) or returns the existing element (the put is not executed). Atomic methods cannot be used with null elements, or elements with null keys.</p>
+
+<h3 id="implementing-an-element-comparator-48013">Implementing an Element Comparator {#48013}</h3>
+
+<p>For all transactional caches, the atomic methods <code class="highlighter-rouge">Cache.removeElement(Element element)</code> and <code class="highlighter-rouge">Cache.replace(Element old, Element element)</code> must compare elements for the atomic operation to complete. This requires all objects stored in the cache to override <code class="highlighter-rouge">equals()</code> and <code class="highlighter-rouge">hashCode()</code>.</p>
+
+<p>If overriding these methods is not desirable for your application, a default comparator is used (<code class="highlighter-rouge">net.sf.echache.store.DefaultElementValueComparator</code>). You can also implement a custom comparator and specify it in the cache configuration with &lt;elementValueComparator&gt;:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="com.my.package.Foo"
+     maxEntriesLocalHeap="500"
+     eternal="false"
+     copyOnRead="true"
+     copyOnWrite="true"
+     consistency="strong"
+     transactionalMode="xa"&gt;
+   &lt;elementValueComparator class="com.company.xyz.MyElementComparator" /&gt;
+   &lt;persistence strategy="distributed"/&gt;
+   &lt;terracotta /&gt;
+&lt;/cache&gt;
+</code></pre>
+</div>
+
+<p>Custom comparators must implement <code class="highlighter-rouge">net.sf.ehcache.store.ElementValueComparator</code>.</p>
+
+<p>A comparator can also be specified programmatically.</p>
+
+<h2 id="working-with-osgi">Working With OSGi</h2>
+
+<p>To allow Enterprise Ehcache to behave as an OSGi component, the following attributes should be set as shown:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ... copyOnRead="true" ... &gt;
+...
+  &lt;terracotta ... clustered="true" ... /&gt;
+...
+&lt;/cache&gt;
+</code></pre>
+</div>
+
+<p>Your OSGi bundle will require the following JAR files (showing versions from a BigMemory Max 4.0.0):</p>
+
+<ul>
+  <li><code class="highlighter-rouge">ehcache-ee-2.7.0.jar</code></li>
+  <li><code class="highlighter-rouge">terracotta-toolkit-runtime-ee-4.0.0.jar</code></li>
+  <li><code class="highlighter-rouge">slf4j-api-1.6.6.jar</code></li>
+  <li>
+    <p><code class="highlighter-rouge">slf4j-nop-1.6.1.jar</code></p>
+
+    <p>Or use another appropriate logger binding.</p>
+  </li>
+</ul>
+
+<p>Use the following directory structure:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> -- net.sf.ehcache
+          |
+          | - ehcache.xml
+          |- ehcache-ee-2.7.0.jar
+      |
+      |- terracotta-toolkit-runtime-ee-4.0.0.jar
+          |
+          | - slf4j-api-1.6.6.jar
+          |
+          | - slf4j-nop-1.6.6.jar
+          |
+          | - META-INF/
+              | - MANIFEST.MF
+</code></pre>
+</div>
+
+<p>The following is an example manifest file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Manifest-Version: 1.0
+ Export-Package: net.sf.ehcache;version="2.7.0"
+ Bundle-Vendor: Terracotta
+ Bundle-ClassPath: .,ehcache-ee-2.7.0.jar,terracotta-toolkit-runtime-ee-4.0.0.jar
+     ,slf4j-api-1.6.6.jar,slf4j-nop-1.6.6.jar
+ Bundle-Version: 2.7.0
+ Bundle-Name: EHCache bundle
+ Created-By: 1.6.0_15 (Apple Inc.)
+ Bundle-ManifestVersion: 2
+ Import-Package: org.osgi.framework;version="1.3.0"
+ Bundle-SymbolicName: net.sf.ehcache
+ Bundle-RequiredExecutionEnvironment: J2SE-1.5
+</code></pre>
+</div>
+
+<p>Use versions appropriate to your setup.</p>
+
+<p>To create the bundle, execute the following command in the <code class="highlighter-rouge">net.sf.ehcache</code> directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jar cvfm net.sf.ehcache.jar MANIFEST.MF *
+</code></pre>
+</div>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>

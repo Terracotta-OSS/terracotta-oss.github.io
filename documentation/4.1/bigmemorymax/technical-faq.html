@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/bigmemorymax/technical-faq.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <h1 id="bigmemory-max-faq">BigMemory Max FAQ</h1><div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#bigmemory-max-faq">
+                        <span class="toctext">BigMemory Max FAQ</span>
+                     </a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-2">
+                           <a href="#getting-started">
+                              <span class="toctext">Getting Started</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#configuration-development-and-operations">
+                              <span class="toctext">Configuration, Development, and Operations</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#environment-and-interoperability">
+                              <span class="toctext">Environment and Interoperability</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#troubleshooting">
+                              <span class="toctext">Troubleshooting</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-6">
+                           <a href="#specific-errors-and-warnings">
+                              <span class="toctext">Specific Errors and Warnings</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<p>This FAQ answers questions about how to use BigMemory Max and Terracotta products, integration with other products, and solving issues. If your question doesn’t appear here, consider posting it on the <a href="http://forums.terracotta.org">Terracotta forums</a>.</p>
+
+<p>Other resources for resolving issues can be found on the <a href="http://www.terracotta.org/confluence/display/release/Home">Release and Compatibility Information</a> page, including:</p>
+
+<ul>
+  <li>Release Notes – Lists features and issues for specific versions of Terracotta products.</li>
+  <li>Compatibility Information – Includes tables on compatible versions of Terracotta products, JVMs, and application servers.</li>
+</ul>
+
+<p>The FAQ is divided into the following sections:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc</td>
+      <td>2:2}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc-zone</td>
+      <td>3:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="whats-the-difference-between-bigmemory-go-and-bigmemory-max">What’s the difference between BigMemory Go and BigMemory Max?</h3>
+
+<p>BigMemory Go is for in-memory data management on a single JVM (in-process). BigMemory Max is for distributed in-memory management across an array of servers. For more on Go vs. Max, see the <a href="http://terracotta.org/products/bigmemory">BigMemory Overview</a>.</p>
+
+<h3 id="what-platforms-does-terracotta-software-run-on-which-application-stacks-does-terracotta-support">What platforms does Terracotta software run on? Which application stacks does Terracotta support?</h3>
+<p>Terracotta is designed to work with as broad an array of platforms, JVMs and application server versions as possible. Supported platforms are listed in the <a href="http://www.terracotta.org/confluence/display/release/Home">Release and Platform Compatibility Information</a>.</p>
+
+<h3 id="what-is-the-terracotta-client">What is the Terracotta Client?</h3>
+<p>The Terracotta Client is functionality in a Java library that operates inside your JVM that enables clustering. When your JVM starts and code is called that initializes Terracotta, the Terracotta Client automatically connects to the Terracotta Server Array to engage clustering services such as the lock manager, object manager, and memory manager.</p>
+
+<h3 id="what-is-the-terracotta-server-array">What is the Terracotta Server Array?</h3>
+<p>The Terracotta Server Array is a set of one or more processes that coordinate data sharing among all Terracotta Clients in the cluster. Each Terracotta Server Array process is a simple Java application that runs directly on the JVM (ie without an application server or container). The Terracotta Server Array is designed to provide maximal High Availability and Scalability.</p>
+
+<p>{/toc-zone}</p>
+
+<h2 id="configuration-development-and-operations">Configuration, Development, and Operations</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc-zone</td>
+      <td>3:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+   <a name="persistence-mode" id="persistence-mode"></a>
+</p>
+<h3 id="how-do-i-enable-restartable-mode">How do I enable restartable mode?</h3>
+
+<p>In the servers section of your tc-config.xml, include the following configurations:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;servers&gt;
+   &lt;server host="host1" name="Server1"&gt;
+       &lt;data-backup&gt;path/to/my/backup/directory&lt;/data-backup&gt;
+   &lt;/server&gt;
+   &lt;restartable enabled="true"/&gt;
+&lt;/servers&gt;
+</code></pre>
+</div>
+
+<p>If persistence of shared data is not required across restarts, set <code class="highlighter-rouge">&lt;restartable enabled&gt;</code> to “false”.</p>
+
+<h3 id="how-do-i-configure-failover-to-work-properly-with-two-terracotta-servers">How do I configure failover to work properly with two Terracotta servers?</h3>
+
+<p>Configure both servers in the <code class="highlighter-rouge">&lt;servers&gt;</code> section of the Terracotta configuration file. Start the two Terracotta server instances that use that configuration file, one server assumes control of the cluster (the ACTIVE) and the second becomes the mirror (the PASSIVE). See the <a href="/documentation/4.1/terracotta-server-array/high-availability">high-availability page</a> for more information.</p>
+
+<h3 id="how-do-i-know-that-my-application-has-started-up-with-a-terracotta-client-and-is-sharing-data">How do I know that my application has started up with a Terracotta client and is sharing data?</h3>
+
+<p>The <a href="/documentation/4.1/tms/tms">Terracotta Management Console (TMC)</a> displays cluster topology by listing Terracotta server groups and connected client nodes in a navigation tree.</p>
+
+<p>In addition, check standard output for messages that the Terracotta client has started up without errors. Terracotta clients also log messages to a file specified in the <code class="highlighter-rouge">&lt;clients&gt;</code> section of the tc-config file.</p>
+
+<h3 id="is-there-a-maximum-number-of-objects-that-can-be-held-by-one-terracotta-server-instance">Is there a maximum number of objects that can be held by one Terracotta server instance?</h3>
+<p>The number of objects that can be held by a Terracotta server instance is two billion, a limit imposed by the design of Java collections. It is unlikely that a Terracotta cluster will need to approach even 50 percent of that maximum. However, if it does, other issues may arise that require the rearchitecting of how application data is handled in the cluster.</p>
+
+<h3 id="how-many-terracotta-clients-l1s-can-connect-to-the-terracotta-server-array-l2s-in-a-cluster">How many Terracotta clients (L1s) can connect to the Terracotta Server Array (L2s) in a cluster?</h3>
+<p>While the number of L1s that can exist in a Terracotta cluster is theoretically unbounded (and cannot be configured), effectively planning for resource limitations and the size of the shared data set should yield an optimum number. Typically, the most important factors that will impact that number are the requirements for performance and availability. Typical questions when sizing a cluster:</p>
+
+<ul>
+  <li>What is the desired transactions-per-second?</li>
+  <li>What are the failover scenarios?</li>
+  <li>How fast and reliable is the network and hardware? How much memory and disk space will each machine have?</li>
+  <li>How much shared data is going to be stored in the cluster? How much of that data should be on the L1s? Will BigMemory be used?</li>
+  <li>How many stripes (active Terracotta servers) does the cluster have?</li>
+  <li>How much load will there be on the L1s? On the L2s?</li>
+</ul>
+
+<p>The most important method for determining the optimum size of a cluster is to test various cluster configurations under load and observe how well each setup meets overall requirements.</p>
+
+<h3 id="how-can-my-application-check-that-the-terracotta-process-is-alive-at-runtime">How can my application check that the Terracotta process is alive at runtime?</h3>
+<p>Your application can check to see if the system property <code class="highlighter-rouge">tc.active</code> is true. For example, the following line of code would return true if Terracotta is active at the time it is run:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Boolean.getBoolean("tc.active");
+</code></pre>
+</div>
+
+<h3 id="how-do-i-confirm-that-my-terracotta-servers-are-up-and-running-correctly">How do I confirm that my Terracotta servers are up and running correctly?</h3>
+
+<p>Here are some ways to confirm that your Terracotta servers are running:</p>
+
+<ul>
+  <li>Connect to the servers using the <a href="/documentation/4.1/tms/tms">Terracotta Management Console</a>.</li>
+  <li>Check the standard output messages to see that each server started without errors.</li>
+  <li>Check each server’s logs to see that each server started without errors. The location of server logs is specified in <code class="highlighter-rouge">tc-config.xml</code>.</li>
+  <li>Use the Terracotta script <code class="highlighter-rouge">server-stat.sh</code> or <code class="highlighter-rouge">server-stat.bat</code> to generate a short status report on one or more Terracotta servers.</li>
+  <li>Use a tool such as <a href="http://www.gnu.org/software/wget/">wget</a> to access the /config or /version servlet. For example, for a server running on localhost and port 9889, use the following wget command to connect to the version servlet:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[PROMPT] wget http://localhost:9889/version
+</code></pre>
+</div>
+
+<p>
+   <a name="monitor" id="monitor"></a>
+</p>
+<h3 id="are-there-ways-i-can-monitor-the-cluster-that-dont-involve-using-the-terracotta-management-console">Are there ways I can monitor the cluster that don’t involve using the Terracotta Management Console?</h3>
+<p>You can monitor the cluster using JMX.</p>
+
+<p>Cluster events are available over JMX via the object name “org.terracotta:type=TC Operator Events,name=Terracotta Operator Events Bean”. Use a tool such as JConsole to view other MBeans needed for monitoring.</p>
+
+<p>
+   <a name="log-level" id="log-level"></a>
+</p>
+<h3 id="how-can-i-control-the-logging-level-for-terracotta-servers-and-clients">How can I control the logging level for Terracotta servers and clients?</h3>
+<p>Create a file called <code class="highlighter-rouge">.tc.custom.log4j.properties</code> and edit it as a standard <code class="highlighter-rouge">log4j.properties</code> file to configure logging, including level, for the Terracotta node that loads it. This file is searched for in the path specified by the environment variable TC_INSTALL_DIR as defined in the start-server script when running a server, or if user defined when running a client.</p>
+
+<h3 id="why-is-it-a-bad-idea-to-change-shared-data-in-a-shutdown-hook">Why is it a bad idea to change shared data in a shutdown hook?</h3>
+<p>If a node attempts to change shared data while exiting, and the shutdown thread blocks, the node may hang and be dropped from the cluster, failing to exit as planned. The thread may block for any number of reasons, such as the failure to obtain a lock. A better alternative is to use the cluster events API to have a second node (one that is not exiting) execute certain code when it detects that the first node is exiting. If you are using Ehcache, use the cluster-events Ehcache API.</p>
+
+<p>You can call <code class="highlighter-rouge">org.terracotta.api.Terracotta.registerBeforeShutdownHook(Runnable beforeShutDownHook)</code> to perform various cleanup tasks before the Terracotta client disconnects and shuts down.</p>
+
+<p>Note that a Terracotta client is not required to release locks before shutting down. The Terracotta server will reclaim those locks, although any outstanding transactions are not committed.</p>
+
+<h3 id="can-i-store-collections-inside-collections-that-are-stored-as-values-in-a-cache">Can I store collections inside collections that are stored as values in a cache?</h3>
+<p>This is not recommended unless your application logic takes careful account of how such values can be modified safely. Race conditions, undefined results, ConcurrentModificationException, and other problems can arise.</p>
+
+<p>{/toc-zone}</p>
+
+<h2 id="environment-and-interoperability">Environment and Interoperability</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc-zone</td>
+      <td>3:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="where-is-there-information-on-platform-compatibility-for-my-version-of-terracotta-software">Where is there information on platform compatibility for my version of Terracotta software?</h3>
+<p>Information on the latest releases of Terracotta products, including a link to the latest platform support, is found on the <a href="http://www.terracotta.org/confluence/display/release/Home">Product Information</a> page. This page also contains a table with links to information on previous releases.</p>
+
+<h3 id="can-i-run-the-terracotta-process-as-a-microsoft-windows-service">Can I run the Terracotta process as a Microsoft Windows service?</h3>
+<p>Yes. See <a href="/documentation/4.1/terracotta-server-array/service">Starting up TSA or CLC as Windows Service using the Service Wrapper</a>.</p>
+
+<h3 id="do-you-have-any-advice-for-running-terracotta-software-on-ubuntu">Do you have any advice for running Terracotta software on Ubuntu?</h3>
+
+<p>The known issues when trying to run Terracotta software on Ubuntu are:</p>
+
+<ul>
+  <li>
+    <p>Default shell is <em>dash</em> <em>bash</em>. Terracotta scripts don’t behave under dash. You might solve this issue by setting your default shell to bash or changing <code class="highlighter-rouge">/bin/sh</code> in our scripts to <code class="highlighter-rouge">/bin/bash</code>.</p>
+  </li>
+  <li>
+    <p>The Ubuntu default JDK is from GNU. Terracotta software compatibility information is on the <a href="http://www.terracotta.org/confluence/display/release/Home">Product Information</a> page.</p>
+  </li>
+  <li>
+    <p>See the <a href="#unknownhostexception">UnknownHostException</a> topic below.</p>
+  </li>
+</ul>
+
+<h3 id="which-garbage-collector-should-i-use-with-the-terracotta-server-l2-process">Which Garbage Collector should I use with the Terracotta Server (L2) process?</h3>
+
+<p>The Terracotta Server performs best with the default garbage collector. This is pre-configured in the startup scripts. If you believe that Java GC is causing performance degradation in the Terracotta Server, the simplest and best way to reduce latencies by reducing collection times is to store more data in BigMemory Max.</p>
+
+<p>Generally, the use of the Concurrent Mark Sweep collector (CMS) is discouraged as it is known to cause heap fragmentation for certain application-data usage patterns. Expert developers considering use of CMS should consult the Oracle tuning and best-practice documentation.</p>
+
+<h3 id="does-terracotta-clustering-work-with-hibernate">Does Terracotta clustering work with Hibernate?</h3>
+<p>Through Ehcache, you can enable and cluster <a href="http://www.ehcache.org/documentation/2.8/integrations/hibernate.html">Hibernate second-level caches</a>.</p>
+
+<h3 id="what-other-technologies-does-terracotta-software-work-with">What other technologies does Terracotta software work with?</h3>
+<p>Terracotta software integrates with most popular Java technologies being used today. For a full list, contact us at <a href="mailto:{$contact_email}">{$contact_email}</a>.</p>
+
+<p>{/toc-zone}</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc-zone</td>
+      <td>3:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="after-my-application-interrupted-a-thread-or-threw-interruptedexception-why-did-the-terracotta-client-die">After my application interrupted a thread (or threw InterruptedException), why did the Terracotta client die?</h3>
+<p>The Terracotta client library runs with your application and is often involved in operations which your application is not necessarily aware of. These operations may get interrupted, too, which is not something the Terracotta client can anticipate. Ensure that your application does not interrput clustered threads. This is a common error that can cause the Terracotta client to shut down or go into an error state, after which it will have to be restarted.</p>
+
+<h3 id="why-does-the-cluster-seem-to-be-running-more-slowly">Why does the cluster seem to be running more slowly?</h3>
+<p>There can be many reasons for a cluster that was performing well to slow down over time. The most common reason for slowdowns is Java Garbage Collection (GC) cycles. Another reason may be that near-memory-full conditions have been reached, and the TSA needs to clear space for continued operations by additional evictions. For more information, refer to <a href="/documentation/4.1/terracotta-server-array/server-arrays">Terracotta Server Array Architecture</a>.</p>
+
+<p>Another possible cause is when an active server is syncing with a mirror server. If the active is under substantial  load, it may be slowed by syncing process. In addition, the syncing process itself may appear to slow down. This can happen when the mirror is waiting for specific sequenced data before it can proceed, indicated by log messages similar to the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>WARN com.tc.l2.ha.L2HACoordinator - 10 messages in pending queue.
+    Message with ID 2273677 is missing still
+</code></pre>
+</div>
+
+<p>If the message ID in the log entries changes over time, no problems are indicated by these warnings.</p>
+
+<p>Another indication that slowdowns are occurring on the server and that clients are throttling their transaction commits is the appearance of the following entry in client logs:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>INFO com.tc.object.tx.RemoteTransactionManagerImpl - ClientID[2](: TransactionID=[65037) :
+    Took more than 1000ms to add to sequencer  : 1497 ms
+</code></pre>
+</div>
+
+<h3 id="why-do-all-of-my-objects-disappear-when-i-restart-the-server">Why do all of my objects disappear when I restart the server?</h3>
+<p>If you are not running the server in restartable mode, the server will remove the object data when it restarts. If you want object data to persist across server restarts, run the server in <a href="#how-do-i-enable-persistent-mode">restartable mode</a>.</p>
+
+<h3 id="why-are-old-objects-still-there-when-i-restart-the-server">Why are old objects still there when I restart the server?</h3>
+<p>If you are running the server in restartable mode, the server keeps the object data across restarts. If you want objects to disappear when you restart the server, you can either disable restartable mode or remove the data files from disk before you restart the server. See <a href="#persistence-mode">this question</a>.</p>
+
+<p><a id="firewall-console"></a>
+<a name="firewall-cluster" id="firewall-cluster"></a></p>
+<h3 id="why-cant-certain-nodes-on-my-terracotta-cluster-see-each-other-on-the-network">Why can’t certain nodes on my Terracotta cluster see each other on the network?</h3>
+<p>A firewall may be preventing different nodes on a cluster from seeing each other. If Terracotta clients attempt to connect to a Terracotta server, for example, but the server seems to not not have any knowledge of these attempts, the clients may be blocked by a firewall. Another example is a backup Terracotta server that comes up as the active server because it is separated from the active server by a firewall.</p>
+
+<h3 id="client-andor-server-nodes-are-exiting-regularly-without-reason">Client and/or server nodes are exiting regularly without reason.</h3>
+<p>Client or server processes that quit (“L1 Exiting” or “L2 Exiting” in logs) for seemingly no visible reason may have been running in a terminal session that has been terminated. The parent process must be maintained for the life of the node process, or use another workaround such as the <code class="highlighter-rouge">nohup</code> option.</p>
+
+<h3 id="i-have-a-setup-with-one-active-terracotta-server-instance-and-a-number-of-standbys-so-why-am-i-getting-errors-because-more-than-one-active-server-comes-up">I have a setup with one active Terracotta server instance and a number of standbys, so why am I getting errors because more than one active server comes up?</h3>
+
+<p>Due to network latency or load, the Terracotta server instances may not may be have adequate time to hold an election. Increase the <code class="highlighter-rouge">&lt;election-time&gt;</code> property in the Terracotta configuration file to the lowest value that solves this issue.</p>
+
+<p>If you are running on Ubuntu, see the note at the end of the <a href="#unknownhostexception">UnknownHostException</a> topic below.</p>
+
+<h3 id="i-have-a-cluster-with-more-than-one-stripe-more-than-one-active-terracotta-server-but-data-is-distributed-very-unevenly-between-the-two-stripes">I have a cluster with more than one stripe (more than one active Terracotta server) but data is distributed very unevenly between the two stripes.</h3>
+
+<p>The Terracotta Server Array distributes data based on the hashcode of keys. To enhance performance, each server stripe should contain approximately the same amount of data. A grossly uneven distribution of data on Terracotta servers in a cluster with more than one active server can be an indication that keys are not being hashed well. If your application is creating keys of a type that does not hash well, this may be the cause of the uneven distribution.</p>
+
+<h3 id="why-is-a-crashed-terracotta-server-instance-failing-to-come-up-when-i-restart-it">Why is a crashed Terracotta server instance failing to come up when I restart it?</h3>
+
+<p>If running in retartable mode, the ACTIVE Terracotta server instance should come up with all shared data intact. However, if the server’s database has somehow become corrupt, you must clear the crashed server’s data directory before restarting.</p>
+
+<h3 id="i-lost-some-data-after-my-entire-cluster-lost-power-and-went-down-how-can-i-ensure-that-all-data-persists-through-a-failure">I lost some data after my entire cluster lost power and went down. How can I ensure that all data persists through a failure?</h3>
+
+<p>If only some data was lost, then Terracotta servers were configured to persist data. The cause for losing a small amount of data could be disk “write” caching on the machines running the Terracotta server instances. If every Terracotta server instance lost power when the cluster went down, data remaining in the disk cache of each machine is lost.</p>
+
+<p>Turning off disk caching is not an optimal solution because the machines running Terracotta server instances will suffer a substantial performance degradation. A better solution is to ensure that power is never interrupted at any one time to every Terracotta server instance in the cluster. This can be achieved through techniques such as using uninterruptible power supplies and geographically subdividing cluster members.</p>
+
+<h3 id="do-i-have-to-restart-terracotta-clients-after-redeploying-in-a-container">Do I have to restart Terracotta clients after redeploying in a container?</h3>
+<p>Errors could occur if a client runs with a web application that has been redeployed, causing the client to not start properly or at all. If the web application is redeployed, be sure to restart the client.</p>
+
+<p>
+   <a name="sparc" id="sparc"></a>
+</p>
+<h3 id="why-does-the-jvm-on-my-sparc-machines-crash-regularly">Why does the JVM on my SPARC machines crash regularly?</h3>
+<p>You may be encountering a known issue with the Hotspot JVM for SPARC. The problem is expected to occur with Hotspot 1.6.0_08 and higher, but may have been fixed in a later version. For more information, see this <a href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6849574">bug report</a>.</p>
+
+<p>{/toc-zone}</p>
+
+<h2 id="specific-errors-and-warnings">Specific Errors and Warnings</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc-zone</td>
+      <td>3:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="what-does-the-warning-warn-comtcbytestcbytebufferfactory---asking-for-a-large-amount-of-memory-mean">What does the warning “WARN com.tc.bytes.TCByteBufferFactory - Asking for a large amount of memory…” mean?</h3>
+<p>If you see this warning repeatedly, objects larger than the recommended maximum are being shared in the Terracotta cluster. These objects must be sent between clients and servers. In this case, related warnings containing text similar to <strong><code class="highlighter-rouge">Attempt to read a byte array of len: 12251178; threshold=8000000</code></strong>
+and <strong><code class="highlighter-rouge">Attempting to send a message (com.tc.net.protocol.delivery.OOOProtocolMessageImpl) of size</code></strong> may also appear in the logs.</p>
+
+<p>If there are a large number of over-sized objects being shared, low-memory issues and degradation of performance may result.</p>
+
+<p>In addition, if elements too large to fit in a client are cached, the value will be stored on the server, thus degrading performance (reads will be slower). In this case, a warning is logged.</p>
+
+<h3 id="when-starting-a-terracotta-server-why-does-it-throw-a-dbversionmismatchexception">When starting a Terracotta server, why does it throw a <strong>DBVersionMismatchException</strong>?</h3>
+
+<p>The server is expecting a Terracotta database with a compatible version, but is finding one with non-compatible version. This usually occurs when starting a Terracotta server with an older version of the database. Note that this can only occur with servers in the restartable mode.</p>
+
+<h3 id="why-am-i-getting-methodnotfound-and-classnotfound-exceptions">Why am I getting MethodNotFound and ClassNotFound exceptions?</h3>
+<p>If you’ve integrated a Terracotta product with a framework such as Spring or Hibernate and are getting one of these exceptions, make sure that an older version of that Terracotta product isn’t on the classpath. With Maven involved, sometimes an older version of a Terracotta product is specified in a framework’s POM and ends up ahead of the current version you’ve specified. You can use tools such as jconsole or jvisualvm to debug, or specify <code class="highlighter-rouge">-XX:+TraceClassLoading</code> on the command line.</p>
+
+<p>If a ClassNotFound exception is thrown at startup, check that a <a href="http://www.terracotta.org/confluence/display/release/Home">supported JDK</a> (not a JRE) is installed.</p>
+
+<h3 id="when-i-start-a-terracotta-server-why-does-it-fail-with-a-schema-error">When I start a Terracotta server, why does it fail with a schema error?</h3>
+
+<p>You may get an error similar to the following when a Terracotta server fails to start:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> Error Message:
+Starting BootJarTool...
+2008-10-08 10:29:29,278 INFO - Terracotta 2.7.0, as of 20081001-101049
+(Revision 10251 by cruise@rh4mo0 from 2.7)
+2008-10-08 10:29:30,459 FATAL -
+*******************************************************************************
+The configuration data in the file at "/opt/terracotta/conf/tc-config.xml"
+does not obey the Terracotta schema:
+[0]: Line 8, column 3: Element not allowed: server in element servers
+
+*******************************************************************************
+</code></pre>
+</div>
+
+<p>This error occurs when there’s a schema violation in the Terracotta configuration file, at the line indicated by the error text. To confirm that your configuration file follows the required schema, see the schema file included with the Terracotta kit. The kit includes schema files (*.xsd) for Terracotta, Ehcache, and Quartz configurations.</p>
+
+<h3 id="the-terracotta-servers-crash-regularly-and-i-see-a-checksumexception">The Terracotta servers crash regularly and I see a ChecksumException.</h3>
+
+<p>If the logs reveal an error similar to <code class="highlighter-rouge">com.sleepycat.je.log.ChecksumException: Read invalid log entry type: 0 LOG_CHECKSUM</code>, there is likely a corrupted disk on at least one of the servers.</p>
+
+<p>
+   <a name="unknownhostexception" id="unknownhostexception"></a>
+</p>
+<h3 id="why-is-javanetunknownhostexception-thrown-when-i-try-to-run-terracotta-sample-applications">Why is <code class="highlighter-rouge">java.net.UnknownHostException</code> thrown when I try to run Terracotta sample applications?</h3>
+
+<p>If an UnknownHostException occurs, and you experience trouble running the Terracotta Welcome application and the included sample applications on Linux (especially Ubuntu), you may need to edit the etc/hosts file.</p>
+
+<p>The UnknownHostException may be followed by “unknown-ip-address”.</p>
+
+<p>For example, your etc/hosts file may contain settings similar to the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>127.0.0.1       localhost
+127.0.1.1    myUbuntu.usa myUbuntu
+</code></pre>
+</div>
+
+<p>If myUbuntu is the host, you must change 127.0.1.1 to the host’s true IP address.</p>
+
+<p><strong>NOTE:</strong>
+You may be able to successfully start Terracotta server instances even with the “invalid” etc/hosts file, and receive no exceptions or errors, but other connectivity problems can occur. For example, when starting two Terracotta servers that should form a mirror group (one active and one standby), you may see behavior that indicates that the servers cannot communicate with each other.</p>
+
+<h3 id="on-a-node-with-plenty-of-ram-and-disk-space-why-is-there-a-failure-with-errors-stating-that-a-native-thread-cannot-be-created">On a node with plenty of RAM and disk space, why is there a failure with errors stating that a “native thread” cannot be created?</h3>
+
+<p>You may be exceeding a limit at the system level. In *NIX, run the following command to see what the limits are:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ulimit -a
+</code></pre>
+</div>
+
+<p>For example, a limit on the number of processes that can run in the shell may be responsible for the errors.</p>
+
+<h3 id="why-does-the-terracotta-server-crash-regularly-with-javaioioexception-file-exists">Why does the Terracotta server crash regularly with <em>java.io.IOException: File exists</em>?</h3>
+
+<p>Early versions of JDK 1.6 had a <a href="http://bugs.java.com/view_bug.do?bug_id=6693490">JVM bug</a> that caused this failure. Update JDK to avoid this issue.</p>
+
+<p>###What does a warning about the ChangeApplicator or ServerMapApplicator mean?
+If you see warning messages such as these:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>WARN com.tc.object.applicator.ChangeApplicator.com.terracotta.toolkit.collections.map.ServerMapApplicator - ServerMap received delta changes for methods other than CLEAR
+WARN com.tc.object.applicator.ChangeApplicator.com.terracotta.toolkit.collections.map.ServerMapApplicator - ServerMap shouldn't normally be broadcasting changes unless its a clear/destroy, but could be a resent txn after crash
+</code></pre>
+</div>
+
+<p>The logging is telling you that there are changes being broadcasted to clients. Normally these are not broadcasted to clients, however in the event of a failover or active restart from disk, it is possible for transactions to be broadcasted. It is safe to ignore these warnings, however it would probably be a good idea to see if there really was an active server restart or failover, in case some other action is necessary.</p>
+
+<p>{/toc-zone}</p>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>

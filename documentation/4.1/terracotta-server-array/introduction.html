@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/terracotta-server-array/introduction.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <h1 id="the-terracotta-server-array">The Terracotta Server Array</h1><div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#the-terracotta-server-array">
+                        <span class="toctext">The Terracotta Server Array</span>
+                     </a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-2">
+                           <a href="#introduction">
+                              <span class="toctext">Introduction</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#definitions-and-functional-characteristics">
+                              <span class="toctext">Definitions and Functional Characteristics</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc</td>
+      <td>2:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For BigMemory Max, Quartz Scheduler, and Terracotta Web Sessions</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>The Terracotta Server Array (TSA) provides the platform for Terracotta products and the backbone for Terracotta clusters. A Terracotta Server Array can vary from a basic two-node tandem to a multi-node array providing configurable scale, high performance, and deep failover coverage.</p>
+
+<p>The main features of the Terracotta Server Array include:</p>
+
+<ul>
+  <li><strong>Distributed In-memory Data Management</strong> –  Manages 10-100x more data in memory than data grids</li>
+  <li><strong>Scalability Without Complexity</strong> –  Simple configuration to add server instances to meet growing demand and facilitate capacity planning</li>
+  <li><strong>High Availability</strong> –  Instant failover for continuous uptime and services</li>
+  <li><strong>Configurable Health Monitoring</strong> –  Terracotta <a href="high-availability#85916">HealthChecker</a> for inter-node monitoring</li>
+  <li><strong>Persistent Application State</strong> –  Automatic permanent storage of all current shared in-memory data</li>
+  <li><strong>Automatic Node Reconnection</strong> –  Temporarily disconnected server instances and clients rejoin the cluster without operator intervention</li>
+</ul>
+
+<p>###New for BigMemory Max 4.x
+The 4.x TSA is an in-memory data platform, providing faster, more consistent, and more predictable access to data. With resource management, if you have more data than memory available, the TSA protects itself from going over its limit through data eviction and throttling. In most cases, it will recover and come back to its normal working state automatically. In addition, four systems are available to protect data: the Fast Restart feature, BigMemory Hybrid’s use of SSD/Flash, active-mirror server groups, and backups.</p>
+
+<p>#####Fast Restartability for Data Persistence
+BigMemory’s Fast Restart feature is now integrated into the TSA, providing crash resilience with quick recovery, plus a consistent record of the entire in-memory data set, no matter how large. For more information, refer to <a href="/documentation/4.1/terracotta-server-array/server-arrays#fast-restartability">Fast Restartability</a>.</p>
+
+<p>#####Hybrid Data Storage
+<a href="/documentation/4.1/terracotta-server-array/hybrid">BigMemory Hybrid</a> extends BigMemory distributed in a Terracotta Server Array so that data can be stored across a hybrid mixture of RAM and SSD/Flash. This additional storage is managed with the in-memory data as one TSA data set.</p>
+
+<p>#####Resource Management
+Resource management provides better control over the TSA’s in-memory data through time, size, and count limitations. This enables automatic handling of, and recovery from, near-memory-full conditions. For more information, refer to <a href="/documentation/4.1/terracotta-server-array/operations#automatic-resource-management">Automatic Resource Management</a>.</p>
+
+<p>#####Predictable Eviction Strategy
+Based upon user-configured time, size, and count limitations, the TSA’s 3-pronged eviction strategy works automatically to ensure predictable behavior when memory becomes full. For more information, refer to <a href="/documentation/4.1/terracotta-server-array/operations#eviction">Eviction</a>.</p>
+
+<p>#####Continuous Uptime
+Improvements to provide continuous availability of data include flexibility in server startup sequencing, better utilization of extra mirrors in mirror groups, multi-stripe backup capability, optimizations to bulk load, and performance improvements for data access on rejoin. In addition, the TSA no longer uses Oracle Berkeley DB, enabling in-memory data to be ready for use much more quickly after any planned or unplanned restart.</p>
+
+<p>#####Terracotta Management Console (TMC)
+The expanded TMC replaces the Developer Console and Operations Center as the integrated platform for monitoring, managing, and administering all Terracotta deployments. There is also support for additional REST APIs for management and monitoring. For more information, start with <a href="/documentation/4.1/tms/tms">Terracotta Management Console</a>.</p>
+
+<p>#####Additional Security Features
+Active Directory (AD) and Lightweight Directory Access Protocol (LDAP) support on Terracotta servers, and custom SecretProvider on Terracotta clients. For more information, refer to <a href="/documentation/4.1/terracotta-server-array/tsa-security">Securing Terracotta Clusters</a> and <a href="/documentation/4.1/terracotta-server-array/tsa-ldap">Setting up LDAP-based Authentication</a>.</p>
+
+<p>#####No More DSO, plus Simplified Configuration
+DSO configuration has been deprecated, and the tc-config has a new format. Most of the elements are the same, but the structure is revised. For more information, refer to <a href="/documentation/4.1/terracotta-server-array/config-reference">Terracotta Configuration Reference</a>.</p>
+
+<h2 id="definitions-and-functional-characteristics">Definitions and Functional Characteristics</h2>
+
+<p>The major components of a Terracotta installation are the following:</p>
+
+<ul>
+  <li><strong>Cluster</strong> –  All of the Terracotta server instances and clients that work together to share application state or a data set.</li>
+  <li><strong>Terracotta client</strong> –  Terracotta clients run on application servers along with the applications being clustered by Terracotta. Clients manage live shared-object graphs.</li>
+  <li><strong>Terracotta server instance</strong> –  A single Terracotta server. An <em>active</em> server instance manages Terracotta clients, coordinates shared objects, and persists data. Server instances have no awareness of the clustered applications running on Terracotta clients. A mirror (sometimes called “hot standby”) is a live backup server instance which continuously replicates the shared data of an active server instance, instantaneously replacing the active if the active fails. <strong>Mirror servers add failover coverage within each mirror group</strong>.</li>
+  <li><strong>Terracotta mirror group</strong> –  A unit in the Terracotta Server Array. Sometimes also called a “stripe,” a mirror group is composed of exactly one active Terracotta server instance and at least one mirror Terracotta server instance. The active server instance manages and persists the fraction of shared data allotted to its mirror group, while each mirror server in the mirror group replicates (or mirrors) the shared data managed by the active server. <strong>Mirror groups add capacity to the cluster</strong>. The mirror servers are optional but highly recommended for providing failover.</li>
+  <li><strong>Terracotta Server Array</strong> –  The platform, consisting of all of the Terracotta server instances in a single cluster. Clustered data, also called in-memory data, or shared data, is partitioned equally among active Terracotta server instances for management and persistence purposes.</li>
+</ul>
+
+<table>
+<caption>TIP:  Nomenclature</caption>
+<tr>
+<td>
+This documentation may refer to a Terracotta server instance as L2, and a Terracotta client (the node running your application) as L1. These are the shorthand references used in Terracotta configuration files.
+</td>
+</tr>
+</table>
+
+<p><a name="24373" id="24373"></a>Figure 1 illustrates a Terracotta cluster with three mirror groups. Each mirror group has an active server and a mirror, and manages one third of the shared data in the cluster.</p>
+
+<p>
+   <img src="/images/documentation/MirrorGroupArray.png" alt="Terracotta cluster with 3 mirror groups." class="right" />
+</p>
+
+<p>A Terracotta cluster has the following functional characteristics:</p>
+
+<ul>
+  <li>Each mirror group automatically elects one active Terracotta server instance.
+  There can never be more than one active server instance per mirror group, but there can be any number of mirrors. However, a performance overhead may become evident when adding more mirror servers due to the load placed on the active server by having to synchronize with each mirror.</li>
+  <li>Every mirror group in the cluster must have a Terracotta server instance in active mode before the cluster is ready to do work.</li>
+  <li>The shared data in the cluster is automatically partitioned and distributed to the mirror groups.
+  The number of partitions equals the number of mirror groups. In Fig. 1, each mirror group has one third of the shared data in the cluster.</li>
+  <li>Mirror groups <strong>cannot</strong> provide failover for each other.
+  Failover is provided <em>within</em> each mirror group, not across mirror groups. This is because mirror groups provide scale by managing discrete portions of the shared data in the cluster – they do not replicate each other. In Fig. 1, if Mirror Group 1 goes down, the cluster must pause (stop work) until Mirror Group 1 is back up with its portion of the shared data intact.</li>
+  <li>Active servers are self-coordinating among themselves.
+  No additional configuration is required to coordinate active server instances.</li>
+  <li>Only mirror server instances can be hot-swapped in an array.
+  In Fig. 1, the L2 MIRROR servers can be shut down and replaced with no affect on cluster functions. However, to add or remove an entire mirror group, the cluster must be brought down. Note also that in this case the original Terracotta configuration file is still in effect and no new servers can be added. Replaced mirror servers must have the same address (hostname or IP address). If you must swap in a mirror with a different configuration, see <a href="/documentation/4.1/terracotta-server-array/operations#45877">Changing Cluster Topology in a Live Cluster</a>.</li>
+</ul>
+
+<p>##Where To Go Next</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">For more about</th>
+      <th style="text-align: left">Go to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Architecture</td>
+      <td style="text-align: left"><a href="/documentation/4.1/terracotta-server-array/server-arrays">Terracotta Server Array Architecture</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">High Availability</td>
+      <td style="text-align: left"><a href="/documentation/4.1/terracotta-server-array/high-availability">Configuring Terracotta Clusters for High Availability</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Configuration</td>
+      <td style="text-align: left"><a href="/documentation/4.1/terracotta-server-array/configuration-guide">Working with Terracotta Configuration Files</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Resource Management</td>
+      <td style="text-align: left"><a href="/documentation/4.1/terracotta-server-array/operations#automatic-resource-management">TSA Operations – Automatic Resource Management</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Live Data Backup</td>
+      <td style="text-align: left"><a href="/documentation/4.1/terracotta-server-array/operations#live-backup-of-distributed-in-memory-data">TSA Operations – Distributed In-memory Data Backup</a></td>
+    </tr>
+  </tbody>
+</table>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>

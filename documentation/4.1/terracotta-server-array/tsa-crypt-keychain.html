@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/terracotta-server-array/tsa-crypt-keychain.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <h1 id="using-encrypted-keychains">Using Encrypted Keychains</h1><div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#using-encrypted-keychains">
+                        <span class="toctext">Using Encrypted Keychains</span>
+                     </a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-2">
+                           <a href="#introduction">
+                              <span class="toctext">Introduction</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#configuration-example">
+                              <span class="toctext">Configuration Example</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#configuring-the-encrypted-server-keychain">
+                              <span class="toctext">Configuring the Encrypted Server Keychain</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#adding-entries-to-encrypted-keychain-files">
+                              <span class="toctext">Adding Entries to Encrypted Keychain Files</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-6">
+                           <a href="#encrypted-client-keychain-files">
+                              <span class="toctext">Encrypted Client Keychain Files</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-7">
+                           <a href="#security-with-the-tms">
+                              <span class="toctext">Security With the TMS</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-8">
+                           <a href="#reading-the-keychain-master-password-from-a-file">
+                              <span class="toctext">Reading the Keychain Master Password From a File</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc</td>
+      <td>2:2}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Note: For a brief overview of Terracotta security with links to individual topics, see <a href="/documentation/4.1/bigmemorymax/security-overview">Security Overview</a>.</p>
+
+<p>Security the Terracotta Server Array (TSA) is set up using Terracotta configuration, tools provided in the Terracotta kit, standard Java tools, and public key infrastructure (via standard digital X.509 digital certificates). This setup process is described in <a href="/documentation/4.1/terracotta-server-array/tsa-security">Securing Terracotta Clusters</a>.</p>
+
+<p>By default, the keychain script that creates Terracotta keychain files uses an obfuscation scheme to protect passwords. This scheme is adequate for development environments or environments where keychain-file security is already assured.</p>
+
+<p>If your environment requires stronger protection for keychain files, use the encryption scheme described in this page. The encryption scheme requires a master password each time the keychain file is accessed.</p>
+
+<p><strong>Note:</strong> Except for the keychain setup, you must follow the setup instructions, including for authentication and SSL, as described in <a href="/documentation/4.1/terracotta-server-array/tsa-security">Securing Terracotta Clusters</a>.</p>
+
+<p>The following diagram shows where the master password is required in the startup process of a Terracotta cluster.</p>
+
+<p>
+   <img src="/images/documentation/tsa-security-flow-encryption.png" alt="IMAGE: Security flow (obfuscation)" />
+</p>
+
+<p>From the point of view of the Terracotta <strong>server</strong>, security checks take place at startup and at the time a connection is made with another node on the cluster:</p>
+
+<ol>
+  <li>At startup, server1 requires a password to be entered directly from the console to complete its startup process.
+ The password can also be <a href="#read-keychain-password">read from a file</a> to avoid manual entry.</li>
+  <li>A connection request from server2 initiates the process of establishing a secure connection using SSL.</li>
+  <li>Server1 authenticates server2 using stored credentials. Credentials are also associated with a role that authorizes server2. The process is symmetrical: server2 authenticates and authorizes server1.</li>
+  <li>A connection request from a Terracotta client initiates the process of establishing a secure connection using SSL.</li>
+  <li>Server1 authenticates and authorizes the client using stored credentials and associated roles. Because a client might communicate with any active server in the cluster during its lifetime, the client must be able to authenticate with any active server. Because active servers can fail over to mirror servers, each client should be able to authenticate against <em>all</em> servers in the cluster.</li>
+</ol>
+
+<p>From the point of view of a Terracotta <strong>client</strong>, security checks occur at the time the client attempts to connect to an active server in the cluster:</p>
+
+<ol>
+  <li>
+    <p>The client uses a server URI that includes the client username.</p>
+
+    <p>A typical (non-secure) URI is <code class="highlighter-rouge">&lt;server-address&gt;:&lt;port&gt;</code>. A URI that initiates a secure connection takes the form <code class="highlighter-rouge">&lt;client-username&gt;@&lt;server-address&gt;:&lt;port&gt;</code>.</p>
+  </li>
+  <li>A secure connection using SSL is established with the server.</li>
+  <li>The client sends a password fetched from a local keychain file. The password is associated with the client username.</li>
+</ol>
+
+<p>Note that the diagram and process shown above are similar to those found in <a href="/documentation/4.1/terracotta-server-array/tsa-security">Securing Terracotta Clusters</a>. The main differences, described in this document, concern the use of the keychain file.</p>
+
+<h2 id="configuration-example">Configuration Example</h2>
+<p>The following configuration snippet is an example of how security could be set up for the servers in the illustration above:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"&gt;
+...
+  &lt;servers secure="true"&gt;
+    &lt;server host="172.16.254.1" name="server1"&gt;
+    ...
+      &lt;security&gt;
+        &lt;ssl&gt;
+          &lt;certificate&gt;jks:server1alias@/the/path/keystore-file.jks&lt;/certificate&gt;
+        &lt;/ssl&gt;
+        &lt;keychain&gt;
+          &lt;secret-provider&gt;
+            com.terracotta.management.security.ConsoleFetchingBackend
+          &lt;/secret-provider&gt;
+          &lt;url&gt;file:///%(user.dir)/server1keychain.tkc&lt;/url&gt;
+        &lt;/keychain&gt;
+        &lt;auth&gt;
+          &lt;realm&gt;com.tc.net.core.security.ShiroIniRealm&lt;/realm&gt;
+          &lt;url&gt;file:///%(user.dir)/myShiroFile.ini&lt;/url&gt;
+          &lt;user&gt;server1username&lt;/user&gt;
+        &lt;/auth&gt;
+      &lt;/security&gt;
+   ...
+   &lt;/server&gt;
+    &lt;server host="172.16.254.2" name="server2"&gt;
+    ...
+      &lt;security&gt;
+        &lt;ssl&gt;
+          &lt;certificate&gt;jks:server2alias@/the/path/keystore-file.jks&lt;/certificate&gt;
+        &lt;/ssl&gt;
+        &lt;keychain&gt;
+          &lt;url&gt;file:///%(user.dir)/server2keychain.tkc&lt;/url&gt;
+        &lt;/keychain&gt;
+        &lt;auth&gt;
+          &lt;realm&gt;com.tc.net.core.security.ShiroIniRealm&lt;/realm&gt;
+          &lt;url&gt;file:///%(user.dir)/myShiroFile.ini&lt;/url&gt;
+          &lt;user&gt;server2username&lt;/user&gt;
+        &lt;/auth&gt;
+      &lt;/security&gt;
+   ...
+   &lt;/server&gt;
+   ...
+ &lt;/servers&gt;
+...
+&lt;/tc:tc-config&gt;
+</code></pre>
+</div>
+
+<p>See the <a href="/documentation/4.1/terracotta-server-array/tsa-security#server-config">configuration section</a> for more information on the configuration elements in the example.</p>
+
+<p><strong>NOTE:</strong> Script names in the examples given below are for UNIX and Linux systems. Equivalent scripts are available for Microsoft Windows in the same locations. Replace the the <code class="highlighter-rouge">.sh</code> extension with <code class="highlighter-rouge">.bat</code> and convert path delimiters as appropriate.</p>
+
+<p>
+   <a id="keychain"></a>
+</p>
+<h2 id="configuring-the-encrypted-server-keychain">Configuring the Encrypted Server Keychain</h2>
+<p>By default, keychain files protect stored passwords using an obfuscation scheme. You can override this scheme by explicitly naming the secret provider for encryption:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;secret-provider&gt;com.terracotta.management.security.ConsoleFetchingBackend&lt;/secret-provider&gt;
+</code></pre>
+</div>
+
+<p>This secret provider is also shown in the configuration example above.</p>
+
+<table>
+<caption>TIP: Overriding the Configured Secret Provider</caption>
+<tr><td>You can override the configured secret provider using the property <code>com.terracotta.SecretProvider</code>. For example, to use obfuscation without changing configuration, use <code>com.terracotta.SecretProvider=com.terracotta.management.security.ObfuscatingSecretProviderBackend</code>.
+</td></tr>
+</table>
+
+<h2 id="adding-entries-to-encrypted-keychain-files">Adding Entries to Encrypted Keychain Files</h2>
+<p>You must also add entries to the keychain file as described in <a href="/documentation/4.1/terracotta-server-array/tsa-security">Securing Terracotta Clusters</a>, <strong>but avoid using the <code class="highlighter-rouge">-O</code> flag when using the keychain script.</strong></p>
+
+<p>For example, to create an entry for the local server’s keystore password, use:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh &lt;keychain-file&gt; &lt;certificate-URI&gt;
+</code></pre>
+</div>
+
+<p>If the keychain file does not exist, add the <code class="highlighter-rouge">-c</code> option to create it:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -c &lt;keychain-file&gt; &lt;certificate-URI&gt;
+</code></pre>
+</div>
+
+<p>You will be prompted for the keychain file’s master password, then for a password to associate with the URI. <strong>For the URI, you must enter the same password used to secure the server’s certificate in the keystore.</strong></p>
+
+<p>For example, to create an entry for server1 from the configuration example above, enter:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh server1keychain.tkc jks:server1alias@keystore-file.jks
+
+Terracotta Management Console - Keychain Client
+Open the keychain by entering its master key:   xxxxxxx
+Enter the password you wish to associate with this URL:   server1pass
+Confirm the password to associate with this URL:   server1pass
+Password for jks:server1alias@keystore-file.jks successfully stored
+</code></pre>
+</div>
+
+<p>To create an entry for server2 in server1’s keychain, use:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh server1keychain.tkc tc://server2username@172.16.254.2:9530
+</code></pre>
+</div>
+
+<h2 id="encrypted-client-keychain-files">Encrypted Client Keychain Files</h2>
+<p>For clients, set the secret provider with the following property:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>com.terracotta.express.SecretProvider=net.sf.ehcache.terracotta.security.ConsoleFetchingSecretProvider
+</code></pre>
+</div>
+
+<p>Add entries to the keychain file as described in <a href="/documentation/4.1/terracotta-server-array/tsa-security#client-keychain">Securing Terracotta Clusters</a>, <strong>but avoid using the <code class="highlighter-rouge">-O</code> flag when using the keychain script.</strong></p>
+
+<p>For example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh clientKeychainFile tc://client1@172.16.254.1:9510
+</code></pre>
+</div>
+
+<p>When you run the keychain script, the following prompt should appear:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Terracotta Management Console - Keychain Client
+KeyChain file successfully created in clientKeychainFile
+Open the keychain by entering its master key:
+</code></pre>
+</div>
+
+<p>Enter the master key, then answer the prompts for the secret to be associated with the server URI:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Enter the password you wish to associate with this URL:
+Password for tc://client1@172.16.254.1:9510 successfully stored
+</code></pre>
+</div>
+
+<p>Note that the script does not verify the credentials or the server address.</p>
+
+<p>If the keychain file does not already exist, use the <code class="highlighter-rouge">-c</code> flag to create it:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -c clientKeychainFile tc://client1@172.16.254.1:9510
+</code></pre>
+</div>
+
+<p>If creating the keychain file, you will be prompted for a master password. To automate the entry of the master password, see <a href="#client-autoread-keychain-secret">Clients Automatically Reading the Keychain Password</a>.</p>
+
+<p>The Terracotta client searches for the keychain file in the following locations:</p>
+
+<ul>
+  <li>%(user.home)/.tc/mgmt/keychain</li>
+  <li>%(user.dir)/keychain.tkc</li>
+  <li>The path specified by the system property <code class="highlighter-rouge">com.tc.security.keychain.url</code></li>
+</ul>
+
+<h2 id="security-with-the-tms">Security With the TMS</h2>
+<p>If you are using the Terracotta Management Server (TMS), you must set up <a href="/documentation/4.1/terracotta-server-array/tsa-security#security-with-tms">JMX authentication</a>. Every node in the cluster must have the following entry in its keychain, all locked with the identical secret:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jmx:net.sf.ehcache:type=RepositoryService
+</code></pre>
+</div>
+
+<p>In addition, server-server REST-agent communication must also be authorized using a keychain entry using the format <code class="highlighter-rouge">jmx://&lt;user&gt;@&lt;host&gt;:&lt;group-port&gt;</code>.</p>
+
+<p>Add entries to the keychain file as described in <a href="/documentation/4.1/terracotta-server-array/tsa-security#security-with-tms">Securing Terracotta Clusters</a>, <strong>but avoid using the <code class="highlighter-rouge">-O</code> flag when using the keychain script.</strong></p>
+
+<p>For example, to create an entry for server2 in server1’s keychain, use:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh server1keychain.tkc jmx://server2username@172.16.254.2:9530
+</code></pre>
+</div>
+
+<p>Each server must have an entry for itself and one for each other server in the TSA.</p>
+
+<p>
+   <a id="read-keychain-password"></a>
+</p>
+<h2 id="reading-the-keychain-master-password-from-a-file">Reading the Keychain Master Password From a File</h2>
+<p>Instead of manually entering the master keychain password at startup, you can set servers and clients to automatically read the password.</p>
+
+<p><strong>Note:</strong> Cygwin (on Windows) is not supported for this feature.</p>
+
+<h3 id="servers-automatically-reading-the-keychain-password">Servers Automatically Reading the Keychain Password</h3>
+
+<ol>
+  <li>
+    <p>Implement the interface <code class="highlighter-rouge">com.terracotta.management.security.SecretProviderBackEnd</code> (located in the JAR <code class="highlighter-rouge">com.terracotta:security-keychain</code>) to fetch a password from a given file. For example:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> package com.foo;
+
+ import com.terracotta.management.security.SecretProviderBackEnd;
+
+ import java.io.ByteArrayOutputStream;
+ import java.io.FileInputStream;
+ import java.io.IOException;
+
+ public class MySecretProvider implements SecretProviderBackEnd {
+   private byte[] bytes;
+
+   // This method reads the password into a byte array.
+   @Override
+   public void fetchSecret() {
+     try {
+       bytes = readPasswordFile("password.pw");
+     } catch (IOException ioe) {
+       throw new RuntimeException("Cannot read password from file", ioe);
+     }
+   }
+
+   private byte[] readPasswordFile(String filename) throws IOException {
+     FileInputStream fis = new FileInputStream(filename);
+     try {
+       byte[] buffer = new byte[64];
+       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+       while (true) {
+         int read = fis.read(buffer);
+         if (read == -1) {
+           break;
+         }
+         baos.write(buffer, 0, read);
+       }
+
+       return baos.toByteArray();
+     } finally {
+       fis.close();
+     }
+   }
+
+   // This method returns the byte array containing the password.        
+   @Override
+   public byte[] getSecret() {
+     return bytes;
+   }
+ }
+</code></pre>
+    </div>
+  </li>
+  <li>Create a JAR containing your implementation (MySecretProvider), then copy it to the BigMemory Max <code class="highlighter-rouge">server/lib</code> directory.</li>
+  <li>
+    <p>Assuming the new JAR file is called <code class="highlighter-rouge">my-secret-provider.jar</code>, edit the start-tc-server script in the BigMemory Max <code class="highlighter-rouge">server/bin</code> as follows:</p>
+
+    <p><strong>UNIX/LINUX</strong><br />
+ Change the line</p>
+
+    <p>~~~  <br />
+ -cp “${TC_INSTALL_DIR}/lib/tc.jar” \
+ ~~~</p>
+
+    <p>to</p>
+
+    <p>~~~
+ -cp “${TC_INSTALL_DIR}/lib/tc.jarr:${TC_INSTALL_DIR}/lib/my-secret-provider.jar” \
+ ~~~</p>
+
+    <p><strong>MICROSOFT WINDOWS</strong><br />
+ Change the line</p>
+
+    <p>~~~
+ set CLASSPATH=%TC_INSTALL_DIR%\lib\tc.jar
+ ~~~</p>
+
+    <p>to</p>
+
+    <p>~~~
+ set CLASSPATH=%TC_INSTALL_DIR%\lib\tc.jar;%TC_INSTALL_DIR%\lib\my-secret-provider.jar
+ ~~~</p>
+  </li>
+  <li>
+    <p>Ensure that the server’s configuration includes the &lt;secret-provider&gt; element specifying your implementation:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;security&gt;
+   ...
+   &lt;keychain&gt;
+     &lt;url&gt;/path/to/my/keychain&lt;/url&gt;
+     &lt;secret-provider&gt;com.foo.MySecretProvider&lt;/secret-provider&gt;
+   &lt;/keychain&gt;
+   ...
+ &lt;/security&gt;
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>At startup, the server will read the keychain password from the file specified in your implementation.</p>
+
+<p>For a simpler solution, you could instead hardcode the password:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    package com.foo;
+
+    import com.terracotta.management.security.SecretProviderBackEnd;
+
+    public class MySecretProvider implements SecretProviderBackEnd {
+
+      // This method returns the byte array containing the password.        
+      @Override
+      public byte[] getSecret() {
+        return new byte[] {'p', 'a', 's', 's', 'w', 'o', 'r', 'd'};
+      }
+
+      @Override
+      public void fetchSecret() {
+      }
+    }
+</code></pre>
+</div>
+
+<p>
+   <a id="client-autoread-keychain-secret"></a>
+</p>
+<h3 id="clients-automatically-reading-the-keychain-password">Clients Automatically Reading the Keychain Password</h3>
+<p>You can set up Terracotta clients to read their keychain’s master password in a similar way as for servers. Import <code class="highlighter-rouge">org.terracotta.toolkit.SecretProvider</code> and override <code class="highlighter-rouge">fetchSecret()</code> and <code class="highlighter-rouge">getSecret()</code> as shown above.</p>
+
+<p>Instead of packaging the implementation in a JAR, specify your implementing class by using the system property <code class="highlighter-rouge">com.terracotta.express.SecretProvider</code>.</p>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>

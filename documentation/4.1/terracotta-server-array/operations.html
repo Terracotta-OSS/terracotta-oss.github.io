@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/terracotta-server-array/operations.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <h1 id="terracotta-server-array-operations">Terracotta Server Array Operations</h1><div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#terracotta-server-array-operations">
+                        <span class="toctext">Terracotta Server Array Operations</span>
+                     </a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-2">
+                           <a href="#cluster-events">
+                              <span class="toctext">Cluster Events</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#live-backup-of-distributed-in-memory-data">
+                              <span class="toctext">Live Backup of Distributed In-memory Data</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#server-and-client-reconnections">
+                              <span class="toctext">Server and Client Reconnections</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#changing-cluster-topology-in-a-live-cluster-{#45877}">
+                              <span class="toctext">Changing Cluster Topology in a Live Cluster {#45877}</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-6">
+                           <a href="#production-mode">
+                              <span class="toctext">Production Mode</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-7">
+                           <a href="#distributed-garbage-collection">
+                              <span class="toctext">Distributed Garbage Collection</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc</td>
+      <td>2:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>##Automatic Resource Management
+Terracotta Server Array resource management involves self-monitoring and polling to determine the real-time size of the data set and assess the amount of memory remaining according to user-configured limitations. In-memory data can be managed from three directions:</p>
+
+<ol>
+  <li>
+    <p><strong>Time</strong> – TTI/TTL settings can be configured to expire entries that will then be evicted by the new TSA eviction implementation. You can also configure caches so that their entries are eternal, or you can pin entries or caches so that they are never evicted.</p>
+  </li>
+  <li>
+    <p><strong>Size</strong> – The total amount of BigMemory managed by the TSA can be configured using the <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> elements in the tc-config.xml file.</p>
+  </li>
+  <li>
+    <p><strong>Count</strong> – The total number of entries per cache can be configured using the <code class="highlighter-rouge">maxEntriesInCache</code> attribute in the ehcache.xml file.</p>
+  </li>
+</ol>
+
+<p>###Eviction</p>
+
+<p>All data is kept in memory, and the TSA runs evictions in the background to keep the data set within its limitations. Eviction of entries from the data set reduces the amount of data before the memory becomes full. The criteria for an entry to be eligible for eviction are:</p>
+
+<ul>
+  <li>It is not on a Terracotta client (L1).</li>
+  <li>It is not pinned to a Terracotta server.</li>
+  <li>It is held in a cache backed by a System of Record (SOR).</li>
+</ul>
+
+<table>
+<caption>Store vs. Cache</caption>
+<tr>
+<td>
+BigMemory's in-memory data is treated as a "store" when BigMemory owns the data, and as a "cache" when the data also resides in a System of Record (SOR). Generally, data that is created by BigMemory and run-time data created by your application are examples of data that is treated as a store. The TSA does not evict data stores because they are the only or primary records. The TSA can evict cached data because that data is backed up in an SOR. (Distinctions in data structures are handled automatically, but you can also use the Terracotta Toolkit API to configure customized data structures.)</td>
+</tr>
+</table>
+
+<p>Eviction is done by the following evictors, which work together in the background:</p>
+
+<ol>
+  <li>The periodic evictor is activated on an as-needed basis. It removes expired entries based on TTI/TTL settings. The Server Expiration Rate graph in the TMC shows the activity of the periodic evictor.</li>
+</ol>
+
+<p>
+   <img src="/images/documentation/ExpirationRate.png" />
+</p>
+
+<ol>
+  <li>The resource-based evictor is activated by the periodic TTI/TTL eviction scheduler, as well as by resource monitoring events. This evictor continuously polls BigMemory stores to check current resource usage. At approximately 10% usage of the disk as well as <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> sizes (configured in the tc-config.xml file), it starts looking for TTI/TTL-expired elements to evict. At approximately 80% usage, it evicts live as well as expired elements. If a monitored resource goes over its critical threshold, this evictor will work continually until the monitored resource falls below the critical threshold.</li>
+</ol>
+
+<p>
+   <img src="/images/documentation/offheap-usage-graph.png" class="right" />
+</p>
+
+<p>This evictor monitors two off-heap thresholds – used space and reserved space.  Resource eviction is triggered if either the reserved or used space is above its threshold.  Once resource eviction has started, both used and reserved spaces must fall below their respective thresholds before resource eviction ends.</p>
+
+<p>The Offheap Usage graph in the TMC provides the following information:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>* Off-heap Max is the configured `offheap` size
+* Off-heap Reserved represents usage of the space that is reserved for the system
+* Off-heap Used represents the amount of off-heap BigMemory that is in use
+</code></pre>
+</div>
+
+<p>The Data Storage Usage graph in the TMC shows the configured <code class="highlighter-rouge">dataStorage</code> size and the amount in use. This usage includes off-heap and hybrid storage combined. (BigMemory Hybrid allows for a mix of a solid-state drive (SSD) with DRAM-based offheap storage.)</p>
+
+<p>
+   <img src="/images/documentation/data-storage-usage-graph.png" />
+</p>
+
+<ol>
+  <li>The capacity-based evictor is activated when a cache goes over its maximum count (as configured with <code class="highlighter-rouge">maxEntriesInCache</code>), plus an overshoot count, and it attempts to bring the size of the cache to the max capacity. The <code class="highlighter-rouge">maxEntriesInCache</code> attribute must be present in the Ehcache configuration (do not include <code class="highlighter-rouge">maxEntriesInCache</code> in your configuration if you do not want the capacity evictor to run). If <code class="highlighter-rouge">maxEntriesInCache</code> is not set, it gets the default value 0, which means that the cache is unbounded and will not undergo capacity eviction (but periodic and resource evictions are still allowed).</li>
+</ol>
+
+<p>The Server Eviction Rate graph in the TMC shows the activity of the resource and capacity evictors.</p>
+
+<p>
+   <img src="/images/documentation/EvictionRate.png" />
+</p>
+
+<p>###Customizing the Eviction Strategy
+Based upon the three types of evictors, there are three strategies that you can employ for controlling the size of the TSA’s data set:</p>
+
+<ol>
+  <li>
+    <p>Set the Time To Idle (TTI) or Time to Live (TTL) options for any entry in your data set. After the time has expired, the periodic evictor will clear the entry.</p>
+  </li>
+  <li>
+    <p>Set the <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> sizes to control how much BigMemory should be used before the resource-based evictor is activated.</p>
+  </li>
+  <li>
+    <p>Set the <code class="highlighter-rouge">maxEntriesInCache</code> attribute to control when the capacity-based evictor is activated.</p>
+  </li>
+</ol>
+
+<p><a id="near-memory-full"></a>
+##Near-Memory-Full Conditions</p>
+
+<p>In a near-memory-full condition, where evictions are not happening fast enough to keep the data set within its BigMemory size limitations, the TSA will put a throttle on operations for a temporary period while it attempts to automatically recover in the background. If unable to recover, the TSA will move into “restricted mode” to prevent out-of-memory errors. The Terracotta Management Console (TMC) uses <a href="#cluster-events">events</a> to report when the TSA enters restricted mode and allows you to execute additional recovery measures.</p>
+
+<p>Summary of TSA behavior in near-memory-full conditions:</p>
+
+<ul>
+  <li>If usage reaches its critical threshold, T1, then it enters “throttle mode,” where writes are slowed while the TSA attempts to evict eligible cache entries in order to bring memory usage within the configured range.</li>
+  <li>If usage reaches its halt threshold, T2, then it enters “restricted mode,” where writes are blocked, an exception is thrown, and operator intervention is needed to reduce memory usage.</li>
+  <li>When usage falls below T1, then the TSA returns to normal operation.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left">Throttle mode</th>
+      <th style="text-align: left">Restricted mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Entered when</td>
+      <td style="text-align: left">Disk, <code class="highlighter-rouge">dataStorage</code>, and/or <code class="highlighter-rouge">offheap</code> usage crosses its critical threshold</td>
+      <td style="text-align: left">Disk, <code class="highlighter-rouge">dataStorage</code>, and/or <code class="highlighter-rouge">offheap</code> usage crosses its halt threshold</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Operator event</td>
+      <td style="text-align: left">“TPS seems really low; marking us as being throttled’</td>
+      <td style="text-align: left">“We’re in restricted mode; waiting a while and retrying”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Data access</td>
+      <td style="text-align: left">Modifications to in-memory data are slowed</td>
+      <td style="text-align: left">Modifications to in-memory data are blocked</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Allowed operations</td>
+      <td style="text-align: left">All cache operations still allowed</td>
+      <td style="text-align: left">Only gets, removes, and config changes are allowed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Actions</td>
+      <td style="text-align: left">Evictions continue automatically in the background</td>
+      <td style="text-align: left">Operator intervention required to make additional evictions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">State of the data</td>
+      <td style="text-align: left">Evictable data is still present</td>
+      <td style="text-align: left">No more data present in memory that can be evicted by the evictor (all caches are pinned)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Recovery</td>
+      <td style="text-align: left">Automatic</td>
+      <td style="text-align: left">From the TMC or programmatically, clear caches and/or remove entries from a data set</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Back to normal operation</td>
+      <td style="text-align: left">As soon as the background evictions have time to catch up and reduce the data set to within its limitations</td>
+      <td style="text-align: left">After user intervention clears space, the TSA will automatically continue with normal operation</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>###Restricted Mode Operations
+If the TSA is temporarily under restricted mode, any change to the data set which may result in increased resource utilization is not allowed, including all put and replace methods. Restricted mode does allow gets, removes, configuration changes, and other operations.</p>
+
+<p>###Recovery
+Recovery from throttle mode is automatic, as soon as the background evictions have time to reduce the data set to within its limitations.</p>
+
+<p>If the TSA enters restricted mode, operator events will be logged in the TMC, and user or programmatic intervention is necessary. In the TMC, you can initiate actions to manually reduce the data set. You can also anticipate operator events and use programmatic logic to respond appropriately.</p>
+
+<p>The following actions are recommended for reducing the data set:</p>
+
+<ul>
+  <li>Clear caches (from the TMC or programmatically)</li>
+  <li>Remove entries from data sets programmatically</li>
+</ul>
+
+<p>Note: Because eviction in restricted mode is resource-driven, changing TTI/TTL or maximum capacity will not move the TSA out of restricted mode.</p>
+
+<p>To clear caches from the TMC, click the <strong>Application Data</strong> tab and the <strong>Management</strong> sub-tab. Each cache will have a clickable option to <strong>Clear Cache</strong>. Note that caution should be used when considering whether to clear a pinned cache.</p>
+
+<p>
+   <a id="cluster-events"></a>
+</p>
+<h2 id="cluster-events">Cluster Events</h2>
+<p>Cluster events report topology changes, performance issues, and errors in operations. These events are logged by both Terracotta server (L2) and client (L1), and can also be viewed in the <a href="/documentation/4.1/tmc/tmc">TMC</a>.</p>
+
+<p>By default, the L2 stores a maximum of 100 events in memory, and this is the number pulled by the TMC. To edit that number, use the Terracotta property <code class="highlighter-rouge">l2.operator.events.store</code>. To set the property in the Terracotta configuration file, use:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+  ...
+  &lt;property name="l2.operator.events.store" value="500" /&gt;
+&lt;/tc-properties&gt;
+</code></pre>
+</div>
+
+<h3 id="event-types-and-definitions">Event Types and Definitions</h3>
+<p>The following table describes the types of event that can be found in logs or viewed in the TMC.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event Category <br /> Type</th>
+      <th>Level</th>
+      <th>Cause</th>
+      <th>Action</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ClusterStateEvents <br /> old.db</td>
+      <td>INFO</td>
+      <td>Active L2 restarting with data recovered from disk.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ClusterTopologyEvent <br /> config.reloaded</td>
+      <td>INFO</td>
+      <td>Cluster configuration was reloaded.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>DGCMessages <br /> dgc.started</td>
+      <td>INFO</td>
+      <td>Periodic DGC, which was explicitly enabled in configuration, has started a cleanup cycle.</td>
+      <td>If periodic DGC is unneeded, disable to improve overall cluster performance.</td>
+      <td>Periodic DGC, which is disabled by default, is mostly useful for toolkit, which lacks automatic handling of distributed garbage.</td>
+    </tr>
+    <tr>
+      <td>DGCMessages <br /> dgc.finished</td>
+      <td>INFO</td>
+      <td>Periodic DGC, which was explicitly enabled in configuration, ended a cleanup cycle.</td>
+      <td>If periodic DGC is unneeded, disable to improve overall cluster performance.</td>
+      <td>Periodic DGC, which is disabled by default, is mostly useful for toolkit, which lacks automatic handling of distributed garbage.</td>
+    </tr>
+    <tr>
+      <td>DGCMessages <br /> dgc.canceled</td>
+      <td>INFO</td>
+      <td>Periodic DGC, which was explicitly enabled in configuration, has been cancelled due to an interruption (for example, by a failover operation).</td>
+      <td>If periodic DGC is unneeded, disable to improve overall cluster performance.</td>
+      <td>Periodic DGC, which is disabled by default, is mostly useful for toolkit, which lacks automatic handling of distributed garbage.</td>
+    </tr>
+    <tr>
+      <td>DGCMessages <br /> inlineDgc.cleanup<br />.started</td>
+      <td>INFO</td>
+      <td>L2 starting up as active with existing data, triggering inline DGC</td>
+      <td> </td>
+      <td>Only seen as server starts up as active (from recovery) from restartable.</td>
+    </tr>
+    <tr>
+      <td>DGCMessages <br /> inlineDgc.cleanup<br />.finished</td>
+      <td>INFO</td>
+      <td>Inline DGC operation completed</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>DGCMessages <br /> inlineDgc.cleanup<br />.canceled</td>
+      <td>INFO</td>
+      <td>Inline DGC operation interrupted.</td>
+      <td>Investigate any unusual cluster behavior or other events.</td>
+      <td>Possibly occurs during failover, but other events should indicate real cause.</td>
+    </tr>
+    <tr>
+      <td>HAMessages <br /> node.joined</td>
+      <td>INFO</td>
+      <td>Specified node has joined the cluster.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>HAMessages <br /> node.left</td>
+      <td>WARN</td>
+      <td>Specified node has left the cluster.</td>
+      <td>Check why the node has left (for example: long gc, network issues, or issues with local node resources).</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>HAMessages <br /> clusterNode<br />StateChanged</td>
+      <td>INFO</td>
+      <td>L2 changing state (for example, from initializing to active).</td>
+      <td>Check to see that state change is expected.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>HAMessages <br /> handshake.reject</td>
+      <td>ERROR</td>
+      <td>L1 unsuccessfully trying to reconnect to cluster, but has already be expelled.</td>
+      <td>L1 should go into a rejoin operation or must be restarted manually.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MemoryManager <br /> high.memory<br />.usage</td>
+      <td>WARN</td>
+      <td>Heap usage has crossed its configured threshold.</td>
+      <td>If combined with longgc, could imply need to relieve memory pressure on L1.</td>
+      <td>The default threshold can be reconfigured through the <code class="highlighter-rouge">high.memory.usage</code> tc-property (refer to  <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a>).</td>
+    </tr>
+    <tr>
+      <td>MemoryManager <br /> long.gc</td>
+      <td>WARN</td>
+      <td>A full GC longer than the configured threshold has occurred.</td>
+      <td>Reduce cache memory footprint in L1. Investigate issues with application logic and garbage creation.</td>
+      <td>The default threshold is 8 seconds, and can be reconfigured in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a> using <code class="highlighter-rouge">longgc.threshhold</code>. Occurrence of this event could help diagnose certain failures, such as in <a href="/documentation/4.1/terracotta-server-array/high-availability#85916">healthchecking</a>.</td>
+    </tr>
+    <tr>
+      <td>ResourceManagement <br /> resource.nearcapacity</td>
+      <td>WARN</td>
+      <td>L2 entered <a href="#near-memory-full">throttled mode</a>, which could be a temporary condition (e.g., caused by bulk-loading) or indicate insufficient allocation of memory to L1s</td>
+      <td>See the section on <a href="#near-memory-full">responses to memory pressure</a>.</td>
+      <td>After emitting this, L2 can emit <code class="highlighter-rouge">resource.capacityrestored</code> (return to normal mode) or resource.fullcapacity (move to restricted mode), based on resource availability.</td>
+    </tr>
+    <tr>
+      <td>ResourceManagement <br /> resource.fullcapacity</td>
+      <td>ERROR</td>
+      <td>L2 entered <a href="#near-memory-full">restricted mode</a>, which could be a temporary condition (e.g., caused by bulk-loading) or indicate insufficient allocation of memory to L1s</td>
+      <td>See the section on <a href="#near-memory-full">responses to memory pressure</a>.</td>
+      <td>After emitting this, L2 can emit <code class="highlighter-rouge">resource.capacityrestored</code> (return to normal mode), based on resource availability.</td>
+    </tr>
+    <tr>
+      <td>ResourceManagement <br /> resource<br />.capacityrestored</td>
+      <td>INFO</td>
+      <td>L2 returned to normal from throttled or restricted mode.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SystemSetupEvent <br /> time.different</td>
+      <td>WARN</td>
+      <td>System clocks are not aligned.</td>
+      <td>Synchronize system clocks.</td>
+      <td>The default tolerance is 30 seconds, and can be reconfigured in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a> using <code class="highlighter-rouge">time.sync.threshold</code>. Note that overly large tolerance can introduce unpredictable errors and behaviors.</td>
+    </tr>
+    <tr>
+      <td>ZapEvents <br /> zap.received</td>
+      <td>WARN</td>
+      <td>Another L2 is trying to cause the specified one to restart (“zap”).</td>
+      <td>Investigate a possible “split brain” situation (a mirror L2 behaves as an active) if the specified L2 does not obey the restart order.</td>
+      <td>A “zap” operation happens only within a mirror group.</td>
+    </tr>
+    <tr>
+      <td>ZapEvents <br /> zap.accepted</td>
+      <td>WARN</td>
+      <td>The specified L2 is accepting the order to restart (“zap” order).</td>
+      <td>Check state of the target L2 to ensure that it restarts as mirror or manually restart the L2.</td>
+      <td>A “zap” order is issued only within a mirror group.</td>
+    </tr>
+    <tr>
+      <td>ZapEvents <br /> dirty.db</td>
+      <td>WARN</td>
+      <td>A mirror L2 is trying to join with data in place.</td>
+      <td>If the mirror does not automatically restart and wipe its data, its data may need to be manually wiped and before it’s restarted.</td>
+      <td>Restarted mirror L2s must wipe their data to resync with the active L2. This is normally an automatic operation that should not require action.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="live-backup-of-distributed-in-memory-data">Live Backup of Distributed In-memory Data</h2>
+<p>Backups of the entire data set across all stripes (mirror groups) of the Terracotta Server Array can be made using the TMC Backup feature. This feature creates a time-stamped backup of each stripe’s data, providing a snapshot of the TSA’s in-memory data.</p>
+
+<p>The Backup feature is available when fast restartability is enabled for the TSA (<code class="highlighter-rouge">&lt;restartable enabled="true"/&gt;</code> in the tc-config.xml).</p>
+
+<p>###Creating a Backup
+From the TMC, select the <strong>Administration</strong> tab and the <strong>Backups</strong> sub-tab. Click the <strong>Make Backup</strong> button to perform a backup. The TMC sends a backup request to all stripes in the cluster.</p>
+
+<p>In order to capture a consistent snapshot of the in-memory data, the backup function creates a pause in transactions, allowing any unfinished transactions to complete, and then the backup is written. This allows the backup to be a consistent record of the entries in-memory, as well as search and other indices.</p>
+
+<p>Note that when backing up a cluster, each stripe is backed up independently and at a slightly different time than the other stripes.</p>
+
+<p>When complete, a window appears that confirms the backup was taken and provides the time-stamped file name(s) of the backup.</p>
+
+<p>###Backup Directory
+Backups are saved to the default directory <code class="highlighter-rouge">data-backup</code>, unless otherwise configured in the tc-config.xml. Terracotta automatically creates <code class="highlighter-rouge">data-backup</code> in the directory containing the Terracotta server’s configuration file (tc-config.xml by default).</p>
+
+<p>You can override the default directory by specifying a different backup directory in the server’s configuration file using the <code class="highlighter-rouge">&lt;data-backup&gt;</code> property:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;servers&gt;
+   &lt;server name="Server1"&gt;
+      &lt;data&gt;/opt/terracotta/server1-data&lt;/data&gt;
+      &lt;data-backup&gt;path/to/my/backup/directory&lt;/data-backup&gt;
+      &lt;offheap&gt;  
+         &lt;enabled&gt;true&lt;/enabled&gt;
+         &lt;maxDataSize&gt;2g&lt;/maxDataSize&gt;
+      &lt;/offheap&gt;
+   &lt;/server&gt;
+   &lt;restartable enabled="true"/&gt;
+&lt;/servers&gt;
+</code></pre>
+</div>
+
+<p>
+   <a id="restore-backup"></a>
+</p>
+<h3 id="restoring-data-from-a-backup">Restoring Data from a Backup</h3>
+<p>If the TSA fails, on restart it automatically restores data from its data directory, recreating the application state. If the current data files are corrupt or missing, or in other situations where an earlier snapshot of data is required, you can restore them from backups:</p>
+
+<ol>
+  <li>Shut down the Terracotta cluster.</li>
+  <li>(Optional) Make copies of any existing data files.</li>
+  <li>Delete the existing data files from your Terracotta servers.</li>
+  <li>Copy the backup data files to the directory from which you deleted the original (existing) data files.</li>
+  <li>Restart the Terracotta cluster.</li>
+</ol>
+
+<h2 id="server-and-client-reconnections">Server and Client Reconnections</h2>
+
+<p>A reconnection mechanism restores lost connections between active and mirror Terracotta server instances. See <a href="/documentation/4.1/terracotta-server-array/high-availability#41216">Automatic Server Instance Reconnect</a> for more information.</p>
+
+<p>A Terracotta Server Array handles perceived client disconnection (for example, a network failure, a long client GC, or node failure) based on the configuration of the <a href="/documentation/4.1/terracotta-server-array/high-availability#85916">HealthChecker</a> or <a href="/documentation/4.1/terracotta-server-array/high-availability#77332">Automatic Client Reconnect</a> mechanisms. A disconnected client also attempts to reconnect based on these mechanisms. The client tries to reconnect first to the initial server, then to any other servers set up in its Terracotta configuration. To preserve data integrity, clients resend any transactions for which they have not received server acks.</p>
+
+<p>##Clearing a Server’s Data
+After a Terracotta server is restarted, under certain circumstances it will retain artifacts from previous runs and its data directory must be manually cleared. These circumstances include running with Fast Restartability disabled and BigMemory Hybrid enabled. This may also be the source of errors during “split brain” resolution or during a mirror server restart.</p>
+
+<p>By default, the number of copies of a server’s objectdb data that are retained is unlimited. Over time, and with frequent restarts, these copies may consume a substantial amount of disk space. You can manually delete these files, which are saved in the server’s data directory under <code class="highlighter-rouge">/dirty-objectdb-backup/dirty-objectdb-&lt;timestamp&gt;</code>. You can also set a limit for the number of backups by adding the following element to the Terracotta configuration file’s &lt;tc-properties&gt; block:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property name="l2.nha.dirtydb.rolling" value="&lt;myValue&gt;" /&gt;
+</code></pre>
+</div>
+
+<p>where &lt;myValue&gt; is an integer.</p>
+
+<p>If you have Fast Restartability disabled and BigMemory Hybrid enabled, you can also automatically remove the older data before server shutdown by setting the property <code class="highlighter-rouge">l2.nha.dirtydb.autoDelete</code> to “true”. It is important to note that a backup copy will still be made in the configured <code class="highlighter-rouge">/dirty-objectdb-backup</code> folder prior to the most recent “working” data being deleted. This can potentially consume all available disk space. If you want to disable the creation of back-ups altogether, the property <code class="highlighter-rouge">l2.nha.dirtydb.backup.enabled</code> can be set to “false”.</p>
+
+<h2 id="changing-cluster-topology-in-a-live-cluster-{#45877}">Changing Cluster Topology in a Live Cluster {#45877}</h2>
+
+<p>Using the TMC, you can change the topology of a live cluster by reloading an edited Terracotta configuration file.</p>
+
+<p>Note the following restrictions:</p>
+
+<ul>
+  <li>Only the removal or addition of &lt;server&gt; blocks in the &lt;servers&gt; or &lt;mirror-group&gt; section of the Terracotta configuration file are allowed.</li>
+  <li>
+    <p>All servers and clients must load the same configuration file to avoid topology conflicts.</p>
+
+    <p>Servers that are part of the same server array but do not share the edited configuration file must have their configuration file edited and reloaded as shown below. Clients that do not load their configuration from the servers must have their configuration files edited to exactly match that of the servers.</p>
+  </li>
+</ul>
+
+<p><strong>Note</strong>: Changing the topology of a live cluster will not affect the distribution of data that is already loaded in the TSA. For example, if you added a stripe to a live cluster, the data in the server array would not be redistributed to utilize it. Instead, the new stripe could be used for adding new caches, while the original servers would continue to manage the original data.</p>
+
+<h3 id="adding-a-new-server">Adding a New Server</h3>
+
+<p>To add a new server to a Terracotta cluster, follow these steps:</p>
+
+<ol>
+  <li>
+    <p>Add a new &lt;server&gt; block to the &lt;servers&gt; or &lt;mirror-group&gt; section in the Terracotta configuration file being used by the cluster.
+ The new &lt;server&gt; block should contain the minimum information required to configure a new server. It should appear similar to the following, with your own values substituted:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;server host="myHost" name="server2" &gt;
+   &lt;data&gt;%(user.home)/terracotta/server2/server-data&lt;/data&gt;
+   &lt;logs&gt;%(user.home)/terracotta/server2/server-logs&lt;/logs&gt;
+   &lt;tsa-port&gt;9513&lt;/tsa-port&gt;
+ &lt;/server&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Make sure you are connected to the TMC, and that the TMC is connected to the target cluster.<br />
+See the <a href="/documentation/4.1/tms/tms">TMC documentation</a> for more information on using the TMC.</p>
+  </li>
+  <li>With the target cluster selected in the TMC, click the <strong>Administration</strong> tab, then choose the <strong>Change Topology</strong> panel.</li>
+  <li>
+    <p>Click <strong>Reload</strong>.<br />
+A message appears with the result of the reload operation. A successful operation logs a message similar to the following:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>2013-03-14 13:25:44,821 INFO - Successfully overridden server topology from file at '/bigmemory-max-4/tc-config.xml'.
+</code></pre>
+    </div>
+  </li>
+  <li>Start the new server.</li>
+</ol>
+
+<h3 id="removing-an-existing-server-16046">Removing an Existing Server {#16046}</h3>
+
+<p>To remove a server from a Terracotta cluster configuration, follow these steps:</p>
+
+<ol>
+  <li>Shut down the server you want to remove from the cluster.<br />
+If you shutting down an active server, first ensure that a backup server is online to enable failover.</li>
+  <li>
+    <p>Delete the &lt;server&gt; block associated with the removed server from the Terracotta configuration file being used by the cluster.
+Make sure you are connected to the TMC, and that the TMC is connected to the target cluster.<br />
+See the <a href="/documentation/4.1/tms/tms">TMC documentation</a> for more information on using the TMC.</p>
+  </li>
+  <li>With the target cluster selected in the TMC, click the <strong>Administration</strong> tab, then choose the <strong>Change Topology</strong> panel.</li>
+  <li>
+    <p>Click <strong>Reload</strong>.<br />
+A message appears with the result of the reload operation. A successful operation logs a message similar to the following:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>2013-03-14 13:25:44,821 INFO - Successfully overridden server topology from file at '/bigmemory-max-4/tc-config.xml'.
+</code></pre>
+    </div>
+
+    <p>The TMC will also display the event <code class="highlighter-rouge">Server topology reloaded from file at '/bigmemory-max-4/tc-config.xml'</code>.</p>
+  </li>
+</ol>
+
+<h3 id="editing-the-configuration-of-an-existing-server">Editing the Configuration of an Existing Server</h3>
+
+<p>If you edit the configuration of an existing (“live”) server and attempt to reload its configuration, the reload operation will fail. However, you can successfully edit an existing server’s configuration by following these steps:</p>
+
+<ol>
+  <li>Remove the server by following the steps in <a href="#16046">Removing an Existing Server</a>.
+Instead of deleting the server’s &lt;server&gt; block, you can comment it out.</li>
+  <li>Edit the server’s &lt;server&gt; block with the changed values.</li>
+  <li>Add (or uncomment) the edited &lt;server&gt; block.</li>
+  <li>In the TMC’s <strong>Change Server Topology</strong> panel, click <strong>Reload</strong>.
+A message appears with the result of the reload operation.</li>
+</ol>
+
+<p><strong>NOTE</strong>: To be able to edit the configuration of an existing server, all clients must load their configuration from the Terracotta Server Array. Clients that load configuration from another source will fail to remain connected to the TSA due to a configuration mismatch.</p>
+
+<h2 id="production-mode">Production Mode</h2>
+<p>Production mode can be set by setting the Terracotta property in the Terracotta configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+  ...
+  &lt;property name="l2.enable.legacy.production.mode" value="true" /&gt;
+&lt;/tc-properties&gt;
+</code></pre>
+</div>
+
+<p>Production mode requires the <code class="highlighter-rouge">--force</code> flag to be used with the stop-tc-server script if the target is an active server with no mirror.</p>
+
+<h2 id="distributed-garbage-collection">Distributed Garbage Collection</h2>
+
+<p>There are two types of DGC: periodic and inline. The periodic DGC is configurable and can be run manually (see below). Inline DGC, which is an automatic garbage-collection process intended to maintain the server’s memory, runs even if the periodic DGC is disabled.</p>
+
+<p>Note that the inline DGC algorithm operates at intervals optimal to maximizing performance, and so does not necessarily collect distributed garbage immediately.</p>
+
+<h3 id="running-the-periodic-dgc">Running the Periodic DGC</h3>
+
+<p>The periodic DGC can be run in any of the following ways:</p>
+
+<ul>
+  <li>run-dgc shell script – Call the run-dgc shell script to trigger DGC externally.</li>
+  <li>JMX – Trigger DGC through the server’s JMX management interface.</li>
+</ul>
+
+<p>By default, DGC is disabled in the Terracotta configuration file in the <code class="highlighter-rouge">&lt;garbage-collection&gt;</code> section. However, even if disabled, it will run automatically under certain circumstances when clearing garbage is necessary but the inline DGC does not run (such as when a crashed server returns to the cluster).</p>
+
+<h3 id="monitoring-and-troubleshooting-the-dgc">Monitoring and Troubleshooting the DGC</h3>
+
+<p>DGC events (both periodic and inline) are reported in a Terracotta server instance’s logs. DGC events can also be monitored using the Terracotta Management Console.</p>
+
+<p>If DGC does not seem to be collecting objects at the expected rate, one of the following issues may be the cause:</p>
+
+<ul>
+  <li>Java GC is not able to collect objects fast enough. Client nodes may be under resource pressure, causing GC collection to run behind, which then causes DGC to run behind.</li>
+  <li>Certain client nodes continue to hold references to objects that have become garbage on other nodes, thus preventing DGC from being able to collect those objects.</li>
+</ul>
+
+<p>If possible, shut down all Terracotta clients to see if DGC then collects the objects that were expected to be collected.</p>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>

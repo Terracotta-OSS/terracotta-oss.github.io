@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/bigmemorymax/get-started/server-array.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <p>#Adding the Terracotta Server Array</p>
+
+<p>The Terracotta Server Array is an array of in-memory data servers that
+plug in seamlessly to provide applications with high-performance, low and
+predictable latency data access to terabytes of in-memory data and
+enterprise capabilities like high availability, scalability, fault tolerance
+and more.</p>
+
+<p>Let’s try starting up a Terracotta server and connecting our data sets to it.</p>
+
+<h2 id="preparation">Preparation</h2>
+
+<ul>
+  <li>Add a valid Terracotta license key to the top level of your Terracotta
+installation directory. If you don’t have one yet, you can register for a
+license at <a href="/downloads/bigmemorymax" target="_blank">terracotta.org/downloads/bigmemorymax</a></li>
+  <li>Add the following jar in the bigmemory-max-4.x.x download kit to your
+classpath:
+    <ul>
+      <li>apis/toolkit/lib/terracotta-toolkit-runtime-ee-4.x.x.jar</li>
+    </ul>
+  </li>
+  <li>Add the terracotta configuration to the configuration file (see below)</li>
+  <li>Make sure data classes serializable</li>
+  <li>Start a Terracotta server instance</li>
+</ul>
+
+<h2 id="create-configuration-file">Create Configuration File</h2>
+
+<p>Create a new configuration file called “ehcache-server-array.xml” in your
+classpath and add a new cache called “server-array” (you can name it anything
+you want, as long as you use the correct name in your code).</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+	 name="SampleConfig" maxBytesLocalHeap="64M"&gt;
+  &lt;cache name="hello-world"/&gt;
+  &lt;cache name="crud"/&gt;
+  &lt;cache name="search"&gt;
+	&lt;searchable&gt;
+		&lt;searchAttribute name="height"/&gt;
+		&lt;searchAttribute name="weight"/&gt;
+		&lt;searchAttribute name="bodyMassIndex" /&gt;
+	&lt;/searchable&gt;
+  &lt;/cache&gt;
+  &lt;cache name="sort"&gt;
+	&lt;searchable&gt;
+		&lt;searchAttribute name="height"/&gt;
+		&lt;searchAttribute name="weight"/&gt;
+	&lt;/searchable&gt;
+  &lt;/cache&gt;
+  &lt;cache name="group"&gt;
+	&lt;searchable&gt;
+		&lt;searchAttribute name="height"/&gt;
+		&lt;searchAttribute name="gender"/&gt;
+		&lt;searchAttribute name="bmi" expression="value.getBodyMassIndex()"/&gt;
+	&lt;/searchable&gt;
+  &lt;/cache&gt;
+  &lt;cache name="server-array"&gt;
+	&lt;searchable&gt;
+		&lt;searchAttribute name="height"/&gt;
+		&lt;searchAttribute name="gender"/&gt;
+		&lt;searchAttribute name="bmi" expression="value.getBodyMassIndex()"/&gt;
+	&lt;/searchable&gt;
+	  &lt;!-- Add the terracotta element to this cache. This causes this data
+	  set to be managed by the Terracotta server array. For the purposes of
+	  demonstration, we set the consistency to "strong" to ensure that data
+	  is always consistent across the entire distributed system. There are
+	  other consistency settings that may be more suitable for different
+	  data sets and applications. --&gt;
+	&lt;terracotta consistency="strong"/&gt;
+  &lt;/cache&gt;
+  &lt;!-- Add the terracottaConfig element to specify where to find the
+  configuration specific to the server array.  In this case, the configuration
+  is retrieved from the server array itself. --&gt;
+  &lt;terracottaConfig url="localhost:9510"/&gt;
+&lt;/ehcache&gt;
+</code></pre>
+</div>
+
+<h2 id="create-serverarraytestjava">Create ServerArrayTest.java</h2>
+
+<p>Create and compile a Java class called ServerArrayTest:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import java.io.Serializable;
+import java.util.List;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+import net.sf.ehcache.search.Attribute;
+import net.sf.ehcache.search.Direction;
+import net.sf.ehcache.search.Query;
+import net.sf.ehcache.search.Result;
+import net.sf.ehcache.search.Results;
+import net.sf.ehcache.search.aggregator.Aggregators;
+
+public class ServerArrayTest {
+
+  public static void main(final String[] args) {
+
+	// Create a cache manager using the factory method...
+	final CacheManager cacheManager = CacheManager.newInstance(Group.class
+		.getResource("/ehcache-server-array.xml"));
+
+	// Retrieve the "sort" data set...
+	final Cache dataSet = cacheManager.getCache("server-array");
+
+	// Check to see if there's any data in it yet...
+	Element person1 = dataSet.get(1L);
+	if (person1 == null) {
+	  System.out.println("We didn't find any data in the server array."
+		  + " This must be the first execution.");
+	  // The data isn't in the server array yet (this must be the first time we
+	  // ran the program), so let's create some objects...
+	  final Person janeAusten = new Person(1, "Jane", "Austen", "Female",
+		  5 * 12 + 7, 130);
+	  final Person charlesDickens = new Person(2, "Charles", "Dickens", "Male",
+		  5 * 12 + 9, 160);
+	  final Person janeDoe = new Person(3, "Jane", "Doe", "Female", 5 * 12 + 5,
+		  145);
+	  final Person alexSmith = new Person(4, "Alex", "Smith", "Other",
+		  5 * 12 + 5, 160);
+
+	  // Put the objects into the data set...
+	  dataSet.put(new Element(janeAusten.getId(), janeAusten));
+	  dataSet.put(new Element(charlesDickens.getId(), charlesDickens));
+	  dataSet.put(new Element(janeDoe.getId(), janeDoe));
+	  dataSet.put(new Element(alexSmith.getId(), alexSmith));
+	} else {
+
+	  System.out.println("We found data in the server array from a previous"
+		  + " execution. No need to create new data.");
+
+	}
+
+	// Fetch the search attributes that we'll use in our query and when fetching
+	// our results...
+	Attribute&lt;Integer&gt; height = dataSet.getSearchAttribute("height");
+	Attribute&lt;String&gt; gender = dataSet.getSearchAttribute("gender");
+	Attribute&lt;Float&gt; bmi = dataSet.getSearchAttribute("bmi");
+
+	// Create a query object. (This query is designed to select the entire data
+	// set.)
+	final Query query = dataSet.createQuery().addCriteria(height.gt(5 * 12));
+
+	// Group by the gender attribute so we can perform aggregations on each
+	// gender...
+	query.addGroupBy(gender);
+	query.includeAttribute(gender);
+
+	// Include an aggregation of the average height and bmi of each gender in
+	// the results...
+	query.includeAggregator(Aggregators.average(height));
+	query.includeAggregator(Aggregators.average(bmi));
+
+	// Include the count of the members of each gender
+	query.includeAggregator(Aggregators.count());
+
+	// Make the results come back sorted by gender in alphabetical order
+	query.addOrderBy(gender, Direction.ASCENDING);
+
+	// Execute the query...
+	final Results results = query.execute();
+
+	// Print the results...
+	for (Result result : results.all()) {
+	  String theGender = result.getAttribute(gender);
+	  List&lt;Object&gt; aggregatorResults = result.getAggregatorResults();
+	  Float avgHeight = (Float) aggregatorResults.get(0);
+	  Float avgBMI = (Float) aggregatorResults.get(1);
+	  Integer count = (Integer) aggregatorResults.get(2);
+	  System.out.println("Gender: " + theGender + "; count: " + count
+		  + "; average height: " + avgHeight + "; average BMI: " + avgBMI);
+	}
+  }
+
+  public static class Person implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private final String firstName;
+	private final String lastName;
+	private final long id;
+	private final int height;
+	private final int weight;
+	private String gender;
+
+	public Person(final long id, final String firstName, final String lastName,
+		final String gender, final int height, final int weight) {
+	  this.id = id;
+	  this.firstName = firstName;
+	  this.lastName = lastName;
+	  this.gender = gender;
+	  this.height = height;
+	  this.weight = weight;
+	}
+
+	public String getFirstName() {
+	  return firstName;
+	}
+
+	public String getLastName() {
+	  return lastName;
+	}
+
+	public String getGender() {
+	  return gender;
+	}
+
+	public int getHeight() {
+	  return height;
+	}
+
+	public int getWeight() {
+	  return weight;
+	}
+
+	public float getBodyMassIndex() {
+	  return ((float) weight / ((float) height * (float) height)) * 703;
+	}
+
+	public long getId() {
+	  return id;
+	}
+
+	public String toString() {
+	  return "[id=" + id + ", firstName=" + firstName + ", lastName="
+		  + lastName + ", height=" + height + " in" + ", weight=" + weight
+		  + " lbs" + ", bmi=" + getBodyMassIndex() + "]";
+	}
+  }
+}
+</code></pre>
+</div>
+
+<h2 id="start-a-terracotta-server-instance">Start a Terracotta Server Instance</h2>
+
+<p>In a terminal, go to the “server” directory in your BigMemory Max
+distribution.  Then run the start-tc-server command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>%&gt; cd /path/to/bigmemory-max-4.x.x/server
+%&gt; ./bin/start-tc-server.sh
+</code></pre>
+</div>
+
+<h2 id="execute">Execute</h2>
+
+<p>The first time you run the ServerArrayTest program in a terminal, there is no
+data in the server array, so you should see output like this:</p>
+
+<pre style="overflow: auto; white-space: nowrap">
+We didn't find any data in the server array. This must be the first execution.<br />
+Gender: Female; count: 2; average height: 66.0; average BMI: 22.242641<br />
+Gender: Male; count: 1; average height: 69.0; average BMI: 23.625288<br />
+Gender: Other; count: 1; average height: 65.0; average BMI: 26.622484<br />
+</pre>
+
+<p>If you run the ServerArrayTest program again (without restarting the Terracotta
+server instance that is already running), the data will be automatically
+retrieved from the server array, so you should see output like this:</p>
+
+<pre style="overflow: auto; white-space: nowrap">
+We found data in the server array from a previous execution. No need to create new data.<br />
+Gender: Female; count: 2; average height: 66.0; average BMI: 22.242641<br />
+Gender: Male; count: 1; average height: 69.0; average BMI: 23.625288<br />
+Gender: Other; count: 1; average height: 65.0; average BMI: 26.622484<br />
+</pre>
+
+<p>In our default configuration, the server keeps all data in memory only (though,
+you can add easily add data persistence with a fast restartable store
+configuration). To clear all data, restart the server before you next run the
+ServerArrayTest program.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>This is just a short example of using BigMemory Max with the full power of the
+server array to help get you started. Keep in mind that the settings we used
+here were chosen to make it as easy as possible to get started. We encourage
+you to read the rest of the documentation and experiment with the different
+configuration options, features and deployment topologies available to best
+meet your application’s performance and scale needs.</p>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>

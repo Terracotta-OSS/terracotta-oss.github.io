@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/bigmemorymax/search/best-practices.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+  <body>
+
+    
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top: 12px;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div class="container-fluid">
+      <div id="contentTitle">
+        <h1></h1>
+      </div>
+      <div>
+        <BR/>
+        <br/>
+
+<div class="container-fluid">
+
+  <div class="row row-offcanvas row-offcanvas-left">
+
+    <!-- sidebar -->
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
+          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
+          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
+        </ul>
+    </div>
+
+    <!-- main area -->
+    <div class="col-xs-12 col-sm-9">
+      <header class="post-header">
+        
+        <h1 class="post-title"></h1>
+        <hr/>
+        
+      </header>
+      <article class="post-content">
+        <h1 id="search-performance-and-best-practices">Search Performance and Best Practices</h1><div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#search-performance-and-best-practices">
+                        <span class="toctext">Search Performance and Best Practices</span>
+                     </a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-2">
+                           <a href="#search-implementation-and-performance">
+                              <span class="toctext">Search Implementation and Performance</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#concurrency-notes">
+                              <span class="toctext">Concurrency Notes</span>
+                           </a>
+                        </li>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#options-for-working-with-nulls">
+                              <span class="toctext">Options for Working with Nulls</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<p>####For Search API and BigMemory SQL</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{toc</td>
+      <td>2:3}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="search-implementation-and-performance">Search Implementation and Performance</h2>
+
+<p>###BigMemory Max Backed by the Terracotta Server Array (TSA)</p>
+
+<p>This implementation uses indexes that are maintained on each Terracotta server. With distributed BigMemory Max, the data is sharded across the number of active nodes in the cluster, and the index for each shard is maintained on the server for that shard. Searches are performed using the Scatter-Gather pattern. The query executes on each node and the results are then aggregated in the BigMemory Max that initiated the search.</p>
+
+<p>Search operations perform in O(log n / number of shards) time. Performance is excellent. To improve the performance still further, consider adding more servers to the TSA. Search results are returned over the network, and the data returned might be very large, so techniques to limit return size are recommended. For more information, see <a href="#best-practices">Best Practices</a>.</p>
+
+<p>###Standalone BigMemory Max
+BigMemory uses a Search index that is maintained at the local node. The index is stored under a directory in the DiskStore and is available whether or not persistence is enabled. Any overflow from the on-heap tier of the cache is searched using indexes.</p>
+
+<p>Search operations perform in O(log(n)) time. For tips that can aid performance, see <a href="#best-practices">Best Practices</a>.</p>
+
+<p>For caches that are on-heap only, Attributes are extracted during query execution rather than ahead of time, and indexes are not used. Instead, the cache takes advantage of the fast access to do the equivalent of a table scan for each query. Each element in the cache is only visited once.</p>
+
+<p>On-heap search operations perform in O(n) time. To see performance results, see <a href="http://svn.terracotta.org/svn/forge/offHeap-test/">Maven-based performance test</a>, where an average of representative queries takes 4.6 ms for a 10,000 entry cache, and 427 ms for a 1,000,000 entry cache.</p>
+
+<p>##Best Practices for Optimizing Searches</p>
+<ol>
+  <li>Construct searches by including only the data that is actually required.
+    <ul>
+      <li>Only use <code class="highlighter-rouge">includeKeys()</code> and/or <code class="highlighter-rouge">includeAttribute()</code> if those values are required for your application logic.</li>
+      <li>If you don’t need values or attributes, be careful not to burden your queries with unnecessary work. For example, if <code class="highlighter-rouge">result.getValue()</code> is not called in the search results, do not use <code class="highlighter-rouge">includeValues()</code> in the query.</li>
+      <li>Consider if it would be sufficient to get attributes or keys on demand. For example, instead of running a search query with <code class="highlighter-rouge">includeValues()</code> and then <code class="highlighter-rouge">result.getValue()</code>, run the query for keys and include <code class="highlighter-rouge">cache.get()</code> for each individual key.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Note</strong>: <code class="highlighter-rouge">includeKeys()</code> and <code class="highlighter-rouge">includeValues()</code> have lazy deserialization, which means that keys and values are de-serialized only when <code class="highlighter-rouge">result.getKey()</code> or <code class="highlighter-rouge">result.getValue()</code> is called. However, calls to <code class="highlighter-rouge">includeKeys()</code> and <code class="highlighter-rouge">includeValues()</code> do take time, so consider carefully when constructing your queries.</p>
+
+<ol>
+  <li>
+    <p>Searchable keys and values are automatically indexed by default. If you are not including them in your query, turn off automatic indexing with the following:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;cache name="cacheName" ...&gt;
+   &lt;searchable keys="false" values="false"/&gt;
+   ...
+   &lt;/searchable&gt;
+ &lt;/cache&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>Limit the size of the result set. Depending on your use case, you might consider maxResults, an Aggregator, or pagination:
+    <ul>
+      <li>If getting a subset of all the possible results quickly is more important than receiving all the results, consider using <code class="highlighter-rouge">query.maxResults(int number_of_results)</code>  Sometimes maxResults is useful where the result set is ordered such that the items you want most are included within the maxResults.</li>
+      <li>If all you want is a summary statistic, use a built-in Aggregator function, such as <code class="highlighter-rouge">count()</code>. For details, see the <code class="highlighter-rouge">net.sf.ehcache.search.aggregator</code> package in the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">Ehcache Javadoc</a>.</li>
+      <li>
+        <p>If you want to avoid an <code class="highlighter-rouge">OutOfMemoryError</code> while allowing your Terracotta client to receive an extremely large result set, consider using the Pagination feature. Pagination limits how many of the total results appear on the client at a time, so that you can view the results in page-sized batches. Instead of calling the parameterless version of the execute method <code class="highlighter-rouge">query.execute()</code>, pass in an <code class="highlighter-rouge">ExecutionHints</code> object that specifies the page size you want:</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code>query.execute(new ExecutionHints().setResultBatchSize(pageSize))
+</code></pre>
+        </div>
+      </li>
+    </ul>
+
+    <p>If you call for results after issuing a query with <code class="highlighter-rouge">ExecutionHints</code>, all results are returned (same behavior as a regular query), except that only the number of results specified as the <code class="highlighter-rouge">ResultBatchSize</code> will appear on the client. For example, if your query would have 500 results and you use a <code class="highlighter-rouge">ResultBatchSize</code> of 100, you will still get all 500 results, but you can scroll through them in pages of 100.</p>
+
+    <p>You can enable search result pagination for the execution phase of a query whether the query was constructed using the Search API or BigMemory SQL.</p>
+
+    <p>Limitations of search result pagination:</p>
+    <ul>
+      <li>Results from GroupBy queries (created with <code class="highlighter-rouge">Query.addGroupBy()</code>) cannot be paginated regardless of server topology.</li>
+      <li>In multi-stripe (active/active) TSA topologies, pagination is not supported for the following query types:
+        <ul>
+          <li>Result-size capped queries with aggregate functions, for example, those
+constructed with <code class="highlighter-rouge">Query.includeAggregator().maxResults()</code> - with the exception that <code class="highlighter-rouge">count()</code> is the one aggregator that does work with all topologies</li>
+          <li>Queries that request result ordering, for example, those created with
+ <code class="highlighter-rouge">Query.addOrderBy()</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Make your search as specific as possible.
+    <ul>
+      <li>Queries with <code class="highlighter-rouge">iLike</code> criteria and fuzzy (wildcard) searches might take longer than more specific queries.</li>
+      <li>If you are using a wildcard, try making it the trailing part of the string instead of the leading part (<code class="highlighter-rouge">"321*"</code> instead of <code class="highlighter-rouge">"*123"</code>).</li>
+      <li>TIP: If you want leading wildcard searches, you should create a <code class="highlighter-rouge">&lt;searchAttribute&gt;</code> with the string value reversed in it, so that your query can use the trailing wildcard instead.</li>
+    </ul>
+  </li>
+  <li>
+    <p>When possible, use the query criteria “Between” instead of “LessThan” and “GreaterThan”, or “LessThanOrEqual” and “GreaterThanOrEqual”. For example, instead of using <code class="highlighter-rouge">le(startDate)</code> and <code class="highlighter-rouge">ge(endDate)</code>, try <code class="highlighter-rouge">not(between(startDate,endDate))</code>.</p>
+  </li>
+  <li>
+    <p>Index dates as integers. This can save time and can also be faster if you have to do a conversion later on.</p>
+  </li>
+  <li>Searches of eventually consistent BigMemory Max data sets are fast because queries are executed immediately, without waiting for the commit of pending transactions at the local node. <strong>Note</strong>: This means that if a thread adds an element into an eventually consistent cache and immediately runs a query to fetch the element, it will not be visible in the search results until the update is published to the server.</li>
+</ol>
+
+<h2 id="concurrency-notes">Concurrency Notes</h2>
+<p>Unlike cache operations, which have selectable concurrency control or transactions, queries are asynchronous and Search results are eventually consistent with the caches.</p>
+
+<h4 id="index-updating">Index Updating</h4>
+<p>Although indexes are updated synchronously, their state lags slightly behind that of the cache. The only exception is when the updating thread performs a search.</p>
+
+<p>For caches with concurrency control, an index does not reflect the new state of the cache until:</p>
+
+<ul>
+  <li>The change has been applied to the cluster.</li>
+  <li>For a cache with transactions, when <code class="highlighter-rouge">commit</code> has been called.</li>
+</ul>
+
+<h4 id="query-results">Query Results</h4>
+<p>Unexpected results might occur if:</p>
+
+<ul>
+  <li>A search returns an Element reference that no longer exists.</li>
+  <li>Search criteria select an Element, but the Element has been updated.</li>
+  <li>Aggregators, such as <code class="highlighter-rouge">sum()</code>, disagree with the same calculation done by redoing the calculation yourself by re-accessing the cache for each key and repeating the calculation.</li>
+  <li>A value reference refers to a value that has been removed from the cache, and the cache has not yet been reindexed. If this happens, the value is null but the key and attributes supplied by the stale cache index are non-null. Because values in Ehcache are also allowed to be null, you cannot tell whether your value is null because it has been removed from the cache after the index was last updated or because it is a null value.</li>
+</ul>
+
+<h4 id="recommendations">Recommendations</h4>
+<p>Because the state of the cache can change between search executions, the following is recommended:</p>
+
+<ul>
+  <li>Add all of the aggregators you want for a query at once, so that the returned aggregators are consistent.</li>
+  <li>Use null guards when accessing a cache with a key returned from a search.</li>
+</ul>
+
+<p>
+   <a id="nulls"></a>
+</p>
+<h2 id="options-for-working-with-nulls">Options for Working with Nulls</h2>
+
+<p>BigMemory SQL supports using the presence or absence of null as a search criterion:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select * from searchable where birthDate is null
+select * from searchable where birthDate is not null
+</code></pre>
+</div>
+
+<p>The Search API supports the same criteria:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>myQuery.addCriteria(cache.getAttribute("middle_name").isNull());
+</code></pre>
+</div>
+
+<p>The opposite case: require that a value for the attribute must be present:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>myQuery.addCriteria(cache.getAttribute("middle_name").notNull());
+</code></pre>
+</div>
+
+<p>which is equivalent to:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>myQuery.addCriteria(cache.getAttribute("middle_name").isNull().not());
+</code></pre>
+</div>
+
+<p>Alternatively, you can call constructors to set up equivalent logic:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Criteria isNull = new IsNull("middle_name");
+Criteria notNull = new NotNull("middle_name");  
+</code></pre>
+</div>
+
+      </article>
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="http://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="http://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/terracotta-oss">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+        <br/>
+        <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+  </body>
+
+</html>
