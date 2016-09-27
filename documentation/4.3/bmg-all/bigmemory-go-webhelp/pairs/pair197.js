@@ -1,0 +1,27 @@
+var pairs =
+{
+"starting":{"terracotta":1}
+,"terracotta":{"management":1}
+,"management":{"console":1}
+,"console":{"following":1,"start":1,"run":1}
+,"following":{"procedure":1,"command":1}
+,"procedure":{"start":1}
+,"start":{"terracotta":1}
+,"run":{"following":1}
+,"command":{"unix":1}
+,"unix":{"management-console\u002Fbin\u002Fstart-tmc.sh":1}
+,"management-console\u002Fbin\u002Fstart-tmc.sh":{"windows":1}
+,"windows":{"management-console\u002Fbin\u002Fstart.bat":1}
+,"management-console\u002Fbin\u002Fstart.bat":{"tmc":1}
+,"tmc":{"requires":1}
+,"requires":{"path":1}
+,"path":{"spaces":1,"path":1,"management-console":1}
+,"spaces":{"<<ffc-which":1}
+,"<<ffc-which":{"path":1}
+,"management-console":{"folder":1}
+,"folder":{"state":1}
+,"state":{"requirement":1}
+,"requirement":{"installation":1}
+,"installation":{"procedure":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,22 @@
+var pairs =
+{
+"using":{"cdata":1}
+,"cdata":{"construct":1}
+,"construct":{"avoid":1,"shown":1}
+,"avoid":{"encoding":1}
+,"encoding":{"url":1}
+,"url":{"wrap":1}
+,"wrap":{"cdata":1}
+,"shown":{"<url>":1}
+,"<url>":{"[cdata":1}
+,"[cdata":{"[ldap:\u002F\u002Fdizzy@172.16.254.1:636":1}
+,"[ldap:\u002F\u002Fdizzy@172.16.254.1:636":{"userdntemplate=cn={0}":1}
+,"userdntemplate=cn={0}":{"ou=users":1}
+,"ou=users":{"dc=mycompany":1}
+,"dc=mycompany":{"dc=com&groupdntemplate=cn={0}":1,"dc=com&groupattribute=uniquemember&groupbindings=bandleaders=admin":1}
+,"dc=com&groupdntemplate=cn={0}":{"ou=groups":1}
+,"ou=groups":{"dc=mycompany":1}
+,"dc=com&groupattribute=uniquemember&groupbindings=bandleaders=admin":{"bandmembers=terracotta]]>":1}
+,"bandmembers=terracotta]]>":{"<\u002Furl>":1}
+}
+;Search.control.loadWordPairs(pairs);

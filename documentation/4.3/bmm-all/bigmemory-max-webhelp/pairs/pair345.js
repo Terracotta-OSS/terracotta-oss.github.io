@@ -1,0 +1,21 @@
+var pairs =
+{
+"\u002Ftc:tc-config\u002Fservers\u002Fserver\u002Fsecurity\u002Fssl\u002Fcertificate":{"element":1}
+,"element":{"specifying":1}
+,"specifying":{"certificate":1}
+,"certificate":{"entry":1,"store":1}
+,"entry":{"location":1}
+,"location":{"certificate":1}
+,"store":{"format":1}
+,"format":{"<store-type>":1}
+,"<store-type>":{"<certificate-alias>@<\u002Fpath\u002Fto\u002Fkeystore.file>":1}
+,"<certificate-alias>@<\u002Fpath\u002Fto\u002Fkeystore.file>":{"java":1}
+,"java":{"keystore":1}
+,"keystore":{"(jks)":1}
+,"(jks)":{"type":1}
+,"type":{"supported":1}
+,"supported":{"terracotta":1}
+,"terracotta":{"3.7":1}
+,"3.7":{"higher":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,23 @@
+var pairs =
+{
+"overview":{"fault":1}
+,"fault":{"recovery":1}
+,"recovery":{"recovery":1,"failures":1,"manual":1}
+,"failures":{"accomplished":1}
+,"accomplished":{"automatically":1}
+,"automatically":{"wan":1}
+,"wan":{"replication":1}
+,"replication":{"service":1}
+,"service":{"however":1}
+,"however":{"scenarios":1}
+,"scenarios":{"require":1}
+,"require":{"user":1}
+,"user":{"intervention":1}
+,"intervention":{"following":1}
+,"following":{"sections":1}
+,"sections":{"describe":1}
+,"describe":{"automatic":1}
+,"automatic":{"fault":1}
+,"manual":{"fault":1}
+}
+;Search.control.loadWordPairs(pairs);

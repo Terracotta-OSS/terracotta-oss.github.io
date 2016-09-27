@@ -1,0 +1,24 @@
+var pairs =
+{
+"order":{"group":1,"used":1,"age":1}
+,"group":{"together":1,"ordering":1,"clause":1,"age":1}
+,"together":{"order":1}
+,"used":{"group":1}
+,"ordering":{"attributes":1}
+,"attributes":{"limited":1}
+,"limited":{"listed":1}
+,"listed":{"group":1}
+,"clause":{"select":1}
+,"select":{"age":1}
+,"age":{"person":1,"order":1,"ascending":1,"zip":1,"asc":1}
+,"person":{"((age":1}
+,"((age":{"100":1}
+,"100":{"zip":1}
+,"zip":{"=20144)":1,"person":1,"order":1,"desc":1}
+,"=20144)":{"time":1}
+,"time":{"10)":1}
+,"10)":{"group":1}
+,"ascending":{"select":1}
+,"asc":{"zip":1}
+}
+;Search.control.loadWordPairs(pairs);

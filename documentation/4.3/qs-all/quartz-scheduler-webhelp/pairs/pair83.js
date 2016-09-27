@@ -1,0 +1,24 @@
+var pairs =
+{
+"how-to":{"list":1}
+,"list":{"triggers":1}
+,"triggers":{"scheduler":1}
+,"scheduler":{"listing":1,"\u002F\u002Fenumerate":1}
+,"listing":{"triggers":1}
+,"\u002F\u002Fenumerate":{"trigger":1}
+,"trigger":{"group":1,"identified":1}
+,"group":{"(string":1,"sched.gettriggergroupnames":1,"(triggerkey":1}
+,"(string":{"group":1}
+,"sched.gettriggergroupnames":{"())":1}
+,"())":{"{\u002F\u002Fenumerate":1}
+,"{\u002F\u002Fenumerate":{"trigger":1}
+,"(triggerkey":{"triggerkey":1}
+,"triggerkey":{"sched.gettriggerkeys":1}
+,"sched.gettriggerkeys":{"(groupequals":1}
+,"(groupequals":{"(group)))":1}
+,"(group)))":{"{system.out.println":1}
+,"{system.out.println":{"found":1}
+,"found":{"trigger":1}
+,"identified":{"triggerkey)":1}
+}
+;Search.control.loadWordPairs(pairs);

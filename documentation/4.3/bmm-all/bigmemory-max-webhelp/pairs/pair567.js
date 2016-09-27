@@ -1,0 +1,26 @@
+var pairs =
+{
+"requirements":{"following":1}
+,"following":{"components":1}
+,"components":{"required":1}
+,"required":{"bigmemory":1}
+,"bigmemory":{"max":1}
+,"max":{"4.1":1}
+,"4.1":{"higher":1}
+,"higher":{"terracotta-license.key":1,"least":1}
+,"terracotta-license.key":{"file":1}
+,"file":{"jdk":1}
+,"jdk":{"1.6":1}
+,"1.6":{"higher":1}
+,"least":{"terracotta":1}
+,"terracotta":{"server":1}
+,"server":{"array":1}
+,"array":{"(tsa)":1}
+,"(tsa)":{"region":1}
+,"region":{"reliable":1}
+,"reliable":{"wan":1}
+,"wan":{"links":1}
+,"links":{"target":1}
+,"target":{"regions":1}
+}
+;Search.control.loadWordPairs(pairs);

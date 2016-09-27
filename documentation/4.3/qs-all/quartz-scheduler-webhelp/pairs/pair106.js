@@ -1,0 +1,24 @@
+var pairs =
+{
+"failure":{"scenarios":1}
+,"scenarios":{"trigger":1}
+,"trigger":{"cannot":1,"misfires":1}
+,"cannot":{"fire":1}
+,"fire":{"specified":1}
+,"specified":{"node":1}
+,"node":{"targeted":1,"group":1}
+,"targeted":{"node":1}
+,"group":{"associated":1}
+,"associated":{"job":1}
+,"job":{"execute":1}
+,"execute":{"once":1}
+,"once":{"misfirethreshold":1}
+,"misfirethreshold":{"timeout":1}
+,"timeout":{"value":1}
+,"value":{"reached":1}
+,"reached":{"trigger":1}
+,"misfires":{"misfire":1}
+,"misfire":{"instructions":1}
+,"instructions":{"executed":1}
+}
+;Search.control.loadWordPairs(pairs);

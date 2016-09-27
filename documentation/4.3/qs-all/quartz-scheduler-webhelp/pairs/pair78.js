@@ -1,0 +1,27 @@
+var pairs =
+{
+"how-to":{"schedule":1}
+,"schedule":{"already":1}
+,"already":{"stored":1}
+,"stored":{"job":1}
+,"job":{"scheduling":1,"\u002F\u002Fdefine":1,"trigger":1}
+,"scheduling":{"already":1}
+,"\u002F\u002Fdefine":{"trigger":1}
+,"trigger":{"fire":1,"trigger":1,"=newtrigger":1,"sched.schedulejob":1}
+,"fire":{"associate":1}
+,"associate":{"existing":1}
+,"existing":{"job":1}
+,"=newtrigger":{".withidentity":1}
+,".withidentity":{"trigger1":1}
+,"trigger1":{"group1":1}
+,"group1":{".startnow":1,"\u0022))":1}
+,".startnow":{".forjob":1}
+,".forjob":{"(jobkey":1}
+,"(jobkey":{"job1":1}
+,"job1":{"group1":1}
+,"\u0022))":{".build":1}
+,".build":{"\u002F\u002Fschedule":1}
+,"\u002F\u002Fschedule":{"trigger":1}
+,"sched.schedulejob":{"(trigger)":1}
+}
+;Search.control.loadWordPairs(pairs);

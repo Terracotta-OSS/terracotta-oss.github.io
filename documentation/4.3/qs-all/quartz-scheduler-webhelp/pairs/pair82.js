@@ -1,0 +1,24 @@
+var pairs =
+{
+"how-to":{"list":1}
+,"list":{"jobs":1}
+,"jobs":{"scheduler":1}
+,"scheduler":{"listing":1,"\u002F\u002Fenumerate":1}
+,"listing":{"jobs":1}
+,"\u002F\u002Fenumerate":{"job":1}
+,"job":{"group":1,"identified":1}
+,"group":{"(string":1,"sched.getjobgroupnames":1,"(jobkey":1}
+,"(string":{"group":1}
+,"sched.getjobgroupnames":{"())":1}
+,"())":{"{\u002F\u002Fenumerate":1}
+,"{\u002F\u002Fenumerate":{"job":1}
+,"(jobkey":{"jobkey":1}
+,"jobkey":{"sched.getjobkeys":1}
+,"sched.getjobkeys":{"(groupequals":1}
+,"(groupequals":{"(group)))":1}
+,"(group)))":{"{system.out.println":1}
+,"{system.out.println":{"found":1}
+,"found":{"job":1}
+,"identified":{"jobkey)":1}
+}
+;Search.control.loadWordPairs(pairs);

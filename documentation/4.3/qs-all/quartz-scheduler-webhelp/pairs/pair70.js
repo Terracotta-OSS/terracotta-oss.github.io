@@ -1,0 +1,21 @@
+var pairs =
+{
+"how-to":{"place":1}
+,"place":{"scheduler":1}
+,"scheduler":{"stand-by":1,"scheduler.standby":1,"fire":1}
+,"stand-by":{"mode":1}
+,"mode":{"placing":1,"\u002F\u002Fstart":1}
+,"placing":{"scheduler":1}
+,"\u002F\u002Fstart":{"previously":1}
+,"previously":{"invoked":1}
+,"invoked":{"scheduler":1}
+,"scheduler.standby":{"\u002F\u002Fnow":1}
+,"\u002F\u002Fnow":{"scheduler":1}
+,"fire":{"triggers":1}
+,"triggers":{"\u002Fexecute":1,"execute":1}
+,"\u002Fexecute":{"jobs":1}
+,"jobs":{"scheduler.start":1}
+,"scheduler.start":{"\u002F\u002Fnow":1}
+,"execute":{"jobs":1}
+}
+;Search.control.loadWordPairs(pairs);

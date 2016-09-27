@@ -1,0 +1,26 @@
+var pairs =
+{
+"running":{"terracotta":1}
+,"terracotta":{"management":1}
+,"management":{"server":1}
+,"server":{"different":1,"run":1,"application":1,"choice":1,"deploying":1}
+,"different":{"container":1}
+,"container":{"terracotta":1,"run":1}
+,"run":{"directly":1,"server":1}
+,"directly":{"provided":1}
+,"provided":{"jetty":1}
+,"jetty":{"java":1}
+,"java":{"servlet":1}
+,"servlet":{"container":1}
+,"application":{"server":1}
+,"choice":{"file":1}
+,"file":{"management-console\u002Fwebapps\u002Ftmc.war":1}
+,"management-console\u002Fwebapps\u002Ftmc.war":{"follow":1}
+,"follow":{"specifications":1}
+,"specifications":{"requirements":1}
+,"requirements":{"chosen":1}
+,"chosen":{"application":1}
+,"deploying":{"war-based":1}
+,"war-based":{"application":1}
+}
+;Search.control.loadWordPairs(pairs);

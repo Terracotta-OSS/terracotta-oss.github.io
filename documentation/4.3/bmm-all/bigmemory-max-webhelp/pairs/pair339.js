@@ -1,0 +1,20 @@
+var pairs =
+{
+"\u002Ftc:tc-config\u002Fservers\u002Fserver\u002Fdata-backup":{"element":1}
+,"element":{"specifies":1}
+,"specifies":{"path":1}
+,"path":{"server":1}
+,"server":{"store":1}
+,"store":{"backups":1}
+,"backups":{"(if":1}
+,"(if":{"backup":1}
+,"backup":{"call":1}
+,"call":{"initiated)":1}
+,"initiated)":{"default":1}
+,"default":{"data-backup":1}
+,"data-backup":{"(creates":1,"working":1}
+,"(creates":{"directory":1}
+,"directory":{"data-backup":1}
+,"working":{"directory)":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,25 @@
+var pairs =
+{
+"\u002Ftc:tc-config\u002Fservers\u002Fserver\u002Flogs":{"section":1}
+,"section":{"lets":1}
+,"lets":{"declare":1}
+,"declare":{"server":1}
+,"server":{"write":1}
+,"write":{"logs":1}
+,"logs":{"default":1,"(creates":1,"working":1}
+,"default":{"logs":1}
+,"(creates":{"directory":1}
+,"directory":{"logs":1}
+,"working":{"directory)":1}
+,"directory)":{"specify":1}
+,"specify":{"stderr":1}
+,"stderr":{"stdout":1}
+,"stdout":{"output":1,"<\u002Flogs>":1}
+,"output":{"destination":1}
+,"destination":{"log":1}
+,"log":{"messages":1}
+,"messages":{"example":1}
+,"example":{"<logs>":1}
+,"<logs>":{"stdout":1}
+}
+;Search.control.loadWordPairs(pairs);

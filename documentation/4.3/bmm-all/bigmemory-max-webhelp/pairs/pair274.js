@@ -1,0 +1,23 @@
+var pairs =
+{
+"configuration":{"server":1,"loaded":1}
+,"server":{"client":1,"logs":1}
+,"client":{"maintain":1,"logs":1,"using":1}
+,"maintain":{"separate":1}
+,"separate":{"log":1}
+,"log":{"directories":1}
+,"directories":{"default":1}
+,"default":{"server":1}
+,"logs":{"written":1,"(user.home)\u002Fterracotta\u002Fclient-logs":1,"info":1}
+,"written":{"(user.home)\u002Fterracotta\u002Fserver-logs":1}
+,"(user.home)\u002Fterracotta\u002Fserver-logs":{"client":1}
+,"(user.home)\u002Fterracotta\u002Fclient-logs":{"find":1}
+,"find":{"configuration":1}
+,"using":{"search":1}
+,"search":{"logs":1}
+,"info":{"message":1}
+,"message":{"containing":1}
+,"containing":{"text":1}
+,"text":{"configuration":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,21 @@
+var pairs =
+{
+"\u002Ftc:tc-config\u002Fservers\u002Fserver\u002Ftsa-port":{"section":1}
+,"section":{"lets":1}
+,"lets":{"port":1}
+,"port":{"terracotta":1}
+,"terracotta":{"server":1}
+,"server":{"listens":1}
+,"listens":{"client":1}
+,"client":{"traffic":1}
+,"traffic":{"default":1}
+,"default":{"value":1}
+,"value":{"tsa-port":1}
+,"tsa-port":{"9510":1}
+,"9510":{"sample":1,"<\u002Ftsa-port>":1}
+,"sample":{"configuration":1}
+,"configuration":{"snippet":1}
+,"snippet":{"<tsa-port>":1}
+,"<tsa-port>":{"9510":1}
+}
+;Search.control.loadWordPairs(pairs);

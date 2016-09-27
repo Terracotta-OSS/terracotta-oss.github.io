@@ -1,0 +1,26 @@
+var pairs =
+{
+"setting":{"production":1,"terracotta":1}
+,"production":{"mode":1}
+,"mode":{"property":1,"setting":1,"requires":1}
+,"property":{"production":1,"terracotta":1}
+,"terracotta":{"property":1,"configuration":1}
+,"configuration":{"<tc-properties>":1}
+,"<tc-properties>":{"<property":1}
+,"<property":{"name=\u0022":1}
+,"name=\u0022":{"l2.enable.legacy.production.mode":1}
+,"l2.enable.legacy.production.mode":{"value=\u0022":1}
+,"value=\u0022":{"true":1}
+,"true":{"<\u002Ftc-properties>":1}
+,"<\u002Ftc-properties>":{"production":1}
+,"requires":{"--force":1}
+,"--force":{"flag":1}
+,"flag":{"used":1}
+,"used":{"stop-tc-server":1}
+,"stop-tc-server":{"script":1}
+,"script":{"target":1}
+,"target":{"active":1}
+,"active":{"server":1}
+,"server":{"mirror":1}
+}
+;Search.control.loadWordPairs(pairs);

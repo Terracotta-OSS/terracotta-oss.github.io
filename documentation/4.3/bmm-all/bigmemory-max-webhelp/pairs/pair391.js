@@ -1,0 +1,25 @@
+var pairs =
+{
+"introduction":{"start":1}
+,"start":{"server":1}
+,"server":{"secure":1,"startup":1,"automatically":1}
+,"secure":{"terracotta":1}
+,"terracotta":{"cluster":1}
+,"cluster":{"using":1}
+,"using":{"start-tc-server":1,"encrypted":1}
+,"start-tc-server":{"script":1}
+,"script":{"using":1}
+,"encrypted":{"keychains":1}
+,"keychains":{"master":1}
+,"master":{"password":1}
+,"password":{"entered":1}
+,"entered":{"command":1}
+,"command":{"line":1}
+,"line":{"during":1}
+,"during":{"server":1}
+,"startup":{"(or":1}
+,"(or":{"server":1}
+,"automatically":{"fetch":1}
+,"fetch":{"password)":1}
+}
+;Search.control.loadWordPairs(pairs);

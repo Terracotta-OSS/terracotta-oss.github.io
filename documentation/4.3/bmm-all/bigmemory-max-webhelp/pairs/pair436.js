@@ -1,0 +1,22 @@
+var pairs =
+{
+"installing":{"terracotta":1}
+,"terracotta":{"management":1}
+,"management":{"server":1}
+,"server":{"following":1,"install":1,"locate":1,"run":1}
+,"following":{"steps":1}
+,"steps":{"install":1}
+,"install":{"terracotta":1}
+,"locate":{"management-console":1}
+,"management-console":{"directory":1}
+,"directory":{"bigmemory":1,"location":1,"just":1}
+,"bigmemory":{"kit":1}
+,"kit":{"copy":1}
+,"copy":{"directory":1,"license":1}
+,"location":{"terracotta":1}
+,"run":{"copy":1}
+,"license":{"file":1}
+,"file":{"management-console":1}
+,"just":{"created":1}
+}
+;Search.control.loadWordPairs(pairs);

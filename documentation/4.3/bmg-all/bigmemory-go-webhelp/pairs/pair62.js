@@ -1,0 +1,24 @@
+var pairs =
+{
+"enums":{"search":1}
+,"search":{"specific":1}
+,"specific":{"enum":1}
+,"enum":{"type":1,"class":1}
+,"type":{"cast":1}
+,"cast":{"value":1}
+,"value":{"enum":1,"string.class.getname":1}
+,"class":{"name":1}
+,"name":{"class":1,"fully":1}
+,"fully":{"qualified":1}
+,"qualified":{"format":1}
+,"format":{"return":1}
+,"return":{"value":1}
+,"string.class.getname":{"select":1}
+,"select":{"*from":1}
+,"*from":{"person":1}
+,"person":{"age":1}
+,"age":{"=(enum":1}
+,"=(enum":{"some.company.package.foo)":1}
+,"some.company.package.foo)":{"\u0027bar":1}
+}
+;Search.control.loadWordPairs(pairs);

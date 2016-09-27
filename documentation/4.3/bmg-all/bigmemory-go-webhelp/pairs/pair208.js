@@ -1,0 +1,19 @@
+var pairs =
+{
+"application":{"data":1}
+,"data":{"tab":1,"nodes":1,"panel":1}
+,"tab":{"manage":1,"application":1}
+,"manage":{"application":1}
+,"nodes":{"connection":1,"supply":1}
+,"connection":{"group":1}
+,"group":{"select":1,"click":1}
+,"select":{"group":1,"cachemanagers":1}
+,"click":{"application":1}
+,"panel":{"cachemanager":1}
+,"cachemanager":{"scope":1}
+,"scope":{"menu":1}
+,"menu":{"select":1}
+,"cachemanagers":{"nodes":1}
+,"supply":{"data":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,27 @@
+var pairs =
+{
+"coldfusion":{"bigmemory":1,"ships":1,"community":1,"caching":1}
+,"bigmemory":{"coldfusion":1,"go\u0027s":1}
+,"ships":{"bigmemory":1}
+,"go\u0027s":{"ehcache":1}
+,"ehcache":{"coldfusion":1,"put":1}
+,"community":{"actively":1}
+,"actively":{"engaged":1}
+,"engaged":{"ehcache":1}
+,"put":{"several":1}
+,"several":{"blogs":1}
+,"blogs":{"two":1}
+,"two":{"started":1}
+,"started":{"short":1}
+,"short":{"introduction":1}
+,"introduction":{"raymond":1}
+,"raymond":{"camden\u0027s":1}
+,"camden\u0027s":{"blog":1}
+,"blog":{"in-depth":1}
+,"in-depth":{"analysis":1}
+,"analysis":{"days":1}
+,"days":{"coldfusion":1}
+,"caching":{"aaron":1}
+,"aaron":{"west":1}
+}
+;Search.control.loadWordPairs(pairs);
