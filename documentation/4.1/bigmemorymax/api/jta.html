@@ -724,6 +724,14 @@ This alternative termination mode has strict requirement on the way threads are 
 <script type="text/javascript">
         $('#').addClass("active");
         $('#').addClass("active");
+
+        //delayed init for documents that need init code that relies on jQuery
+        //but jQuery is loaded in the footer
+        $(document).ready(function() {
+          if(typeof delayedInitHandler == 'function'){
+            delayedInitHandler();
+          }
+        })
 </script>
 
 

@@ -392,6 +392,14 @@ The meaning of the elements and attributes are explained in the section on <code
 <script type="text/javascript">
         $('#').addClass("active");
         $('#').addClass("active");
+
+        //delayed init for documents that need init code that relies on jQuery
+        //but jQuery is loaded in the footer
+        $(document).ready(function() {
+          if(typeof delayedInitHandler == 'function'){
+            delayedInitHandler();
+          }
+        })
 </script>
 
 

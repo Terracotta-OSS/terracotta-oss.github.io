@@ -382,6 +382,14 @@ Advanced features such as fast-restart persistence, advance management features 
 <script type="text/javascript">
         $('#').addClass("active");
         $('#').addClass("active");
+
+        //delayed init for documents that need init code that relies on jQuery
+        //but jQuery is loaded in the footer
+        $(document).ready(function() {
+          if(typeof delayedInitHandler == 'function'){
+            delayedInitHandler();
+          }
+        })
 </script>
 
 

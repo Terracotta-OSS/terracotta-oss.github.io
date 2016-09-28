@@ -429,6 +429,14 @@ When the cache is operating at a steady state, the Data Used typically exceeds t
 <script type="text/javascript">
         $('#').addClass("active");
         $('#').addClass("active");
+
+        //delayed init for documents that need init code that relies on jQuery
+        //but jQuery is loaded in the footer
+        $(document).ready(function() {
+          if(typeof delayedInitHandler == 'function'){
+            delayedInitHandler();
+          }
+        })
 </script>
 
 

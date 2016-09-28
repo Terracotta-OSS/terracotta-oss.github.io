@@ -670,6 +670,14 @@ Password for tc://client1@172.16.254.1:9510 successfully stored
 <script type="text/javascript">
         $('#').addClass("active");
         $('#').addClass("active");
+
+        //delayed init for documents that need init code that relies on jQuery
+        //but jQuery is loaded in the footer
+        $(document).ready(function() {
+          if(typeof delayedInitHandler == 'function'){
+            delayedInitHandler();
+          }
+        })
 </script>
 
 

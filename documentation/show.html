@@ -10,11 +10,11 @@
   <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
-  <title>Terracotta</title>
+  <title>Documentation View</title>
 
   <meta name="description" content="Java's most widely used cache.">
 
-  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/bigmemorymax/api/cluster-events.html">
+  <link rel="canonical" href="http://www.terracotta.org/documentation/show.html">
   <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
 
 
@@ -112,236 +112,41 @@
 
     <div class="container-fluid">
       <div id="contentTitle">
-        <h1></h1>
+        <h1>Documentation View</h1>
       </div>
       <div>
         <BR/>
-        <br/>
-
-<div class="container-fluid">
+        <div class="container-fluid">
 
   <div class="row row-offcanvas row-offcanvas-left">
 
-    <!-- sidebar -->
-    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-        <ul class="nav">
-          <li id="tc_mnu_docs_current" class="submenu"><a href="#current_version">Current Documentation</a></li>
-          <li id="tc_mnu_doce_release_notes" class="submenu"><a href="http://www.terracotta.org/confluence/display/release/Home" target="_blank">Release Notes</a></li>
-          <li id="tc_mnu_docs_previous" class="submenu"><a href="#historical_versions">Historical Versions</a></li>
-        </ul>
-    </div>
-
     <!-- main area -->
-    <div class="col-xs-12 col-sm-9">
-      <header class="post-header">
-        
-        <h1 class="post-title"></h1>
-        <hr/>
-        
-      </header>
+    <div class="col-xs-12 col-sm-12">
+      
+      
       <article class="post-content">
-        <h1 id="terracotta-cluster-events">Terracotta Cluster Events</h1><div id="toc-container">
-   <table class="toc" id="toc">
-      <tbody>
-         <tr>
-            <td>
-               <ul>
-                  <li class="toc_level-1 toc_section-1">
-                     <a href="#terracotta-cluster-events">
-                        <span class="toctext">Terracotta Cluster Events</span>
-                     </a>
-                     <ul>
-                        <li class="toc_level-2 toc_section-2">
-                           <a href="#introduction">
-                              <span class="toctext">Introduction</span>
-                           </a>
-                        </li>
-                        <li class="toc_level-2 toc_section-3">
-                           <a href="#cluster-topology">
-                              <span class="toctext">Cluster Topology</span>
-                           </a>
-                        </li>
-                        <li class="toc_level-2 toc_section-4">
-                           <a href="#listening-for-cluster-events">
-                              <span class="toctext">Listening For Cluster Events</span>
-                           </a>
-                        </li>
-                        <li class="toc_level-2 toc_section-5">
-                           <a href="#troubleshooting">
-                              <span class="toctext">Troubleshooting</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-               </ul>
-            </td>
-         </tr>
-      </tbody>
-   </table>
-</div>
+        <style>
+    #displayer {
+        width: 100%;
+        border: 0;
 
-<table>
-  <tbody>
-    <tr>
-      <td>{toc</td>
-      <td>2:3}</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="introduction">Introduction</h2>
-<p>The Terracotta distributed BigMemory Max cluster events API provides access to Terracotta cluster events and cluster topology. This event-notification mechanism reports events related to the nodes in the Terracotta cluster, not cache events.</p>
-
-<h2 id="cluster-topology">Cluster Topology</h2>
-<p>The interface <code class="highlighter-rouge">net.sf.ehcache.cluster.CacheCluster</code> provides methods for obtaining topology information for a Terracotta cluster.
-The following methods are available:</p>
-
-<ul>
-  <li>
-    <p><code class="highlighter-rouge">String getScheme()</code></p>
-
-    <p>Returns a scheme name for the cluster information. Currently <code class="highlighter-rouge">TERRACOTTA</code> is the only scheme supported. The scheme name is used by CacheManager.getCluster() to return cluster information.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">Collection&lt;ClusterNode&gt; getNodes()</code></p>
-
-    <p>Returns information on all the nodes in the cluster, including ID, hostname, and IP address.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">boolean addTopologyListener(ClusterTopologyListener listener)</code></p>
-
-    <p>Adds a cluster-events listener. Returns true if the listener is already active.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">boolean removeTopologyListener(ClusterTopologyListener)</code></p>
-
-    <p>Removes a cluster-events listener. Returns true if the listener is already inactive.</p>
-  </li>
-</ul>
-
-<p>The interface <code class="highlighter-rouge">net.sf.ehcache.cluster.ClusterNode</code> provides methods for obtaining information on specific cluster nodes.</p>
-
-<pre>
-   <code>public interface ClusterNode {
-/**
-* Get a unique (per cluster) identifier for this node.
-*
-* @return Unique per cluster identifier
-*/
-String getId();
-/**
-* Get the host name of the node
-*
-* @return Host name of node
-*/
-String getHostname();
-/**
-* Get the IP address of the node
-*
-* @return IP address of node
-*/
-String getIp();
-}
-</code>
-</pre>
-
-<h2 id="listening-for-cluster-events">Listening For Cluster Events</h2>
-
-<p>The interface <code class="highlighter-rouge">net.sf.ehcache.cluster.ClusterTopologyListener</code> provides methods for detecting the following cluster events:</p>
-
-<pre>
-   <code>public interface ClusterTopologyListener {
-/**
-* A node has joined the cluster
-*
-* @param node The joining node
-*/
-void nodeJoined(ClusterNode node);
-/**
-* A node has left the cluster
-*
-* @param node The departing node
-*/
-void nodeLeft(ClusterNode node);
-/**
-* This node has established contact with the cluster and can execute clustered operations.
-*
-* @param node The current node
-*/
-void clusterOnline(ClusterNode node);
-/**
-* This node has lost contact (possibly temporarily) with the cluster and cannot execute
-* clustered operations
-*
-* @param node The current node
-*/
-void clusterOffline(ClusterNode node);
-}
-/**
-* This node lost contact and rejoined the cluster again.
-* <p></p>
-* This event is only fired in the node which rejoined and not to all the connected nodes
-* @param oldNode The old node which got disconnected
-* @param newNode The new node after rejoin
-*/
-void clusterRejoined(ClusterNode oldNode, ClusterNode newNode);
-</code>
-</pre>
-
-<h3 id="example-code">Example Code</h3>
-<p>This example prints out the cluster nodes and then registers a <code class="highlighter-rouge">ClusterTopologyListener</code>
-which prints out events as they happen.</p>
-
-<pre>
-   <code>CacheManager mgr = ...
-CacheCluster cluster = mgr.getCluster("TERRACOTTA");
-  // Get current nodes
-Collection&lt;ClusterNode&gt; nodes = cluster.getNodes();
-for(ClusterNode node : nodes) {
-  System.out.println(node.getId() + " " + node.getHostname() + " " + node.getIp());
-}
-  // Register listener
-cluster.addTopologyListener(new ClusterTopologyListener() {
-  public void nodeJoined(ClusterNode node) { System.out.println(node + " joined"); }
-  public void nodeLeft(ClusterNode node) { System.out.println(node + " left"); }
-  public void clusterOnline(ClusterNode node) { System.out.println(node + " enabled"); }
-  public void clusterOffline(ClusterNode node) { System.out.println(node + " disabled"); }
-  public void clusterRejoined(ClusterNode node, ClusterNode newNode) {
-    System.out.println(node + " rejoined the cluster as " + newNode);
+        /** for Chrome, these 3 are interdependent **/
+        height: 800px;
+        padding-top: 220px;
+        margin: -220px 0 0 0;
+    }
+</style>
+<script>
+  //Execute after jQuery is available.
+  function delayedInitHandler() {
+    var it = location.hash.slice(1);
+    $('#displayer').prop('src', it);
   }
-});
-</code>
-</pre>
 
-<h2 id="troubleshooting">Troubleshooting</h2>
-<p>In most cases the Terracotta cluster-events API behaves as expected. Unexpected results can occur under the circumstances described below.</p>
+</script>
 
-<h3 id="getcluster-returns-null-for-programmatically-created-cachemanagers">getCluster Returns Null For Programmatically Created CacheManagers</h3>
-<p>If a CacheManager instance is created and configured programmatically (without an <code>ehcache.xml</code> or other external configuration resource), <code>getCluster("TERRACOTTA")</code> may return null even if a Terracotta cluster exists. To ensure that cluster information is returned in this case, get a cache that is clustered with Terracotta:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>// mgr created and configured programmatically.
-CacheManager mgr = new CacheManager();
-// myCache has Terracotta clustering.
-Cache cache = mgr.getEhcache("myCache");
-// A Terracotta client has started, making available cluster information.
-CacheCluster cluster = mgr.getCluster("TERRACOTTA");
-</code></pre>
-</div>
-
-<h3 id="nodejoined-for-the-current-node-68163">nodeJoined for the Current Node {#68163}</h3>
-
-<p>Since the current node joins the cluster before code adding the topology listener runs, the current node may never receive the nodeJoined event. You can detect if the current node is in the cluster by checking if the cluster is online:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>cluster.addTopologyListener(cacheListener);
-if(cluster.isClusterOnline()) {
-  cacheListener.clusterOnline(cluster.getCurrentNode());
-}
-</code></pre>
-</div>
-
-<h3 id="multiple-nodejoined-events-in-the-same-jvm">Multiple NodeJoined Events in the Same JVM</h3>
-<p>Since multiple Terracotta clients can exist in the same JVM, for example when using the Terracotta Toolkit and Ehcache, multiple NodeJoined events can be generated in that JVM. Remote clients will not be able to differentiate between the clients that generated the NodeJoined events.</p>
-
+<iframe id="displayer">
+</iframe>
       </article>
     </div>
 

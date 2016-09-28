@@ -272,6 +272,14 @@ Please note that the 3.x code line is now several years old and is out of commer
 <script type="text/javascript">
         $('#tc_mnu_download').addClass("active");
         $('#').addClass("active");
+
+        //delayed init for documents that need init code that relies on jQuery
+        //but jQuery is loaded in the footer
+        $(document).ready(function() {
+          if(typeof delayedInitHandler == 'function'){
+            delayedInitHandler();
+          }
+        })
 </script>
 
 
