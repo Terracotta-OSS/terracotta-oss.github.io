@@ -140,10 +140,7 @@
   //Execute after jQuery is available.
   function delayedInitHandler() {
     var it = location.hash.slice(1);
-    // Have to do this in an overly complex and hardcoded way
-    // since a relative URL is not always same protocol as parent
-    var protocolAwareSrc = location.origin + '/documentation/' + it
-    $('#displayer').prop('src', protocolAwareSrc);
+    $('#displayer').prop('src', it);
   }
 
 </script>
