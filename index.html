@@ -164,8 +164,14 @@ Advanced features such as fast-restart persistence, advance management features 
 
   <div id="start" class="jumbotron breaker">
     <div class="container">
-
-      
+      <div id="content">
+          <ul id="startguide-tabs" class="nav nav-tabs" data-tabs="tabs">
+              <li class="active"><a href="#first" data-toggle="tab"><b class="sgtab">Terracotta 4.3 Quick Start</b></a></li>
+              <li><a href="#second" data-toggle="tab"><b class="sgtab">Terracotta 5.0 Quick Start</b></a></li>
+          </ul>
+          <div id="startguide-tab-content" class="tab-content">
+              <div class="tab-pane active" id="first">
+                  
       <h1>Getting Started</h1>
 
       Getting started with the Terracotta Server is a simple matter of downloading, changing a few configuration
@@ -193,36 +199,29 @@ Advanced features such as fast-restart persistence, advance management features 
       Add the following JARs from within the kit to your application's classpath (if they are not already there):
 
       <ul>
-          <li> `apis/ehcache/lib/ehcache-<version>.jar` &ndash; This file contains the Ehcache API.</li>
+          <li> <code>apis/ehcache/lib/ehcache-&lt;version&gt;.jar</code> &ndash; This file contains the Ehcache API.</li>
 
-          <li> `apis/ehcache/lib/slf4j-api-<version>.jar` &ndash; This file is the bridge, or logging facade, to the BigMemory Max logging framework.</li>
+          <li> <code>apis/ehcache/lib/slf4j-api-&lt;version&gt;.jar</code> &ndash; This file is the bridge, or logging facade, to the BigMemory Max logging framework.</li>
 
-          <li> `apis/toolkit/lib/terracotta-toolkit-runtime-<version>.jar` &ndash; This JAR contains the libraries that enable connecting Ehcache to the Terracotta Server.</li>
+          <li> <code>apis/toolkit/lib/terracotta-toolkit-runtime-&lt;version&gt;.jar</code> &ndash; This JAR contains the libraries that enable connecting Ehcache to the Terracotta Server.</li>
        </ul>
 
        <h3>3 - Configure Ehcache</h3>
 
        Configure Ehcache to utilize the Terracotta Server. Create an `ehcache.xml` configuration file, or modify your own existing Ehcache configuration, or update the one that is provided in the config-samples/ directory of the downloaded Terracotta Server kit. For example:
 
-       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
-     name="myBigMemoryMaxConfig"&gt;
-
-  &lt;cache name="myCache"
-        maxBytesLocalHeap="512M"&gt;
-
-    &lt;!-- Include the terracotta element so that the cache will be
-    distributed and managed by the Terracotta server.  --&gt;
-    &lt;terracotta/&gt;
-  &lt;/cache&gt;
-
-  &lt;!-- Specify where to find the server configuration. In this
-  case, the configuration is retrieved from the local server. --&gt;
-  &lt;terracottaConfig url="localhost:9510" /&gt;
-
-&lt;/ehcache&gt;</code></pre>
+       <pre class="pre-indented prettyprint"><code><span class="tag">&lt;ehcache</span><span class="pln"> </span><span class="atn">xmlns:xsi</span><span class="pun">=</span><span class="atv">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp;</span><span class="atn">xsi:noNamespaceSchemaLocation</span><span class="pun">=</span><span class="atv">"http://ehcache.org/ehcache.xsd"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp;</span><span class="atn">name</span><span class="pun">=</span><span class="atv">"myBigMemoryMaxConfig"</span><span class="tag">&gt;</span><span class="pln"><br><br>&nbsp; </span><span class="com">&lt;!-- Tell BigMemory where to write its data to disk. --&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;diskStore</span><span class="pln"> </span><span class="atn">path</span><span class="pun">=</span><span class="atv">"/path/to/my/disk/store/directory"</span><span class="tag">/&gt;</span><span class="pln"><br><br>&nbsp; </span><span class="com">&lt;!-- Set 'maxBytesLocalOffHeap' to the amount of off-heap in-memory <br>&nbsp; storage you want to use. This memory is invisible to the Java garbage <br>&nbsp; collector, providing for gigabytes to terabytes of in-memory data without <br>&nbsp; garbage collection pauses. --&gt;</span><span class="pln"> <br>&nbsp; </span><span class="tag">&lt;cache</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"myBigMemoryMaxStore"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="atn">maxBytesLocalHeap</span><span class="pun">=</span><span class="atv">"512M"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="atn">maxBytesLocalOffHeap</span><span class="pun">=</span><span class="atv">"8G"</span><span class="tag">&gt;</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com">&lt;!-- Tell BigMemory to use the "localRestartable" persistence<br>&nbsp; &nbsp; strategy for fast restart (optional). --&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;persistence</span><span class="pln"> </span><span class="atn">strategy</span><span class="pun">=</span><span class="atv">"localRestartable"</span><span class="tag">/&gt;</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com">&lt;!-- Include the terracotta element so that the data set will be <br>&nbsp; &nbsp; managed as a client of the Terracotta server array. &nbsp;--&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;terracotta/&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/cache&gt;</span><span class="pln"><br><br>&nbsp; </span><span class="com">&lt;!-- Specify where to find the server array configuration. In this <br>&nbsp; case, the configuration is retrieved from the local server. --&gt;</span><span class="pln"> <br>&nbsp; </span><span class="tag">&lt;terracottaConfig</span><span class="pln"> </span><span class="atn">url</span><span class="pun">=</span><span class="atv">"localhost:9510"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln"><br><br></span><span class="tag">&lt;/ehcache&gt;</span><span class="pln"><br></span></code></pre>
 
       Ensure that your `ehcache.xml` file is in the top-level of your classpath.
+      
+      <br/><br/>
+      <h3>Note</h3>
+
+      1 - Use the -XX:MaxDirectMemorySize Java option to allocate enough direct memory in the JVM to accomodate the off-heap storage specified in your configuration, plus at least 250MB to allow for other direct memory usage that might occur in your application. For example: <code>-XX:MaxDirectMemorySize=9G</code> Set MaxDirectMemorySize to the amount of BigMemory you have.
+      <br/>
+      2 - Also, allocate at least enough heap using the -Xmx Java option to accomodate the on-heap storage specified in your configuration, plus enough extra heap to run the rest of your application. For example: <code>-Xmx1g</code>
+      <br/>
+      3 - If necessary, define the JAVA_HOME environment variable.
 
       <br/><br/>
 
@@ -280,10 +279,177 @@ Advanced features such as fast-restart persistence, advance management features 
 
      Read the <a href="/documentation">user documentation</a> for everything you've been wondering about the new API!
 
+              </div>
+              <div class="tab-pane" id="second">
+                  
+      <h1>Getting Started</h1>
 
+      Getting started with the Terracotta Server is a simple matter of downloading, changing a few configuration
+      items, and starting it up.
+
+      Because the server isn't very interesting without something using it, this guide will show you how to put
+      the Terracotta Server to its most common use: clustering an Ehcache cache.
+
+      <br/><br/>
+
+      <h2>Download and Install</h2>
+
+      Installing and using Terracotta Server is as easy as downloading the kit and ensuring that the correct files are on your application's classpath. The only platform requirement is using JDK 1.8 or higher.
+
+      <br/><br/>
+
+      <h3>1 - Download the Terracotta Server.</h3>
+
+      The kit is packaged as a .tar.gz file. <a href="/downloads">Download</a> it then unpack it on the command line or with the appropriate decompression application.
+
+      <br/><br/>
+
+      <h3>2 - Update Classpath</h3>
+
+      Add the following JAR from within the kit to your application's classpath (if they are not already there):
+
+      <code>apis/ehcache-terracotta-client-all.jar</code> &ndash; This file contains the Ehcache API.</li>
+
+      <br/><br/>
+      <h3>3 - Configure Ehcache</h3>
+
+      <h4>3.1 - Through XML</h4>
+      Configure Ehcache to utilize the Terracotta Server. Create an <code>ehcache.xml</code> configuration file, or modify your own existing Ehcache configuration, or update the one that is provided in the <code>config-samples/</code> directory of the downloaded Terracotta Server kit. For example:<br/>
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">
+  .....
+  &lt;cache alias="foo"&gt; 
+    &lt;key-type&gt;java.lang.String&lt;/key-type&gt; 
+    &lt;resources&gt;
+      &lt;heap unit="entries"&gt;2000&lt;/heap&gt; 
+      &lt;offheap unit="MB"&gt;500&lt;/offheap&gt; 
+    &lt;/resources&gt;
+  &lt;/cache&gt;
+
+  &lt;cache-template name="myDefaults"&gt; 
+    &lt;key-type&gt;java.lang.Long&lt;/key-type&gt;
+    &lt;value-type&gt;java.lang.String&lt;/value-type&gt;
+    &lt;heap unit="entries"&gt;200&lt;/heap&gt;
+  &lt;/cache-template&gt;
+
+  &lt;cache alias="bar" uses-template="myDefaults"&gt; 
+    &lt;key-type&gt;java.lang.Number&lt;/key-type&gt;
+  &lt;/cache&gt;
+
+  &lt;cache alias="simpleCache" uses-template="myDefaults" /&gt;
+  .....
+       </code></pre>
+
+      Ensure that your <code>ehcache.xml</code> file is in the top-level of your classpath.
+
+      <br/><br/>
+
+      <h4>3.2 - Through Java</h4>
+      As with the previous versions of Ehcache, the canonical way of dealing with <code>Cache</code> is through a <code>CacheManager</code>:
+      <pre class="prettyprint highlight"><code class="language-java" data-lang="java">
+  .....
+  CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+    .withCache("preConfigured", CacheConfigurationBuilder
+      .newCacheConfigurationBuilder(Long.class, String.class, ResourcePoolsBuilder.heap(10))) 
+    .build(); 
+
+  cacheManager.init(); 
+
+  Cache&lt;Long, String&gt; preConfigured = cacheManager.getCache("preConfigured", Long.class, String.class); 
+
+  Cache&lt;Long, String&gt; myCache = cacheManager.createCache("myCache", 
+    CacheConfigurationBuilder.newCacheConfigurationBuilder(Long.class, String.class, ResourcePoolsBuilder.heap(10)).build());
+
+  myCache.put(1L, "da one!"); 
+  String value = myCache.get(1L); 
+
+  cacheManager.removeCache("preConfigured"); 
+
+  cacheManager.close();
+  .....
+      </code></pre>
+
+      Further, for creating the cache manager with <b>clustering support</b>, you will need to provide the clustering service configuration:
+      <pre class="prettyprint highlight"><code class="language-java" data-lang="java">
+  .....
+  final CacheManagerBuilder&lt;PersistentCacheManager&gt; clusteredCacheManagerBuilder =
+    CacheManagerBuilder.newCacheManagerBuilder() 
+      .with(ClusteringServiceConfigurationBuilder
+        .cluster(URI.create("terracotta://localhost:9510/my-application")).autoCreate()); 
+
+  final PersistentCacheManager cacheManager = clusteredCacheManagerBuilder.build(true); 
+
+  cacheManager.close();
+  .....
+      </code></pre>
+
+      <br/><br/>
+
+      <h2>Start The Terracotta Server</h2>
+
+      <h3>1 - Configure the Terracotta Server</h3>
+
+       To configure the Terracotta server, create a <code>tc-config.xml</code> configuration file, or update the one that is provided in the <code>config-samples/</code> directory of the terracotta kit. For example:
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;tc-config xmlns="http://www.terracotta.org/config" xmlns:ohr="http://www.terracotta.org/config/offheap-resource"&gt;
+    &lt;services&gt;
+      &lt;service id="resources"&gt;
+        &lt;ohr:offheap-resources&gt;
+          &lt;ohr:resource name="primary-server-resource" unit="MB"&gt;128&lt;/ohr:resource&gt;   
+          &lt;ohr:resource name="secondary-server-resource" unit="MB"&gt;96&lt;/ohr:resource&gt;  
+        &lt;/ohr:offheap-resources&gt;
+      &lt;/service&gt;
+    &lt;/services&gt;
+  &lt;/tc-config&gt;
+       </code></pre>
+
+      	The above configuration defines two named server <i>off-heap</i> resources:
+        <br/>
+        An <i>off-heap</i> resource of <code>128 MB</code> size named <code>primary-server-resource</code>.
+        <br/>
+        Another <i>off-heap</i> resource named <code>secondary-server-resource</code> with <code>96 MB</code> capacity.
+
+      <br/><br/>
+
+      <h3>2 - Start the Terracotta Server</h3>
+
+      Assuming that you have the clustered EhCache kit available locally, start with extracting the <b>ehcache-clustered</b> kit. Change to your extracted directory and then execute the <b>start-tc-server</b> script as below to start the Terracotta server with the above configuration:
+      <br/><br/>
+
+      On Windows:
+      <pre><code>
+  cd &lt;path/to/terracotta/kit&gt;/server/bin
+  start-tc-server.bat -f &lt;path/to/server/config&gt;/tc-config.xml
+      </code></pre>
+
+      On Unix/Mac:
+      <pre><code>
+  cd &lt;path/to/terracotta/kit&gt;/server/bin
+  ./start-tc-server.sh -f &lt;path/to/server/config&gt;/tc-config.xml
+      </code></pre>
+      
+      <h3>Note</h3>
+      You will need to have <code>JAVA_HOME</code> set to <b>JDK8</b> while starting the Terracotta server.
+      <br/><br/>
+      Check for the below <code>INFO</code> log to confirm if the server started successfully, <code>Terracotta Server instance has started up as ACTIVE node on 0:0:0:0:0:0:0:0:9510 successfully, and is now ready for work</code>.
+
+      <br/><br/>
+
+     <h2>Not quite ready yet?</h2>
+
+     Read the <a href="/documentation">user documentation</a> for everything you've been wondering about the new API!
+
+              </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          jQuery(document).ready(function ($) {
+              $('#startguide-tabs').tab();
+          });
+      </script>
    </div>
-
-  </div>
 
 
     <br/>
