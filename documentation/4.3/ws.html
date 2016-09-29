@@ -10,11 +10,11 @@
   <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
-  <title>Terracotta</title>
+  <title>4.3 Documentation</title>
 
   <meta name="description" content="Java's most widely used cache.">
 
-  <link rel="canonical" href="http://www.terracotta.org/documentation/4.1/bigmemorymax/api/unlocked-reads-view.html">
+  <link rel="canonical" href="http://www.terracotta.org/documentation/4.3/ws.html">
   <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
 
 
@@ -114,7 +114,7 @@
 
     <div class="container-fluid">
       <div id="contentTitle">
-        <h1></h1>
+        <h1>4.3 Documentation</h1>
       </div>
       <div>
         <BR/>
@@ -137,84 +137,26 @@
     <div class="col-xs-12 col-sm-9">
       <header class="post-header">
         
-        <h1 class="post-title"></h1>
+        <h1 class="post-title">Web Sessions PDF Documentation - 4.3 </h1>
         <hr/>
         
       </header>
       <article class="post-content">
-        <h1 id="unlocked-reads-for-consistent-caches-(unlockedreadsview)">Unlocked Reads for Consistent Caches (UnlockedReadsView)</h1>
-
-<p>Certain environments require consistent cached data while also needing to provide optimized reads of that data. For example, a financial application may need to display account data as a result of a large number of requests from web clients. The performance impact of these requests can be reduced by allowing unlocked reads of an otherwise locked cache.</p>
-
-<p>In cases where there is tolerance for getting potentially stale data, an unlocked (inconsistent) reads view can be created for Cache types using the UnlockedReadsView decorator. UnlockedReadsView requires that the underlying cache have Terracotta clustering and use the strong consistency mode. For example, the following cache can be decorated with UnlockedReadsView:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache"
-     maxElementsInMemory="500"
-     eternal="false"&gt;
-   &lt;persistence strategy="distributed"/&gt;
-   &lt;terracotta clustered="true" consistency="strong" /&gt;
-&lt;/cache&gt;
-</code></pre>
-</div>
-
-<p>You can create an unlocked view of myCache programmatically:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Cache cache = cacheManager.getEhcache("myCache");
-UnlockedReadsView unlockedReadsView = new UnlockedReadsView(cache, "myUnlockedCache");
-</code></pre>
-</div>
-
-<p>The following table lists the API methods available with the decorator <code class="highlighter-rouge">net.sf.ehcache.constructs.unlockedreadsview.UnlockedReadsView</code>.</p>
-
-<table>
+        <table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
 <tr>
-<th>Method</th>
-<th>Definition</th>
+<th class="tableblock halign-left valign-top">&nbsp;</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>
-<code>public String getName()</code>
-</td>
-<td>
-Returns the name of the unlocked cache view.
-</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/documentation/4.3/web-sessions-user-guide-4.3.3.pdf">User Guide</a></p></td>
 </tr>
-<tr>
-<td>
-<code>public Element get(final Object key)</code>
-
-<code>public Element get(final Serializable key)</code>
-</td>
-<td>
-Returns the data under the given key. Returns null if data has expired.
-</td>
-</tr>
-<tr>
-<td>
-<code>public Element getQuiet(final Object key)</code>
-
-<code>public Element getQuiet(final Serializable key)</code>
-</td>
-<td>
-Returns the data under the given key without updating cache statistics. Returns null if data has expired.
-</td>
-</tr>
+</tbody>
 </table>
-
-<h3 id="unlockedreadsview-and-data-freshness">UnlockedReadsView and Data Freshness</h3>
-
-<p>By default, caches have the following attributes set as shown:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ... copyOnRead="true" ... &gt;
-...
-  &lt;terracotta ... consistency="strong"  ... /&gt;
-...
-&lt;/cache&gt;
-</code></pre>
-</div>
-
-<p>Default settings are designed to make distributed caches more efficient and consistent in most use cases.</p>
-
       </article>
     </div>
 
