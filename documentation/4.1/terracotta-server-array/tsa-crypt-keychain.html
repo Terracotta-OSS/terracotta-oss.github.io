@@ -494,28 +494,28 @@ Password for tc://client1@172.16.254.1:9510 successfully stored
     <p><strong>UNIX/LINUX</strong><br />
  Change the line</p>
 
-    <p>~~~  <br />
- -cp “${TC_INSTALL_DIR}/lib/tc.jar” \
- ~~~</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> -cp "${TC_INSTALL_DIR}/lib/tc.jar" \
+</code></pre>
+    </div>
 
     <p>to</p>
 
-    <p>~~~
- -cp “${TC_INSTALL_DIR}/lib/tc.jarr:${TC_INSTALL_DIR}/lib/my-secret-provider.jar” \
- ~~~</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> -cp "${TC_INSTALL_DIR}/lib/tc.jarr:${TC_INSTALL_DIR}/lib/my-secret-provider.jar" \
+</code></pre>
+    </div>
 
     <p><strong>MICROSOFT WINDOWS</strong><br />
  Change the line</p>
 
-    <p>~~~
- set CLASSPATH=%TC_INSTALL_DIR%\lib\tc.jar
- ~~~</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> set CLASSPATH=%TC_INSTALL_DIR%\lib\tc.jar
+</code></pre>
+    </div>
 
     <p>to</p>
 
-    <p>~~~
- set CLASSPATH=%TC_INSTALL_DIR%\lib\tc.jar;%TC_INSTALL_DIR%\lib\my-secret-provider.jar
- ~~~</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> set CLASSPATH=%TC_INSTALL_DIR%\lib\tc.jar;%TC_INSTALL_DIR%\lib\my-secret-provider.jar
+</code></pre>
+    </div>
   </li>
   <li>
     <p>Ensure that the server’s configuration includes the &lt;secret-provider&gt; element specifying your implementation:</p>

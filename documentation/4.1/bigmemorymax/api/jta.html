@@ -378,7 +378,7 @@ in the mutating node.
 In this mode, some inconsistency might occur between a cache and other XA resources (such as databases) after a crash. However,
 the cache data remains consistent because the transaction is still fully atomic on the cache itself.</p>
 
-<h4 id="xastrict-mode">xa_strict Mode</h4>
+<h4 id="xa_strict-mode">xa_strict Mode</h4>
 <p>With “xa_strict”, the cache always responds to the TransactionManager’s recover calls with the list of
 prepared XIDs of failed transactions. Those transaction branches can then be committed or rolled back by the transaction manager.
 This mode supports the basic XA mechanism of the JTA standard.</p>
