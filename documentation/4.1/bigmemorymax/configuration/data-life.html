@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -221,13 +224,13 @@
 <h2 id="setting-expiration-{#24283}">Setting Expiration {#24283}</h2>
 <p>BigMemory data entries expire based on parameters with configurable values. When eviction occurs, expired elements are the first to be removed. Having an effective expiration configuration is critical to optimizing the use of resources such as heap and maintaining overall performance.</p>
 
-<p>To add expiration, edit the values of the following <code class="highlighter-rouge">&lt;cache&gt;</code> attributes, and tune these values based on results of performance tests:</p>
+<p>To add expiration, edit the values of the following <code class="language-plaintext highlighter-rouge">&lt;cache&gt;</code> attributes, and tune these values based on results of performance tests:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">timeToIdleSeconds</code> – The maximum number of seconds an element can exist in the BigMemory data store without being accessed. The element expires at this limit and will no longer be returned from BigMemory. The default value is 0, which means no TTI eviction takes place (infinite lifetime).</li>
-  <li><code class="highlighter-rouge">timeToLiveSeconds</code> – The maximum number of seconds an element can exist in the the BigMemory data store regardless of use. The element expires at this limit and will no longer be returned from BigMemory. The default value is 0, which means no TTL eviction takes place (infinite lifetime).</li>
-  <li><code class="highlighter-rouge">maxEntriesInCache</code> – The maximum sum total number of elements (cache entries) allowed for a distributed cache in all Terracotta clients. If this target is exceeded, eviction occurs to bring the count within the allowed  target. The default value is 0, which means that the cache will not undergo capacity eviction (but periodic and resource evictions are still allowed). Note that <code class="highlighter-rouge">maxEntriesInCache</code> reflects storage allocated on the TSA.</li>
-  <li><code class="highlighter-rouge">eternal</code> –  If the cache’s <code class="highlighter-rouge">eternal</code> flag is set, it overrides any finite TTI/TTL values that have been set. Individual cache elements may also be set to eternal. Eternal elements and caches do not expire, however they may be evicted.</li>
+  <li><code class="language-plaintext highlighter-rouge">timeToIdleSeconds</code> – The maximum number of seconds an element can exist in the BigMemory data store without being accessed. The element expires at this limit and will no longer be returned from BigMemory. The default value is 0, which means no TTI eviction takes place (infinite lifetime).</li>
+  <li><code class="language-plaintext highlighter-rouge">timeToLiveSeconds</code> – The maximum number of seconds an element can exist in the the BigMemory data store regardless of use. The element expires at this limit and will no longer be returned from BigMemory. The default value is 0, which means no TTL eviction takes place (infinite lifetime).</li>
+  <li><code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> – The maximum sum total number of elements (cache entries) allowed for a distributed cache in all Terracotta clients. If this target is exceeded, eviction occurs to bring the count within the allowed  target. The default value is 0, which means that the cache will not undergo capacity eviction (but periodic and resource evictions are still allowed). Note that <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> reflects storage allocated on the TSA.</li>
+  <li><code class="language-plaintext highlighter-rouge">eternal</code> –  If the cache’s <code class="language-plaintext highlighter-rouge">eternal</code> flag is set, it overrides any finite TTI/TTL values that have been set. Individual cache elements may also be set to eternal. Eternal elements and caches do not expire, however they may be evicted.</li>
 </ul>
 
 <p>See <a href="#30343">How Configuration Affects Element Eviction</a> for more information on how configuration can impact eviction.</p>
@@ -240,35 +243,45 @@
 
 <h3 id="configuring-pinning">Configuring Pinning</h3>
 
-<p>Entire caches can be pinned using the <code class="highlighter-rouge">pinning</code> element in the Ehcache configuration. This element has a required attribute (<code class="highlighter-rouge">store</code>) to specify how the pinning will be accomplished.</p>
+<p>Entire caches can be pinned using the <code class="language-plaintext highlighter-rouge">pinning</code> element in the Ehcache configuration. This element has a required attribute (<code class="language-plaintext highlighter-rouge">store</code>) to specify how the pinning will be accomplished.</p>
 
-<p>The <code class="highlighter-rouge">store</code> attribute can have either of the following values:</p>
+<p>The <code class="language-plaintext highlighter-rouge">store</code> attribute can have either of the following values:</p>
 
 <ul>
   <li>inCache – Data is pinned in the cache, in any tier in which cache data is stored. The tier is chosen based on performance-enhancing efficiency algorithms. Unexpired entries can never be evicted.</li>
-  <li>localMemory – Data is pinned to the memory store or the off-heap store. Entries are evicted only in the event that the store’s configured size is exceeded. Updated copies of invalidated elements are faulted in from the server, a behavior you can override by setting the <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">Terracotta property</a> <code class="highlighter-rouge">l1.servermapmanager.faultInvalidatedPinnedEntries</code> to false.</li>
+  <li>localMemory – Data is pinned to the memory store or the off-heap store. Entries are evicted only in the event that the store’s configured size is exceeded. Updated copies of invalidated elements are faulted in from the server, a behavior you can override by setting the <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">Terracotta property</a> <code class="language-plaintext highlighter-rouge">l1.servermapmanager.faultInvalidatedPinnedEntries</code> to false.</li>
 </ul>
 
 <p>For example, the following cache is configured to pin its entries:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="Cache1" ... &gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="Cache1" ... &gt;
      &lt;pinning store="inCache" /&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The following cache is configured to pin its entries to heap or off-heap only:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="Cache2" ... &gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="Cache2" ... &gt;
      &lt;pinning store="localMemory" /&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="pinning-and-cache-sizing">Pinning and Cache Sizing</h3>
 <p>The interaction of the pinning configuration with the cache sizing configuration depends upon which pinning option is used.</p>
 
-<p>For <code class="highlighter-rouge">inCache</code> pinning, the pinning setting takes priority over the configured cache size. Elements resident in a cache with this pinning option cannot be evicted if they haven’t expired. This type of pinned cache is not eligible for eviction at all, and <code class="highlighter-rouge">maxEntriesInCache</code> should not be configured for this cache.</p>
+<p>For <code class="language-plaintext highlighter-rouge">inCache</code> pinning, the pinning setting takes priority over the configured cache size. Elements resident in a cache with this pinning option cannot be evicted if they haven’t expired. This type of pinned cache is not eligible for eviction at all, and <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> should not be configured for this cache.</p>
 
 <table>
 <caption>Use caution with `inCache` pinning</caption>
@@ -277,15 +290,20 @@ Potentially, pinned caches could grow to an unlimited size. Caches should never 
 </td></tr>
 </table>
 
-<p>For <code class="highlighter-rouge">localMemory</code> pinning, the configured cache size takes priority over the pinning setting. <code class="highlighter-rouge">localMemory</code> pinning should be used for optimization, to keep data in heap or off-heap memory, unless or until the tier becomes too full. If the number of entries surpasses the configured size, entries will be evicted. For example, in the following cache the <code class="highlighter-rouge">maxEntriesOnHeap</code> and <code class="highlighter-rouge">maxBytesLocalOffHeap</code> settings override the pinning configuration:</p>
+<p>For <code class="language-plaintext highlighter-rouge">localMemory</code> pinning, the configured cache size takes priority over the pinning setting. <code class="language-plaintext highlighter-rouge">localMemory</code> pinning should be used for optimization, to keep data in heap or off-heap memory, unless or until the tier becomes too full. If the number of entries surpasses the configured size, entries will be evicted. For example, in the following cache the <code class="language-plaintext highlighter-rouge">maxEntriesOnHeap</code> and <code class="language-plaintext highlighter-rouge">maxBytesLocalOffHeap</code> settings override the pinning configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="myCache"
      maxEntriesOnHeap="10000"
      maxBytesLocalOffHeap="8g"
      ... &gt;
     &lt;pinning store="localMemory" /&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="scope-of-pinning">Scope of Pinning</h3>
@@ -294,24 +312,29 @@ Potentially, pinned caches could grow to an unlimited size. Caches should never 
 <p>Pinning achieved programmatically will not be persisted — after a restart the pinned entries are no longer pinned. Pinning is also lost when an L1 <a href="/documentation/4.1/bigmemorymax/configuration/reference-guide#71266">rejoins</a> a cluster. Cache pinning in configuration is reinstated with the configuration file.</p>
 
 <h2 id="explicitly-removing-data">Explicitly Removing Data</h2>
-<p>To unpin all of a cache’s pinned entries, clear the cache. Specific entries can be removed from a cache using <code class="highlighter-rouge">Cache.remove()</code>. To empty the cache, <code class="highlighter-rouge">Cache.removeAll()</code>. If the cache itself is removed (<code class="highlighter-rouge">Cache.dispose()</code> or <code class="highlighter-rouge">CacheManager.removeCache()</code>), then any data still remaining in the cache is also removed locally. However, that remaining data is <em>not</em> removed from the TSA or disk (if localRestartable).</p>
+<p>To unpin all of a cache’s pinned entries, clear the cache. Specific entries can be removed from a cache using <code class="language-plaintext highlighter-rouge">Cache.remove()</code>. To empty the cache, <code class="language-plaintext highlighter-rouge">Cache.removeAll()</code>. If the cache itself is removed (<code class="language-plaintext highlighter-rouge">Cache.dispose()</code> or <code class="language-plaintext highlighter-rouge">CacheManager.removeCache()</code>), then any data still remaining in the cache is also removed locally. However, that remaining data is <em>not</em> removed from the TSA or disk (if localRestartable).</p>
 
 <h2 id="how-configuration-affects-element-flushing-and-eviction-{#30343}">How Configuration Affects Element Flushing and Eviction {#30343}</h2>
 <p>The following example shows a cache with certain expiration settings:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="myCache"
       eternal="false" timeToIdleSeconds="3600"
       timeToLiveSeconds="0" memoryStoreEvictionPolicy="LFU"&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Note the following about the myCache configuration:</p>
 
 <ul>
-  <li>If a client accesses an entry in myCache that has been idle for more than an hour (<code class="highlighter-rouge">timeToIdleSeconds</code>), that element is evicted.</li>
+  <li>If a client accesses an entry in myCache that has been idle for more than an hour (<code class="language-plaintext highlighter-rouge">timeToIdleSeconds</code>), that element is evicted.</li>
   <li>If an entry expires but is not accessed, and no resource constraints force eviction, then the expired entry remains in place until a periodic evictor removes it.</li>
-  <li>Entries in myCache can live forever if accessed at least once per 60 minutes (<code class="highlighter-rouge">timeToLiveSeconds</code>). However, unexpired entries may still be flushed based on  other limitations (see <a href="/documentation/4.1/bigmemorymax/configuration/cache-size">Sizing BigMemory Tiers</a>).</li>
+  <li>Entries in myCache can live forever if accessed at least once per 60 minutes (<code class="language-plaintext highlighter-rouge">timeToLiveSeconds</code>). However, unexpired entries may still be flushed based on  other limitations (see <a href="/documentation/4.1/bigmemorymax/configuration/cache-size">Sizing BigMemory Tiers</a>).</li>
 </ul>
 
 <h2 id="data-freshness-and-expiration">Data Freshness and Expiration</h2>
@@ -322,7 +345,7 @@ Potentially, pinned caches could grow to an unlimited size. Caches should never 
 
 <ul>
   <li>
-    <p><strong>Data Expiration</strong>: Use the eviction algorithms included with Ehcache, along with the <code class="highlighter-rouge">timeToIdleSeconds</code> and <code class="highlighter-rouge">timetoLiveSeconds</code> settings, to enforce a maximum time for elements to live in the cache (forcing a re-load from the database or SOR).</p>
+    <p><strong>Data Expiration</strong>: Use the eviction algorithms included with Ehcache, along with the <code class="language-plaintext highlighter-rouge">timeToIdleSeconds</code> and <code class="language-plaintext highlighter-rouge">timetoLiveSeconds</code> settings, to enforce a maximum time for elements to live in the cache (forcing a re-load from the database or SOR).</p>
   </li>
   <li>
     <p><strong>Message Bus</strong>: Use an application to make all updates to the database. When updates are made, post a message onto a message queue with a key to the item that was updated. All application instances can subscribe to the message bus and receive messages about data that is updated, and can synchronize their local copy of the data accordingly (for example by invalidating the cache entry for updated data)</p>
@@ -371,14 +394,6 @@ Potentially, pinned caches could grow to an unlimited size. Caches should never 
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -400,24 +415,32 @@ Potentially, pinned caches could grow to an unlimited size. Caches should never 
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -425,7 +448,7 @@ Potentially, pinned caches could grow to an unlimited size. Caches should never 
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

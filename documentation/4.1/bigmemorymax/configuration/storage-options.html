@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -236,11 +239,11 @@
 
 <p>When an element is added to a cache and it goes beyond its maximum
 memory size, an existing element is either deleted, if overflow
-is not enabled, or evaluated for spooling to another tier, if overflow is enabled. The overflow options are <code class="highlighter-rouge">overflowToOffHeap</code> and <code class="highlighter-rouge">&lt;persistence&gt;</code> (disk store).</p>
+is not enabled, or evaluated for spooling to another tier, if overflow is enabled. The overflow options are <code class="language-plaintext highlighter-rouge">overflowToOffHeap</code> and <code class="language-plaintext highlighter-rouge">&lt;persistence&gt;</code> (disk store).</p>
 
 <p>If overflow is enabled, a check for expiry is carried out. If it is expired
 it is deleted; if not it is spooled. The eviction of an item from
-the memory store is based on the optional <code class="highlighter-rouge">MemoryStoreEvictionPolicy</code> attribute
+the memory store is based on the optional <code class="language-plaintext highlighter-rouge">MemoryStoreEvictionPolicy</code> attribute
 specified in the configuration file. Legal values are LRU (default), LFU and FIFO:</p>
 
 <ul>
@@ -249,9 +252,9 @@ specified in the configuration file. Legal values are LRU (default), LFU and FIF
   <li><strong>First In First Out (FIFO)</strong>—Elements are evicted in the same order as they come in. When a put call is made for a new element (and assuming that the max limit is reached for the memory store) the element that was placed first (First-In) in the store is the candidate for eviction (First-Out).</li>
 </ul>
 
-<p>For all the eviction policies there are also <code class="highlighter-rouge">putQuiet</code> and <code class="highlighter-rouge">getQuiet</code> methods which do not update the last used timestamp.</p>
+<p>For all the eviction policies there are also <code class="language-plaintext highlighter-rouge">putQuiet</code> and <code class="language-plaintext highlighter-rouge">getQuiet</code> methods which do not update the last used timestamp.</p>
 
-<p>When there is a <code class="highlighter-rouge">get</code> or a <code class="highlighter-rouge">getQuiet</code> on an element, it is checked for expiry. If expired, it is removed and null is returned. Note that at any point in time there will usually be some expired elements in the cache. Memory sizing of an application must always take into
+<p>When there is a <code class="language-plaintext highlighter-rouge">get</code> or a <code class="language-plaintext highlighter-rouge">getQuiet</code> on an element, it is checked for expiry. If expired, it is removed and null is returned. Note that at any point in time there will usually be some expired elements in the cache. Memory sizing of an application must always take into
 account the maximum size of each cache.</p>
 
 <table>
@@ -266,17 +269,22 @@ which can provide an estimate of the size (in bytes) of the memory store. It ret
 
 <p>The off-heap store extends the in-memory store to memory outside the of the object heap. This store, which is not subject to Java GC, is limited only by the amount of RAM available.</p>
 
-<p>Because off-heap data is stored in bytes, only data that is <code class="highlighter-rouge">Serializable</code> is suitable for the off-heap store. Any non serializable data overflowing to the <code class="highlighter-rouge">OffHeapMemoryStore</code> is simply removed, and a WARNING level log message emitted.</p>
+<p>Because off-heap data is stored in bytes, only data that is <code class="language-plaintext highlighter-rouge">Serializable</code> is suitable for the off-heap store. Any non serializable data overflowing to the <code class="language-plaintext highlighter-rouge">OffHeapMemoryStore</code> is simply removed, and a WARNING level log message emitted.</p>
 
 <p>Since serialization and deserialization take place on putting and getting from the off-heap store, it is theoretically slower than the memory store. This difference, however, is mitigated when GC involved with larger heaps is taken into account.</p>
 
 <h3 id="allocating-direct-memory">Allocating Direct Memory in the JVM</h3>
-<p>The off-heap store uses the direct-memory portion of the JVM. You must allocate sufficient direct memory for the off-heap store by using the JVM property <code class="highlighter-rouge">MaxDirectMemorySize</code>.</p>
+<p>The off-heap store uses the direct-memory portion of the JVM. You must allocate sufficient direct memory for the off-heap store by using the JVM property <code class="language-plaintext highlighter-rouge">MaxDirectMemorySize</code>.</p>
 
 <p>For example, to allocate 2GB of direct memory in the JVM:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>java -XX:MaxDirectMemorySize=2G ...
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>java -XX:MaxDirectMemorySize=2G ...
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Since direct memory may be shared with other processes, allocate at least 256MB (or preferably 1GB) more to direct memory than will be allocated to the off-heap store.</p>
@@ -299,11 +307,11 @@ which can provide an estimate of the size (in bytes) of the memory store. It ret
 <p>If Java GC issues are afflicting a 32-bit JVM, then off-heap store can help. However, note the following:</p>
 
 <ul>
-  <li>Everything has to fit in 4GB of addressable space. If 2GB of heap is allocated (with <code class="highlighter-rouge">-Xmx2g</code>) then at most are are 2GB left for off-heap data.</li>
+  <li>Everything has to fit in 4GB of addressable space. If 2GB of heap is allocated (with <code class="language-plaintext highlighter-rouge">-Xmx2g</code>) then at most are are 2GB left for off-heap data.</li>
   <li>The JVM process requires some of the 4GB of addressable space for its code and shared libraries plus any extra Operating System overhead.</li>
   <li>Allocating a 3GB heap with -Xmx, as well as 2047MB of off-heap memory, will not cause an error at startup, but when it’s time to grow the heap an OutOfMemoryError is likely.</li>
   <li>If both -Xms3G and -Xmx3G are used with 2047MB of off-heap memory, the virtual machine will start but then complain as soon as the off-heap store tries to allocate the off-heap buffers.</li>
-  <li>Some APIs, such as <code class="highlighter-rouge">java.util.zip.ZipFile</code> on a 1.5 JVM, may &lt;mmap&gt; files in memory. This will also use up process space and may trigger an OutOfMemoryError.</li>
+  <li>Some APIs, such as <code class="language-plaintext highlighter-rouge">java.util.zip.ZipFile</code> on a 1.5 JVM, may &lt;mmap&gt; files in memory. This will also use up process space and may trigger an OutOfMemoryError.</li>
 </ul>
 
 <h2 id="configuring-the-off-heap-store">Configuring the Off-Heap Store</h2>
@@ -314,7 +322,10 @@ which can provide an estimate of the size (in bytes) of the memory store. It ret
 <p>The following XML configuration creates an off-heap cache with an in-heap store (maxEntriesLocalHeap)
 of 10,000 elements which overflow to a 1-gigabyte off-heap area.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache updateCheck="false" monitoring="off" dynamicConfig="false"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;ehcache updateCheck="false" monitoring="off" dynamicConfig="false"&gt;
   &lt;defaultCache maxEntriesLocalHeap="10000"
               eternal="true"
               memoryStoreEvictionPolicy="LRU"
@@ -327,7 +338,9 @@ of 10,000 elements which overflow to a 1-gigabyte off-heap area.</p>
        overflowToOffHeap="true"
        maxBytesLocalOffHeap="1G"/&gt;
 &lt;/ehcache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The configuration options are:</p>
@@ -340,7 +353,7 @@ GC cycles and has a size limit set by the Java property MaxDirectMemorySize.
 The default value is false.</p>
 
 <h4 id="maxbyteslocaloffheap">maxBytesLocalOffHeap</h4>
-<p>Sets the amount of off-heap memory available to the cache and is in effect only if <code class="highlighter-rouge">overflowToOffHeap</code> is tr
+<p>Sets the amount of off-heap memory available to the cache and is in effect only if <code class="language-plaintext highlighter-rouge">overflowToOffHeap</code> is tr
 ue. The minimum amount that can be allocated is 1MB. There is no maximum.</p>
 
 <p>For more information on sizing data stores, refer to <a href="/documentation/4.1/bigmemorymax/configuration/cache-size">Sizing Storage Tiers</a>.</p>
@@ -357,7 +370,10 @@ when using an off-heap store to avoid performance degradation. Lower values for 
 
 <p>The equivalent cache can be created using the following programmatic configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public Cache createOffHeapCache()
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>public Cache createOffHeapCache()
 {
   CacheConfiguration config = new CacheConfiguration("sample-offheap-cache", 10000)
   .overflowToOffHeap(true).maxBytesLocalOffHeap("1G");
@@ -365,7 +381,9 @@ when using an off-heap store to avoid performance degradation. Lower values for 
   manager.addCache(cache);
   return cache;
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="disk-store">Disk Store</h2>
@@ -376,7 +394,7 @@ when using an off-heap store to avoid performance degradation. Lower values for 
 <p>This section covers local disk usage. Additional information may also be found on the <a href="/documentation/4.1/bigmemorymax/configuration/fast-restart">Fast Restartability</a> page.</p>
 
 <h3 id="serialization">Serialization</h3>
-<p>Only data that is <code class="highlighter-rouge">Serializable</code> can be placed in the disk store. Writes to and from the disk use <code class="highlighter-rouge">ObjectInputStream</code> and the Java serialization mechanism. Any non-serializable data overflowing to the disk store is removed and a NotSerializableException is thrown.</p>
+<p>Only data that is <code class="language-plaintext highlighter-rouge">Serializable</code> can be placed in the disk store. Writes to and from the disk use <code class="language-plaintext highlighter-rouge">ObjectInputStream</code> and the Java serialization mechanism. Any non-serializable data overflowing to the disk store is removed and a NotSerializableException is thrown.</p>
 
 <p>Serialization speed is affected by the size of the objects being
 serialized and their type. It has been found that:</p>
@@ -412,21 +430,26 @@ a warning message is logged to encourage explicit configuration of the disk stor
 
 <p>If the disk store path is not specified, a default path is used, and the default will be auto-resolved in the case of a conflict with another CacheManager.</p>
 
-<p>The localTempSwap disk store creates a data file for each cache on startup called “<code class="highlighter-rouge">&lt;cache_name&gt;</code>.data”.</p>
+<p>The localTempSwap disk store creates a data file for each cache on startup called “<code class="language-plaintext highlighter-rouge">&lt;cache_name&gt;</code>.data”.</p>
 
 <h4 id="localrestartable">localRestartable</h4>
 
 <p>This option implements a restartable store for all in-memory data. After any restart, the data set is automatically reloaded from disk to the in-memory stores.</p>
 
-<p>The path to the directory where any required disk files will be created is configured with the <code class="highlighter-rouge">&lt;diskStore&gt;</code>  sub-element of the Ehcache configuration. In order to use the restartable store, a unique and explicitly specified path is required.</p>
+<p>The path to the directory where any required disk files will be created is configured with the <code class="language-plaintext highlighter-rouge">&lt;diskStore&gt;</code>  sub-element of the Ehcache configuration. In order to use the restartable store, a unique and explicitly specified path is required.</p>
 
 <h3 id="disk-store-configuration-element">Disk Store Configuration Element</h3>
 
-<p>Files are created in the directory specified by the <code class="highlighter-rouge">&lt;diskStore&gt;</code>
-configuration element. The <code class="highlighter-rouge">&lt;diskStore&gt;</code> element has one attribute called <code class="highlighter-rouge">path</code>.</p>
+<p>Files are created in the directory specified by the <code class="language-plaintext highlighter-rouge">&lt;diskStore&gt;</code>
+configuration element. The <code class="language-plaintext highlighter-rouge">&lt;diskStore&gt;</code> element has one attribute called <code class="language-plaintext highlighter-rouge">path</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;diskStore path="/path/to/store/data"/&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;diskStore path="/path/to/store/data"/&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Legal values for the path attibute are legal file system paths. For example, for Unix:</p>
@@ -441,7 +464,7 @@ configuration element. The <code class="highlighter-rouge">&lt;diskStore&gt;</co
   <li>user.home - User’s home directory</li>
   <li>user.dir - User’s current working directory</li>
   <li>java.io.tmpdir - Default temp file path</li>
-  <li>ehcache.disk.store.dir - A system property you would normally specify on the command line—for example, <code class="highlighter-rouge">java -Dehcache.disk.store.dir=/u01/myapp/diskdir</code>.</li>
+  <li>ehcache.disk.store.dir - A system property you would normally specify on the command line—for example, <code class="language-plaintext highlighter-rouge">java -Dehcache.disk.store.dir=/u01/myapp/diskdir</code>.</li>
 </ul>
 
 <p>Subdirectories can be specified below the system property, for example:</p>
@@ -452,7 +475,10 @@ user.dir/one
 
 <p>To programmatically set a disk store path:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>DiskStoreConfiguration diskStoreConfiguration = new DiskStoreConfiguration();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>DiskStoreConfiguration diskStoreConfiguration = new DiskStoreConfiguration();
 
 diskStoreConfiguration.setPath("/my/path/dir");
 
@@ -460,7 +486,9 @@ diskStoreConfiguration.setPath("/my/path/dir");
 configuration.addDiskStore(diskStoreConfiguration);
 
 CacheManager mgr = new CacheManager(configuration);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p><strong>Note</strong>: A CacheManager’s disk store path cannot be changed once it is set in configuration. If the disk store path is changed, the CacheManager must be recycled for the new path to take effect.</p>
@@ -468,20 +496,20 @@ CacheManager mgr = new CacheManager(configuration);
 <h3 id="disk-store-expiry-and-eviction">Disk Store Expiry and Eviction</h3>
 <p>Expired elements are eventually evicted to free up disk space. The element is also removed from the in-memory index of elements.</p>
 
-<p>One thread per cache is used to remove expired elements. The optional attribute <code class="highlighter-rouge">diskExpiryThreadIntervalSeconds</code>
+<p>One thread per cache is used to remove expired elements. The optional attribute <code class="language-plaintext highlighter-rouge">diskExpiryThreadIntervalSeconds</code>
 sets the interval between runs of the expiry thread.</p>
 
-<p><strong>Warning</strong>: Setting <code class="highlighter-rouge">diskExpiryThreadIntervalSeconds</code> to a low value can cause excessive disk-store locking and high CPU utilization. The default value is 120 seconds.</p>
+<p><strong>Warning</strong>: Setting <code class="language-plaintext highlighter-rouge">diskExpiryThreadIntervalSeconds</code> to a low value can cause excessive disk-store locking and high CPU utilization. The default value is 120 seconds.</p>
 
 <p>If a cache’s disk store has a limited size, Elements will be evicted from the disk store when it exceeds this limit. The LFU algorithm is used for these evictions. It is not configurable or changeable.</p>
 
-<p><strong>Note</strong>: With the “localTempSwap” strategy, you can use <code class="highlighter-rouge">maxEntriesLocalDisk</code> or <code class="highlighter-rouge">maxBytesLocalDisk</code> at either the Cache or CacheManager level to control the size of the disk tier.</p>
+<p><strong>Note</strong>: With the “localTempSwap” strategy, you can use <code class="language-plaintext highlighter-rouge">maxEntriesLocalDisk</code> or <code class="language-plaintext highlighter-rouge">maxBytesLocalDisk</code> at either the Cache or CacheManager level to control the size of the disk tier.</p>
 
 <h3 id="turning-off-disk-stores">Turning off Disk Stores</h3>
 
-<p>To turn off disk store path creation, comment out the <code class="highlighter-rouge">diskStore</code> element in ehcache.xml.</p>
+<p>To turn off disk store path creation, comment out the <code class="language-plaintext highlighter-rouge">diskStore</code> element in ehcache.xml.</p>
 
-<p>The default Ehcache configuration, ehcache-failsafe.xml, uses a disk store. To avoid use of a disk store, specify a custom ehcache.xml with the <code class="highlighter-rouge">diskStore</code> element commented out.</p>
+<p>The default Ehcache configuration, ehcache-failsafe.xml, uses a disk store. To avoid use of a disk store, specify a custom ehcache.xml with the <code class="language-plaintext highlighter-rouge">diskStore</code> element commented out.</p>
 
 <h2 id="configuration-examples">Configuration Examples</h2>
 
@@ -584,14 +612,6 @@ database (100x slower) or caching on local disk (20x slower).</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -613,24 +633,32 @@ database (100x slower) or caching on local disk (20x slower).</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -638,7 +666,7 @@ database (100x slower) or caching on local disk (20x slower).</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

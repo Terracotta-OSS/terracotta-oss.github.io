@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -209,23 +212,23 @@ programmatic access to working with Ehcache.</p>
 
 <h2 id="cachemanager">CacheManager</h2>
 
-<p>The class <code class="highlighter-rouge">CacheManager</code> is used to manage caches. Creation of, access to, and removal of caches is controlled by a named CacheManager.</p>
+<p>The class <code class="language-plaintext highlighter-rouge">CacheManager</code> is used to manage caches. Creation of, access to, and removal of caches is controlled by a named CacheManager.</p>
 
 <h3 id="cm-creation">CacheManager Creation Modes</h3>
 
-<p><code class="highlighter-rouge">CacheManager</code> supports two creation modes: singleton and instance. The two types can exist in the same JVM. However, multiple CacheManagers with the same name are not allowed to exist in the same JVM. <code class="highlighter-rouge">CacheManager()</code> constructors creating non-Singleton CacheManagers can violate this rule, causing a NullPointerException. If your code may create multiple CacheManagers of the same name in the same JVM, avoid this error by using the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">static <code class="highlighter-rouge">CacheManager.create()</code> methods</a>, which always return the named (or default unnamed) CacheManager if it already exists in that JVM. If the named (or default unnamed) CacheManager does not exist, the <code class="highlighter-rouge">CacheManager.create()</code> methods create it.</p>
+<p><code class="language-plaintext highlighter-rouge">CacheManager</code> supports two creation modes: singleton and instance. The two types can exist in the same JVM. However, multiple CacheManagers with the same name are not allowed to exist in the same JVM. <code class="language-plaintext highlighter-rouge">CacheManager()</code> constructors creating non-Singleton CacheManagers can violate this rule, causing a NullPointerException. If your code may create multiple CacheManagers of the same name in the same JVM, avoid this error by using the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">static <code class="language-plaintext highlighter-rouge">CacheManager.create()</code> methods</a>, which always return the named (or default unnamed) CacheManager if it already exists in that JVM. If the named (or default unnamed) CacheManager does not exist, the <code class="language-plaintext highlighter-rouge">CacheManager.create()</code> methods create it.</p>
 
-<p>For singletons, calling <code class="highlighter-rouge">CacheManager.create(...)</code> returns the existing singleton CacheManager with the configured name (if it exists) or creates the singleton based on the passed-in configuration.</p>
+<p>For singletons, calling <code class="language-plaintext highlighter-rouge">CacheManager.create(...)</code> returns the existing singleton CacheManager with the configured name (if it exists) or creates the singleton based on the passed-in configuration.</p>
 
-<p>To work from configuration, use the <code class="highlighter-rouge">CacheManager.newInstance(...)</code> method, which parses the passed-in configuration to either get the existing named CacheManager or create that CacheManager if it doesn’t exist.</p>
+<p>To work from configuration, use the <code class="language-plaintext highlighter-rouge">CacheManager.newInstance(...)</code> method, which parses the passed-in configuration to either get the existing named CacheManager or create that CacheManager if it doesn’t exist.</p>
 
 <p>To review, the behavior of the CacheManager creation methods is as follows:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">CacheManager.newInstance(Configuration configuration)</code> – Create a new CacheManager or return the existing one named in the configuration.</li>
-  <li><code class="highlighter-rouge">CacheManager.create()</code> – Create a new singleton CacheManager with default configuration, or return the existing singleton. This is the same as <code class="highlighter-rouge">CacheManager.getInstance()</code>.</li>
-  <li><code class="highlighter-rouge">CacheManager.create(Configuration configuration)</code> – Create a singleton CacheManager with the passed-in configuration, or return the existing singleton.</li>
-  <li><code class="highlighter-rouge">new CacheManager(Configuration configuration)</code> – Create a new CacheManager, or throw an exception if the CacheManager named in the configuration already exists or if the parameter (configuration) is null.</li>
+  <li><code class="language-plaintext highlighter-rouge">CacheManager.newInstance(Configuration configuration)</code> – Create a new CacheManager or return the existing one named in the configuration.</li>
+  <li><code class="language-plaintext highlighter-rouge">CacheManager.create()</code> – Create a new singleton CacheManager with default configuration, or return the existing singleton. This is the same as <code class="language-plaintext highlighter-rouge">CacheManager.getInstance()</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">CacheManager.create(Configuration configuration)</code> – Create a singleton CacheManager with the passed-in configuration, or return the existing singleton.</li>
+  <li><code class="language-plaintext highlighter-rouge">new CacheManager(Configuration configuration)</code> – Create a new CacheManager, or throw an exception if the CacheManager named in the configuration already exists or if the parameter (configuration) is null.</li>
 </ul>
 
 <p>Note that in instance-mode (non-singleton), where multiple CacheManagers can
@@ -246,11 +249,11 @@ there will also be listener ports which must be unique.</p>
 <h2 id="cache">Cache</h2>
 <p>This is a thread-safe logical representation of a set of data elements, analogous to a cache region in many caching systems. Once a reference to a cache is obtained (through a CacheManager), logical actions can be performed. The physical implementation of these actions is relegated to the <a href="storage-options">stores</a>.</p>
 
-<p>Caches are instantiated from configuration or programmatically using one of the <code class="highlighter-rouge">Cache()</code> constructors. Certain cache characteristics, such as ARC-related sizing, and pinning, must be set using configuration.</p>
+<p>Caches are instantiated from configuration or programmatically using one of the <code class="language-plaintext highlighter-rouge">Cache()</code> constructors. Certain cache characteristics, such as ARC-related sizing, and pinning, must be set using configuration.</p>
 
-<p>Cache methods can be used to get information about the cache (for example, <code class="highlighter-rouge">getCacheManager()</code>, <code class="highlighter-rouge">isNodeBulkLoadEnabled()</code>, <code class="highlighter-rouge">isSearchable()</code>, etc.), or perform certain cache-wide operations (for example, flush, load, initialize, dispose, etc.).</p>
+<p>Cache methods can be used to get information about the cache (for example, <code class="language-plaintext highlighter-rouge">getCacheManager()</code>, <code class="language-plaintext highlighter-rouge">isNodeBulkLoadEnabled()</code>, <code class="language-plaintext highlighter-rouge">isSearchable()</code>, etc.), or perform certain cache-wide operations (for example, flush, load, initialize, dispose, etc.).</p>
 
-<p>The methods provided in the <code class="highlighter-rouge">Cache</code> class also allow you to work with cache elements (for example, get, set, remove, replace, etc.) as well as get information about the them (for example, isExpired, isPinned, etc.).</p>
+<p>The methods provided in the <code class="language-plaintext highlighter-rouge">Cache</code> class also allow you to work with cache elements (for example, get, set, remove, replace, etc.) as well as get information about the them (for example, isExpired, isPinned, etc.).</p>
 
 <h2 id="element">Element</h2>
 
@@ -261,7 +264,7 @@ expire and be removed by the cache, depending on the cache settings.</p>
 <p>There is an API for Objects in addition to the one for Serializable. Non-serializable Objects can be stored only in heap. If an attempt is made to persist them,
 they are discarded with a DEBUG-level log message but no error.</p>
 
-<p>The APIs are identical except for the return methods from Element: <code class="highlighter-rouge">getKeyValue()</code> and <code class="highlighter-rouge">getObjectValue()</code> are used by the Object API in place of <code class="highlighter-rouge">getKey()</code> and <code class="highlighter-rouge">getValue()</code>.</p>
+<p>The APIs are identical except for the return methods from Element: <code class="language-plaintext highlighter-rouge">getKeyValue()</code> and <code class="language-plaintext highlighter-rouge">getObjectValue()</code> are used by the Object API in place of <code class="language-plaintext highlighter-rouge">getKey()</code> and <code class="language-plaintext highlighter-rouge">getValue()</code>.</p>
 
       </article>
     </div>
@@ -296,14 +299,6 @@ they are discarded with a DEBUG-level log message but no error.</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -325,24 +320,32 @@ they are discarded with a DEBUG-level log message but no error.</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -350,7 +353,7 @@ they are discarded with a DEBUG-level log message but no error.</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

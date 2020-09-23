@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -196,15 +199,20 @@
   </tbody>
 </table>
 
-<p>A Windows service supports scheduling and automatic start and restart. You might want to run the Terracotta Server Array or the Cross-Language Connector, which are Java applications, as a <strong>Windows service</strong>. If so, use the Service Wrapper located inside the kit at <code class="highlighter-rouge">$installdir/server/wrapper</code> (or, for 3.7, <code class="highlighter-rouge">$installdir/wrapper</code>).</p>
+<p>A Windows service supports scheduling and automatic start and restart. You might want to run the Terracotta Server Array or the Cross-Language Connector, which are Java applications, as a <strong>Windows service</strong>. If so, use the Service Wrapper located inside the kit at <code class="language-plaintext highlighter-rouge">$installdir/server/wrapper</code> (or, for 3.7, <code class="language-plaintext highlighter-rouge">$installdir/wrapper</code>).</p>
 
 <h2 id="set-java_home">Set JAVA_HOME</h2>
-<p>To start the service, set your <code class="highlighter-rouge">JAVA_HOME</code> in <code class="highlighter-rouge">conf/wrapper-tsa.conf</code> or <code class="highlighter-rouge">conf/wrapper-clc.conf</code>. For example:</p>
+<p>To start the service, set your <code class="language-plaintext highlighter-rouge">JAVA_HOME</code> in <code class="language-plaintext highlighter-rouge">conf/wrapper-tsa.conf</code> or <code class="language-plaintext highlighter-rouge">conf/wrapper-clc.conf</code>. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>set.JAVA_HOME=C:/Java/jdk1.7.0_21
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>set.JAVA_HOME=C:/Java/jdk1.7.0_21
+</code>
+      </pre>
+   </div>
 </div>
-<p>The wrapper does not read your <code class="highlighter-rouge">JAVA_HOME</code> from the environment. For Windows, if you do not want to set it in the configuration file, comment it out and set <code class="highlighter-rouge">JAVA_HOME</code> in the registry instead.</p>
+<p>The wrapper does not read your <code class="language-plaintext highlighter-rouge">JAVA_HOME</code> from the environment. For Windows, if you do not want to set it in the configuration file, comment it out and set <code class="language-plaintext highlighter-rouge">JAVA_HOME</code> in the registry instead.</p>
 
 <h2 id="configuration-files">Configuration Files</h2>
 <p>For the Cross-Language Connector, you need these configuration files:</p>
@@ -222,10 +230,15 @@
 
 <p>Overwrite those files with your own. If you want to change these file names, modify the names in the wrapper configurations.</p>
 
-<p>Modify the <code class="highlighter-rouge">TSA conf/wrapper-tsa.conf</code> file to match the server name in your tc-config.xml:</p>
+<p>Modify the <code class="language-plaintext highlighter-rouge">TSA conf/wrapper-tsa.conf</code> file to match the server name in your tc-config.xml:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>set.SERVER_NAME=server0
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>set.SERVER_NAME=server0
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>where <em>server0</em> represents the name of the server you want to start.</p>
@@ -236,37 +249,57 @@
 <p>In addition, the Administrator user needs to have read/write permission for the “wrapper” directory.</p>
 
 <h2 id="install-and-start-the-service">Install and Start the Service</h2>
-<p>The wrapper service is located at <code class="highlighter-rouge">$installdir/server/wrapper</code> .</p>
+<p>The wrapper service is located at <code class="language-plaintext highlighter-rouge">$installdir/server/wrapper</code> .</p>
 
 <p>To install the service wrapper, run the script with the install parameter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>%&gt; bin/tsa-service.bat install
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>%&gt; bin/tsa-service.bat install
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>NOTE: The examples in this section show the TSA script. For the Cross-Language Connector, use the <code class="highlighter-rouge">clc-service</code> or <code class="highlighter-rouge">clc-service.bat</code> script.</p>
+<p>NOTE: The examples in this section show the TSA script. For the Cross-Language Connector, use the <code class="language-plaintext highlighter-rouge">clc-service</code> or <code class="language-plaintext highlighter-rouge">clc-service.bat</code> script.</p>
 
 <p>Then you can either start/stop the service:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>%&gt; bin/tsa-service.bat start
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>%&gt; bin/tsa-service.bat start
 %&gt; bin/tsa-service.bat stop
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If you want to remove the service:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>%&gt; bin/tsa-service.bat remove
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>%&gt; bin/tsa-service.bat remove
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>There are more commands available when you run the script without any parameter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>%&gt; bin/tsa-service.bat
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>%&gt; bin/tsa-service.bat
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="changing-wrapper-configuration">Changing Wrapper Configuration</h2>
-<p>There are comments in <code class="highlighter-rouge">wrapper-tsa.conf</code> and <code class="highlighter-rouge">wrapper-clc.conf</code> to explain each parameter.
+<p>There are comments in <code class="language-plaintext highlighter-rouge">wrapper-tsa.conf</code> and <code class="language-plaintext highlighter-rouge">wrapper-clc.conf</code> to explain each parameter.
 If you need to modify JVM system properties, classpath, or command line parameters,
 follow the current pattern. Pay close attention to their numerical
 order and parameter counts.</p>
@@ -306,14 +339,6 @@ order and parameter counts.</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -335,24 +360,32 @@ order and parameter counts.</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -360,7 +393,7 @@ order and parameter counts.</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

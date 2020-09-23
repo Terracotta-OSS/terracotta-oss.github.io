@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -187,7 +190,7 @@
 </table>
 
 <h2 id="introduction">Introduction</h2>
-<p>A number of properties control the way the Terracotta Server Array and its clients perform in a Terracotta cluster. Some of these settings are found in the Terracotta configuration file (<code class="highlighter-rouge">tc-config.xml</code>), while others are found in the BigMemory configuration file (<code class="highlighter-rouge">ehcache.xml</code>). A few must be set programmatically.</p>
+<p>A number of properties control the way the Terracotta Server Array and its clients perform in a Terracotta cluster. Some of these settings are found in the Terracotta configuration file (<code class="language-plaintext highlighter-rouge">tc-config.xml</code>), while others are found in the BigMemory configuration file (<code class="language-plaintext highlighter-rouge">ehcache.xml</code>). A few must be set programmatically.</p>
 
 <p>The following sections detail the most important of these properties and shows their default values. To confirm the latest default values for your version of Terracotta software, see the XSD included with your Terracotta kit.</p>
 
@@ -195,19 +198,24 @@
 
 <p>A Terracotta cluster is composed of clients and servers. Terracotta properties often use a shorthand notation where a client is referred to as “l1” and a server as “l2”.</p>
 
-<p>These properties are set at the top of <code class="highlighter-rouge">tc-config.xml</code> using a configuration block similar to the following:</p>
+<p>These properties are set at the top of <code class="language-plaintext highlighter-rouge">tc-config.xml</code> using a configuration block similar to the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc-properties&gt;
    &lt;property name="l2.nha.tcgroupcomm.reconnect.enabled" value="true" /&gt;
 &lt;!-- More properties here. --&gt;
 &lt;/tc-properties&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>See the <a href="/documentation/4.1/terracotta-server-array/introduction">Terracotta Server Array documentation</a> for more information on the Terracotta Server Array.</p>
 
 <h3 id="reconnection-and-logging-properties">Reconnection and Logging Properties</h3>
-<p>The following reconnection properties are shown with default values. These properties can be set to custom values using Terracotta configuration properties (<code class="highlighter-rouge">&lt;tc-properties&gt;</code>/<code class="highlighter-rouge">&lt;property&gt;</code> elements in <code class="highlighter-rouge">tc-config.xml</code>).</p>
+<p>The following reconnection properties are shown with default values. These properties can be set to custom values using Terracotta configuration properties (<code class="language-plaintext highlighter-rouge">&lt;tc-properties&gt;</code>/<code class="language-plaintext highlighter-rouge">&lt;property&gt;</code> elements in <code class="language-plaintext highlighter-rouge">tc-config.xml</code>).</p>
 
 <table>
 <tr><th>Property</th><th>Default Value</th><th>Notes</th></tr>
@@ -246,38 +254,53 @@
 
 <h4 id="l2-l2-gc-tolerance--40-secs-cable-pullnetwork-down-tolerance--10secs">l2&lt;-&gt;l2 GC tolerance : 40 secs, cable pull/network down tolerance : 10secs</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>l2.healthcheck.l2.ping.enabled = true
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>l2.healthcheck.l2.ping.enabled = true
 l2.healthcheck.l2.ping.idletime = 5000
 l2.healthcheck.l2.ping.interval = 1000
 l2.healthcheck.l2.ping.probes = 3
 l2.healthcheck.l2.socketConnect = true
 l2.healthcheck.l2.socketConnectTimeout = 5
 l2.healthcheck.l2.socketConnectCount = 10
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h4 id="l2-l1-gc-tolerance--40-secs-cable-pullnetwork-down-tolerance--10secs">l2-&gt;l1 GC tolerance : 40 secs, cable pull/network down tolerance : 10secs</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>l2.healthcheck.l1.ping.enabled = true
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>l2.healthcheck.l1.ping.enabled = true
 l2.healthcheck.l1.ping.idletime = 5000
 l2.healthcheck.l1.ping.interval = 1000
 l2.healthcheck.l1.ping.probes = 3
 l2.healthcheck.l1.socketConnect = true
 l2.healthcheck.l1.socketConnectTimeout = 5
 l2.healthcheck.l1.socketConnectCount = 10
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h4 id="l1-l1-gc-tolerance--50-secs-cable-pullnetwork-down-tolerance--10secs">l1-&gt;l1 GC tolerance : 50 secs, cable pull/network down tolerance : 10secs</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>l1.healthcheck.l2.ping.enabled = true
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>l1.healthcheck.l2.ping.enabled = true
 l1.healthcheck.l2.ping.idletime = 5000
 l1.healthcheck.l2.ping.interval = 1000
 l1.healthcheck.l2.ping.probes = 3
 l1.healthcheck.l2.socketConnect = true
 l1.healthcheck.l2.socketConnectTimeout = 5
 l1.healthcheck.l2.socketConnectCount = 13
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="terracotta-clients">Terracotta Clients</h2>
@@ -285,7 +308,7 @@ l1.healthcheck.l2.socketConnectCount = 13
 
 <p>See also <a href="/documentation/4.1/bigmemorymax/configuration/reference-guide#how-server-settings-affect-client-settings">How Server Settings Can Override Client Settings</a>.</p>
 
-<p>Properties are set in <code class="highlighter-rouge">ehcache.xml</code> except as noted.</p>
+<p>Properties are set in <code class="language-plaintext highlighter-rouge">ehcache.xml</code> except as noted.</p>
 
 <h3 id="general-settings">General Settings</h3>
 <p>The following default settings affect in-memory data. For more information on these settings, see the <a href="/documentation/4.1/bigmemorymax/configuration/configuration">BigMemory Max documentation</a>.</p>
@@ -377,14 +400,6 @@ For bulk-loading mode. The maximum time the bulk-load operation takes to batch p
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -406,24 +421,32 @@ For bulk-loading mode. The maximum time the bulk-load operation takes to batch p
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -431,7 +454,7 @@ For bulk-loading mode. The maximum time the bulk-load operation takes to batch p
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

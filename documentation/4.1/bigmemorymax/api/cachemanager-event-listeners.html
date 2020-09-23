@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -185,15 +188,15 @@
 
 <p>BigMemory Max’s Ehcache implementation includes CacheManager event listeners. These listeners allow implementers to register callback
 methods that will be executed when a CacheManager event occurs. Cache listeners
-implement the <code class="highlighter-rouge">CacheManagerEventListener</code> interface.
+implement the <code class="language-plaintext highlighter-rouge">CacheManagerEventListener</code> interface.
 The events include:</p>
 
 <ul>
   <li>
-    <p>adding a <code class="highlighter-rouge">Cache</code></p>
+    <p>adding a <code class="language-plaintext highlighter-rouge">Cache</code></p>
   </li>
   <li>
-    <p>removing a <code class="highlighter-rouge">Cache</code></p>
+    <p>removing a <code class="language-plaintext highlighter-rouge">Cache</code></p>
   </li>
 </ul>
 
@@ -204,24 +207,29 @@ is doing.</p>
 
 <h3 id="configuration">Configuration</h3>
 
-<p>One <code class="highlighter-rouge">CacheManagerEventListenerFactory</code> and hence one <code class="highlighter-rouge">CacheManagerEventListener</code> can be specified per CacheManager instance.
+<p>One <code class="language-plaintext highlighter-rouge">CacheManagerEventListenerFactory</code> and hence one <code class="language-plaintext highlighter-rouge">CacheManagerEventListener</code> can be specified per CacheManager instance.
 The factory is configured as below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cacheManagerEventListenerFactory class="" properties=""/&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cacheManagerEventListenerFactory class="" properties=""/&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The entry specifies a <code class="highlighter-rouge">CacheManagerEventListenerFactory</code> which will be used to
-create a <code class="highlighter-rouge">CacheManagerEventListener</code>, which is notified when Caches are
+<p>The entry specifies a <code class="language-plaintext highlighter-rouge">CacheManagerEventListenerFactory</code> which will be used to
+create a <code class="language-plaintext highlighter-rouge">CacheManagerEventListener</code>, which is notified when Caches are
 added or removed from the CacheManager.
-The attributes of a <code class="highlighter-rouge">CacheManagerEventListenerFactory</code> are:</p>
+The attributes of a <code class="language-plaintext highlighter-rouge">CacheManagerEventListenerFactory</code> are:</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">class</code> — a fully qualified factory class name.</p>
+    <p><code class="language-plaintext highlighter-rouge">class</code> — a fully qualified factory class name.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">properties</code> — comma-separated properties having meaning only to the factory.</p>
+    <p><code class="language-plaintext highlighter-rouge">properties</code> — comma-separated properties having meaning only to the factory.</p>
   </li>
 </ul>
 
@@ -229,19 +237,22 @@ The attributes of a <code class="highlighter-rouge">CacheManagerEventListenerFac
 the responsibility of the implementer to safely handle the potential
 performance and thread safety issues depending on what their listener
 is doing.
-If no class is specified, or there is no <code class="highlighter-rouge">cacheManagerEventListenerFactory</code> element, no listener is created. There
+If no class is specified, or there is no <code class="language-plaintext highlighter-rouge">cacheManagerEventListenerFactory</code> element, no listener is created. There
 is no default.</p>
 
 <h3 id="implementing-a-cachemanager-event-listener-factory-and-cachemanager-event-listener">Implementing a CacheManager Event Listener Factory and CacheManager Event Listener</h3>
 
-<p><code class="highlighter-rouge">CacheManagerEventListenerFactory</code> is an abstract factory for creating
+<p><code class="language-plaintext highlighter-rouge">CacheManagerEventListenerFactory</code> is an abstract factory for creating
 cacheManager listeners. Implementers should provide their own concrete
 factory extending this abstract factory. It can then be configured in
 ehcache.xml.
 The factory class needs to be a concrete subclass of the abstract
-factory <code class="highlighter-rouge">CacheManagerEventListenerFactory</code>, which is reproduced below:</p>
+factory <code class="language-plaintext highlighter-rouge">CacheManagerEventListenerFactory</code>, which is reproduced below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * An abstract factory for creating {@link CacheManagerEventListener}s. Implementers should
 * provide their own concrete factory extending this factory. It can then be configured in
 * ehcache.xml
@@ -259,12 +270,17 @@ public abstract class CacheManagerEventListenerFactory {
 public abstract CacheManagerEventListener
        createCacheManagerEventListener(Properties properties);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The factory creates a concrete implementation of <code class="highlighter-rouge">CacheManagerEventListener</code>, which is reproduced below:</p>
+<p>The factory creates a concrete implementation of <code class="language-plaintext highlighter-rouge">CacheManagerEventListener</code>, which is reproduced below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * Allows implementers to register callback methods that will be executed when a
 * CacheManager event occurs.
 * The events include:
@@ -313,24 +329,26 @@ void notifyCacheAdded(String cacheName);
 */
 void notifyCacheRemoved(String cacheName);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The implementations need to be placed in the classpath accessible to
-Ehcache. Ehcache uses the ClassLoader returned by <code class="highlighter-rouge">Thread.currentThread().getContextClassLoader()</code>
+Ehcache. Ehcache uses the ClassLoader returned by <code class="language-plaintext highlighter-rouge">Thread.currentThread().getContextClassLoader()</code>
 to load classes.</p>
 
 <h2 id="cache-event-listeners">Cache Event Listeners</h2>
 <p>BigMemory Max’s Ehcache implementation also includes Cache event listeners. Cache listeners allow implementers to register callback methods that
 will be executed when a cache event occurs. Cache listeners
-implement the <code class="highlighter-rouge">CacheEventListener</code> interface.
+implement the <code class="language-plaintext highlighter-rouge">CacheEventListener</code> interface.
 The events include:</p>
 
 <ul>
   <li>an Element has been put</li>
   <li>an Element has been updated. Updated means that an Element exists in the Cache with the same key as the Element being put.</li>
   <li>an Element has been removed</li>
-  <li>an Element expires, either because <code class="highlighter-rouge">timeToLive</code> or <code class="highlighter-rouge">timeToIdle</code> have been reached.</li>
+  <li>an Element expires, either because <code class="language-plaintext highlighter-rouge">timeToLive</code> or <code class="language-plaintext highlighter-rouge">timeToIdle</code> have been reached.</li>
 </ul>
 
 <p>Callbacks to these methods are synchronous and unsynchronized. It is
@@ -340,31 +358,36 @@ is doing.
 Listeners are guaranteed to be notified of events in the order in which
 they occurred.
 Elements can be put or removed from a Cache without notifying listeners
-by using the <code class="highlighter-rouge">putQuiet</code> and <code class="highlighter-rouge">removeQuiet</code> methods.</p>
+by using the <code class="language-plaintext highlighter-rouge">putQuiet</code> and <code class="language-plaintext highlighter-rouge">removeQuiet</code> methods.</p>
 
 <h3 id="configuration-1">Configuration</h3>
 
 <p>Cache event listeners are configured per cache. Each cache can have
 multiple listeners.
 Each listener is configured by adding a
-<code class="highlighter-rouge">cacheEventListenerFactory</code> element as follows:</p>
+<code class="language-plaintext highlighter-rouge">cacheEventListenerFactory</code> element as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ...&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache ...&gt;
   &lt;cacheEventListenerFactory class="" properties="" listenFor=""/&gt;
   ...
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The entry specifies a <code class="highlighter-rouge">CacheEventListenerFactory</code> which is used to
-create a <code class="highlighter-rouge">CacheEventListener</code>, which then receives notifications.
-The attributes of a <code class="highlighter-rouge">CacheEventListenerFactory</code> are:</p>
+<p>The entry specifies a <code class="language-plaintext highlighter-rouge">CacheEventListenerFactory</code> which is used to
+create a <code class="language-plaintext highlighter-rouge">CacheEventListener</code>, which then receives notifications.
+The attributes of a <code class="language-plaintext highlighter-rouge">CacheEventListenerFactory</code> are:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">class</code> — a fully qualified factory class name.</li>
-  <li><code class="highlighter-rouge">properties</code> — optional comma-separated properties having meaning only to the factory.</li>
+  <li><code class="language-plaintext highlighter-rouge">class</code> — a fully qualified factory class name.</li>
+  <li><code class="language-plaintext highlighter-rouge">properties</code> — optional comma-separated properties having meaning only to the factory.</li>
   <li>
-    <p><code class="highlighter-rouge">listenFor</code> — describes which events will be delivered in a clustered environment (defaults to “all”).</p>
+    <p><code class="language-plaintext highlighter-rouge">listenFor</code> — describes which events will be delivered in a clustered environment (defaults to “all”).</p>
 
     <p>These are the possible values:</p>
 
@@ -382,12 +405,15 @@ performance and thread safety issues depending on what their listener
 is doing.</p>
 
 <h3 id="Implementing-a-CacheEventListenerFactory">Implementing a Cache Event Listener Factory and Cache Event Listener</h3>
-<p>A <code class="highlighter-rouge">CacheEventListenerFactory</code> is an abstract factory for creating
+<p>A <code class="language-plaintext highlighter-rouge">CacheEventListenerFactory</code> is an abstract factory for creating
 cache event listeners. Implementers should provide their own concrete
 factory, extending this abstract factory. It can then be configured in ehcache.xml.
-The following example demonstrates how to create an abstract <code class="highlighter-rouge">CacheEventListenerFactory</code>:</p>
+The following example demonstrates how to create an abstract <code class="language-plaintext highlighter-rouge">CacheEventListenerFactory</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * An abstract factory for creating listeners. Implementers should provide their own
 * concrete factory extending this factory. It can then be configured in ehcache.xml
 *
@@ -402,13 +428,18 @@ public abstract class CacheEventListenerFactory {
 */
 public abstract CacheEventListener createCacheEventListener(Properties properties);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The following example demonstrates how to create a concrete implementation of the <code class="highlighter-rouge">CacheEventListener</code>
+<p>The following example demonstrates how to create a concrete implementation of the <code class="language-plaintext highlighter-rouge">CacheEventListener</code>
 interface:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * Allows implementers to register callback methods that will be executed when a cache event
 *  occurs.
 * The events include:
@@ -513,21 +544,23 @@ void dispose();
 */
 public Object clone() throws CloneNotSupportedException;
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Two other methods are also available:</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">void notifyElementEvicted(Ehcache cache, Element element)</code></p>
+    <p><code class="language-plaintext highlighter-rouge">void notifyElementEvicted(Ehcache cache, Element element)</code></p>
 
-    <p>Called immediately after an element is evicted from the cache. Eviction, which happens when a cache entry is deleted from a store, should not be confused with removal, which is a result of calling <code class="highlighter-rouge">Cache.removeElement(Element)</code>.</p>
+    <p>Called immediately after an element is evicted from the cache. Eviction, which happens when a cache entry is deleted from a store, should not be confused with removal, which is a result of calling <code class="language-plaintext highlighter-rouge">Cache.removeElement(Element)</code>.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">void notifyRemoveAll(Ehcache cache)</code></p>
+    <p><code class="language-plaintext highlighter-rouge">void notifyRemoveAll(Ehcache cache)</code></p>
 
-    <p>Called during <code class="highlighter-rouge">Ehcache.removeAll()</code> to indicate that all elements have been removed from the cache in a bulk operation. The usual <code class="highlighter-rouge">notifyElementRemoved(net.sf.ehcache.Ehcache, net.sf.ehcache.Element)</code> is not called. Only one notification is emitted because performance considerations do not allow for serially processing notifications where potentially millions of elements have been bulk deleted.</p>
+    <p>Called during <code class="language-plaintext highlighter-rouge">Ehcache.removeAll()</code> to indicate that all elements have been removed from the cache in a bulk operation. The usual <code class="language-plaintext highlighter-rouge">notifyElementRemoved(net.sf.ehcache.Ehcache, net.sf.ehcache.Element)</code> is not called. Only one notification is emitted because performance considerations do not allow for serially processing notifications where potentially millions of elements have been bulk deleted.</p>
   </li>
 </ul>
 
@@ -538,8 +571,13 @@ of these classes will be done.</p>
 
 <p>To add a listener programmatically, follow this example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cache.getCacheEventNotificationService().registerListener(myListener);
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>cache.getCacheEventNotificationService().registerListener(myListener);
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>
@@ -550,7 +588,10 @@ of these classes will be done.</p>
 
 <p>For example, if listener A detects a put into cache A and in turn puts an element into cache B, then listener B should receive an event (if it is correctly registered to cache B). However, with the following code, listener B would fail to receive the event generated by the put:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// This method is within listener A
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>// This method is within listener A
 public void notifyElementPut(...) {
   ...
   ...
@@ -559,12 +600,17 @@ public void notifyElementPut(...) {
   ...
 
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The following code allows listener B to receive the event:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// This method is within listener A
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>// This method is within listener A
 public void notifyElementPut(...) {
   executorService.execute(new Runnable() {
     public void run()     
@@ -579,7 +625,9 @@ public void notifyElementPut(...) {
   ...
   }
 ...
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
       </article>
@@ -615,14 +663,6 @@ public void notifyElementPut(...) {
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -644,24 +684,32 @@ public void notifyElementPut(...) {
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -669,7 +717,7 @@ public void notifyElementPut(...) {
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -219,13 +222,18 @@
 
 <p>Client creation can block on resolving URL at this point:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TerracottaClient client = new TerracottaClient("myHost:9510");
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>TerracottaClient client = new TerracottaClient("myHost:9510");
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If it is known that resolving “myHost” may take too long or hang, your application can should wrap client instantiation with code that provides a reasonable timeout.</p>
 
-<p>A separate connection issue can occur after the server URL is resolved but while the client is attempting to connect to the server. The timeout for this type of connection can be set using the Terracotta property <code class="highlighter-rouge">l1.socket.connect.timeout</code> (see <a href="/documentation/4.1/terracotta-server-array/high-availability#introduction"> First-Time Client Connection</a>).</p>
+<p>A separate connection issue can occur after the server URL is resolved but while the client is attempting to connect to the server. The timeout for this type of connection can be set using the Terracotta property <code class="language-plaintext highlighter-rouge">l1.socket.connect.timeout</code> (see <a href="/documentation/4.1/terracotta-server-array/high-availability#introduction"> First-Time Client Connection</a>).</p>
 
 <h2 id="multiple-terracotta-clients-in-a-single-jvm">Multiple Terracotta Clients in a Single JVM</h2>
 
@@ -235,15 +243,20 @@
 
 <p>This situation can arise whenever multiple classloaders are involved with multiple copies of the Toolkit JAR.</p>
 
-<p>For example, to run a web application in Tomcat, one copy of the Toolkit JAR may need to be in the application’s <code class="highlighter-rouge">WEB-INF/lib</code> directory while another may need to be in Tomcat’s common <code class="highlighter-rouge">lib</code> directory to support loading of the context-level <valve>. In this case, two Terracotta clients will be running with every Tomcat instance.</valve></p>
+<p>For example, to run a web application in Tomcat, one copy of the Toolkit JAR may need to be in the application’s <code class="language-plaintext highlighter-rouge">WEB-INF/lib</code> directory while another may need to be in Tomcat’s common <code class="language-plaintext highlighter-rouge">lib</code> directory to support loading of the context-level <valve>. In this case, two Terracotta clients will be running with every Tomcat instance.</valve></p>
 
 <h3 id="clients-sharing-a-node-id">Clients Sharing a Node ID</h3>
 
 <p>Clients instantiated using the same constructor (a constructor with matching parameters) in the same JVM will share the same node ID. For example, the following clients will have the same node ID:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TerracottaClient client1 = new TerracottaClient("myHost:9510");
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>TerracottaClient client1 = new TerracottaClient("myHost:9510");
 TerracottaClient client2 = new TerracottaClient("myHost:9511");
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Cluster events generated from client1 and client2 will appear to come from the same node. In addition, cluster topology methods may return ambiguous or useless results.</p>
@@ -283,14 +296,6 @@ TerracottaClient client2 = new TerracottaClient("myHost:9511");
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -312,24 +317,32 @@ TerracottaClient client2 = new TerracottaClient("myHost:9511");
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -337,7 +350,7 @@ TerracottaClient client2 = new TerracottaClient("myHost:9511");
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

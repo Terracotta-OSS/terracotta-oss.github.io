@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -226,11 +229,11 @@
 <p>JMX creates a standard way of instrumenting classes and making them available to a management and monitoring infrastructure. This provides an alternative to the <a href="/documentation/4.1/tms/tms">Terracotta Management Server</a> for custom or third-party tools.</p>
 
 <h2 id="jmx-overview">JMX Overview</h2>
-<p>The <code class="highlighter-rouge">net.sf.ehcache.management</code> package contains MBeans and a <code class="highlighter-rouge">ManagementService</code> for JMX management of BigMemory Max. It is in a separate package so that JMX libraries are only required if you want to use it - there is no leakage of JMX dependencies
+<p>The <code class="language-plaintext highlighter-rouge">net.sf.ehcache.management</code> package contains MBeans and a <code class="language-plaintext highlighter-rouge">ManagementService</code> for JMX management of BigMemory Max. It is in a separate package so that JMX libraries are only required if you want to use it - there is no leakage of JMX dependencies
 into the core Ehcache package.</p>
 
-<p>Use <code class="highlighter-rouge">net.sf.ehcache.management.ManagementService.registerMBeans(...)</code> static method
-to register a selection of MBeans to the MBeanServer provided to the method. If you wish to monitor Ehcache but not use JMX, use the existing public methods on <code class="highlighter-rouge">Cache</code> and <code class="highlighter-rouge">CacheStatistics</code>.</p>
+<p>Use <code class="language-plaintext highlighter-rouge">net.sf.ehcache.management.ManagementService.registerMBeans(...)</code> static method
+to register a selection of MBeans to the MBeanServer provided to the method. If you wish to monitor Ehcache but not use JMX, use the existing public methods on <code class="language-plaintext highlighter-rouge">Cache</code> and <code class="language-plaintext highlighter-rouge">CacheStatistics</code>.</p>
 
 <p>The Management package is illustrated in the follwing image.</p>
 
@@ -253,8 +256,8 @@ traversal to its collection of Cache MBeans. Each Cache MBean likewise allows tr
 its CacheConfiguration MBean and its CacheStatistics MBean.</p>
 
 <h2 id="jmx-remoting">JMX Remoting</h2>
-<p>The Remote API allows connection from a remote JMX Agent to an MBeanServer via an <a id="MBeanServerConnection"></a><code class="highlighter-rouge">MBeanServerConnection</code>.
-Only <code class="highlighter-rouge">Serializable</code> attributes are available remotely. The following Ehcache MBean attributes are available remotely:</p>
+<p>The Remote API allows connection from a remote JMX Agent to an MBeanServer via an <a id="MBeanServerConnection"></a><code class="language-plaintext highlighter-rouge">MBeanServerConnection</code>.
+Only <code class="language-plaintext highlighter-rouge">Serializable</code> attributes are available remotely. The following Ehcache MBean attributes are available remotely:</p>
 
 <ul>
   <li>limited CacheManager attributes</li>
@@ -264,9 +267,9 @@ Only <code class="highlighter-rouge">Serializable</code> attributes are availabl
 </ul>
 
 <p>Most attributes use built-in types. To access all attributes, add ehcache.jar to the remote JMX client’s
-classpath. For example, <code class="highlighter-rouge">jconsole -J-Djava.class.path=ehcache.jar</code>.</p>
+classpath. For example, <code class="language-plaintext highlighter-rouge">jconsole -J-Djava.class.path=ehcache.jar</code>.</p>
 
-<h2 id="objectname-naming-scheme"><code class="highlighter-rouge">ObjectName</code> naming scheme</h2>
+<h2 id="objectname-naming-scheme"><code class="language-plaintext highlighter-rouge">ObjectName</code> naming scheme</h2>
 <ul>
   <li>CacheManager - “net.sf.ehcache:type=CacheManager,name=&lt;CacheManager&gt;”</li>
   <li>Cache - “net.sf.ehcache:type=Cache,CacheManager=&lt;cacheManagerName&gt;,name=&lt;cacheName&gt;”</li>
@@ -276,11 +279,11 @@ classpath. For example, <code class="highlighter-rouge">jconsole -J-Djava.class.
 </ul>
 
 <h2 id="the-management-service">The Management Service</h2>
-<p>The <code class="highlighter-rouge">ManagementService</code> class is the API entry point.
+<p>The <code class="language-plaintext highlighter-rouge">ManagementService</code> class is the API entry point.
 <img src="/images/documentation/ManagementService.png" alt="Ehcache Image" />
-There is only one method, <code class="highlighter-rouge">ManagementService.registerMBeans</code> which is used to initiate JMX registration
+There is only one method, <code class="language-plaintext highlighter-rouge">ManagementService.registerMBeans</code> which is used to initiate JMX registration
 of a CacheManager’s instrumented MBeans.
-The <code class="highlighter-rouge">ManagementService</code> is a <code class="highlighter-rouge">CacheManagerEventListener</code> and
+The <code class="language-plaintext highlighter-rouge">ManagementService</code> is a <code class="language-plaintext highlighter-rouge">CacheManagerEventListener</code> and
 is therefore notified of any new Caches added or disposed and updates the MBeanServer appropriately.
 Initiated MBeans remain registered in the MBeanServer until the CacheManager shuts down, at which time
 the MBeans are deregistered. This ensures correct behavior in application servers where applications are
@@ -325,10 +328,15 @@ public static void registerMBeans(
 <p>This example shows how to register CacheStatistics in the JDK platform MBeanServer, which
 works with the JConsole management agent.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>CacheManager manager = new CacheManager();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>CacheManager manager = new CacheManager();
 MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 ManagementService.registerMBeans(manager, mBeanServer, false, false, false, true);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>CacheStatistics MBeans are then registered.
@@ -337,8 +345,8 @@ ManagementService.registerMBeans(manager, mBeanServer, false, false, false, true
 <h2 id="hibernate-statistics">Hibernate statistics</h2>
 <p>If you are running Terracotta clustered caches as hibernate second-level cache provider, it is possible to access
 the hibernate statistics and Ehcache stats via JMX.
-<code class="highlighter-rouge">EhcacheHibernateMBean</code> is the main interface that exposes all the APIs via JMX. It basically extends
-two interfaces – <code class="highlighter-rouge">EhcacheStats</code> and <code class="highlighter-rouge">HibernateStats</code>. Please look into the specific interface for more
+<code class="language-plaintext highlighter-rouge">EhcacheHibernateMBean</code> is the main interface that exposes all the APIs via JMX. It basically extends
+two interfaces – <code class="language-plaintext highlighter-rouge">EhcacheStats</code> and <code class="language-plaintext highlighter-rouge">HibernateStats</code>. Please look into the specific interface for more
 details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoon/archive/2007/06/extending_the_n_2.html">online tutorial</a>.</p>
 
 <h2 id="performance">Performance</h2>
@@ -356,7 +364,10 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
 
 <p>Use the sample client code below, but adapt the host, port, username, and password variables according to your setup.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	import java.util.HashMap;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>	import java.util.HashMap;
 	import java.util.Map;
 
 	import javax.management.remote.JMXConnector;
@@ -393,17 +404,24 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
 		jmxConnector.close();
 	  }
 	}
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>###Run the Client</p>
 
 <p>After compiling your client, configure the JVM with a truststore containing your Terracotta Server’s certificate. You can simply re-use the one created for the Terracotta Server (refer to <a href="/documentation/4.1/terracotta-server-array/tsa-security">Securing Terracotta Clusters with SSL</a>).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	% java -Djavax.net.ssl.trustStore=/your/path/to/truststore.jks \
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>	% java -Djavax.net.ssl.trustStore=/your/path/to/truststore.jks \
 	  -Djavax.net.ssl.trustStorePassword=your_truststore_password \
 	  Main
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>###About the Credentials</p>
@@ -413,9 +431,12 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
 <p>###Troubleshooting
 ####Password stack trace</p>
 
-<p>The stack trace below indicates that the password you specified in the <code class="highlighter-rouge">javax.net.ssl.trustStorePassword</code> system property is not the same as in the truststore you specified in the <code class="highlighter-rouge">javax.net.ssl.trustStore</code> system property.</p>
+<p>The stack trace below indicates that the password you specified in the <code class="language-plaintext highlighter-rouge">javax.net.ssl.trustStorePassword</code> system property is not the same as in the truststore you specified in the <code class="language-plaintext highlighter-rouge">javax.net.ssl.trustStore</code> system property.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	Exception in thread "main" java.io.IOException: Failed to retrieve RMIServer stub: javax.naming.CommunicationException [Root exception is java.rmi.ConnectIOException: Exception creating connection to: localhost; nested exception is:
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>	Exception in thread "main" java.io.IOException: Failed to retrieve RMIServer stub: javax.naming.CommunicationException [Root exception is java.rmi.ConnectIOException: Exception creating connection to: localhost; nested exception is:
 		java.net.SocketException: java.security.NoSuchAlgorithmException: Error constructing implementation (algorithm: Default, provider: SunJSSE, class: com.sun.net.ssl.internal.ssl.DefaultSSLContextImpl)]
 		at javax.management.remote.rmi.RMIConnector.connect(RMIConnector.java:338)
 		at javax.management.remote.JMXConnectorFactory.connect(JMXConnectorFactory.java:248)
@@ -477,14 +498,19 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
 	Caused by: java.security.UnrecoverableKeyException: Password verification failed
 		at sun.security.provider.JavaKeyStore.engineLoad(JavaKeyStore.java:769)
 		... 37 more
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>####Truststore stack trace</p>
 
-<p>The stack trace below indicates that the truststore you specified in the <code class="highlighter-rouge">javax.net.ssl.trustStore</code> system property does not exist or cannot be read.</p>
+<p>The stack trace below indicates that the truststore you specified in the <code class="language-plaintext highlighter-rouge">javax.net.ssl.trustStore</code> system property does not exist or cannot be read.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	Exception in thread "main" java.io.IOException: Failed to retrieve RMIServer stub: javax.naming.CommunicationException [Root exception is java.rmi.ConnectIOException: error during JRMP connection establishment; nested exception is:
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>	Exception in thread "main" java.io.IOException: Failed to retrieve RMIServer stub: javax.naming.CommunicationException [Root exception is java.rmi.ConnectIOException: error during JRMP connection establishment; nested exception is:
 		javax.net.ssl.SSLException: java.lang.RuntimeException: Unexpected error: java.security.InvalidAlgorithmParameterException: the trustAnchors parameter must be non-empty]
 		at javax.management.remote.rmi.RMIConnector.connect(RMIConnector.java:338)
 		at javax.management.remote.JMXConnectorFactory.connect(JMXConnectorFactory.java:248)
@@ -544,7 +570,9 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
 		at java.security.cert.PKIXBuilderParameters.&lt;init&gt;(PKIXBuilderParameters.java:87)
 		at sun.security.validator.PKIXValidator.&lt;init&gt;(PKIXValidator.java:55)
 		... 32 more
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>####Conditional stack trace</p>
@@ -557,7 +585,7 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
   <li>
     <p>The credentials field is not an Object array containing the username as a String in the array’s first slot and the password as a char[] in the array’s second slot.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  Exception in thread "main" java.lang.SecurityException: Username and/or password is not valid!
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Exception in thread "main" java.lang.SecurityException: Username and/or password is not valid!
       at com.tc.management.EnterpriseL2Management$1.authenticate(EnterpriseL2Management.java:202)
       at javax.management.remote.rmi.RMIServerImpl.doNewClient(RMIServerImpl.java:213)
       at javax.management.remote.rmi.RMIServerImpl.newClient(RMIServerImpl.java:180)
@@ -588,8 +616,7 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
       at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
       at java.lang.reflect.Method.invoke(Method.java:597)
       at com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -626,14 +653,6 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -655,24 +674,32 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -680,7 +707,7 @@ details. You may also refer to this <a href="http://weblogs.java.net/blog/maxpoo
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

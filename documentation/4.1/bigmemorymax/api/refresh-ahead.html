@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -200,7 +203,10 @@
 <h3 id="configuring-inline-refresh">Configuring Inline Refresh</h3>
 <p>Inline refresh ahead is configured per cache using a <a href="http://terracotta.org/documentation/bigmemorymax/api/cache-decorators">cache decorator</a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache ...
 
   &lt;cacheLoaderFactory class="com.company.my.ConcreteCacheLoaderFactory"
       properties="some_property=1, some_other_property=2" /&gt;
@@ -215,7 +221,9 @@
   &lt;/cacheDecorator&gt;
   ...
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The cache-decorator class is required for implementing the refresh-ahead mechanism. Note that inline-refresh configuration properties are optional unless marked REQUIRED. The following table describes these properties.</p>
@@ -232,7 +240,7 @@
 
 <h3 id="how-timetorefreshseconds-works-with-expiration">How timeToRefreshSeconds Works With Expiration</h3>
 
-<p>The <code class="highlighter-rouge">timeToRefreshSeconds</code> value is at least how old an entry must be before a get operation triggers an automatic refresh. The refresh is a reload operation that resets an entry’s time-to-live (TTL) countdown. A Time-to-idle (TTI) setting is reset upon access and so has no effect if it is greater than the refresh time limit (TTR), unless no access occurs.</p>
+<p>The <code class="language-plaintext highlighter-rouge">timeToRefreshSeconds</code> value is at least how old an entry must be before a get operation triggers an automatic refresh. The refresh is a reload operation that resets an entry’s time-to-live (TTL) countdown. A Time-to-idle (TTI) setting is reset upon access and so has no effect if it is greater than the refresh time limit (TTR), unless no access occurs.</p>
 
 <p>For example, for a cache with a TTR of 10 seconds, a TTL of 30 seconds, and a TTI of 0 (infinite idle time), any access to an entry that occurs between 10 and 30 seconds triggers an automatic refresh of that entry. This assumes that the entry is reloaded ahead of the TTL limit so that the TTL timer is reset.</p>
 
@@ -245,7 +253,10 @@
 <h3 id="configuring-scheduled-refresh">Configuring Scheduled Refresh</h3>
 <p><em>Scheduled</em> refresh ahead is configured using a <a href="http://terracotta.org/documentation/bigmemorymax/api/cache-extensions">cache extension</a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;cache ...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code> &lt;cache ...
 
    &lt;cacheLoaderFactory class="com.company.my.ConcreteCacheLoaderFactory"
      properties="some_property=1, some_other_property=2" /&gt;
@@ -258,14 +269,16 @@
      propertySeparator=";"/&gt;
 ...
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Because a cron expression can contain commas (“,”), which is the default delimiter for properties, the <code class="highlighter-rouge">propertySeparator</code> attribute can be used to specify a different delimiter.</p>
+<p>Because a cron expression can contain commas (“,”), which is the default delimiter for properties, the <code class="language-plaintext highlighter-rouge">propertySeparator</code> attribute can be used to specify a different delimiter.</p>
 
 <p>The cache-extension class is required for implementing the refresh-ahead mechanism. This cache extension is responsible for instantiating a dedicated Quartz scheduler with its own <a href="http://quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-09">RamJobStore</a> for each non-clustered cache configured for scheduled refresh ahead.</p>
 
-<p>Note that scheduled-refresh configuration properties are optional unless marked REQUIRED. The following table describes these properties. Classes are found in <code class="highlighter-rouge">net.sf.ehcache.constructs.scheduledrefresh</code>.</p>
+<p>Note that scheduled-refresh configuration properties are optional unless marked REQUIRED. The following table describes these properties. Classes are found in <code class="language-plaintext highlighter-rouge">net.sf.ehcache.constructs.scheduledrefresh</code>.</p>
 
 <table>
   <thead>
@@ -288,7 +301,7 @@
     </tr>
     <tr>
       <td>keyGenerator</td>
-      <td>If null, <code class="highlighter-rouge">SimpleScheduledRefreshKeyGenerator</code> is used to enumerate all keys in the cache. Or, to filter the keys to be refreshed, provide a class that implements the <code class="highlighter-rouge">ScheduledRefreshKeyGenerator</code> interface, overring its <code class="highlighter-rouge">generateKeys()</code> method.</td>
+      <td>If null, <code class="language-plaintext highlighter-rouge">SimpleScheduledRefreshKeyGenerator</code> is used to enumerate all keys in the cache. Or, to filter the keys to be refreshed, provide a class that implements the <code class="language-plaintext highlighter-rouge">ScheduledRefreshKeyGenerator</code> interface, overring its <code class="language-plaintext highlighter-rouge">generateKeys()</code> method.</td>
       <td>Null</td>
     </tr>
     <tr>
@@ -313,12 +326,12 @@
     </tr>
     <tr>
       <td>jobStoreFactory</td>
-      <td>By default, a RAMJobStore is used by the Quartz instance. To define a custom job store, implement the <code class="highlighter-rouge">ScheduledRefreshJobStorePropertiesFactory</code> interface.</td>
+      <td>By default, a RAMJobStore is used by the Quartz instance. To define a custom job store, implement the <code class="language-plaintext highlighter-rouge">ScheduledRefreshJobStorePropertiesFactory</code> interface.</td>
       <td><a href="#ScheduledRefreshRAMJobStoreFactory">See below.</a></td>
     </tr>
     <tr>
       <td>tcConfigUrl</td>
-      <td>The URL to a Terracotta server in the form &lt;server-address&gt;:&lt;tsa-port&gt;, same as the Quartz property <code class="highlighter-rouge">org.quartz.jobStore.tcConfigUrl</code>. Setting this allows the Quartz instances supporting scheduled refresh to run distributed in a Terracotta cluster.</td>
+      <td>The URL to a Terracotta server in the form &lt;server-address&gt;:&lt;tsa-port&gt;, same as the Quartz property <code class="language-plaintext highlighter-rouge">org.quartz.jobStore.tcConfigUrl</code>. Setting this allows the Quartz instances supporting scheduled refresh to run distributed in a Terracotta cluster.</td>
       <td>N/A</td>
     </tr>
     <tr>
@@ -330,15 +343,18 @@
 </table>
 
 <p><a id="ScheduledRefreshRAMJobStoreFactory"></a>
-The default jobStoreFactory is <code class="highlighter-rouge">ScheduledRefreshRAMJobStoreFactory</code>. However, if the property <code class="highlighter-rouge">tcConfigUrl</code> is specified, the jobStoreFactory used is <code class="highlighter-rouge">ScheduledRefreshTerracottaJobStoreFactory</code>.</p>
+The default jobStoreFactory is <code class="language-plaintext highlighter-rouge">ScheduledRefreshRAMJobStoreFactory</code>. However, if the property <code class="language-plaintext highlighter-rouge">tcConfigUrl</code> is specified, the jobStoreFactory used is <code class="language-plaintext highlighter-rouge">ScheduledRefreshTerracottaJobStoreFactory</code>.</p>
 
 <p>
    <a id="cacheloader"></a>
 </p>
 <h2 id="implementing-the-cacheloader">Implementing the CacheLoader</h2>
-<p>Implementing CacheLoaderFactory through the BigMemory Max API is required to effect reloading of entries for refresh-ahead operations. In configuration, specify the concrete class that extends <code class="highlighter-rouge">net.sf.ehcache.loader.CacheLoaderFactory</code> and call <code class="highlighter-rouge">createCacheLoader(myCache, properties)</code> to create the cache’s cacheloader. For example, if the configured concrete class is the following:</p>
+<p>Implementing CacheLoaderFactory through the BigMemory Max API is required to effect reloading of entries for refresh-ahead operations. In configuration, specify the concrete class that extends <code class="language-plaintext highlighter-rouge">net.sf.ehcache.loader.CacheLoaderFactory</code> and call <code class="language-plaintext highlighter-rouge">createCacheLoader(myCache, properties)</code> to create the cache’s cacheloader. For example, if the configured concrete class is the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache" ...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="myCache" ...
 
   &lt;cacheLoaderFactory class="com.company.my.ConcreteCacheLoaderFactory"
       Properties="some_property=1, some_other_property=2" /&gt;
@@ -349,17 +365,24 @@ The default jobStoreFactory is <code class="highlighter-rouge">ScheduledRefreshR
 
   ...
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>then it can be used programmatically:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>CacheLoader cacheLoader = ConcreteCacheLoaderFactory.createCacheLoader(myCache, properties);
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>CacheLoader cacheLoader = ConcreteCacheLoaderFactory.createCacheLoader(myCache, properties);
 // Custom properties can be passed to the implemented CacheLoader.
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p><code class="highlighter-rouge">cacheLoader</code> must implement the <code class="highlighter-rouge">CacheLoader.loadAll()</code> method to load the refreshed entries.</p>
+<p><code class="language-plaintext highlighter-rouge">cacheLoader</code> must implement the <code class="language-plaintext highlighter-rouge">CacheLoader.loadAll()</code> method to load the refreshed entries.</p>
 
       </article>
     </div>
@@ -394,14 +417,6 @@ The default jobStoreFactory is <code class="highlighter-rouge">ScheduledRefreshR
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -423,24 +438,32 @@ The default jobStoreFactory is <code class="highlighter-rouge">ScheduledRefreshR
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -448,7 +471,7 @@ The default jobStoreFactory is <code class="highlighter-rouge">ScheduledRefreshR
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

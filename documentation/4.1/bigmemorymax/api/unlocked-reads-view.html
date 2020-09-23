@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -148,23 +151,33 @@
 
 <p>In cases where there is tolerance for getting potentially stale data, an unlocked (inconsistent) reads view can be created for Cache types using the UnlockedReadsView decorator. UnlockedReadsView requires that the underlying cache have Terracotta clustering and use the strong consistency mode. For example, the following cache can be decorated with UnlockedReadsView:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="myCache"
      maxElementsInMemory="500"
      eternal="false"&gt;
    &lt;persistence strategy="distributed"/&gt;
    &lt;terracotta clustered="true" consistency="strong" /&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>You can create an unlocked view of myCache programmatically:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Cache cache = cacheManager.getEhcache("myCache");
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Cache cache = cacheManager.getEhcache("myCache");
 UnlockedReadsView unlockedReadsView = new UnlockedReadsView(cache, "myUnlockedCache");
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The following table lists the API methods available with the decorator <code class="highlighter-rouge">net.sf.ehcache.constructs.unlockedreadsview.UnlockedReadsView</code>.</p>
+<p>The following table lists the API methods available with the decorator <code class="language-plaintext highlighter-rouge">net.sf.ehcache.constructs.unlockedreadsview.UnlockedReadsView</code>.</p>
 
 <table>
 <tr>
@@ -205,12 +218,17 @@ Returns the data under the given key without updating cache statistics. Returns 
 
 <p>By default, caches have the following attributes set as shown:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ... copyOnRead="true" ... &gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache ... copyOnRead="true" ... &gt;
 ...
   &lt;terracotta ... consistency="strong"  ... /&gt;
 ...
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Default settings are designed to make distributed caches more efficient and consistent in most use cases.</p>
@@ -248,14 +266,6 @@ Returns the data under the given key without updating cache statistics. Returns 
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -277,24 +287,32 @@ Returns the data under the given key without updating cache statistics. Returns 
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -302,7 +320,7 @@ Returns the data under the given key without updating cache statistics. Returns 
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

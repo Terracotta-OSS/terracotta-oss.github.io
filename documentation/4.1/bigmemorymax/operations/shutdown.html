@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -197,19 +200,19 @@
 </table>
 
 <h2 id="introduction">Introduction</h2>
-<p>BigMemory is shut down through the Ehcache API. Note that Hibernate automatically shuts down its Ehcache <code class="highlighter-rouge">CacheManager</code>.</p>
+<p>BigMemory is shut down through the Ehcache API. Note that Hibernate automatically shuts down its Ehcache <code class="language-plaintext highlighter-rouge">CacheManager</code>.</p>
 
 <p>The recommended way to shutdown the Ehcache is:</p>
 
 <ul>
-  <li>to call <code class="highlighter-rouge">CacheManager.shutdown()</code></li>
-  <li>in a web app, register the Ehcache <code class="highlighter-rouge">ShutdownListener</code></li>
+  <li>to call <code class="language-plaintext highlighter-rouge">CacheManager.shutdown()</code></li>
+  <li>in a web app, register the Ehcache <code class="language-plaintext highlighter-rouge">ShutdownListener</code></li>
 </ul>
 
-<p>Note that when the CacheManager is shut down, existing cache data is removed locally but may still remain in the TSA (with distributed caches) or disk (if restartable). This is the same as occurs when only the cache is removed (<code class="highlighter-rouge">Cache.dispose()</code> or <code class="highlighter-rouge">CacheManager.removeCache()</code>). To ensure that unwanted data is not persisted, call <code class="highlighter-rouge">Cache.removeAll()</code> in all caches whose data is no longer wanted.</p>
+<p>Note that when the CacheManager is shut down, existing cache data is removed locally but may still remain in the TSA (with distributed caches) or disk (if restartable). This is the same as occurs when only the cache is removed (<code class="language-plaintext highlighter-rouge">Cache.dispose()</code> or <code class="language-plaintext highlighter-rouge">CacheManager.removeCache()</code>). To ensure that unwanted data is not persisted, call <code class="language-plaintext highlighter-rouge">Cache.removeAll()</code> in all caches whose data is no longer wanted.</p>
 
 <h2 id="explicitly-removing-data">Explicitly Removing Data</h2>
-<p>Specific entries can be removed from a cache using <code class="highlighter-rouge">Cache.remove()</code>. To empty the cache, <code class="highlighter-rouge">Cache.removeAll()</code>. If the cache itself is removed (<code class="highlighter-rouge">Cache.dispose()</code> or <code class="highlighter-rouge">CacheManager.removeCache()</code>), then any data still remaining in the cache is also removed locally. However, that remaining data is <em>not</em> removed from the TSA or disk (if restartable).</p>
+<p>Specific entries can be removed from a cache using <code class="language-plaintext highlighter-rouge">Cache.remove()</code>. To empty the cache, <code class="language-plaintext highlighter-rouge">Cache.removeAll()</code>. If the cache itself is removed (<code class="language-plaintext highlighter-rouge">Cache.dispose()</code> or <code class="language-plaintext highlighter-rouge">CacheManager.removeCache()</code>), then any data still remaining in the cache is also removed locally. However, that remaining data is <em>not</em> removed from the TSA or disk (if restartable).</p>
 
 <p>Though not recommended, Ehcache also lets you register a JVM shutdown hook.</p>
 
@@ -218,15 +221,20 @@
 To receive notification events, this class must be configured in the deployment
 descriptor for the web application. To do so, add the following to web.xml in your web application:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;listener&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;listener&gt;
   &lt;listener-class&gt;net.sf.ehcache.constructs.web.ShutdownListener&lt;/listener-class&gt;
 &lt;/listener&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="the-shutdown-hook">The Shutdown Hook</h2>
 <p>The Ehcache CacheManager can optionally register a shutdown hook.
-To do so, set the system property <code class="highlighter-rouge">net.sf.ehcache.enableShutdownHook=true</code>.
+To do so, set the system property <code class="language-plaintext highlighter-rouge">net.sf.ehcache.enableShutdownHook=true</code>.
 This will shut down the CacheManager when it detects the Virtual Machine shutting down and
 it is not already shut down.</p>
 
@@ -252,8 +260,8 @@ The sequence of events is:</p>
 <p>The shutdown hook runs when:</p>
 
 <ul>
-  <li>A program exists normally. For example,  <code class="highlighter-rouge">System.exit()</code> is called, or the last non-daemon thread exits.</li>
-  <li>the Virtual Machine is terminated, e.g. CTRL-C. This corresponds to <code class="highlighter-rouge">kill -SIGTERM pid</code> or <code class="highlighter-rouge">kill -15 pid</code> on Unix systems.</li>
+  <li>A program exists normally. For example,  <code class="language-plaintext highlighter-rouge">System.exit()</code> is called, or the last non-daemon thread exits.</li>
+  <li>the Virtual Machine is terminated, e.g. CTRL-C. This corresponds to <code class="language-plaintext highlighter-rouge">kill -SIGTERM pid</code> or <code class="language-plaintext highlighter-rouge">kill -15 pid</code> on Unix systems.</li>
 </ul>
 
 <p>The shutdown hook will not run when:</p>
@@ -261,8 +269,8 @@ The sequence of events is:</p>
 <ul>
   <li>the Virtual Machine aborts.</li>
   <li>A SIGKILL signal is sent to the Virtual Machine process on Unix
-systems, e.g. <code class="highlighter-rouge">kill -SIGKILL pid</code> or <code class="highlighter-rouge">kill -9 pid</code>.</li>
-  <li>A <code class="highlighter-rouge">TerminateProcess</code> call is sent to the process on Windows systems.</li>
+systems, e.g. <code class="language-plaintext highlighter-rouge">kill -SIGKILL pid</code> or <code class="language-plaintext highlighter-rouge">kill -9 pid</code>.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">TerminateProcess</code> call is sent to the process on Windows systems.</li>
 </ul>
 
 <h2 id="dirty-shutdown">Dirty Shutdown</h2>
@@ -301,14 +309,6 @@ systems, e.g. <code class="highlighter-rouge">kill -SIGKILL pid</code> or <code 
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -330,24 +330,32 @@ systems, e.g. <code class="highlighter-rouge">kill -SIGKILL pid</code> or <code 
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -355,7 +363,7 @@ systems, e.g. <code class="highlighter-rouge">kill -SIGKILL pid</code> or <code 
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

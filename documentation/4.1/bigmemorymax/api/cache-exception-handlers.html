@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -196,8 +199,8 @@
 using a dynamic proxy, may be configured so that a CacheExceptionHandler can be configured to
 intercept Exceptions. Errors are not intercepted.</p>
 
-<p>Caches with ExceptionHandling configured are of type <code class="highlighter-rouge">Ehcache</code>. To get the exception handling behavior they must
-be referenced using <code class="highlighter-rouge">CacheManager.getEhcache()</code>, not <code class="highlighter-rouge">CacheManager.getCache()</code>, which returns the underlying undecorated cache.</p>
+<p>Caches with ExceptionHandling configured are of type <code class="language-plaintext highlighter-rouge">Ehcache</code>. To get the exception handling behavior they must
+be referenced using <code class="language-plaintext highlighter-rouge">CacheManager.getEhcache()</code>, not <code class="language-plaintext highlighter-rouge">CacheManager.getCache()</code>, which returns the underlying undecorated cache.</p>
 
 <p>CacheExceptionHandlers may be set either declaratively in the ehcache.xml configuration file, or programmatically.</p>
 
@@ -205,26 +208,34 @@ be referenced using <code class="highlighter-rouge">CacheManager.getEhcache()</c
 
 <p>Cache event listeners are configured per cache. Each cache can have
 at most one exception handler.
-An exception handler is configured by adding a <code class="highlighter-rouge">cacheExceptionHandlerFactory</code> element as shown in the following example:</p>
+An exception handler is configured by adding a <code class="language-plaintext highlighter-rouge">cacheExceptionHandlerFactory</code> element as shown in the following example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ...&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache ...&gt;
  &lt;cacheExceptionHandlerFactory
    class="net.sf.ehcache.exceptionhandler.CountingExceptionHandlerFactory"
    properties="logLevel=FINE"/&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="implementing-a-cache-exception-handler-factory-and-cache-exception-handler">Implementing a Cache Exception Handler Factory and Cache Exception Handler</h2>
 
-<p>A <code class="highlighter-rouge">CacheExceptionHandlerFactory</code> is an abstract factory for creating
+<p>A <code class="language-plaintext highlighter-rouge">CacheExceptionHandlerFactory</code> is an abstract factory for creating
 cache exception handlers. Implementers should provide their own concrete
 factory, extending this abstract factory. It can then be configured in
 ehcache.xml.
 The factory class needs to be a concrete subclass of the abstract
-factory class <code class="highlighter-rouge">CacheExceptionHandlerFactory</code>, which is reproduced below:</p>
+factory class <code class="language-plaintext highlighter-rouge">CacheExceptionHandlerFactory</code>, which is reproduced below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * An abstract factory for creating &lt;code&gt;CacheExceptionHandler&lt;/code&gt;s at configuration
 * time, in ehcache.xml.
 * &lt;p/&gt;
@@ -241,13 +252,18 @@ public abstract class CacheExceptionHandlerFactory {
 */
 public abstract CacheExceptionHandler createExceptionHandler(Properties properties);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The factory creates a concrete implementation of the <code class="highlighter-rouge">CacheExceptionHandler</code>
+<p>The factory creates a concrete implementation of the <code class="language-plaintext highlighter-rouge">CacheExceptionHandler</code>
 interface, which is reproduced below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * A handler which may be registered with an Ehcache, to handle exception on Cache operations.
 *
 * Handlers may be registered at configuration time in ehcache.xml, using a
@@ -284,7 +300,9 @@ public interface CacheExceptionHandler {
 */
 void onException(Ehcache ehcache, Object key, Exception exception);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The implementations need to be placed in the classpath accessible to Ehcache.
@@ -295,13 +313,18 @@ of these classes will be done.</p>
 <p>The following example shows how to add exception handling to a cache, and then adding the
 cache back into cache manager so that all clients obtain the cache handling decoration.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>CacheManager cacheManager = ...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>CacheManager cacheManager = ...
 Ehcache cache = cacheManger.getCache("exampleCache");
 ExceptionHandler handler = new ExampleExceptionHandler(...);
 cache.setCacheLoader(handler);
 Ehcache proxiedCache = ExceptionHandlingDynamicCacheProxy.createProxy(cache);
 cacheManager.replaceCacheWithDecoratedCache(cache, proxiedCache);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
       </article>
@@ -337,14 +360,6 @@ cacheManager.replaceCacheWithDecoratedCache(cache, proxiedCache);
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -366,24 +381,32 @@ cacheManager.replaceCacheWithDecoratedCache(cache, proxiedCache);
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -391,7 +414,7 @@ cacheManager.replaceCacheWithDecoratedCache(cache, proxiedCache);
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

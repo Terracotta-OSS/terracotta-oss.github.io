@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -197,9 +200,9 @@ to create Ehcache decorators that are backed by a Cache instance, implement Ehca
 
 <p>The Decorator pattern is one of the the well known Gang of Four patterns.</p>
 
-<p>Decorated caches are accessed from the CacheManager using <code class="highlighter-rouge">CacheManager.getEhcache(String name)</code>.
-Note that, for backward compatibility, <code class="highlighter-rouge">CacheManager.getCache(String name)</code> has been retained. However only
-<code class="highlighter-rouge">CacheManager.getEhcache(String name)</code> returns the decorated cache.</p>
+<p>Decorated caches are accessed from the CacheManager using <code class="language-plaintext highlighter-rouge">CacheManager.getEhcache(String name)</code>.
+Note that, for backward compatibility, <code class="language-plaintext highlighter-rouge">CacheManager.getCache(String name)</code> has been retained. However only
+<code class="language-plaintext highlighter-rouge">CacheManager.getEhcache(String name)</code> returns the decorated cache.</p>
 
 <h2 id="creating-a-decorator">Creating a Decorator</h2>
 
@@ -220,7 +223,7 @@ BlockingCache newBlockingCache = new BlockingCache(cache);
 <p>It accepts the name of a concrete class that extends net.sf.ehcache.constructs.CacheDecoratorFactory</p>
 
 <p>The properties will be parsed according to the delimiter (default is comma “,”) and passed to the concrete factory’s
-<code class="highlighter-rouge">createDecoratedEhcache(Ehcache cache, Properties properties)</code> method along with the reference to the owning cache.</p>
+<code class="language-plaintext highlighter-rouge">createDecoratedEhcache(Ehcache cache, Properties properties)</code> method along with the reference to the owning cache.</p>
 
 <p>It is configured as per the following example:</p>
 
@@ -230,15 +233,15 @@ BlockingCache newBlockingCache = new BlockingCache(cache);
 		properties="property1=36 ..." /&gt;
 </pre>
 
-<p>Note that decorators can be configured against the <code class="highlighter-rouge">defaultCache</code>. This is very useful for frameworks
- like Hibernate that add caches based on the <code class="highlighter-rouge">defaultCache</code>.</p>
+<p>Note that decorators can be configured against the <code class="language-plaintext highlighter-rouge">defaultCache</code>. This is very useful for frameworks
+ like Hibernate that add caches based on the <code class="language-plaintext highlighter-rouge">defaultCache</code>.</p>
 
 <h2 id="adding-decorated-caches-to-the-cachemanager">Adding decorated caches to the CacheManager</h2>
 
 <p>Having created a decorator programmatically it is generally useful to put it in a place where multiple threads may access it.
-Note that decorators created via configuration in ehcache.xml have already been added to the <code class="highlighter-rouge">CacheManager</code>.</p>
+Note that decorators created via configuration in ehcache.xml have already been added to the <code class="language-plaintext highlighter-rouge">CacheManager</code>.</p>
 
-<h3 id="using-cachemanagerreplacecachewithdecoratedcache">Using <code class="highlighter-rouge">CacheManager.replaceCacheWithDecoratedCache()</code></h3>
+<h3 id="using-cachemanagerreplacecachewithdecoratedcache">Using <code class="language-plaintext highlighter-rouge">CacheManager.replaceCacheWithDecoratedCache()</code></h3>
 
 <p>A built-in way is to replace the Cache in CacheManager with the decorated one. This is achieved as in the following
 example:</p>
@@ -247,7 +250,7 @@ example:</p>
 cacheManager.replaceCacheWithDecoratedCache(cache, newBlockingCache);
 </pre>
 
-<p>The <code class="highlighter-rouge">CacheManager</code> <code class="highlighter-rouge"><span class="p">{</span><span class="err">replaceCacheWithDecoratedCache</span><span class="p">}</span></code> method requires that the decorated cache be built from
+<p>The <code class="language-plaintext highlighter-rouge">CacheManager</code> <code class="language-plaintext highlighter-rouge">{replaceCacheWithDecoratedCache}</code> method requires that the decorated cache be built from
  the underlying cache from the same name.</p>
 
 <p>Note that any overwridden Ehcache methods will take on new behaviours without casting, as per the normal rules
@@ -257,7 +260,7 @@ cacheManager.replaceCacheWithDecoratedCache(cache, newBlockingCache);
 
 <p>A word of caution. This method should be called in an appropriately synchronized init style method before multiple threads
 attempt to use it. All threads must be referencing the same decorated cache. An example of a suitable init method is
-found in <code class="highlighter-rouge">CachingFilter</code>:</p>
+found in <code class="language-plaintext highlighter-rouge">CachingFilter</code>:</p>
 
 <pre>
 /**
@@ -294,12 +297,12 @@ Ehcache blockingCache = singletonManager.getEhcache("sampleCache1");
 
 <p>The returned cache will exhibit the decorations.</p>
 
-<h3 id="using-cachemanageradddecoratedcache">Using <code class="highlighter-rouge">CacheManager.addDecoratedCache()</code></h3>
+<h3 id="using-cachemanageradddecoratedcache">Using <code class="language-plaintext highlighter-rouge">CacheManager.addDecoratedCache()</code></h3>
 
 <p>Sometimes you want to add a decorated cache but retain access to the underlying cache.</p>
 
-<p>The way to do this is to create a decorated cache and then call <code class="highlighter-rouge">cache.setName(new_name)</code> and then add it to <code class="highlighter-rouge">CacheManager</code>
-with <code class="highlighter-rouge">CacheManager.addDecoratedCache()</code>.</p>
+<p>The way to do this is to create a decorated cache and then call <code class="language-plaintext highlighter-rouge">cache.setName(new_name)</code> and then add it to <code class="language-plaintext highlighter-rouge">CacheManager</code>
+with <code class="language-plaintext highlighter-rouge">CacheManager.addDecoratedCache()</code>.</p>
 
 <pre>
 /**
@@ -339,7 +342,7 @@ public void addDecoratedCache(Ehcache decoratedCache) throws ObjectExistsExcepti
 <p>It allows concurrent read access to elements already in the cache. If the element is null, other
  reads will block until an element with the same key is put into the cache.
  This is useful for constructing read-through or self-populating caches.
- BlockingCache is used by <code class="highlighter-rouge">CachingFilter</code>.</p>
+ BlockingCache is used by <code class="language-plaintext highlighter-rouge">CachingFilter</code>.</p>
 
 <h3 id="SelfPopulatingCache">SelfPopulatingCache</h3>
 
@@ -391,14 +394,6 @@ public void addDecoratedCache(Ehcache decoratedCache) throws ObjectExistsExcepti
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -420,24 +415,32 @@ public void addDecoratedCache(Ehcache decoratedCache) throws ObjectExistsExcepti
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -445,7 +448,7 @@ public void addDecoratedCache(Ehcache decoratedCache) throws ObjectExistsExcepti
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -286,7 +289,7 @@ CacheWriter. Possible examples are:</p>
   <li>
     <p>Working with versioning in the cache elements.</p>
 
-    <p>You may have to explicitly version elements. Auto-versioning is off by default and is effective only for unclustered MemoryStore caches. Distributed caches or caches that use off-heap or disk stores cannot use auto-versioning. To enable auto-versioning, set the system property <code class="highlighter-rouge">net.sf.ehcache.element.version.auto</code> (it is false by default). Note that if this property is turned on for one of the ineligible caches, auto-versioning will silently fail.</p>
+    <p>You may have to explicitly version elements. Auto-versioning is off by default and is effective only for unclustered MemoryStore caches. Distributed caches or caches that use off-heap or disk stores cannot use auto-versioning. To enable auto-versioning, set the system property <code class="language-plaintext highlighter-rouge">net.sf.ehcache.element.version.auto</code> (it is false by default). Note that if this property is turned on for one of the ineligible caches, auto-versioning will silently fail.</p>
   </li>
   <li>
     <p>Verifications with the underlying resource to check if the scheduled write-behind operation is still relevant.</p>
@@ -304,10 +307,10 @@ The following aspects of read-through with write-behind should be considered:</p
 
 <h3 id="lazy-loading">Lazy Loading</h3>
 <p>The entire data set does not need to be loaded into the cache on startup. A read-through cache
-uses a <code class="highlighter-rouge">CacheLoader</code> that loads data into the cache on demand. In this way the cache can be populated lazily.</p>
+uses a <code class="language-plaintext highlighter-rouge">CacheLoader</code> that loads data into the cache on demand. In this way the cache can be populated lazily.</p>
 
 <h3 id="caching-of-a-partial-dataset">Caching of a Partial Dataset</h3>
-<p>If the entire dataset cannot fit in the cache, then some reads will miss the cache and fall through to the <code class="highlighter-rouge">CacheLoader</code> which will
+<p>If the entire dataset cannot fit in the cache, then some reads will miss the cache and fall through to the <code class="language-plaintext highlighter-rouge">CacheLoader</code> which will
   in turn hit the database. If a write has occurred but has not yet hit the database due to write-behind, then the database will be inconsistent.
 The simplest solution is to ensure that the entire dataset is in the cache. This then places some implications on cache configuration
   in the areas of expiry and eviction.</p>
@@ -316,8 +319,8 @@ The simplest solution is to ensure that the entire dataset is in the cache. This
 <p>Eviction or flushing of elements, occurs when the maximum elements for the cache have been exceeded. Be sure to size the cache appropriately to avoid eviction or flushing. See <a href="/documentation/4.1/configuration/cache-size">How to Size Caches</a> for more information.</p>
 
 <h4 id="expiry">Expiry</h4>
-<p>Even if all of the dataset can fit in the cache, it could be evicted if Elements expire. Accordingly, both <code class="highlighter-rouge">timeToLive</code> and
-  <code class="highlighter-rouge">timeToIdle</code> should be set to eternal (“0”) to prevent this from happening.</p>
+<p>Even if all of the dataset can fit in the cache, it could be evicted if Elements expire. Accordingly, both <code class="language-plaintext highlighter-rouge">timeToLive</code> and
+  <code class="language-plaintext highlighter-rouge">timeToIdle</code> should be set to eternal (“0”) to prevent this from happening.</p>
 
 <h2 id="introductory-video">Introductory Video</h2>
 <p>Alex Snaps the primary author of Write Behind presents an <a href="http://vimeo.com/21193026">introductory video</a> on Write Behind.</p>
@@ -328,10 +331,13 @@ You can also <a href="https://github.com/alexsnaps/Ehcache-Raffle">checkout</a> 
   and Cache Loaders from github.com.</p>
 
 <h2 id="configuration">Configuration</h2>
-<p>There are many configuration options. See the <code class="highlighter-rouge">CacheWriterConfiguration</code> for properties that may be set and their effect.
+<p>There are many configuration options. See the <code class="language-plaintext highlighter-rouge">CacheWriterConfiguration</code> for properties that may be set and their effect.
 Below is an example of how to configure the cache writer in XML:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="writeThroughCache1" ... &gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="writeThroughCache1" ... &gt;
 &lt;cacheWriter writeMode="write-behind" maxWriteDelay="8" rateLimitPerSecond="5"
         writeCoalescing="true" writeBatching="true" writeBatchSize="20"
         retryAttempts="2" retryAttemptDelaySeconds="2"&gt;
@@ -340,12 +346,17 @@ Below is an example of how to configure the cache writer in XML:</p>
 	       propertySeparator=";"/&gt;
 &lt;/cacheWriter&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Further examples:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="writeThroughCache2" ... &gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="writeThroughCache2" ... &gt;
  &lt;cacheWriter/&gt;
 &lt;/cache&gt;
 &lt;cache name="writeThroughCache3" ... &gt;
@@ -369,12 +380,17 @@ Below is an example of how to configure the cache writer in XML:</p>
 	     propertySeparator=";"/&gt;
  &lt;/cacheWriter&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>This configuration can also be achieved through the <code class="highlighter-rouge">Cache</code> constructor in Java:</p>
+<p>This configuration can also be achieved through the <code class="language-plaintext highlighter-rouge">Cache</code> constructor in Java:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Cache cache = new Cache(
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Cache cache = new Cache(
 new CacheConfiguration("cacheName", 10)
 .cacheWriter(new CacheWriterConfiguration()
 .writeMode(CacheWriterConfiguration.WriteMode.WRITE-BEHIND)
@@ -389,17 +405,24 @@ new CacheConfiguration("cacheName", 10)
    .className("com.company.MyCacheWriterFactory")
    .properties("just.some.property=test; another.property=test2")
    .propertySeparator(";"))));
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Instead of relying on a <code class="highlighter-rouge">CacheWriterFactoryConfiguration</code> to create a <code class="highlighter-rouge">CacheWriter</code>, it’s also possible to explicitly
-register a <code class="highlighter-rouge">CacheWriter</code> instance from within Java code. This allows you to refer to local resources like database
+<p>Instead of relying on a <code class="language-plaintext highlighter-rouge">CacheWriterFactoryConfiguration</code> to create a <code class="language-plaintext highlighter-rouge">CacheWriter</code>, it’s also possible to explicitly
+register a <code class="language-plaintext highlighter-rouge">CacheWriter</code> instance from within Java code. This allows you to refer to local resources like database
 connections or file handles.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Cache cache = manager.getCache("cacheName");
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Cache cache = manager.getCache("cacheName");
 MyCacheWriter writer = new MyCacheWriter(jdbcConnection);
 cache.registerCacheWriter(writer);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="configuration-attributes">Configuration Attributes</h3>
@@ -433,7 +456,7 @@ cache.registerCacheWriter(writer);
 </ul>
 
 <p>
-   <code class="highlighter-rouge">net.sf.ehcache.config.CacheWriterConfiguration.setWriteBehindMaxQueueSize()</code>
+   <code class="language-plaintext highlighter-rouge">net.sf.ehcache.config.CacheWriterConfiguration.setWriteBehindMaxQueueSize()</code>
 </p>
 
 <ul>
@@ -441,7 +464,7 @@ cache.registerCacheWriter(writer);
 </ul>
 
 <p>
-   <code class="highlighter-rouge">net.sf.ehcache.config.CacheWriterConfiguration.setWriteBehindConcurrency()</code>
+   <code class="language-plaintext highlighter-rouge">net.sf.ehcache.config.CacheWriterConfiguration.setWriteBehindConcurrency()</code>
 </p>
 
 <ul>
@@ -455,11 +478,14 @@ cache.registerCacheWriter(writer);
 </ul>
 
 <h2 id="api">API</h2>
-<p>CacheLoaders are exposed for API use through the <code class="highlighter-rouge">cache.getWithLoader(...)</code> method. CacheWriters are exposed with
-<code class="highlighter-rouge">cache.putWithWriter(...)</code> and <code class="highlighter-rouge">cache.removeWithWriter(...)</code> methods.
-For example, following is the method signature for <code class="highlighter-rouge">cache.putWithWriter(...)</code>.</p>
+<p>CacheLoaders are exposed for API use through the <code class="language-plaintext highlighter-rouge">cache.getWithLoader(...)</code> method. CacheWriters are exposed with
+<code class="language-plaintext highlighter-rouge">cache.putWithWriter(...)</code> and <code class="language-plaintext highlighter-rouge">cache.removeWithWriter(...)</code> methods.
+For example, following is the method signature for <code class="language-plaintext highlighter-rouge">cache.putWithWriter(...)</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * Put an element in the cache writing through a CacheWriter. If no CacheWriter has been
 * set for the cache, then this method has the same effect as cache.put().
 *
@@ -482,16 +508,21 @@ For example, following is the method signature for <code class="highlighter-roug
 */
 void putWithWriter(Element element) throws IllegalArgumentException, IllegalStateException,
 CacheException;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>See the Cache JavaDoc for the complete API.</p>
 
 <h2 id="spi">SPI</h2>
-<p>The Ehcache write-through SPI is the <code class="highlighter-rouge">CacheWriter</code> interface. Implementers perform writes to the underlying resource
+<p>The Ehcache write-through SPI is the <code class="language-plaintext highlighter-rouge">CacheWriter</code> interface. Implementers perform writes to the underlying resource
 in their implementation.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>/**
 * A CacheWriter is an interface used for write-through and write-behind caching to a
 * underlying resource.
 * &lt;p/&gt;
@@ -612,16 +643,18 @@ void deleteAll(Collection&lt;CacheEntry&gt; entries) throws CacheException;
 void throwAway(Element element, SingleOperationType operationType, RuntimeException e);
 
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="faq">FAQ</h2>
 
 <h4 id="is-there-a-way-to-monitor-the-write-behind-queue-size">Is there a way to monitor the write-behind queue size?</h4>
-<p>Use the method <code class="highlighter-rouge">net.sf.ehcache.statistics.LiveCacheStatistics#getWriterQueueLength()</code>. This method returns the number of elements on the local queue (in all local buckets) that are waiting to be processed, or -1 if no write-behind queue exists. Note that elements or a batch currently being processed (and coalesced elements) are not included in the returned value.</p>
+<p>Use the method <code class="language-plaintext highlighter-rouge">net.sf.ehcache.statistics.LiveCacheStatistics#getWriterQueueLength()</code>. This method returns the number of elements on the local queue (in all local buckets) that are waiting to be processed, or -1 if no write-behind queue exists. Note that elements or a batch currently being processed (and coalesced elements) are not included in the returned value.</p>
 
 <h4 id="what-happens-if-an-exception-occurs-when-the-writer-is-called">What happens if an exception occurs when the writer is called?</h4>
-<p>Once all retry attempts have been executed, on exception the element (or all elements of that batch) will be passed to the <code class="highlighter-rouge">net.sf.ehcache.writer.CacheWriter#throwAway</code> method.
+<p>Once all retry attempts have been executed, on exception the element (or all elements of that batch) will be passed to the <code class="language-plaintext highlighter-rouge">net.sf.ehcache.writer.CacheWriter#throwAway</code> method.
 The user can then act one last time on the element that failed to write. A reference to the last thrown RuntimeException, and the type of operation that failed to execute for the element, are received.
 Any Exception thrown from that method will simply be logged and ignored. The element will be lost forever. It is important that implementers are careful about proper Exception handling in that last method.</p>
 
@@ -660,14 +693,6 @@ Any Exception thrown from that method will simply be logged and ignored. The ele
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -689,24 +714,32 @@ Any Exception thrown from that method will simply be logged and ignored. The ele
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -714,7 +747,7 @@ Any Exception thrown from that method will simply be logged and ignored. The ele
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

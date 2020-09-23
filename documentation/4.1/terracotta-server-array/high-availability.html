@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -231,7 +234,7 @@ This document may refer to a Terracotta server instance as L2, and a Terracotta 
   <li>
     <p>Two or More Terracotta Server Instances</p>
 
-    <p>You may set up High Availability using either <code class="highlighter-rouge">&lt;server&gt;</code> or <code class="highlighter-rouge">&lt;mirror-group&gt;</code> configurations. Note that <code class="highlighter-rouge">&lt;server&gt;</code> instances do work together as a mirror group, but to create more than one stripe, or to configure the election-time, use <code class="highlighter-rouge">&lt;mirror-group&gt;</code> instances. See <a href="server-arrays#67714">Terracotta Server Arrays Architecture</a> on how to set up a cluster with multiple Terracotta server instances.</p>
+    <p>You may set up High Availability using either <code class="language-plaintext highlighter-rouge">&lt;server&gt;</code> or <code class="language-plaintext highlighter-rouge">&lt;mirror-group&gt;</code> configurations. Note that <code class="language-plaintext highlighter-rouge">&lt;server&gt;</code> instances do work together as a mirror group, but to create more than one stripe, or to configure the election-time, use <code class="language-plaintext highlighter-rouge">&lt;mirror-group&gt;</code> instances. See <a href="server-arrays#67714">Terracotta Server Arrays Architecture</a> on how to set up a cluster with multiple Terracotta server instances.</p>
   </li>
   <li>
     <p>Server-Server Reconnection</p>
@@ -249,7 +252,10 @@ This document may refer to a Terracotta server instance as L2, and a Terracotta 
 
 <p>The following high-availability features can be used to extend the reliability of a Terracotta cluster. These features are controlled using properties set with the &lt;tc-properties&gt; section at the <em>beginning</em> of the Terracotta configuration file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"  
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"  
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
 xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
 
@@ -262,7 +268,9 @@ xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
 &lt;!-- The rest of the Terracotta configuration goes here. --&gt;
 
 &lt;/tc:tc-config&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>See the section <em>Overriding tc.properties</em> in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">Configuration Guide and Reference</a> for more information.</p>
@@ -287,7 +295,7 @@ xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
   <li>l1.healthcheck.l2 indicates L1 -&gt; L2</li>
 </ul>
 
-<p>For example, the <code class="highlighter-rouge">l2.healthcheck.l2.ping.enabled</code> property applies to L2 -&gt; L2.</p>
+<p>For example, the <code class="language-plaintext highlighter-rouge">l2.healthcheck.l2.ping.enabled</code> property applies to L2 -&gt; L2.</p>
 
 <p>The following HealthChecker properties can be set in the &lt;tc-properties&gt; section of the Terracotta configuration file:</p>
 
@@ -408,23 +416,27 @@ Set the client's callback port. Terracotta configuration does not assign clients
 
 <p>The following formula can help you compute the maximum time it will take HealthChecker to discover failed or disconnected remote nodes:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Max Time = (ping.idletime) + socketConnectCount * [(ping.interval * ping.probes)
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Max Time = (ping.idletime) + socketConnectCount * [(ping.interval * ping.probes)
            + (socketConnectTimeout * ping.interval)]
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Note the following about the formula:</p>
 
 <ul>
   <li>
-    <p>The response time to a socket-connection attempt is less than or equal to <code class="highlighter-rouge">(socketConnectTimeout * ping.interval)</code>. For calculating the worst-case scenario (absolute maximum time), the equality is used. In most real-world situations the socket-connect response time is likely to be close to 0 and the formula can be simplified to the following:</p>
+    <p>The response time to a socket-connection attempt is less than or equal to <code class="language-plaintext highlighter-rouge">(socketConnectTimeout * ping.interval)</code>. For calculating the worst-case scenario (absolute maximum time), the equality is used. In most real-world situations the socket-connect response time is likely to be close to 0 and the formula can be simplified to the following:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  Max Time = (ping.idletime) + [socketConnectCount * (ping.interval * ping.probes)]
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Max Time = (ping.idletime) + [socketConnectCount * (ping.interval * ping.probes)]
+</code></pre></div>    </div>
   </li>
-  <li><code class="highlighter-rouge">ping.idletime</code>, the trigger for the full HealthChecker process, is counted once since it is in effect only once each time the process is triggered.</li>
-  <li><code class="highlighter-rouge">socketConnectCount</code> is a multiplier that is in incremented as long as a positive response is received for each socket connection attempt.</li>
+  <li><code class="language-plaintext highlighter-rouge">ping.idletime</code>, the trigger for the full HealthChecker process, is counted once since it is in effect only once each time the process is triggered.</li>
+  <li><code class="language-plaintext highlighter-rouge">socketConnectCount</code> is a multiplier that is in incremented as long as a positive response is received for each socket connection attempt.</li>
   <li>The formula yields an ideal value, since slight variations in actual times can occur.</li>
   <li>To prevent clients from disconnecting too quickly in a situation where an active server is temporarily disconnected from both the backup server and those clients, ensure that the Max Time for L1-&gt;L2 is approximately 8-12 seconds longer than for L2-&gt;L2. If the values are too close together, then in certain situations the active server may kill the backup and refuse to allow clients to reconnect.</li>
 </ul>
@@ -437,28 +449,43 @@ Set the client's callback port. Terracotta configuration does not assign clients
 
 <p>The following settings create an aggressive HealthChecker with low tolerance for short network outages or long GC cycles:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property name="l1.healthcheck.l2.ping.enabled" value="true" /&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;property name="l1.healthcheck.l2.ping.enabled" value="true" /&gt;
 &lt;property name="l1.healthcheck.l2.ping.idletime" value="2000" /&gt;
 &lt;property name="l1.healthcheck.l2.ping.interval" value="1000" /&gt;
 &lt;property name="l1.healthcheck.l2.ping.probes" value="3" /&gt;
 &lt;property name="l1.healthcheck.l2.socketConnect" value="true" /&gt;
 &lt;property name="l1.healthcheck.l2.socketConnectTimeout" value="2" /&gt;
 &lt;property name="l1.healthcheck.l2.socketConnectCount" value="5" /&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>According to the HealthChecker “Max Time” formula, the maximum time before a remote node is considered to be lost is computed in the following way:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>2000 + 5 [( 3 * 1000 ) + ( 2 * 1000)] = 27000
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>2000 + 5 [( 3 * 1000 ) + ( 2 * 1000)] = 27000
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>In this case, after the initial idletime of 2 seconds, the remote failed to respond to ping probes but responded to every socket connection attempt, indicating that the node is reachable but not functional (within the allowed time frame) or in a long GC cycle. This aggressive HealthChecker configuration declares a node dead in no more than 27 seconds.</p>
 
 <p>If at some point the node had been completely unreachable (a socket connection attempt failed), HealthChecker would have declared it dead sooner. Where, for example, the problem is a disconnected network cable, the “Max Time” is likely to be even shorter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>2000 + 1[3 * 1000) + ( 2 * 1000 ) = 7000
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>2000 + 1[3 * 1000) + ( 2 * 1000 ) = 7000
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>In this case, HealthChecker declares a node dead in no more than 7 seconds.</p>
@@ -467,28 +494,43 @@ Set the client's callback port. Terracotta configuration does not assign clients
 
 <p>The following settings create a HealthChecker with a higher tolerance for interruptions in network communications and long GC cycles:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property name="l1.healthcheck.l2.ping.enabled" value="true" /&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;property name="l1.healthcheck.l2.ping.enabled" value="true" /&gt;
 &lt;property name="l1.healthcheck.l2.ping.idletime" value="5000" /&gt;
 &lt;property name="l1.healthcheck.l2.ping.interval" value="1000" /&gt;
 &lt;property name="l1.healthcheck.l2.ping.probes" value="3" /&gt;
 &lt;property name="l1.healthcheck.l2.socketConnect" value="true" /&gt;
 &lt;property name="l1.healthcheck.l2.socketConnectTimeout" value="5" /&gt;
 &lt;property name="l1.healthcheck.l2.socketConnectCount" value="10" /&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>According to the HealthChecker “Max Time” formula, the maximum time before a remote node is considered to be lost is computed in the following way:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>5000 + 10 [( 3 x 1000 ) + ( 5 x 1000)] = 85000
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>5000 + 10 [( 3 x 1000 ) + ( 5 x 1000)] = 85000
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>In this case, after the initial idletime of 5 seconds, the remote failed to respond to ping probes but responded to every socket connection attempt, indicating that the node is reachable but not functional (within the allowed time frame) or excessively long GC cycle. This tolerant HealthChecker configuration declares a node dead in no more than 85 seconds.</p>
 
 <p>If at some point the node had been completely unreachable (a socket connection attempt failed), HealthChecker would have declared it dead sooner. Where, for example, the problem is a disconnected network cable, the “Max Time” is likely to be even shorter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>5000 + 1[3 * 1000) + ( 5 * 1000 )] = 13000
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>5000 + 1[3 * 1000) + ( 5 * 1000 )] = 13000
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>In this case, HealthChecker declares a node dead in no more than 13 seconds.</p>
@@ -526,8 +568,8 @@ This feature increases time-to-failover by the timeout value set for the automat
 <p>Configure the following properties for the reconnect mechanism:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">l2.nha.tcgroupcomm.reconnect.enabled</code> –  (DEFAULT: false) When set to “true” enables a server instance to attempt reconnection with its peer server instance after a disconnection is detected. Most use cases should benefit from enabling this setting.</li>
-  <li><code class="highlighter-rouge">l2.nha.tcgroupcomm.reconnect.timeout</code> –  Enabled if <code class="highlighter-rouge">l2.nha.tcgroupcomm.reconnect.enabled</code> is set to true. Specifies the timeout (in milliseconds) for reconnection. Default: 2000. This parameter can be tuned to handle longer network disruptions.</li>
+  <li><code class="language-plaintext highlighter-rouge">l2.nha.tcgroupcomm.reconnect.enabled</code> –  (DEFAULT: false) When set to “true” enables a server instance to attempt reconnection with its peer server instance after a disconnection is detected. Most use cases should benefit from enabling this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">l2.nha.tcgroupcomm.reconnect.timeout</code> –  Enabled if <code class="language-plaintext highlighter-rouge">l2.nha.tcgroupcomm.reconnect.enabled</code> is set to true. Specifies the timeout (in milliseconds) for reconnection. Default: 2000. This parameter can be tuned to handle longer network disruptions.</li>
 </ul>
 
 <h3 id="automatic-client-reconnect-77332">Automatic Client Reconnect {#77332}</h3>
@@ -548,8 +590,8 @@ With this feature, clients waiting to reconnect continue to hold locks. Some app
 <p>Configure the following properties for the reconnect mechanism:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">l2.l1reconnect.enabled</code> – (DEFAULT: false) When set to “true” enables a client to reconnect to a cluster after a disconnection is detected. This property controls a server instance’s reaction to such an attempt. It is set on the server instance and is passed to clients by the server instance. A client cannot override the server instance’s setting. If a mismatch exists between the client setting and a server instance’s setting, and the client attempts to reconnect to the cluster, the client emits a mismatch error and exits. Most use cases should benefit from enabling this setting.</li>
-  <li><code class="highlighter-rouge">l2.l1reconnect.timeout.millis</code> –  Enabled if <code class="highlighter-rouge">l2.l1reconnect.enabled</code> is set to true. Specifies the timeout (in milliseconds) for reconnection. This property controls a server instance’s timeout during such an attempt. It is set on the server instance and is passed to clients by the server instance. A client cannot override the server instance’s setting. Default: 2000. This parameter can be tuned to handle longer network disruptions.</li>
+  <li><code class="language-plaintext highlighter-rouge">l2.l1reconnect.enabled</code> – (DEFAULT: false) When set to “true” enables a client to reconnect to a cluster after a disconnection is detected. This property controls a server instance’s reaction to such an attempt. It is set on the server instance and is passed to clients by the server instance. A client cannot override the server instance’s setting. If a mismatch exists between the client setting and a server instance’s setting, and the client attempts to reconnect to the cluster, the client emits a mismatch error and exits. Most use cases should benefit from enabling this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">l2.l1reconnect.timeout.millis</code> –  Enabled if <code class="language-plaintext highlighter-rouge">l2.l1reconnect.enabled</code> is set to true. Specifies the timeout (in milliseconds) for reconnection. This property controls a server instance’s timeout during such an attempt. It is set on the server instance and is passed to clients by the server instance. A client cannot override the server instance’s setting. Default: 2000. This parameter can be tuned to handle longer network disruptions.</li>
 </ul>
 
 <h3 id="special-client-connection-properties">Special Client Connection Properties</h3>
@@ -578,7 +620,10 @@ This reconnection window also applies in a cluster with a single Terracotta serv
 
 <p>This window is configured in the Terracotta configuration file using the &lt;client-reconnect-window&gt; element:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;servers&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;servers&gt;
   ...
   &lt;client-reconnect-window&gt;120&lt;/client-reconnect-window&gt;
   &lt;!-- The reconnect window is configured in seconds, with a default value of 120.
@@ -586,7 +631,9 @@ This reconnection window also applies in a cluster with a single Terracotta serv
        added unless a different value is required. --&gt;
   ...
 &lt;/servers&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Clients that fail to connect to the new active server must be restarted if they are to successfully reconnect to the cluster.</p>
@@ -595,19 +642,29 @@ This reconnection window also applies in a cluster with a single Terracotta serv
 
 <p>When a Terracotta client is first started (or restarted), it attempts to connect to a Terracotta server instance based on the following properties:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Must the client and server be running the same version of Terracotta?
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code># Must the client and server be running the same version of Terracotta?
 l1.connect.versionMatchCheck.enabled = true
 # Time (in milliseconds) before a socket connection attempt is timed out.
 l1.socket.connect.timeout=10000
 # Time (in milliseconds; minimum 10) between attempts to connect to a server.
 l1.socket.reconnect.waitInterval=1000
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The timing properties above control connection attempts only <em>after</em> the client has obtained and resolved its configuration from the server. To control connection attempts <em>before</em> configuration is resolved, set the following property on the client:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dcom.tc.tc.config.total.timeout=5000
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>-Dcom.tc.tc.config.total.timeout=5000
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This property limits the time (in milliseconds) that a client spends attempting to make an initial connection.</p>
@@ -638,15 +695,14 @@ l1.socket.reconnect.waitInterval=1000
   <li>Ensure that all of the caches in the Ehcache configuration file where rejoin is enabled have nonstop enabled.</li>
   <li>Ensure that your application does not create caches on the client without nonstop enabled.</li>
   <li>
-    <p>Enable the rejoin attribute in the client’s <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element:</p>
+    <p>Enable the rejoin attribute in the client’s <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;terracottaConfig url="myHost:9510" rejoin="true" /&gt;
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;terracottaConfig url="myHost:9510" rejoin="true" /&gt;
+</code></pre></div>    </div>
   </li>
 </ol>
 
-<p>For more options on configuring <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code>, see the <a href="/documentation/4.1/bigmemorymax/configuration/distributed-configuration#35085">configuration reference</a>.</p>
+<p>For more options on configuring <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code>, see the <a href="/documentation/4.1/bigmemorymax/configuration/distributed-configuration#35085">configuration reference</a>.</p>
 
 <h4 id="exception-during-rejoin">Exception During Rejoin</h4>
 
@@ -654,13 +710,18 @@ l1.socket.reconnect.waitInterval=1000
 
 <p>To ensure that locks are released properly, application code should encapsulate lock-unlock operations with try-finally blocks:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>myLock.acquireLock();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>myLock.acquireLock();
 try {
   // Do some work.
 } finally {
   myLock.unlock();
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="effective-client-server-reconnection-settings:-an-example">Effective Client-Server Reconnection Settings: An Example</h2>
@@ -669,10 +730,15 @@ try {
 
 <p>In general, it is advisable to maintain an L1-L2 HealthChecker timeout that falls between the L2-L2 HealthChecker timeout as modified in the following ineqaulity:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>L2-L2 HealthCheck + Election Time
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>L2-L2 HealthCheck + Election Time
         &lt;  L1-L2 HealthCheck
                   &lt;  L2-L2 HealthCheck + Election Time + Client Reconnect Window
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This allows a cluster’s L1s to avoid disconnecting before a client reconnection window is opened (a backup L2 takes over), or to not disconnect if that window is never opened (the original active L2 is still functional). The Election Time and Client Reconnect Window settings, which are found in the Terracotta configuration file, are respectively 5 seconds and 120 seconds by default.</p>
@@ -922,14 +988,6 @@ This test can only be run on a redundant network
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -951,24 +1009,32 @@ This test can only be run on a redundant network
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -976,7 +1042,7 @@ This test can only be run on a redundant network
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

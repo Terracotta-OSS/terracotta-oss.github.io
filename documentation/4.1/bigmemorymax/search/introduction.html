@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -199,14 +202,22 @@ For support for nulls, see <a href="/documentation/4.1/bigmemorymax/search/best-
 <p>Searchable attributes may be extracted from both keys and values. Keys, values,
 or summary values (Aggregators) can all be returned. Here is a simple example: Search for 32-year-old males and return the cache values.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Results results = cache.createQuery().includeValues()
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Results results = cache.createQuery().includeValues()
   .addCriteria(age.eq(32).and(gender.eq("male"))).execute();
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Queries can be formulated using the either the BigMemory Search API or BigMemory SQL (Structured Query Language).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// BigMemory Search API:
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>// BigMemory Search API:
 Attribute&lt;Integer&gt; age = cache.getSearchAttribute("age");
 Person.createQuery().addCriteria(age.gt(30)).includeValues().execute();
 
@@ -219,7 +230,9 @@ QueryManager queryManager =
 				.build();
 Query personQuery = queryManager.createQuery(
 	"select * from Person where age &gt; 30");
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Before creating a query, the Ehcache configuration must be prepared. This page contains information about preparing for searches. For constructing queries, go to either:</p>
@@ -238,58 +251,81 @@ Query personQuery = queryManager.createQuery(
 
 <h3 id="by-configuration">By Configuration</h3>
 
-<p>Caches are made searchable by adding a <code class="highlighter-rouge">&lt;searchable/&gt;</code> tag to the ehcache.xml file.</p>
+<p>Caches are made searchable by adding a <code class="language-plaintext highlighter-rouge">&lt;searchable/&gt;</code> tag to the ehcache.xml file.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="cache2" maxBytesLocalHeap="16M" eternal="true" maxBytesLocalOffHeap="256M"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="cache2" maxBytesLocalHeap="16M" eternal="true" maxBytesLocalOffHeap="256M"&gt;
 	&lt;persistence strategy="localRestartable"/&gt;
 	&lt;searchable/&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This configuration will scan keys and values and, if they are of supported search types, add them as
 attributes called “key” and “value” respectively. If you do not want automatic indexing of keys and values,
 you can disable it with:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="cacheName" ...&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="cacheName" ...&gt;
 	&lt;searchable keys="false" values="false"&gt;
 	   ...
 	&lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>You might want to do this if you have a mix of types for your keys or values. The automatic indexing will throw
 an exception if types are mixed.</p>
 
-<p>If you think that you will want to add search attributes after the cache is initialized, you can explicitly indicate the dynamic search configuration. Set the <code class="highlighter-rouge">allowDynamicIndexing</code> attribute to “true” to enable use of the dynamic attributes extractor (described in the <a href="#defining-attributes">Defining Attributes</a> section below):</p>
+<p>If you think that you will want to add search attributes after the cache is initialized, you can explicitly indicate the dynamic search configuration. Set the <code class="language-plaintext highlighter-rouge">allowDynamicIndexing</code> attribute to “true” to enable use of the dynamic attributes extractor (described in the <a href="#defining-attributes">Defining Attributes</a> section below):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="cacheName" ...&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="cacheName" ...&gt;
 	&lt;searchable allowDynamicIndexing="true"&gt;
 	   ...
 	&lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Often keys or values will not be directly searchable and instead you will need to extract searchable attributes from the keys or values.
 The following example shows a more typical case. Attribute Extractors are explained in more detail in the following section.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="cache3" maxEntriesLocalHeap="10000" eternal="true" maxBytesLocalOffHeap="10G"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="cache3" maxEntriesLocalHeap="10000" eternal="true" maxBytesLocalOffHeap="10G"&gt;
 	&lt;persistence strategy="localRestartable"/&gt;
 	&lt;searchable&gt;
    		&lt;searchAttribute name="age" class="net.sf.ehcache.search.TestAttributeExtractor"/&gt;
    		&lt;searchAttribute name="gender" expression="value.getGender()"/&gt;
 	&lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="programmatically">Programmatically</h3>
 
 <p>The following example shows how to programmatically create the cache configuration with search attributes.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration cacheManagerConfig = new Configuration();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Configuration cacheManagerConfig = new Configuration();
 CacheConfiguration cacheConfig = new CacheConfiguration("myCache", 0).eternal(true);
 Searchable searchable = new Searchable();
 cacheConfig.addSearchable(searchable);
@@ -310,24 +346,26 @@ cacheManager.addCache(new Cache(cacheConfig));
 Ehcache myCache = cacheManager.getEhcache("myCache");
 // Now create the attributes and queries, then execute.
 ...
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>To learn more about BigMemory Search, see the <code class="highlighter-rouge">net.sf.ehcache.search*</code> packages in the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">Javadoc for http://www.ehcache.org/apidocs/2.8.5/index.html</a>.</p>
+<p>To learn more about BigMemory Search, see the <code class="language-plaintext highlighter-rouge">net.sf.ehcache.search*</code> packages in the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">Javadoc for http://www.ehcache.org/apidocs/2.8.5/index.html</a>.</p>
 
 <h3 id="disk-usage-with-the-terracotta-server-array">Disk usage with the Terracotta Server Array</h3>
 
-<p>Search indexes are stored on Terracotta server disks. The default path is the same directory as the configured <code class="highlighter-rouge">&lt;data&gt;</code> location. You can customize the path using the <code class="highlighter-rouge">&lt;index&gt;</code> element in the server’s <code class="highlighter-rouge">tc-config.xml</code> configuration file.</p>
+<p>Search indexes are stored on Terracotta server disks. The default path is the same directory as the configured <code class="language-plaintext highlighter-rouge">&lt;data&gt;</code> location. You can customize the path using the <code class="language-plaintext highlighter-rouge">&lt;index&gt;</code> element in the server’s <code class="language-plaintext highlighter-rouge">tc-config.xml</code> configuration file.</p>
 
 <p>The Terracotta Server Array can be configured to be restartable in addition to including searchable caches, but both of these features require disk storage. When both are enabled, be sure that enough disk space is available. Depending upon the number of searchable attributes, the amount of disk storage required might be 3 times the amount of in-memory data.</p>
 
-<p>It is highly recommended to store the search index (<code class="highlighter-rouge">&lt;index&gt;</code>) and the Fast Restart data (<code class="highlighter-rouge">&lt;data&gt;</code>) on separate disks.</p>
+<p>It is highly recommended to store the search index (<code class="language-plaintext highlighter-rouge">&lt;index&gt;</code>) and the Fast Restart data (<code class="language-plaintext highlighter-rouge">&lt;data&gt;</code>) on separate disks.</p>
 
 <h2 id="defining-attributes">Defining Attributes</h2>
 
 <p>In addition to configuring a cache to be searchable, you must define the attributes to be used in searches.</p>
 
-<p>Attributes are extracted from keys or values during search by using <code class="highlighter-rouge">AttributeExtractor</code>s. An extracted attribute must be one of the following types:</p>
+<p>Attributes are extracted from keys or values during search by using <code class="language-plaintext highlighter-rouge">AttributeExtractor</code>s. An extracted attribute must be one of the following types:</p>
 
 <ul>
   <li>Boolean</li>
@@ -351,17 +389,27 @@ Ehcache myCache = cacheManager.getEhcache("myCache");
 <h4 id="examples-of-attributes">Examples of Attributes</h4>
 
 <h5 id="api-example">API Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;searchable&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;searchable&gt;
 &lt;searchAttribute name="age" type="Integer"/&gt;
 &lt;/searchable&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h5 id="bigmemory-sql-example">BigMemory SQL Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// no cast required for String or int
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>// no cast required for String or int
 select * from Person where age = '11'
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If an attribute cannot be found or is of the wrong type, an AttributeExtractorException is thrown on search execution.</p>
@@ -373,8 +421,8 @@ select * from Person where age = '11'
 <p>The parts of an Element that are well-known attributes can be referenced by some predefined, well-known names.
 If a key and/or value is of a supported search type, it is added automatically as an attribute with the name
 “key” or “value”.
-These well-known attributes have the convenience of being constant attributes made available on the <code class="highlighter-rouge">Query</code> class.
-For example, the attribute for “key” can be referenced in a query by <code class="highlighter-rouge">Query.KEY</code>. For even greater readability, statically import so that, in this example, you would use <code class="highlighter-rouge">KEY</code>.</p>
+These well-known attributes have the convenience of being constant attributes made available on the <code class="language-plaintext highlighter-rouge">Query</code> class.
+For example, the attribute for “key” can be referenced in a query by <code class="language-plaintext highlighter-rouge">Query.KEY</code>. For even greater readability, statically import so that, in this example, you would use <code class="language-plaintext highlighter-rouge">KEY</code>.</p>
 
 <table>
   <thead>
@@ -397,19 +445,27 @@ For example, the attribute for “key” can be referenced in a query by <code c
 
 <h3 id="reflection-attribute-extractor">Reflection Attribute Extractor</h3>
 
-<p>The <code class="highlighter-rouge">ReflectionAttributeExtractor</code> is a built-in search attribute extractor that uses JavaBean conventions and also understands a simple form of expression. Where a JavaBean property is available and it is of a searchable type, it can be declared:</p>
+<p>The <code class="language-plaintext highlighter-rouge">ReflectionAttributeExtractor</code> is a built-in search attribute extractor that uses JavaBean conventions and also understands a simple form of expression. Where a JavaBean property is available and it is of a searchable type, it can be declared:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache&gt;
   &lt;searchable&gt;
     &lt;searchAttribute name="age"/&gt;
   &lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The expression language of the <code class="highlighter-rouge">ReflectionAttributeExtractor</code> also uses method/value dotted expression chains. The expression chain must start with “key”, “value”, or “element”. From the starting object, a chain of method calls or field names follows. Method calls and field names can be freely mixed in the chain:</p>
+<p>The expression language of the <code class="language-plaintext highlighter-rouge">ReflectionAttributeExtractor</code> also uses method/value dotted expression chains. The expression chain must start with “key”, “value”, or “element”. From the starting object, a chain of method calls or field names follows. Method calls and field names can be freely mixed in the chain:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache&gt;
   &lt;searchable&gt;
     &lt;searchAttribute name="age" expression="value.person.getAge()"/&gt;
   &lt;/searchable&gt;
@@ -419,7 +475,9 @@ For example, the attribute for “key” can be referenced in a query by <code c
      &lt;searchAttribute name="name" expression="element.toString()"/&gt;
   &lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p><strong>Note</strong>: The method and field name portions of the expression are case-sensitive.</p>
@@ -429,48 +487,66 @@ For example, the attribute for “key” can be referenced in a query by <code c
 </p>
 <h3 id="custom-attribute-extractor">Custom Attribute Extractor</h3>
 
-<p>In more complex situations, you can create your own attribute extractor by implementing the <code class="highlighter-rouge">AttributeExtractor</code> interface. The interface’s <code class="highlighter-rouge">attributeFor</code> method returns the attribute value for the element and attribute name you specify.</p>
+<p>In more complex situations, you can create your own attribute extractor by implementing the <code class="language-plaintext highlighter-rouge">AttributeExtractor</code> interface. The interface’s <code class="language-plaintext highlighter-rouge">attributeFor</code> method returns the attribute value for the element and attribute name you specify.</p>
 
 <p><strong>Note</strong>: These examples assume there are previously created Person objects containing attributes such as name, age, and gender.</p>
 
 <p>Provide your extractor class:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="cache2" maxEntriesLocalHeap="0" eternal="true"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="cache2" maxEntriesLocalHeap="0" eternal="true"&gt;
   &lt;persistence strategy="none"/&gt;
   &lt;searchable&gt;
      &lt;searchAttribute name="age" class="net.sf.ehcache.search.TestAttributeExtractor"/&gt;
   &lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>A custom attribute extractor could be passed an Employee object to extract a specific attribute:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>returnVal = employee.getdept();
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>returnVal = employee.getdept();
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If you need to pass state to your custom extractor, specify properties:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache&gt;
   &lt;searchable&gt;
     &lt;searchAttribute name="age"
     class="net.sf.ehcache.search.TestAttributeExtractor"
     properties="foo=this,bar=that,etc=12" /&gt;
   &lt;/searchable&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>If properties are provided, the attribute extractor implementation must have a public constructor that accepts a single <code class="highlighter-rouge">java.util.Properties</code> instance.</p>
+<p>If properties are provided, the attribute extractor implementation must have a public constructor that accepts a single <code class="language-plaintext highlighter-rouge">java.util.Properties</code> instance.</p>
 
 <h3 id="dynamic-attributes-extractor">Dynamic Attributes Extractor</h3>
 
-<p>The <code class="highlighter-rouge">DynamicAttributesExtractor</code> provides flexibility by allowing the search configuration to be changed after the cache is initialized. This is done with one method call, at the point of element insertion into the cache. The <code class="highlighter-rouge">DynamicAttributesExtractor</code> method returns a map of attribute names to index and their respective values. This method is called for every Ehcache.put() and replace() invocation.</p>
+<p>The <code class="language-plaintext highlighter-rouge">DynamicAttributesExtractor</code> provides flexibility by allowing the search configuration to be changed after the cache is initialized. This is done with one method call, at the point of element insertion into the cache. The <code class="language-plaintext highlighter-rouge">DynamicAttributesExtractor</code> method returns a map of attribute names to index and their respective values. This method is called for every Ehcache.put() and replace() invocation.</p>
 
-<p>Assuming that we have previously created Person objects containing attributes such as name, age, and gender, the following example shows how to create a dynamically searchable cache and register the <code class="highlighter-rouge">DynamicAttributesExtractor</code>:</p>
+<p>Assuming that we have previously created Person objects containing attributes such as name, age, and gender, the following example shows how to create a dynamically searchable cache and register the <code class="language-plaintext highlighter-rouge">DynamicAttributesExtractor</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration config = new Configuration();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Configuration config = new Configuration();
 config.setName("default");
   	CacheConfiguration cacheCfg = new CacheConfiguration("PersonCache");
   	cacheCfg.setEternal(true);
@@ -498,10 +574,12 @@ cache.registerDynamicAttributesExtractor(new DynamicAttributesExtractor() {
 });
 // Now add some data to the cache
 cache.put(new Element(10, new Person("John Doe", 34, Person.Gender.MALE)));
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Given the code above, the newly put element would be indexed on values of name and age fields, but not gender. If, at a later time, you would like to start indexing the element data on gender, you would need to create a new <code class="highlighter-rouge">DynamicAttributesExtractor</code> instance that extracts that field for indexing.</p>
+<p>Given the code above, the newly put element would be indexed on values of name and age fields, but not gender. If, at a later time, you would like to start indexing the element data on gender, you would need to create a new <code class="language-plaintext highlighter-rouge">DynamicAttributesExtractor</code> instance that extracts that field for indexing.</p>
 
 <p>Similarly, consider the following scenario. A Customer object has three fields: First Name, Middle Name, and Last Name. Two custom extractors exist, one for FirstName and one for LastName. To index and search on Middle Name, you must add a new, third extractor specifically for that purpose.</p>
 
@@ -509,13 +587,13 @@ cache.put(new Element(10, new Person("John Doe", 34, Person.Gender.MALE)));
 
 <ul>
   <li>
-    <p>To use the <code class="highlighter-rouge">DynamicAttributesExtractor</code>, the cache must be configured to be searchable and dynamically indexable. See <a href="#making-a-cache-searchable">Making a Cache Searchable</a>.</p>
+    <p>To use the <code class="language-plaintext highlighter-rouge">DynamicAttributesExtractor</code>, the cache must be configured to be searchable and dynamically indexable. See <a href="#making-a-cache-searchable">Making a Cache Searchable</a>.</p>
   </li>
   <li>
     <p>A dynamically searchable cache must have a dynamic extractor registered BEFORE data is added to it. (This is to prevent potential races between extractor registration and cache loading which might result in an incomplete set of indexed data, leading to erroneous search results.)</p>
   </li>
   <li>
-    <p>Each call on the <code class="highlighter-rouge">DynamicAttributesExtractor</code> method replaces the previously registered extractor, because there can be at most one extractor instance configured for each such cache.</p>
+    <p>Each call on the <code class="language-plaintext highlighter-rouge">DynamicAttributesExtractor</code> method replaces the previously registered extractor, because there can be at most one extractor instance configured for each such cache.</p>
   </li>
   <li>
     <p>If a dynamically searchable cache is initially configured with a predefined set of search attributes, this set of attributes is always be queried for extracted values, regardless of whether or not a dynamic search attribute extractor has been configured.</p>
@@ -561,14 +639,6 @@ cache.put(new Element(10, new Person("John Doe", 34, Person.Gender.MALE)));
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -590,24 +660,32 @@ cache.put(new Element(10, new Person("John Doe", 34, Person.Gender.MALE)));
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -615,7 +693,7 @@ cache.put(new Element(10, new Person("John Doe", 34, Person.Gender.MALE)));
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -200,7 +203,10 @@
 <h2 id="initializing-the-toolkit">Initializing the Toolkit</h2>
 <p>To access the tools in the Toolkit, your application must first initialize the Terracotta Toolkit. Initializing the Terracotta Toolkit always begins with starting a Terracotta client:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>...
 // These classes must be imported:
 import org.terracotta.toolkit.*;
 ...
@@ -209,10 +215,12 @@ import org.terracotta.toolkit.*;
 // In this case the source is a server and its configured port.
 Toolkit toolkit = ToolkitFactory.createToolkit("toolkit:terracotta://localhost:9510");
 ...
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>When a Terracotta client is started, it must load a Terracotta configuration. Programmatically, <code class="highlighter-rouge">createToolkit()</code> takes as argument the source for the client’s configuration. In the example above, the configuration source is a Terracotta server running on the local host, with port set to 9510. In general, a filename, an URL, or a resolvable hostname or IP address and port number can be used. The specified server instance must be running and accessible before the code that starts the client executes.</p>
+<p>When a Terracotta client is started, it must load a Terracotta configuration. Programmatically, <code class="language-plaintext highlighter-rouge">createToolkit()</code> takes as argument the source for the client’s configuration. In the example above, the configuration source is a Terracotta server running on the local host, with port set to 9510. In general, a filename, an URL, or a resolvable hostname or IP address and port number can be used. The specified server instance must be running and accessible before the code that starts the client executes.</p>
 
 <p>The data structures and other tools provided by the Toolkit are automatically distributed (clustered) when your application is run in a Terracotta cluster. Since the Toolkit is obtained from an instantiated client, all Toolkit tools must be used clustered. Unclustered use is not supported in this version.</p>
 
@@ -221,22 +229,30 @@ Toolkit toolkit = ToolkitFactory.createToolkit("toolkit:terracotta://localhost:9
 
 <p>Clients are initialized with rejoin using a Properties object:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Properties properties = new Properties();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Properties properties = new Properties();
 properties.put("rejoin","true");
 Toolkit toolkit = ToolkitFactory
                     .createToolkit("toolkit:terracotta://localhost:9510", properties);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="toolkit-data-structures">Toolkit Data Structures</h2>
 <p>All data structures must have serializable keys and values. In addition, data structures may have other requirements on keys as noted.</p>
 
 <h3 id="toolkitstore">ToolkitStore</h3>
-<p>The <code class="highlighter-rouge">ToolkitStore</code> is a key-value data store that is automatically distributed in a Terracotta cluster. The <code class="highlighter-rouge">ToolkitStore</code> is used similarly to the <code class="highlighter-rouge">ToolkitCache</code> except that it lacks eviction. It is limited to keys of type String.</p>
+<p>The <code class="language-plaintext highlighter-rouge">ToolkitStore</code> is a key-value data store that is automatically distributed in a Terracotta cluster. The <code class="language-plaintext highlighter-rouge">ToolkitStore</code> is used similarly to the <code class="language-plaintext highlighter-rouge">ToolkitCache</code> except that it lacks eviction. It is limited to keys of type String.</p>
 
-<p>To create a <code class="highlighter-rouge">ToolkitStore</code>, use the following:</p>
+<p>To create a <code class="language-plaintext highlighter-rouge">ToolkitStore</code>, use the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Enforce type checking -- can store only Value.class.
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>// Enforce type checking -- can store only Value.class.
 ToolkitStore&lt;Value&gt; store1 = toolkit.getStore("myStore1", Value.class);
 
 // Do not enforce type checking -- any type of value can be stored.
@@ -244,7 +260,9 @@ ToolkitStore store2 = toolkit.getStore("myStore2",  null);
 
 // Use the provided configuration instead of default configuration.
 ToolkitStore&lt;Value&gt; store3 = toolkit.getStore("myStore3", configuration, Value.class);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h4 id="store-configuration">Store Configuration</h4>
@@ -689,14 +707,6 @@ Names can be reused. If the specified name belonged to a destroyed object, a new
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -718,24 +728,32 @@ Names can be reused. If the specified name belonged to a destroyed object, a new
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -743,7 +761,7 @@ Names can be reused. If the specified name belonged to a destroyed object, a new
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -225,13 +228,16 @@
 
 <p>This document discusses cluster configuration in the Terracotta Server Array. To learn more about the Terracotta server instances, see <a href="../terracotta-server-array/server-arrays#67714">Terracotta Server Array Architecture</a>.</p>
 
-<p>For a comprehensive and fully annotated configuration file, see <code class="highlighter-rouge">config-samples/tc-config-reference.xml</code> in the Terracotta kit.</p>
+<p>For a comprehensive and fully annotated configuration file, see <code class="language-plaintext highlighter-rouge">config-samples/tc-config-reference.xml</code> in the Terracotta kit.</p>
 
 <h2 id="quick-start-configuration">Quick Start Configuration</h2>
 
-<p>To configure the Terracotta server, create a <code class="highlighter-rouge">tc-config.xml</code> configuration file, or update the one that is provided in the config-samples/ directory of the BigMemory Max kit. For example:</p>
+<p>To configure the Terracotta server, create a <code class="language-plaintext highlighter-rouge">tc-config.xml</code> configuration file, or update the one that is provided in the config-samples/ directory of the BigMemory Max kit. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>    &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
     &lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
@@ -267,7 +273,9 @@
         &lt;logs&gt;logs-%i&lt;/logs&gt;
       &lt;/clients&gt;
     &lt;/tc:tc-config&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>To successfully configure a Terracotta Server Array using the Terracotta configuration file, note the following:</p>
@@ -312,21 +320,26 @@
 
 <h3 id="pgfId-998366">Default Configuration</h3>
 
-<p>If no configuration file is specified <em>and</em> no <code class="highlighter-rouge">tc-config.xml</code> exists in the directory in which the Terracotta instance is started, then default configuration values are used.</p>
+<p>If no configuration file is specified <em>and</em> no <code class="language-plaintext highlighter-rouge">tc-config.xml</code> exists in the directory in which the Terracotta instance is started, then default configuration values are used.</p>
 
 <h3 id="pgfId-998369">Local XML File (Default)</h3>
 
-<p>The file <code class="highlighter-rouge">tc-config.xml</code> is used by default if it is located in the directory in which a Terracotta instance is started <em>and</em> no configuration file is explicitly specified.</p>
+<p>The file <code class="language-plaintext highlighter-rouge">tc-config.xml</code> is used by default if it is located in the directory in which a Terracotta instance is started <em>and</em> no configuration file is explicitly specified.</p>
 
 <h3 id="pgfId-998372">Local or Remote Configuration File</h3>
 
 <p>You can explicitly specify a configuration file by passing the -f option to the script used to start a Terracotta server. For example, to start a Terracotta server on UNIX/Linux using the provided script, enter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>start-tc-server.sh -f &lt;path_to_configuration_file&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>start-tc-server.sh -f &lt;path_to_configuration_file&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>where &lt;path_to_configuration_file&gt; can be a URL or a relative directory path. In Microsoft Windows, use <code class="highlighter-rouge">start-tc-server.bat</code>.</p>
+<p>where &lt;path_to_configuration_file&gt; can be a URL or a relative directory path. In Microsoft Windows, use <code class="language-plaintext highlighter-rouge">start-tc-server.bat</code>.</p>
 
 <p><strong>Note</strong>: Cygwin (on Windows) is not supported for this feature.</p>
 
@@ -337,10 +350,10 @@
 <ul>
   <li><a href="#29148">Local or Remote XML File</a></li>
   <li><a href="#70775">Terracotta Server</a></li>
-  <li>An Ehcache configuration file (using the <a href="/documentation/4.1/bigmemorymax/configuration/configuration"><code class="highlighter-rouge">&lt;terracottaConfig&gt;</code></a> element) used with BigMemory Max and BigMemory Go.</li>
-  <li>A Quartz properties file (using the <code class="highlighter-rouge">org.quartz.jobStore.tcConfigUrl</code> property) used with Quartz Scheduler.</li>
-  <li>A Filter (in <code class="highlighter-rouge">web.xml</code>) element used with containers and Terracotta Web Sessions.</li>
-  <li>The client constructor (<code class="highlighter-rouge">TerracottaClient()</code>) used when a client is instantiated programmatically using the Terracotta Toolkit.</li>
+  <li>An Ehcache configuration file (using the <a href="/documentation/4.1/bigmemorymax/configuration/configuration"><code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code></a> element) used with BigMemory Max and BigMemory Go.</li>
+  <li>A Quartz properties file (using the <code class="language-plaintext highlighter-rouge">org.quartz.jobStore.tcConfigUrl</code> property) used with Quartz Scheduler.</li>
+  <li>A Filter (in <code class="language-plaintext highlighter-rouge">web.xml</code>) element used with containers and Terracotta Web Sessions.</li>
+  <li>The client constructor (<code class="language-plaintext highlighter-rouge">TerracottaClient()</code>) used when a client is instantiated programmatically using the Terracotta Toolkit.</li>
 </ul>
 
 <p>Terracotta clients can load customized configuration files to specify &lt;client&gt; and &lt;application&gt; configuration. However, the &lt;servers&gt; block of every client in a cluster must match the &lt;servers&gt; block of the servers in the cluster. If there is a mismatch, the client will emit an error and fail to complete its startup. However, there are options you can set for <a href="/documentation/4.1/bigmemorymax/configuration/reference-guide#how-server-settings-affect-client-settings">How Server Settings Can Override Client Settings</a>.</p>
@@ -396,10 +409,15 @@ On startup, Terracotta clients must fetch certain configuration properties from 
    <img src="/images/documentation/tc-config-dev-A.png" alt="Terracotta development cluster with one server." class="panel" />
 </p>
 
-<p>To use the default configuration settings, start your Terracotta server using the <code class="highlighter-rouge">start-tc-server.sh</code> (or <code class="highlighter-rouge">start-tc-server.bat)</code> script in a directory that does <em>not</em> contain the file <code class="highlighter-rouge">tc-config.xml</code>:</p>
+<p>To use the default configuration settings, start your Terracotta server using the <code class="language-plaintext highlighter-rouge">start-tc-server.sh</code> (or <code class="language-plaintext highlighter-rouge">start-tc-server.bat)</code> script in a directory that does <em>not</em> contain the file <code class="language-plaintext highlighter-rouge">tc-config.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[PROMPT] ${TERRACOTTA_HOME}\bin\start-tc-server.sh
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>[PROMPT] ${TERRACOTTA_HOME}\bin\start-tc-server.sh
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>To specify a configuration file, use one of the approaches discussed in <a href="#18319">How Terracotta Servers Get Configured</a>.</p>
@@ -414,7 +432,10 @@ On startup, Terracotta clients must fetch certain configuration properties from 
 
 <p>The configuration file loaded by the Terracotta servers must define each server separately using &lt;server&gt; elements. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc:tc-config xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc:tc-config xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"
 xmlns:tc="http://www.terracotta.org/config"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
 ...
@@ -424,7 +445,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;server host="myResolvableHostName" name="Server2"&gt;
 ...
 &lt;/tc:tc-config&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>
@@ -446,11 +469,16 @@ If you are running the servers on the same machine, some elements in the &lt;ser
 
 <p>With multiple &lt;server&gt; elements, the name attribute may be required to avoid ambiguity when starting a server:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>start-tc-server.sh -n Server1 -f &lt;path_to_configuration_file&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>start-tc-server.sh -n Server1 -f &lt;path_to_configuration_file&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>In Microsoft Windows, use <code class="highlighter-rouge">start-tc-server.bat</code>.</p>
+<p>In Microsoft Windows, use <code class="language-plaintext highlighter-rouge">start-tc-server.bat</code>.</p>
 
 <p>For example, if you are running Terracotta server instances on the same host, you must specify the name attribute to set an unambiguous target for the script.</p>
 
@@ -458,15 +486,20 @@ If you are running the servers on the same machine, some elements in the &lt;ser
 
 <h3 id="clients-in-development-36126">Clients in Development {#36126}</h3>
 
-<p>You can explicitly specify a client’s Terracotta configuration file by passing <code class="highlighter-rouge">-Dtc.config=path/to/my-tc-config.xml</code> when you start your application with the Terracotta client.</p>
+<p>You can explicitly specify a client’s Terracotta configuration file by passing <code class="language-plaintext highlighter-rouge">-Dtc.config=path/to/my-tc-config.xml</code> when you start your application with the Terracotta client.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> -Dtc.config=path/to/my-tc-config.xml -cp classes myApp.class.Main
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code> -Dtc.config=path/to/my-tc-config.xml -cp classes myApp.class.Main
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>where <code class="highlighter-rouge">myApp.class.Main</code> is the class used to launch the application you want to cluster with Terracotta.</p>
+<p>where <code class="language-plaintext highlighter-rouge">myApp.class.Main</code> is the class used to launch the application you want to cluster with Terracotta.</p>
 
-<p>If <code class="highlighter-rouge">tc-config.xml</code> exists in the directory in which you run Java, it can be loaded without <code class="highlighter-rouge">-Dtc.config</code>.</p>
+<p>If <code class="language-plaintext highlighter-rouge">tc-config.xml</code> exists in the directory in which you run Java, it can be loaded without <code class="language-plaintext highlighter-rouge">-Dtc.config</code>.</p>
 
 <h2 id="configuration-in-a-production-environment">Configuration in a Production Environment</h2>
 
@@ -478,14 +511,24 @@ If you are running the servers on the same machine, some elements in the &lt;ser
 
 <p>If your Terracotta configuration file uses “%i” for the hostname attribute in its server element, change it to the actual hostname in production. For example, if in development you used the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="%i" name="Server1"&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;server host="%i" name="Server1"&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>and the production host’s hostname is myHostName, then change the host attribute to the myHostName:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="myHostName" name="Server1"&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;server host="myHostName" name="Server1"&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>
@@ -502,29 +545,49 @@ If you are running the servers on the same machine, some elements in the &lt;ser
 
 <p>To start your application with the Terracotta client using your own scripts, first set the following environment variables:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TC_INSTALL_DIR=&lt;path_to_local_Terracotta_home&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>TC_INSTALL_DIR=&lt;path_to_local_Terracotta_home&gt;
 TC_CONFIG_PATH=&lt;path/to/tc-config.xml&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TC_CONFIG_PATH=&lt;server_host&gt;:&lt;tsa-port&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>TC_CONFIG_PATH=&lt;server_host&gt;:&lt;tsa-port&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>where <code class="highlighter-rouge">&lt;server_host&gt;:&lt;tsa-port&gt;</code> points to the running Terracotta server. The specified Terracotta server will push its configuration to the Terracotta client.</p>
+<p>where <code class="language-plaintext highlighter-rouge">&lt;server_host&gt;:&lt;tsa-port&gt;</code> points to the running Terracotta server. The specified Terracotta server will push its configuration to the Terracotta client.</p>
 
 <p>Alternatively, a client can specify that its configuration come from a server by setting the <em>tc.config</em> system propery:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dtc.config=serverHost:tsaPort
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>-Dtc.config=serverHost:tsaPort
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If more than one Terracotta server is available, enter them in a comma-separated list:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TC_CONFIG_PATH=&lt;server_host1&gt;:&lt;tsa-port&gt;,&lt;server_host2&gt;:&lt;tsa-port&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>TC_CONFIG_PATH=&lt;server_host1&gt;:&lt;tsa-port&gt;,&lt;server_host2&gt;:&lt;tsa-port&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If &lt;server_host1&gt; is unavailable, &lt;server_host2&gt; is used.</p>
@@ -533,47 +596,67 @@ TC_CONFIG_PATH=&lt;path/to/tc-config.xml&gt;
 
 <p>Terracotta products can set a configuration path using their own configuration files.</p>
 
-<p>For BigMemory Max and BigMemory Go, use the <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element in the Ehcache configuration file (<code class="highlighter-rouge">ehcache.xml</code> by default):</p>
+<p>For BigMemory Max and BigMemory Go, use the <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element in the Ehcache configuration file (<code class="language-plaintext highlighter-rouge">ehcache.xml</code> by default):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;terracottaConfig url="localhost:9510" /&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;terracottaConfig url="localhost:9510" /&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>For Quartz, use the <code class="highlighter-rouge">org.quartz.jobStore.tcConfigUrl</code> property in the Quartz properties file (<code class="highlighter-rouge">quartz.properties</code> by default):</p>
+<p>For Quartz, use the <code class="language-plaintext highlighter-rouge">org.quartz.jobStore.tcConfigUrl</code> property in the Quartz properties file (<code class="language-plaintext highlighter-rouge">quartz.properties</code> by default):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>org.quartz.jobStore.tcConfigUrl = /myPath/to/tc-config.xml
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>org.quartz.jobStore.tcConfigUrl = /myPath/to/tc-config.xml
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>For Terracotta Web Sessions, use the appropriate elements in <code class="highlighter-rouge">web.xml</code> or <code class="highlighter-rouge">context.xml</code> (see <a href="/documentation/4.1/web-sessions/installation-guide">Web Sessions Installation</a>).</p>
+<p>For Terracotta Web Sessions, use the appropriate elements in <code class="language-plaintext highlighter-rouge">web.xml</code> or <code class="language-plaintext highlighter-rouge">context.xml</code> (see <a href="/documentation/4.1/web-sessions/installation-guide">Web Sessions Installation</a>).</p>
 
 <h2 id="binding-ports-to-interfaces">Binding Ports to Interfaces</h2>
 
 <p>Normally, the ports you specify for a server in the Terracotta configuration are bound to the interface associated with the host specified for that server. For example, if the server is configured with the IP address “12.345.678.8” (or a hostname with that address), the server’s ports are bound to that same interface:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="12.345.678.8" name="Server1"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;server host="12.345.678.8" name="Server1"&gt;
  ...
  &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
  &lt;jmx-port&gt;9520&lt;/jmx-port&gt;
  &lt;tsa-group-port&gt;9530&lt;/tsa-group-port&gt;
 &lt;/server&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>However, in certain situations it may be necessary to specify a different interface for one or more of a server’s ports. This is done using the <code class="highlighter-rouge">bind</code> attribute, which allows you bind a port to a different interface. For example, a JMX client may only be able connect to a certain interface on a host. The following configuration shows a JMX port bound to an interface different than the host’s:</p>
+<p>However, in certain situations it may be necessary to specify a different interface for one or more of a server’s ports. This is done using the <code class="language-plaintext highlighter-rouge">bind</code> attribute, which allows you bind a port to a different interface. For example, a JMX client may only be able connect to a certain interface on a host. The following configuration shows a JMX port bound to an interface different than the host’s:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="12.345.678.8" name="Server1"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;server host="12.345.678.8" name="Server1"&gt;
  ...
  &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
  &lt;jmx-port bind="12.345.678.9"&gt;9520&lt;/jmx-port&gt;
  &lt;tsa-group-port&gt;9530&lt;/tsa-group-port&gt;
 &lt;/server&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="which-configuration?">Which Configuration?</h2>
 
-<p>Each server and client must maintain separate log directories. By default, server logs are written to <code class="highlighter-rouge">%(user.home)/terracotta/server-logs</code> and client logs to <code class="highlighter-rouge">%(user.home)/terracotta/client-logs</code>.</p>
+<p>Each server and client must maintain separate log directories. By default, server logs are written to <code class="language-plaintext highlighter-rouge">%(user.home)/terracotta/server-logs</code> and client logs to <code class="language-plaintext highlighter-rouge">%(user.home)/terracotta/client-logs</code>.</p>
 
 <p>To find out which configuration a server or client is using, search its logs for an INFO message containing the text “Configuration loaded from”.</p>
 
@@ -610,14 +693,6 @@ TC_CONFIG_PATH=&lt;path/to/tc-config.xml&gt;
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -639,24 +714,32 @@ TC_CONFIG_PATH=&lt;path/to/tc-config.xml&gt;
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -664,7 +747,7 @@ TC_CONFIG_PATH=&lt;path/to/tc-config.xml&gt;
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

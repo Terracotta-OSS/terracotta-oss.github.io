@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -199,17 +202,22 @@
 <h2 id="data-persistence-implementation">Data Persistence Implementation</h2>
 <p>The BigMemory Fast Restart feature works by creating a real-time record of the in-memory data, which it persists in a Fast Restart store on the local disk. After any restart, the data that was last in memory (both heap and off-heap stores) automatically loads from the Fast Restart store back into memory.</p>
 
-<p>Data persistence is configured by adding the <code class="highlighter-rouge">&lt;persistence&gt;</code> sub-element to a cache configuration. The <code class="highlighter-rouge">&lt;persistence&gt;</code> sub-element includes two attributes: <code class="highlighter-rouge">strategy</code> and <code class="highlighter-rouge">synchronousWrites</code>.</p>
+<p>Data persistence is configured by adding the <code class="language-plaintext highlighter-rouge">&lt;persistence&gt;</code> sub-element to a cache configuration. The <code class="language-plaintext highlighter-rouge">&lt;persistence&gt;</code> sub-element includes two attributes: <code class="language-plaintext highlighter-rouge">strategy</code> and <code class="language-plaintext highlighter-rouge">synchronousWrites</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache&gt;
    &lt;persistence strategy="localRestartable|localTempSwap|none|distributed"
                 synchronousWrites="false|true"/&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>###Strategy Options
-The options for the <code class="highlighter-rouge">strategy</code> attribute are:</p>
+The options for the <code class="language-plaintext highlighter-rouge">strategy</code> attribute are:</p>
 
 <ul>
   <li>
@@ -222,30 +230,30 @@ The options for the <code class="highlighter-rouge">strategy</code> attribute ar
     <p><strong>“none”</strong> — Does not offload data to disk. With this option, all of the working data is kept in memory only. This is the default mode.</p>
   </li>
   <li>
-    <p><strong>“distributed”</strong> — Defers to the <code class="highlighter-rouge">&lt;terracotta&gt;</code> configuration for persistence settings. For more information, refer to <a href="/documentation/4.1/bigmemorymax/configuration/distributed-configuration#95592">Terracotta Clustering Configuration Elements</a>.</p>
+    <p><strong>“distributed”</strong> — Defers to the <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> configuration for persistence settings. For more information, refer to <a href="/documentation/4.1/bigmemorymax/configuration/distributed-configuration#95592">Terracotta Clustering Configuration Elements</a>.</p>
   </li>
 </ul>
 
 <p>###Synchronous Writes Options
-If the <code class="highlighter-rouge">strategy</code> attribute is set to “localRestartable”, then the <code class="highlighter-rouge">synchronousWrites</code> attribute may be configured. The options for <code class="highlighter-rouge">synchronousWrites</code> are:</p>
+If the <code class="language-plaintext highlighter-rouge">strategy</code> attribute is set to “localRestartable”, then the <code class="language-plaintext highlighter-rouge">synchronousWrites</code> attribute may be configured. The options for <code class="language-plaintext highlighter-rouge">synchronousWrites</code> are:</p>
 
 <ul>
   <li>
-    <p><strong>synchronousWrites=”false”</strong> — This option specifies that an eventually consistent record of the data is kept on disk at all times. Writes to disk happen when efficient, and cache operations proceed without waiting for acknowledgement of writing to disk. After a restart, the data is recovered as it was when last synced. This option is faster than <code class="highlighter-rouge">synchronousWrites="true"</code>, but after a crash, the last 2-3 seconds of written data may be lost.</p>
+    <p><strong>synchronousWrites=”false”</strong> — This option specifies that an eventually consistent record of the data is kept on disk at all times. Writes to disk happen when efficient, and cache operations proceed without waiting for acknowledgement of writing to disk. After a restart, the data is recovered as it was when last synced. This option is faster than <code class="language-plaintext highlighter-rouge">synchronousWrites="true"</code>, but after a crash, the last 2-3 seconds of written data may be lost.</p>
 
-    <p>If not specified, the default for <code class="highlighter-rouge">synchronousWrites</code> is “false”.</p>
+    <p>If not specified, the default for <code class="language-plaintext highlighter-rouge">synchronousWrites</code> is “false”.</p>
   </li>
   <li>
-    <p><strong>synchronousWrites=”true”</strong> — This option specifies that a fully consistent record of the data is kept on disk at all times. As changes are made to the data set, they are synchronously recorded on disk. The write to disk happens before a return to the caller. After a restart, the data is recovered exactly as it was before shutdown. This option is slower than <code class="highlighter-rouge">synchronousWrites="false"</code>, but after a crash, it provides full data consistency.</p>
+    <p><strong>synchronousWrites=”true”</strong> — This option specifies that a fully consistent record of the data is kept on disk at all times. As changes are made to the data set, they are synchronously recorded on disk. The write to disk happens before a return to the caller. After a restart, the data is recovered exactly as it was before shutdown. This option is slower than <code class="language-plaintext highlighter-rouge">synchronousWrites="false"</code>, but after a crash, it provides full data consistency.</p>
   </li>
 </ul>
 
-<p>For transaction caching with <code class="highlighter-rouge">synchronousWrites</code>, soft locks are used to protect access. If there is a crash in the middle of a transaction, then upon recovery the soft locks are cleared on next access.</p>
+<p>For transaction caching with <code class="language-plaintext highlighter-rouge">synchronousWrites</code>, soft locks are used to protect access. If there is a crash in the middle of a transaction, then upon recovery the soft locks are cleared on next access.</p>
 
-<p><strong>Note</strong>: The <code class="highlighter-rouge">synchronousWrites</code> attribute is also available in the <code class="highlighter-rouge">&lt;terracotta&gt;</code> sub-element. If configured in both places, it must have the same value.</p>
+<p><strong>Note</strong>: The <code class="language-plaintext highlighter-rouge">synchronousWrites</code> attribute is also available in the <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> sub-element. If configured in both places, it must have the same value.</p>
 
 <p>###DiskStore Path
-The path to the directory where any required disk files will be created is configured with the <code class="highlighter-rouge">&lt;diskStore&gt;</code> sub-element of the Ehcache configuration.</p>
+The path to the directory where any required disk files will be created is configured with the <code class="language-plaintext highlighter-rouge">&lt;diskStore&gt;</code> sub-element of the Ehcache configuration.</p>
 
 <ul>
   <li>
@@ -265,38 +273,53 @@ The path to the directory where any required disk files will be created is confi
 
 <p>The following configuration provides fast restartability with fully consistent data persistence:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;ehcache&gt;
   &lt;diskStore path="/path/to/store/data"/&gt;
   &lt;cache&gt;
     &lt;persistence strategy="localRestartable" synchronousWrites="true"/&gt;
   &lt;/cache&gt;
 &lt;/ehcache&gt;  
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The following configuration provides fast restartability with eventually consistent data persistence:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;ehcache&gt;
   &lt;diskStore path="/path/to/store/data"/&gt;
   &lt;cache&gt;
     &lt;persistence strategy="localRestartable" synchronousWrites="false"/&gt;
   &lt;/cache&gt;
 &lt;/ehcache&gt;  
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>###Clustered Caches
-For distributing BigMemory Max across a Terracotta Server Array (TSA), the persistence strategy in the ehcache.xml should be set to “distributed”, and the <code class="highlighter-rouge">&lt;terracotta&gt;</code> sub-element must be present in the configuration.</p>
+For distributing BigMemory Max across a Terracotta Server Array (TSA), the persistence strategy in the ehcache.xml should be set to “distributed”, and the <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> sub-element must be present in the configuration.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache&gt;
   maxEntriesInCache="100000"&gt;
   &lt;persistence strategy="distributed"/&gt;
   &lt;terracotta clustered="true" consistency="eventual" synchronousWrites="false"/&gt;
 &lt;/cache&gt;    
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The attribute <code class="highlighter-rouge">maxEntriesInCache</code> configures the maximum number of entries in a distributed cache. (<code class="highlighter-rouge">maxEntriesInCache</code> is not required, but if it is not set, the default is unlimited.)</p>
+<p>The attribute <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> configures the maximum number of entries in a distributed cache. (<code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> is not required, but if it is not set, the default is unlimited.)</p>
 
 <p><strong>Note</strong>: Restartability must be enabled in the TSA in order for clients to be restartable.</p>
 
@@ -304,30 +327,43 @@ For distributing BigMemory Max across a Terracotta Server Array (TSA), the persi
 
 <p>The “localTempSwap” persistence strategy create a local disk tier for in-memory data during BigMemory operation. The disk storage is temporary and is cleared after a restart.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;ehcache&gt;
   &lt;diskStore path="/auto/default/path"/&gt;
   &lt;cache&gt;
     &lt;persistence strategy="localTempSwap"/&gt;
   &lt;/cache&gt;
 &lt;/ehcache&gt;  
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p><strong>Note</strong>: With the “localTempSwap” strategy, you can use <code class="highlighter-rouge">maxEntriesLocalDisk</code> or <code class="highlighter-rouge">maxBytesLocalDisk</code> at either the Cache or CacheManager level to control the size of the disk tier.</p>
+<p><strong>Note</strong>: With the “localTempSwap” strategy, you can use <code class="language-plaintext highlighter-rouge">maxEntriesLocalDisk</code> or <code class="language-plaintext highlighter-rouge">maxBytesLocalDisk</code> at either the Cache or CacheManager level to control the size of the disk tier.</p>
 
 <p>###In-memory Only Cache
 When the persistence strategy is “none”, all cache stays in memory (with no overflow to disk nor persistence on disk).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache&gt;
   &lt;persistence strategy="none"/&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>###Programmatic Configuration Example
 The following is an example of how to programmatically configure cache persistence on disk:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration cacheManagerConfig = new Configuration()
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Configuration cacheManagerConfig = new Configuration()
     .diskStore(new DiskStoreConfiguration()
     .path("/path/to/store/data"));
 CacheConfiguration cacheConfig = new CacheConfiguration()
@@ -340,7 +376,9 @@ cacheManagerConfig.addCache(cacheConfig);
 
 CacheManager cacheManager = new CacheManager(cacheManagerConfig);
 Ehcache myCache = cacheManager.getEhcache("my-cache");
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>##Fast Restart Performance
@@ -394,14 +432,6 @@ The following recommendations should be observed when configuring BigMemory for 
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -423,24 +453,32 @@ The following recommendations should be observed when configuring BigMemory for 
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -448,7 +486,7 @@ The following recommendations should be observed when configuring BigMemory for 
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

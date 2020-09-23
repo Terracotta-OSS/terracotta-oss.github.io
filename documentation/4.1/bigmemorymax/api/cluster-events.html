@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -195,33 +198,33 @@
 <p>The Terracotta distributed BigMemory Max cluster events API provides access to Terracotta cluster events and cluster topology. This event-notification mechanism reports events related to the nodes in the Terracotta cluster, not cache events.</p>
 
 <h2 id="cluster-topology">Cluster Topology</h2>
-<p>The interface <code class="highlighter-rouge">net.sf.ehcache.cluster.CacheCluster</code> provides methods for obtaining topology information for a Terracotta cluster.
+<p>The interface <code class="language-plaintext highlighter-rouge">net.sf.ehcache.cluster.CacheCluster</code> provides methods for obtaining topology information for a Terracotta cluster.
 The following methods are available:</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">String getScheme()</code></p>
+    <p><code class="language-plaintext highlighter-rouge">String getScheme()</code></p>
 
-    <p>Returns a scheme name for the cluster information. Currently <code class="highlighter-rouge">TERRACOTTA</code> is the only scheme supported. The scheme name is used by CacheManager.getCluster() to return cluster information.</p>
+    <p>Returns a scheme name for the cluster information. Currently <code class="language-plaintext highlighter-rouge">TERRACOTTA</code> is the only scheme supported. The scheme name is used by CacheManager.getCluster() to return cluster information.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">Collection&lt;ClusterNode&gt; getNodes()</code></p>
+    <p><code class="language-plaintext highlighter-rouge">Collection&lt;ClusterNode&gt; getNodes()</code></p>
 
     <p>Returns information on all the nodes in the cluster, including ID, hostname, and IP address.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">boolean addTopologyListener(ClusterTopologyListener listener)</code></p>
+    <p><code class="language-plaintext highlighter-rouge">boolean addTopologyListener(ClusterTopologyListener listener)</code></p>
 
     <p>Adds a cluster-events listener. Returns true if the listener is already active.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">boolean removeTopologyListener(ClusterTopologyListener)</code></p>
+    <p><code class="language-plaintext highlighter-rouge">boolean removeTopologyListener(ClusterTopologyListener)</code></p>
 
     <p>Removes a cluster-events listener. Returns true if the listener is already inactive.</p>
   </li>
 </ul>
 
-<p>The interface <code class="highlighter-rouge">net.sf.ehcache.cluster.ClusterNode</code> provides methods for obtaining information on specific cluster nodes.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">net.sf.ehcache.cluster.ClusterNode</code> provides methods for obtaining information on specific cluster nodes.</p>
 
 <pre>
    <code>public interface ClusterNode {
@@ -249,7 +252,7 @@ String getIp();
 
 <h2 id="listening-for-cluster-events">Listening For Cluster Events</h2>
 
-<p>The interface <code class="highlighter-rouge">net.sf.ehcache.cluster.ClusterTopologyListener</code> provides methods for detecting the following cluster events:</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">net.sf.ehcache.cluster.ClusterTopologyListener</code> provides methods for detecting the following cluster events:</p>
 
 <pre>
    <code>public interface ClusterTopologyListener {
@@ -291,7 +294,7 @@ void clusterRejoined(ClusterNode oldNode, ClusterNode newNode);
 </pre>
 
 <h3 id="example-code">Example Code</h3>
-<p>This example prints out the cluster nodes and then registers a <code class="highlighter-rouge">ClusterTopologyListener</code>
+<p>This example prints out the cluster nodes and then registers a <code class="language-plaintext highlighter-rouge">ClusterTopologyListener</code>
 which prints out events as they happen.</p>
 
 <pre>
@@ -321,24 +324,34 @@ cluster.addTopologyListener(new ClusterTopologyListener() {
 <h3 id="getcluster-returns-null-for-programmatically-created-cachemanagers">getCluster Returns Null For Programmatically Created CacheManagers</h3>
 <p>If a CacheManager instance is created and configured programmatically (without an <code>ehcache.xml</code> or other external configuration resource), <code>getCluster("TERRACOTTA")</code> may return null even if a Terracotta cluster exists. To ensure that cluster information is returned in this case, get a cache that is clustered with Terracotta:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// mgr created and configured programmatically.
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>// mgr created and configured programmatically.
 CacheManager mgr = new CacheManager();
 // myCache has Terracotta clustering.
 Cache cache = mgr.getEhcache("myCache");
 // A Terracotta client has started, making available cluster information.
 CacheCluster cluster = mgr.getCluster("TERRACOTTA");
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="nodejoined-for-the-current-node-68163">nodeJoined for the Current Node {#68163}</h3>
 
 <p>Since the current node joins the cluster before code adding the topology listener runs, the current node may never receive the nodeJoined event. You can detect if the current node is in the cluster by checking if the cluster is online:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cluster.addTopologyListener(cacheListener);
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>cluster.addTopologyListener(cacheListener);
 if(cluster.isClusterOnline()) {
   cacheListener.clusterOnline(cluster.getCurrentNode());
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="multiple-nodejoined-events-in-the-same-jvm">Multiple NodeJoined Events in the Same JVM</h3>
@@ -377,14 +390,6 @@ if(cluster.isClusterOnline()) {
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -406,24 +411,32 @@ if(cluster.isClusterOnline()) {
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -431,7 +444,7 @@ if(cluster.isClusterOnline()) {
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

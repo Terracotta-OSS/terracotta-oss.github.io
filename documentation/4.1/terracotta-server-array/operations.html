@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -209,10 +212,10 @@ Terracotta Server Array resource management involves self-monitoring and polling
     <p><strong>Time</strong> – TTI/TTL settings can be configured to expire entries that will then be evicted by the new TSA eviction implementation. You can also configure caches so that their entries are eternal, or you can pin entries or caches so that they are never evicted.</p>
   </li>
   <li>
-    <p><strong>Size</strong> – The total amount of BigMemory managed by the TSA can be configured using the <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> elements in the tc-config.xml file.</p>
+    <p><strong>Size</strong> – The total amount of BigMemory managed by the TSA can be configured using the <code class="language-plaintext highlighter-rouge">dataStorage</code> and <code class="language-plaintext highlighter-rouge">offheap</code> elements in the tc-config.xml file.</p>
   </li>
   <li>
-    <p><strong>Count</strong> – The total number of entries per cache can be configured using the <code class="highlighter-rouge">maxEntriesInCache</code> attribute in the ehcache.xml file.</p>
+    <p><strong>Count</strong> – The total number of entries per cache can be configured using the <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> attribute in the ehcache.xml file.</p>
   </li>
 </ol>
 
@@ -245,7 +248,7 @@ BigMemory's in-memory data is treated as a "store" when BigMemory owns the data,
 </p>
 
 <ol>
-  <li>The resource-based evictor is activated by the periodic TTI/TTL eviction scheduler, as well as by resource monitoring events. This evictor continuously polls BigMemory stores to check current resource usage. At approximately 10% usage of the disk as well as <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> sizes (configured in the tc-config.xml file), it starts looking for TTI/TTL-expired elements to evict. At approximately 80% usage, it evicts live as well as expired elements. If a monitored resource goes over its critical threshold, this evictor will work continually until the monitored resource falls below the critical threshold.</li>
+  <li>The resource-based evictor is activated by the periodic TTI/TTL eviction scheduler, as well as by resource monitoring events. This evictor continuously polls BigMemory stores to check current resource usage. At approximately 10% usage of the disk as well as <code class="language-plaintext highlighter-rouge">dataStorage</code> and <code class="language-plaintext highlighter-rouge">offheap</code> sizes (configured in the tc-config.xml file), it starts looking for TTI/TTL-expired elements to evict. At approximately 80% usage, it evicts live as well as expired elements. If a monitored resource goes over its critical threshold, this evictor will work continually until the monitored resource falls below the critical threshold.</li>
 </ol>
 
 <p>
@@ -256,20 +259,25 @@ BigMemory's in-memory data is treated as a "store" when BigMemory owns the data,
 
 <p>The Offheap Usage graph in the TMC provides the following information:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>* Off-heap Max is the configured `offheap` size
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>* Off-heap Max is the configured `offheap` size
 * Off-heap Reserved represents usage of the space that is reserved for the system
 * Off-heap Used represents the amount of off-heap BigMemory that is in use
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The Data Storage Usage graph in the TMC shows the configured <code class="highlighter-rouge">dataStorage</code> size and the amount in use. This usage includes off-heap and hybrid storage combined. (BigMemory Hybrid allows for a mix of a solid-state drive (SSD) with DRAM-based offheap storage.)</p>
+<p>The Data Storage Usage graph in the TMC shows the configured <code class="language-plaintext highlighter-rouge">dataStorage</code> size and the amount in use. This usage includes off-heap and hybrid storage combined. (BigMemory Hybrid allows for a mix of a solid-state drive (SSD) with DRAM-based offheap storage.)</p>
 
 <p>
    <img src="/images/documentation/data-storage-usage-graph.png" />
 </p>
 
 <ol>
-  <li>The capacity-based evictor is activated when a cache goes over its maximum count (as configured with <code class="highlighter-rouge">maxEntriesInCache</code>), plus an overshoot count, and it attempts to bring the size of the cache to the max capacity. The <code class="highlighter-rouge">maxEntriesInCache</code> attribute must be present in the Ehcache configuration (do not include <code class="highlighter-rouge">maxEntriesInCache</code> in your configuration if you do not want the capacity evictor to run). If <code class="highlighter-rouge">maxEntriesInCache</code> is not set, it gets the default value 0, which means that the cache is unbounded and will not undergo capacity eviction (but periodic and resource evictions are still allowed).</li>
+  <li>The capacity-based evictor is activated when a cache goes over its maximum count (as configured with <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code>), plus an overshoot count, and it attempts to bring the size of the cache to the max capacity. The <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> attribute must be present in the Ehcache configuration (do not include <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> in your configuration if you do not want the capacity evictor to run). If <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> is not set, it gets the default value 0, which means that the cache is unbounded and will not undergo capacity eviction (but periodic and resource evictions are still allowed).</li>
 </ol>
 
 <p>The Server Eviction Rate graph in the TMC shows the activity of the resource and capacity evictors.</p>
@@ -286,10 +294,10 @@ Based upon the three types of evictors, there are three strategies that you can 
     <p>Set the Time To Idle (TTI) or Time to Live (TTL) options for any entry in your data set. After the time has expired, the periodic evictor will clear the entry.</p>
   </li>
   <li>
-    <p>Set the <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> sizes to control how much BigMemory should be used before the resource-based evictor is activated.</p>
+    <p>Set the <code class="language-plaintext highlighter-rouge">dataStorage</code> and <code class="language-plaintext highlighter-rouge">offheap</code> sizes to control how much BigMemory should be used before the resource-based evictor is activated.</p>
   </li>
   <li>
-    <p>Set the <code class="highlighter-rouge">maxEntriesInCache</code> attribute to control when the capacity-based evictor is activated.</p>
+    <p>Set the <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> attribute to control when the capacity-based evictor is activated.</p>
   </li>
 </ol>
 
@@ -317,8 +325,8 @@ Based upon the three types of evictors, there are three strategies that you can 
   <tbody>
     <tr>
       <td style="text-align: left">Entered when</td>
-      <td style="text-align: left">Disk, <code class="highlighter-rouge">dataStorage</code>, and/or <code class="highlighter-rouge">offheap</code> usage crosses its critical threshold</td>
-      <td style="text-align: left">Disk, <code class="highlighter-rouge">dataStorage</code>, and/or <code class="highlighter-rouge">offheap</code> usage crosses its halt threshold</td>
+      <td style="text-align: left">Disk, <code class="language-plaintext highlighter-rouge">dataStorage</code>, and/or <code class="language-plaintext highlighter-rouge">offheap</code> usage crosses its critical threshold</td>
+      <td style="text-align: left">Disk, <code class="language-plaintext highlighter-rouge">dataStorage</code>, and/or <code class="language-plaintext highlighter-rouge">offheap</code> usage crosses its halt threshold</td>
     </tr>
     <tr>
       <td style="text-align: left">Operator event</td>
@@ -383,13 +391,18 @@ Recovery from throttle mode is automatic, as soon as the background evictions ha
 <h2 id="cluster-events">Cluster Events</h2>
 <p>Cluster events report topology changes, performance issues, and errors in operations. These events are logged by both Terracotta server (L2) and client (L1), and can also be viewed in the <a href="/documentation/4.1/tmc/tmc">TMC</a>.</p>
 
-<p>By default, the L2 stores a maximum of 100 events in memory, and this is the number pulled by the TMC. To edit that number, use the Terracotta property <code class="highlighter-rouge">l2.operator.events.store</code>. To set the property in the Terracotta configuration file, use:</p>
+<p>By default, the L2 stores a maximum of 100 events in memory, and this is the number pulled by the TMC. To edit that number, use the Terracotta property <code class="language-plaintext highlighter-rouge">l2.operator.events.store</code>. To set the property in the Terracotta configuration file, use:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc-properties&gt;
   ...
   &lt;property name="l2.operator.events.store" value="500" /&gt;
 &lt;/tc-properties&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="event-types-and-definitions">Event Types and Definitions</h3>
@@ -495,28 +508,28 @@ Recovery from throttle mode is automatic, as soon as the background evictions ha
       <td>WARN</td>
       <td>Heap usage has crossed its configured threshold.</td>
       <td>If combined with longgc, could imply need to relieve memory pressure on L1.</td>
-      <td>The default threshold can be reconfigured through the <code class="highlighter-rouge">high.memory.usage</code> tc-property (refer to  <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a>).</td>
+      <td>The default threshold can be reconfigured through the <code class="language-plaintext highlighter-rouge">high.memory.usage</code> tc-property (refer to  <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a>).</td>
     </tr>
     <tr>
       <td>MemoryManager <br /> long.gc</td>
       <td>WARN</td>
       <td>A full GC longer than the configured threshold has occurred.</td>
       <td>Reduce cache memory footprint in L1. Investigate issues with application logic and garbage creation.</td>
-      <td>The default threshold is 8 seconds, and can be reconfigured in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a> using <code class="highlighter-rouge">longgc.threshhold</code>. Occurrence of this event could help diagnose certain failures, such as in <a href="/documentation/4.1/terracotta-server-array/high-availability#85916">healthchecking</a>.</td>
+      <td>The default threshold is 8 seconds, and can be reconfigured in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a> using <code class="language-plaintext highlighter-rouge">longgc.threshhold</code>. Occurrence of this event could help diagnose certain failures, such as in <a href="/documentation/4.1/terracotta-server-array/high-availability#85916">healthchecking</a>.</td>
     </tr>
     <tr>
       <td>ResourceManagement <br /> resource.nearcapacity</td>
       <td>WARN</td>
       <td>L2 entered <a href="#near-memory-full">throttled mode</a>, which could be a temporary condition (e.g., caused by bulk-loading) or indicate insufficient allocation of memory to L1s</td>
       <td>See the section on <a href="#near-memory-full">responses to memory pressure</a>.</td>
-      <td>After emitting this, L2 can emit <code class="highlighter-rouge">resource.capacityrestored</code> (return to normal mode) or resource.fullcapacity (move to restricted mode), based on resource availability.</td>
+      <td>After emitting this, L2 can emit <code class="language-plaintext highlighter-rouge">resource.capacityrestored</code> (return to normal mode) or resource.fullcapacity (move to restricted mode), based on resource availability.</td>
     </tr>
     <tr>
       <td>ResourceManagement <br /> resource.fullcapacity</td>
       <td>ERROR</td>
       <td>L2 entered <a href="#near-memory-full">restricted mode</a>, which could be a temporary condition (e.g., caused by bulk-loading) or indicate insufficient allocation of memory to L1s</td>
       <td>See the section on <a href="#near-memory-full">responses to memory pressure</a>.</td>
-      <td>After emitting this, L2 can emit <code class="highlighter-rouge">resource.capacityrestored</code> (return to normal mode), based on resource availability.</td>
+      <td>After emitting this, L2 can emit <code class="language-plaintext highlighter-rouge">resource.capacityrestored</code> (return to normal mode), based on resource availability.</td>
     </tr>
     <tr>
       <td>ResourceManagement <br /> resource<br />.capacityrestored</td>
@@ -530,7 +543,7 @@ Recovery from throttle mode is automatic, as soon as the background evictions ha
       <td>WARN</td>
       <td>System clocks are not aligned.</td>
       <td>Synchronize system clocks.</td>
-      <td>The default tolerance is 30 seconds, and can be reconfigured in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a> using <code class="highlighter-rouge">time.sync.threshold</code>. Note that overly large tolerance can introduce unpredictable errors and behaviors.</td>
+      <td>The default tolerance is 30 seconds, and can be reconfigured in <a href="/documentation/4.1/terracotta-server-array/config-reference#overriding-tcproperties">tc.properties</a> using <code class="language-plaintext highlighter-rouge">time.sync.threshold</code>. Note that overly large tolerance can introduce unpredictable errors and behaviors.</td>
     </tr>
     <tr>
       <td>ZapEvents <br /> zap.received</td>
@@ -559,7 +572,7 @@ Recovery from throttle mode is automatic, as soon as the background evictions ha
 <h2 id="live-backup-of-distributed-in-memory-data">Live Backup of Distributed In-memory Data</h2>
 <p>Backups of the entire data set across all stripes (mirror groups) of the Terracotta Server Array can be made using the TMC Backup feature. This feature creates a time-stamped backup of each stripe’s data, providing a snapshot of the TSA’s in-memory data.</p>
 
-<p>The Backup feature is available when fast restartability is enabled for the TSA (<code class="highlighter-rouge">&lt;restartable enabled="true"/&gt;</code> in the tc-config.xml).</p>
+<p>The Backup feature is available when fast restartability is enabled for the TSA (<code class="language-plaintext highlighter-rouge">&lt;restartable enabled="true"/&gt;</code> in the tc-config.xml).</p>
 
 <p>###Creating a Backup
 From the TMC, select the <strong>Administration</strong> tab and the <strong>Backups</strong> sub-tab. Click the <strong>Make Backup</strong> button to perform a backup. The TMC sends a backup request to all stripes in the cluster.</p>
@@ -571,11 +584,14 @@ From the TMC, select the <strong>Administration</strong> tab and the <strong>Bac
 <p>When complete, a window appears that confirms the backup was taken and provides the time-stamped file name(s) of the backup.</p>
 
 <p>###Backup Directory
-Backups are saved to the default directory <code class="highlighter-rouge">data-backup</code>, unless otherwise configured in the tc-config.xml. Terracotta automatically creates <code class="highlighter-rouge">data-backup</code> in the directory containing the Terracotta server’s configuration file (tc-config.xml by default).</p>
+Backups are saved to the default directory <code class="language-plaintext highlighter-rouge">data-backup</code>, unless otherwise configured in the tc-config.xml. Terracotta automatically creates <code class="language-plaintext highlighter-rouge">data-backup</code> in the directory containing the Terracotta server’s configuration file (tc-config.xml by default).</p>
 
-<p>You can override the default directory by specifying a different backup directory in the server’s configuration file using the <code class="highlighter-rouge">&lt;data-backup&gt;</code> property:</p>
+<p>You can override the default directory by specifying a different backup directory in the server’s configuration file using the <code class="language-plaintext highlighter-rouge">&lt;data-backup&gt;</code> property:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;servers&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;servers&gt;
    &lt;server name="Server1"&gt;
       &lt;data&gt;/opt/terracotta/server1-data&lt;/data&gt;
       &lt;data-backup&gt;path/to/my/backup/directory&lt;/data-backup&gt;
@@ -586,7 +602,9 @@ Backups are saved to the default directory <code class="highlighter-rouge">data-
    &lt;/server&gt;
    &lt;restartable enabled="true"/&gt;
 &lt;/servers&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>
@@ -612,15 +630,20 @@ Backups are saved to the default directory <code class="highlighter-rouge">data-
 <p>##Clearing a Server’s Data
 After a Terracotta server is restarted, under certain circumstances it will retain artifacts from previous runs and its data directory must be manually cleared. These circumstances include running with Fast Restartability disabled and BigMemory Hybrid enabled. This may also be the source of errors during “split brain” resolution or during a mirror server restart.</p>
 
-<p>By default, the number of copies of a server’s objectdb data that are retained is unlimited. Over time, and with frequent restarts, these copies may consume a substantial amount of disk space. You can manually delete these files, which are saved in the server’s data directory under <code class="highlighter-rouge">/dirty-objectdb-backup/dirty-objectdb-&lt;timestamp&gt;</code>. You can also set a limit for the number of backups by adding the following element to the Terracotta configuration file’s &lt;tc-properties&gt; block:</p>
+<p>By default, the number of copies of a server’s objectdb data that are retained is unlimited. Over time, and with frequent restarts, these copies may consume a substantial amount of disk space. You can manually delete these files, which are saved in the server’s data directory under <code class="language-plaintext highlighter-rouge">/dirty-objectdb-backup/dirty-objectdb-&lt;timestamp&gt;</code>. You can also set a limit for the number of backups by adding the following element to the Terracotta configuration file’s &lt;tc-properties&gt; block:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property name="l2.nha.dirtydb.rolling" value="&lt;myValue&gt;" /&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;property name="l2.nha.dirtydb.rolling" value="&lt;myValue&gt;" /&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>where &lt;myValue&gt; is an integer.</p>
 
-<p>If you have Fast Restartability disabled and BigMemory Hybrid enabled, you can also automatically remove the older data before server shutdown by setting the property <code class="highlighter-rouge">l2.nha.dirtydb.autoDelete</code> to “true”. It is important to note that a backup copy will still be made in the configured <code class="highlighter-rouge">/dirty-objectdb-backup</code> folder prior to the most recent “working” data being deleted. This can potentially consume all available disk space. If you want to disable the creation of back-ups altogether, the property <code class="highlighter-rouge">l2.nha.dirtydb.backup.enabled</code> can be set to “false”.</p>
+<p>If you have Fast Restartability disabled and BigMemory Hybrid enabled, you can also automatically remove the older data before server shutdown by setting the property <code class="language-plaintext highlighter-rouge">l2.nha.dirtydb.autoDelete</code> to “true”. It is important to note that a backup copy will still be made in the configured <code class="language-plaintext highlighter-rouge">/dirty-objectdb-backup</code> folder prior to the most recent “working” data being deleted. This can potentially consume all available disk space. If you want to disable the creation of back-ups altogether, the property <code class="language-plaintext highlighter-rouge">l2.nha.dirtydb.backup.enabled</code> can be set to “false”.</p>
 
 <h2 id="changing-cluster-topology-in-a-live-cluster-{#45877}">Changing Cluster Topology in a Live Cluster {#45877}</h2>
 
@@ -648,13 +671,12 @@ After a Terracotta server is restarted, under certain circumstances it will reta
     <p>Add a new &lt;server&gt; block to the &lt;servers&gt; or &lt;mirror-group&gt; section in the Terracotta configuration file being used by the cluster.
  The new &lt;server&gt; block should contain the minimum information required to configure a new server. It should appear similar to the following, with your own values substituted:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;server host="myHost" name="server2" &gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;server host="myHost" name="server2" &gt;
    &lt;data&gt;%(user.home)/terracotta/server2/server-data&lt;/data&gt;
    &lt;logs&gt;%(user.home)/terracotta/server2/server-logs&lt;/logs&gt;
    &lt;tsa-port&gt;9513&lt;/tsa-port&gt;
  &lt;/server&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Make sure you are connected to the TMC, and that the TMC is connected to the target cluster.<br />
@@ -665,9 +687,8 @@ See the <a href="/documentation/4.1/tms/tms">TMC documentation</a> for more info
     <p>Click <strong>Reload</strong>.<br />
 A message appears with the result of the reload operation. A successful operation logs a message similar to the following:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>2013-03-14 13:25:44,821 INFO - Successfully overridden server topology from file at '/bigmemory-max-4/tc-config.xml'.
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-03-14 13:25:44,821 INFO - Successfully overridden server topology from file at '/bigmemory-max-4/tc-config.xml'.
+</code></pre></div>    </div>
   </li>
   <li>Start the new server.</li>
 </ol>
@@ -689,11 +710,10 @@ See the <a href="/documentation/4.1/tms/tms">TMC documentation</a> for more info
     <p>Click <strong>Reload</strong>.<br />
 A message appears with the result of the reload operation. A successful operation logs a message similar to the following:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>2013-03-14 13:25:44,821 INFO - Successfully overridden server topology from file at '/bigmemory-max-4/tc-config.xml'.
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-03-14 13:25:44,821 INFO - Successfully overridden server topology from file at '/bigmemory-max-4/tc-config.xml'.
+</code></pre></div>    </div>
 
-    <p>The TMC will also display the event <code class="highlighter-rouge">Server topology reloaded from file at '/bigmemory-max-4/tc-config.xml'</code>.</p>
+    <p>The TMC will also display the event <code class="language-plaintext highlighter-rouge">Server topology reloaded from file at '/bigmemory-max-4/tc-config.xml'</code>.</p>
   </li>
 </ol>
 
@@ -715,14 +735,19 @@ A message appears with the result of the reload operation.</li>
 <h2 id="production-mode">Production Mode</h2>
 <p>Production mode can be set by setting the Terracotta property in the Terracotta configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc-properties&gt;
   ...
   &lt;property name="l2.enable.legacy.production.mode" value="true" /&gt;
 &lt;/tc-properties&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Production mode requires the <code class="highlighter-rouge">--force</code> flag to be used with the stop-tc-server script if the target is an active server with no mirror.</p>
+<p>Production mode requires the <code class="language-plaintext highlighter-rouge">--force</code> flag to be used with the stop-tc-server script if the target is an active server with no mirror.</p>
 
 <h2 id="distributed-garbage-collection">Distributed Garbage Collection</h2>
 
@@ -739,7 +764,7 @@ A message appears with the result of the reload operation.</li>
   <li>JMX – Trigger DGC through the server’s JMX management interface.</li>
 </ul>
 
-<p>By default, DGC is disabled in the Terracotta configuration file in the <code class="highlighter-rouge">&lt;garbage-collection&gt;</code> section. However, even if disabled, it will run automatically under certain circumstances when clearing garbage is necessary but the inline DGC does not run (such as when a crashed server returns to the cluster).</p>
+<p>By default, DGC is disabled in the Terracotta configuration file in the <code class="language-plaintext highlighter-rouge">&lt;garbage-collection&gt;</code> section. However, even if disabled, it will run automatically under certain circumstances when clearing garbage is necessary but the inline DGC does not run (such as when a crashed server returns to the cluster).</p>
 
 <h3 id="monitoring-and-troubleshooting-the-dgc">Monitoring and Troubleshooting the DGC</h3>
 
@@ -787,14 +812,6 @@ A message appears with the result of the reload operation.</li>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -816,24 +833,32 @@ A message appears with the result of the reload operation.</li>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -841,7 +866,7 @@ A message appears with the result of the reload operation.</li>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

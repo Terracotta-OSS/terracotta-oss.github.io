@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -203,7 +206,10 @@
 <h2 id="configuration-overview">Configuration Overview</h2>
 <p>Active Directory and standard LDAP are configured in the &lt;auth&gt; section of each server’s configuration block:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;servers secure="true"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;servers secure="true"&gt;
   &lt;server host="172.16.254.1" name="server1"&gt;
     ...
     &lt;security&gt;
@@ -216,7 +222,9 @@
     &lt;/security&gt;
 ...
 &lt;/server&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Active Directory and standard LDAP are configured using the &lt;realm&gt; and &lt;url&gt; elements; the &lt;user&gt; element is used for <a href="tsa-security#keychain">connections between Terracotta servers</a> and is not required for LDAP-related configuration.</p>
@@ -245,13 +253,18 @@
 <h2 id="active-directory-configuration">Active Directory Configuration</h2>
 <p>Specify the realm and URL in the &lt;security&gt; section of the Terracotta configuration as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;auth&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;auth&gt;
   &lt;realm&gt;com.tc.net.core.security.ShiroActiveDirectoryRealm&lt;/realm&gt;
   &lt;url&gt;ldap://admin_user@server_address:server_port/searchBase=search_domain%26
        groupBindings=groups_to_roles&lt;/url&gt;
   &lt;user&gt;&lt;/user&gt;
 &lt;/auth&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Note the value of the &lt;realm&gt; element, which must specify the correct class (or Shiro security realm) for Active Directory. The components of the URL are defined in the following table.</p>
@@ -266,11 +279,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">ldap://</td>
-      <td style="text-align: left">For the scheme, use either <code class="highlighter-rouge">ldap://</code> or <code class="highlighter-rouge">ldaps://</code>.</td>
+      <td style="text-align: left">For the scheme, use either <code class="language-plaintext highlighter-rouge">ldap://</code> or <code class="language-plaintext highlighter-rouge">ldaps://</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left">admin_user</td>
-      <td style="text-align: left">The name of a user with sufficient rights in Active Directory to perform a search in the domain specified by searchBase. The password for this user password must be stored in the Terracotta keychain used by the Terracotta server, using as key the root of the LDAP URI, <code class="highlighter-rouge">ldap://admin_user@server_name:server_port</code>, with no trailing slash (“/”).</td>
+      <td style="text-align: left">The name of a user with sufficient rights in Active Directory to perform a search in the domain specified by searchBase. The password for this user password must be stored in the Terracotta keychain used by the Terracotta server, using as key the root of the LDAP URI, <code class="language-plaintext highlighter-rouge">ldap://admin_user@server_name:server_port</code>, with no trailing slash (“/”).</td>
     </tr>
     <tr>
       <td style="text-align: left">server_address:server_port</td>
@@ -278,30 +291,38 @@
     </tr>
     <tr>
       <td style="text-align: left">searchBase</td>
-      <td style="text-align: left">Specifies the Active Directory domain to be searched. For example, if the Active Directory domain is reggae.jamaica.org, then the format is <code class="highlighter-rouge">searchBase=dc=reggae,dc=jamaica,dc=org</code>.</td>
+      <td style="text-align: left">Specifies the Active Directory domain to be searched. For example, if the Active Directory domain is reggae.jamaica.org, then the format is <code class="language-plaintext highlighter-rouge">searchBase=dc=reggae,dc=jamaica,dc=org</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left">groupBindings</td>
-      <td style="text-align: left">Specifies the mappings between Active Directory groups and Terracotta roles. For example, <code class="highlighter-rouge">groupBindings=Domain%20Admins=admin,Users=terracotta</code> maps the  Active Directory groups “Domain Admins” and “Users” to the “admin” and “terracotta” Terracotta roles, respectively. To be mapped, the named Active Directory groups must be part of the domain specified in searchBase; all other groups (including those with the specified names) in other domains are ignored.</td>
+      <td style="text-align: left">Specifies the mappings between Active Directory groups and Terracotta roles. For example, <code class="language-plaintext highlighter-rouge">groupBindings=Domain%20Admins=admin,Users=terracotta</code> maps the  Active Directory groups “Domain Admins” and “Users” to the “admin” and “terracotta” Terracotta roles, respectively. To be mapped, the named Active Directory groups must be part of the domain specified in searchBase; all other groups (including those with the specified names) in other domains are ignored.</td>
     </tr>
   </tbody>
 </table>
 
 <p>For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;auth&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;auth&gt;
   &lt;realm&gt;com.tc.net.core.security.ShiroActiveDirectoryRealm&lt;/realm&gt;
   &lt;url&gt;ldap://bmarley@172.16.254.1:389?searchBase=dc=reggae,dc=jamaica,dc=org%26
        groupBindings=Domain%20Admins=admin,Users=terracotta&lt;/url&gt;
   &lt;user&gt;&lt;/user&gt;
 &lt;/auth&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="standard-ldap-configuration">Standard LDAP Configuration</h2>
 <p>Specify the realm and URL in the &lt;security&gt; section of the Terracotta configuration as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;auth&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;auth&gt;
   &lt;realm&gt;com.tc.net.core.security.ShiroLdapRealm&lt;/realm&gt;
   &lt;url&gt;ldap://directory_manager@myLdapServer:636?
        userDnTemplate=cn=%7B0%7D,ou=users,dc=mycompany,dc=com%26
@@ -310,7 +331,9 @@
        groupBindings=bandleaders=admin,bandmembers=terracotta&lt;/url&gt;
   &lt;user&gt;&lt;/user&gt;
 &lt;/auth&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Note the value of the &lt;realm&gt; element, which must specify the correct class (or Shiro security realm) for Active Directory. The components of the URL are defined in the following table.</p>
@@ -325,11 +348,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">ldap://</td>
-      <td style="text-align: left">For the scheme, use either <code class="highlighter-rouge">ldap://</code> or <code class="highlighter-rouge">ldaps://</code>.</td>
+      <td style="text-align: left">For the scheme, use either <code class="language-plaintext highlighter-rouge">ldap://</code> or <code class="language-plaintext highlighter-rouge">ldaps://</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left">directory_manager</td>
-      <td style="text-align: left">The name of a user with sufficient rights on the LDAP server to perform searches. No user is required if anonymous lookups are allowed. If a user is required, the user’s password must be stored in the Terracotta keychain, using as key the root of the LDAP URL, <code class="highlighter-rouge">ldap://admin_user@server_name:server_port</code>, with no trailing slash (“/”).</td>
+      <td style="text-align: left">The name of a user with sufficient rights on the LDAP server to perform searches. No user is required if anonymous lookups are allowed. If a user is required, the user’s password must be stored in the Terracotta keychain, using as key the root of the LDAP URL, <code class="language-plaintext highlighter-rouge">ldap://admin_user@server_name:server_port</code>, with no trailing slash (“/”).</td>
     </tr>
     <tr>
       <td style="text-align: left">server_address:server_port</td>
@@ -349,14 +372,17 @@
     </tr>
     <tr>
       <td style="text-align: left">groupBindings</td>
-      <td style="text-align: left">Specifies the mappings between LDAP groups and Terracotta roles. For example, <code class="highlighter-rouge">groupBindings=bandleaders=admin,bandmembers=terracotta</code> maps the LDAP groups “bandleaders” and “bandmembers” to the “admin” and “terracotta” Terracotta roles, respectively.</td>
+      <td style="text-align: left">Specifies the mappings between LDAP groups and Terracotta roles. For example, <code class="language-plaintext highlighter-rouge">groupBindings=bandleaders=admin,bandmembers=terracotta</code> maps the LDAP groups “bandleaders” and “bandmembers” to the “admin” and “terracotta” Terracotta roles, respectively.</td>
     </tr>
   </tbody>
 </table>
 
 <p>For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;auth&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;auth&gt;
   &lt;realm&gt;com.tc.net.core.security.ShiroLdapRealm&lt;/realm&gt;
   &lt;url&gt;ldap://dizzy@172.16.254.1:636?
        userDnTemplate=cn=%7B0%7D,ou=users,dc=mycompany,dc=com%26
@@ -365,12 +391,17 @@
        groupBindings=bandleaders=admin,bandmembers=terracotta&lt;/url&gt;
   &lt;user&gt;&lt;/user&gt;
 &lt;/auth&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This implies the LDAP directory structure is set up similar to the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>+ dc=com  
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>+ dc=com  
     + dc=mycompany  
         + ou=groups  
             + cn=bandleaders  
@@ -379,12 +410,17 @@
             + cn=bandleaders
                   | uniqueMember=art
                   | uniqueMember=bird
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If, however, the the LDAP directory structure is set up similar to the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>+ dc=com  
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>+ dc=com  
     + dc=mycompany  
         + ou=groups  
             + cn=bandleaders  
@@ -393,7 +429,9 @@
             + cn=bandleaders
                   | musician=art
                   | musician=bird
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>then the value of groupAttribute should be “musician”.</p>
@@ -404,12 +442,17 @@
 <h2 id="using-the-cdata-construct">Using the CDATA Construct</h2>
 <p>To avoid encoding the URL, wrap it in a CDATA construct as shown:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;url&gt;&lt;![CDATA[ldap://dizzy@172.16.254.1:636?
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;url&gt;&lt;![CDATA[ldap://dizzy@172.16.254.1:636?
      userDnTemplate=cn={0},ou=users,dc=mycompany,dc=com&amp;
      groupDnTemplate=cn={0},ou=groups,dc=mycompany,dc=com&amp;
      groupAttribute=uniqueMember&amp;
      groupBindings=bandleaders=admin,bandmembers=terracotta]]&gt;&lt;/url&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
       </article>
@@ -445,14 +488,6 @@
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -474,24 +509,32 @@
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -499,7 +542,7 @@
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

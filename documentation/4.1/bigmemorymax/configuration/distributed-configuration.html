@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -228,19 +231,19 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>The BigMemory Max configuration file (<code class="highlighter-rouge">ehcache.xml</code> by default) contains the configuration for one instance of a CacheManager (the Ehcache class managing a set of defined caches). This configuration file must be in your application’s classpath to be found. When using a WAR file, <code class="highlighter-rouge">ehcache.xml</code> should be copied to <code class="highlighter-rouge">WEB-INF/classes</code>.</p>
+<p>The BigMemory Max configuration file (<code class="language-plaintext highlighter-rouge">ehcache.xml</code> by default) contains the configuration for one instance of a CacheManager (the Ehcache class managing a set of defined caches). This configuration file must be in your application’s classpath to be found. When using a WAR file, <code class="language-plaintext highlighter-rouge">ehcache.xml</code> should be copied to <code class="language-plaintext highlighter-rouge">WEB-INF/classes</code>.</p>
 
-<p>Note the following about <code class="highlighter-rouge">ehcache.xml</code> in a Terracotta cluster:</p>
+<p>Note the following about <code class="language-plaintext highlighter-rouge">ehcache.xml</code> in a Terracotta cluster:</p>
 
 <ul>
   <li>The copy on disk is loaded into memory from the first Terracotta client (also called application server or node) to join the cluster.</li>
   <li>Once loaded, the configuration is persisted in memory by the Terracotta servers in the cluster and survives client restarts.</li>
   <li>In-memory configuration can be edited in the Terracotta Management Console (TMC).
-  Changes take effect immediately but are <em>not</em> written to the original on-disk copy of <code class="highlighter-rouge">ehcache.xml</code>.</li>
-  <li>The in-memory cache configuration is removed with server restarts if the servers are not in persistent mode (<code class="highlighter-rouge">&lt;restartable enabled="false"&gt;</code>), which is the default.
-  The original (on-disk) <code class="highlighter-rouge">ehcache.xml</code> is loaded.</li>
-  <li>The in-memory cache configuration survives server restarts if the servers are in persistent mode (<code class="highlighter-rouge">&lt;restartable enabled="true"&gt;</code>).
-  If you are using the Terracotta servers with persistence of shared data, and you want the cluster to load the original (on-disk) <code class="highlighter-rouge">ehcache.xml</code>, the servers’ database must be wiped by removing the data files from the servers’ <code class="highlighter-rouge">server-data</code> directory. This directory is specified in the Terracotta configuration file in effect (<code class="highlighter-rouge">tc-config.xml</code> by default). Wiping the database causes <em>all persisted shared data to be lost</em>.</li>
+  Changes take effect immediately but are <em>not</em> written to the original on-disk copy of <code class="language-plaintext highlighter-rouge">ehcache.xml</code>.</li>
+  <li>The in-memory cache configuration is removed with server restarts if the servers are not in persistent mode (<code class="language-plaintext highlighter-rouge">&lt;restartable enabled="false"&gt;</code>), which is the default.
+  The original (on-disk) <code class="language-plaintext highlighter-rouge">ehcache.xml</code> is loaded.</li>
+  <li>The in-memory cache configuration survives server restarts if the servers are in persistent mode (<code class="language-plaintext highlighter-rouge">&lt;restartable enabled="true"&gt;</code>).
+  If you are using the Terracotta servers with persistence of shared data, and you want the cluster to load the original (on-disk) <code class="language-plaintext highlighter-rouge">ehcache.xml</code>, the servers’ database must be wiped by removing the data files from the servers’ <code class="language-plaintext highlighter-rouge">server-data</code> directory. This directory is specified in the Terracotta configuration file in effect (<code class="language-plaintext highlighter-rouge">tc-config.xml</code> by default). Wiping the database causes <em>all persisted shared data to be lost</em>.</li>
 </ul>
 
 <p>A minimal distributed-cache configuration should have the following configured:</p>
@@ -252,11 +255,11 @@
 </ul>
 
 <h2 id="cachemanager-configuration">CacheManager Configuration</h2>
-<p>CacheManager configuration elements and attributes are fully described in the <code class="highlighter-rouge">ehcache.xml</code> reference file available in the kit.</p>
+<p>CacheManager configuration elements and attributes are fully described in the <code class="language-plaintext highlighter-rouge">ehcache.xml</code> reference file available in the kit.</p>
 
 <h3 id="via-ehcachexml">Via ehcache.xml</h3>
 
-<p>The attributes of <code class="highlighter-rouge">&lt;ehcache&gt;</code> are:</p>
+<p>The attributes of <code class="language-plaintext highlighter-rouge">&lt;ehcache&gt;</code> are:</p>
 
 <ul>
   <li>name –
@@ -291,11 +294,10 @@ automatically register the SampledCacheMBean with the system MBean server.  Curr
 this monitoring is only useful when using Terracotta clustering. The “autodetect” value detects the presence of Terracotta clustering and registers the MBean.  Other allowed values
 are “on” and “off”.  The default is “autodetect”.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &lt;Ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;Ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="ehcache.xsd"
   updateCheck="true" monitoring="autodetect"&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -305,7 +307,10 @@ are “on” and “off”.  The default is “autodetect”.</p>
 creates a CacheManager with a Terracotta configuration specified in an URL, and creates a defaultCache
 and a cache named “example”.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration configuration = new Configuration()
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Configuration configuration = new Configuration()
 .terracotta(new TerracottaClientConfiguration().url("localhost:9510"))
 .defaultCache(new CacheConfiguration("defaultCache", 100))
 .cache(new CacheConfiguration("example", 100)
@@ -313,7 +318,9 @@ and a cache named “example”.</p>
 .timeToLiveSeconds(120)
 .terracotta(new TerracottaConfiguration()));
 CacheManager manager = new CacheManager(configuration);
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="terracotta-clustering-configuration-elements-{#95592}">Terracotta Clustering Configuration Elements {#95592}</h2>
@@ -323,11 +330,11 @@ CacheManager manager = new CacheManager(configuration);
 <p>&lt;a id”96514”&gt;&lt;/a&gt;</p>
 <h3 id="terracotta-70873">terracotta {#70873}</h3>
 
-<p>The <code class="highlighter-rouge">&lt;terracotta&gt;</code> element is an optional sub-element of <code class="highlighter-rouge">&lt;cache&gt;</code>. It can be set differently for each <code class="highlighter-rouge">&lt;cache&gt;</code> defined in <code class="highlighter-rouge">ehcache.xml</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> element is an optional sub-element of <code class="language-plaintext highlighter-rouge">&lt;cache&gt;</code>. It can be set differently for each <code class="language-plaintext highlighter-rouge">&lt;cache&gt;</code> defined in <code class="language-plaintext highlighter-rouge">ehcache.xml</code>.</p>
 
-<p><code class="highlighter-rouge">&lt;terracotta&gt;</code> has one subelement, <code class="highlighter-rouge">&lt;nonstop&gt;</code> (see <a href="/documentation/4.1/bigmemorymax/configuration/non-stop-cache">Non-Blocking Disconnected (Nonstop) Operation</a> for more information).</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> has one subelement, <code class="language-plaintext highlighter-rouge">&lt;nonstop&gt;</code> (see <a href="/documentation/4.1/bigmemorymax/configuration/non-stop-cache">Non-Blocking Disconnected (Nonstop) Operation</a> for more information).</p>
 
-<p>The following <code class="highlighter-rouge">&lt;terracotta&gt;</code> attribute allows you to control the type of data consistency for the distributed cache:</p>
+<p>The following <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> attribute allows you to control the type of data consistency for the distributed cache:</p>
 
 <ul>
   <li>
@@ -337,7 +344,7 @@ CacheManager manager = new CacheManager(configuration);
   </li>
 </ul>
 
-<p>Except for special cases, the following <code class="highlighter-rouge">&lt;terracotta&gt;</code> attributes should operate with their default values:</p>
+<p>Except for special cases, the following <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> attributes should operate with their default values:</p>
 
 <ul>
   <li>clustered –  Enables (“true” DEFAULT) or disables (“false”) Terracotta clustering of a specific cache. Clustering is enabled if this attribute is not specified. Disabling clustering also disables the effects of all of the other attributes.</li>
@@ -357,9 +364,12 @@ CacheManager manager = new CacheManager(configuration);
 
 <h4 id="default-behavior">Default Behavior</h4>
 
-<p>By default, adding <code class="highlighter-rouge">&lt;terracotta/&gt;</code> to a <code class="highlighter-rouge">&lt;cache&gt;</code> block is equivalent to adding the following:</p>
+<p>By default, adding <code class="language-plaintext highlighter-rouge">&lt;terracotta/&gt;</code> to a <code class="language-plaintext highlighter-rouge">&lt;cache&gt;</code> block is equivalent to adding the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="sampleTerracottaCache"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="sampleTerracottaCache"
     maxEntriesLocalHeap="1000"
     eternal="false"
     timeToIdleSeconds="3600"
@@ -367,15 +377,17 @@ CacheManager manager = new CacheManager(configuration);
   &lt;persistence strategy="distributed"/&gt;
   &lt;terracotta clustered="true" consistency="eventual" /&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>&lt;a id”96514”&gt;&lt;/a&gt;</p>
 <h3 id="terracottaconfig-35085">terracottaConfig {#35085}</h3>
 
-<p>The <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element enables the distributed-cache client to identify a source of Terracotta configuration. It also allows a client to rejoin a cluster after disconnecting from that cluster and being timed out by a Terracotta server. For more information on the rejoin feature, see <a href="http://terracotta.org/documentation/4.1/bigmemorymax/configuration/reference-guide#71266">Using Rejoin to Automatically Reconnect Terracotta Clients</a>. In addition, the <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element allows you to enable caches for WAN replication.</p>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element enables the distributed-cache client to identify a source of Terracotta configuration. It also allows a client to rejoin a cluster after disconnecting from that cluster and being timed out by a Terracotta server. For more information on the rejoin feature, see <a href="http://terracotta.org/documentation/4.1/bigmemorymax/configuration/reference-guide#71266">Using Rejoin to Automatically Reconnect Terracotta Clients</a>. In addition, the <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element allows you to enable caches for WAN replication.</p>
 
-<p>The client must load the configuration from a file or a Terracotta server. The value of the <code class="highlighter-rouge">url</code> attribute should contain a path to the file, a system property, or the address and TSA port (9510 by default) of a server.</p>
+<p>The client must load the configuration from a file or a Terracotta server. The value of the <code class="language-plaintext highlighter-rouge">url</code> attribute should contain a path to the file, a system property, or the address and TSA port (9510 by default) of a server.</p>
 
 <table>
 <caption>TIP: Terracotta Clients and Servers</caption>
@@ -390,29 +402,39 @@ In a Terracotta cluster, the application server is also known as the client.
 
 <h4 id="adding-an-url-attribute">Adding an URL Attribute</h4>
 
-<p>Add the <code class="highlighter-rouge">url</code> attribute to the <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element as follows:</p>
+<p>Add the <code class="language-plaintext highlighter-rouge">url</code> attribute to the <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;terracottaConfig url="&lt;source&gt;" /&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;terracottaConfig url="&lt;source&gt;" /&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>where <code class="highlighter-rouge">&lt;source&gt;</code> must be one of the following:</p>
+<p>where <code class="language-plaintext highlighter-rouge">&lt;source&gt;</code> must be one of the following:</p>
 
 <ul>
-  <li>A path (for example, <code class="highlighter-rouge">url="/path/to/tc-config.xml"</code>)</li>
-  <li>An URL (for example, <code class="highlighter-rouge">url="http://www.mydomain.com/path/to/tc-config.xml</code>)</li>
-  <li>A system property (for example, <code class="highlighter-rouge">url="${terracotta.config.location}"</code>), where the system property is defined like this:</li>
+  <li>A path (for example, <code class="language-plaintext highlighter-rouge">url="/path/to/tc-config.xml"</code>)</li>
+  <li>An URL (for example, <code class="language-plaintext highlighter-rouge">url="http://www.mydomain.com/path/to/tc-config.xml</code>)</li>
+  <li>A system property (for example, <code class="language-plaintext highlighter-rouge">url="${terracotta.config.location}"</code>), where the system property is defined like this:</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>System.setProperty("terracotta.config.location","10.x.x.x:9510"");
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>System.setProperty("terracotta.config.location","10.x.x.x:9510"");
+</code>
+      </pre>
+   </div>
 </div>
 
 <ul>
-  <li>A Terracotta host address in the form <code class="highlighter-rouge">&lt;host&gt;:&lt;tsa-port&gt;</code> (for example, <code class="highlighter-rouge">url="host1:9510"</code>). Note the following about using server addresses in the form <code class="highlighter-rouge">&lt;host&gt;:&lt;tsa-port&gt;</code>:
+  <li>A Terracotta host address in the form <code class="language-plaintext highlighter-rouge">&lt;host&gt;:&lt;tsa-port&gt;</code> (for example, <code class="language-plaintext highlighter-rouge">url="host1:9510"</code>). Note the following about using server addresses in the form <code class="language-plaintext highlighter-rouge">&lt;host&gt;:&lt;tsa-port&gt;</code>:
     <ul>
       <li>The default TSA port is 9510.</li>
-      <li>In a multi-server cluster, you can specify a comma-delimited list (for example, <code class="highlighter-rouge">url="host1:9510,host2:9510,host3:9510"</code>).</li>
+      <li>In a multi-server cluster, you can specify a comma-delimited list (for example, <code class="language-plaintext highlighter-rouge">url="host1:9510,host2:9510,host3:9510"</code>).</li>
       <li>If the Terracotta configuration source changes at a later time, it must be updated in configuration.</li>
     </ul>
   </li>
@@ -420,19 +442,27 @@ In a Terracotta cluster, the application server is also known as the client.
 
 <h4 id="adding-the-wan-attribute">Adding the WAN Attribute</h4>
 
-<p>For each cache to be replicated, its <code class="highlighter-rouge">ehcache.xml</code> configuration file must include the <code class="highlighter-rouge">wanEnabledTSA</code> attribute set to “true” within the <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element. Add the <code class="highlighter-rouge">wanEnabledTSA</code> attribute to the <code class="highlighter-rouge">&lt;terracottaConfig&gt;</code> element as follows:</p>
+<p>For each cache to be replicated, its <code class="language-plaintext highlighter-rouge">ehcache.xml</code> configuration file must include the <code class="language-plaintext highlighter-rouge">wanEnabledTSA</code> attribute set to “true” within the <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element. Add the <code class="language-plaintext highlighter-rouge">wanEnabledTSA</code> attribute to the <code class="language-plaintext highlighter-rouge">&lt;terracottaConfig&gt;</code> element as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;terracottaConfig wanEnabledTSA="true"/&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;terracottaConfig wanEnabledTSA="true"/&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>For more information, refer to <a href="http://terracotta.org/documentation/4.1/wan/introduction">BigMemory WAN Replication</a>.</p>
 
 <h3 id="embedding-terracotta-configuration">Embedding Terracotta Configuration</h3>
 
-<p>You can embed the contents of a Terracotta configuration file in <code class="highlighter-rouge">ehcache.xml</code> as follows:</p>
+<p>You can embed the contents of a Terracotta configuration file in <code class="language-plaintext highlighter-rouge">ehcache.xml</code> as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;terracottaConfig&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;terracottaConfig&gt;
    &lt;tc-config&gt;
        &lt;servers&gt;
            &lt;server host="server1" name="s1"/&gt;
@@ -443,7 +473,9 @@ In a Terracotta cluster, the application server is also known as the client.
        &lt;/clients&gt;
    &lt;/tc-config&gt;
 &lt;/terracottaConfig&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="controlling-cache-size-{#78357}">Controlling Cache Size {#78357}</h2>
@@ -459,7 +491,7 @@ In a Terracotta cluster, the application server is also known as the client.
 
 <p>To learn about eviction and controlling the size of the cache, see the <a href="/documentation/4.1/bigmemorymax/configuration/data-life">data life</a> and <a href="/documentation/4.1/bigmemorymax/configuration/cache-size">sizing storage tiers</a> pages.</p>
 
-<p>Ensure that the edited <code class="highlighter-rouge">ehcache.xml</code> is in your application’s classpath. If you are using a WAR file,  <code class="highlighter-rouge">ehcache.xml</code> should be in <code class="highlighter-rouge">WEB-INF/classes</code>.</p>
+<p>Ensure that the edited <code class="language-plaintext highlighter-rouge">ehcache.xml</code> is in your application’s classpath. If you are using a WAR file,  <code class="language-plaintext highlighter-rouge">ehcache.xml</code> should be in <code class="language-plaintext highlighter-rouge">WEB-INF/classes</code>.</p>
 
 <p>See <a href="http://terracotta.org/documentation/4.1/bigmemorymax/configuration/reference-guide#30343">How Configuration Affects Element Eviction</a> for more information on how configuration can impact eviction. See <a href="#95592">Terracotta Clustering Configuration Elements</a> for definitions of other available configuration properties.</p>
 
@@ -469,7 +501,7 @@ In a Terracotta cluster, the application server is also known as the client.
 
 <h2 id="cache-events-configuration-{#20075}">Cache Events Configuration {#20075}</h2>
 
-<p>The <code class="highlighter-rouge">&lt;cache&gt;</code> subelement &lt;cacheEventListenerFactory&gt;, which registers listeners for cache events such as puts and updates, has a notification scope controlled by the attribute <code class="highlighter-rouge">listenFor</code>. This attribute can have one of the following values:</p>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;cache&gt;</code> subelement &lt;cacheEventListenerFactory&gt;, which registers listeners for cache events such as puts and updates, has a notification scope controlled by the attribute <code class="language-plaintext highlighter-rouge">listenFor</code>. This attribute can have one of the following values:</p>
 
 <ul>
   <li>local –  Listen for events on the local node. No remote events are detected.</li>
@@ -479,35 +511,45 @@ In a Terracotta cluster, the application server is also known as the client.
 
 <p>In order for cache events to be detected by remote nodes in a Terracotta cluster, event listeners must have a scope that includes remote events. For example, the following configuration allows listeners of type MyCacheListener to detect both local and remote events:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache" ... &gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="myCache" ... &gt;
  &lt;!-- Not defining the listenFor attribute for &lt;cacheEventListenerFactory&gt; is by default
       equivalent to listenFor="all". --&gt;
  &lt;cacheEventListenerFactory
     class="net.sf.ehcache.event.TerracottaCacheEventReplicationFactory" /&gt;
  &lt;terracotta /&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>You must use <code class="highlighter-rouge">net.sf.ehcache.event.TerracottaCacheEventReplicationFactory</code> as the factory class to enable cluster-wide cache-event broadcasts in a Terracotta cluster.</p>
+<p>You must use <code class="language-plaintext highlighter-rouge">net.sf.ehcache.event.TerracottaCacheEventReplicationFactory</code> as the factory class to enable cluster-wide cache-event broadcasts in a Terracotta cluster.</p>
 
 <p>See <a href="http://terracotta.org/documentation/4.1/bigmemorymax/configuration/reference-guide#82378">Cache Events in a Terracotta Cluster</a> for more information on cache events in a Terracotta cluster.</p>
 
 <h2 id="copy-on-read">Copy On Read</h2>
 
-<p>The <code class="highlighter-rouge">copyOnRead</code> setting is most easily explained by first examining what it does when not enabled and exploring the potential problems that can arise.
-For a cache in which <code class="highlighter-rouge">copyOnRead</code> is NOT enabled, the following reference comparison will always be true:</p>
+<p>The <code class="language-plaintext highlighter-rouge">copyOnRead</code> setting is most easily explained by first examining what it does when not enabled and exploring the potential problems that can arise.
+For a cache in which <code class="language-plaintext highlighter-rouge">copyOnRead</code> is NOT enabled, the following reference comparison will always be true:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Object obj1 = c.get("key").getValue();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Object obj1 = c.get("key").getValue();
 // Assume no other thread changes the cache mapping between these get() operations ....
 Object obj2 = c.get("key").getValue();
 if (obj1 == obj2) {
  System.err.println("Same value objects!");
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The fact that the same object reference is returned across multiple <code class="highlighter-rouge">get()</code> operations implies that the cache is storing a direct reference to cache value. This default behavior (copyOnRead=false) is usually desired, although there are at least two scenarios in which it is problematic:</p>
+<p>The fact that the same object reference is returned across multiple <code class="language-plaintext highlighter-rouge">get()</code> operations implies that the cache is storing a direct reference to cache value. This default behavior (copyOnRead=false) is usually desired, although there are at least two scenarios in which it is problematic:</p>
 
 <p>(1) Caches shared between classloaders</p>
 
@@ -520,24 +562,29 @@ In this scenario you would get ClassCastExceptions when one web application acce
 read by the other application.</p>
 
 <p>One obvious solution to this problem is to move the value types to the
-common loader, but another is to enable <code class="highlighter-rouge">copyOnRead</code>. When copyOnRead is in effect, the object references are unique with every <code class="highlighter-rouge">get()</code>. Having unique object references means that the thread context loader of the caller
-will be used to materialize the cache values on each <code class="highlighter-rouge">get()</code>. This feature has utility in OSGi environments as well where a common cache service might be shared between bundles.</p>
+common loader, but another is to enable <code class="language-plaintext highlighter-rouge">copyOnRead</code>. When copyOnRead is in effect, the object references are unique with every <code class="language-plaintext highlighter-rouge">get()</code>. Having unique object references means that the thread context loader of the caller
+will be used to materialize the cache values on each <code class="language-plaintext highlighter-rouge">get()</code>. This feature has utility in OSGi environments as well where a common cache service might be shared between bundles.</p>
 
 <p>Another subtle issue concerns mutable value objects in a distributed cache. Consider this simple code with a Cache containing a mutable value type (Foo):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Foo {
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>class Foo {
  int field;
 }
 Foo foo = (Foo) c.get("key").getValue();
 foo.field++;
 // foo instance is never re-put() to the cache
 // ...
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>If the Foo instance is never put back into the Cache your local cache is no longer consistent with the cluster (it is locally modified only). Enabling <code class="highlighter-rouge">copyOnRead</code> eliminates this possibility since the only way to affect cache values is to call mutator methods on the Cache.</p>
+<p>If the Foo instance is never put back into the Cache your local cache is no longer consistent with the cluster (it is locally modified only). Enabling <code class="language-plaintext highlighter-rouge">copyOnRead</code> eliminates this possibility since the only way to affect cache values is to call mutator methods on the Cache.</p>
 
-<p>It is worth noting that there is a performance penalty to copyOnRead since values are deserialized on every <code class="highlighter-rouge">get()</code>.</p>
+<p>It is worth noting that there is a performance penalty to copyOnRead since values are deserialized on every <code class="language-plaintext highlighter-rouge">get()</code>.</p>
 
 <h2 id="configuring-robust-distributed-in-memory-data-sets">Configuring Robust Distributed In-memory Data Sets</h2>
 
@@ -553,13 +600,13 @@ foo.field++;
 
 <h2 id="incompatible-configuration">Incompatible Configuration</h2>
 
-<p>For any clustered cache, you must delete, disable, or edit configuration elements in <code class="highlighter-rouge">ehcache.xml</code> that are incompatible when clustering with Terracotta. Clustered caches have a <code class="highlighter-rouge">&lt;terracotta/&gt;</code> or <code class="highlighter-rouge">&lt;terracotta clustered="true"/&gt;</code> element.</p>
+<p>For any clustered cache, you must delete, disable, or edit configuration elements in <code class="language-plaintext highlighter-rouge">ehcache.xml</code> that are incompatible when clustering with Terracotta. Clustered caches have a <code class="language-plaintext highlighter-rouge">&lt;terracotta/&gt;</code> or <code class="language-plaintext highlighter-rouge">&lt;terracotta clustered="true"/&gt;</code> element.</p>
 
 <p>The following Ehcache configuration attributes or elements should be deleted or disabled:</p>
 
 <ul>
-  <li>Replication-related attributes such as <code class="highlighter-rouge">replicateAsynchronously</code> and <code class="highlighter-rouge">replicatePuts</code>.</li>
-  <li>The attribute <code class="highlighter-rouge">MemoryStoreEvictionPolicy</code> is ignored (a clock eviction policy is used instead), however, if allowed to remain in a clustered cache configuration, the <code class="highlighter-rouge">MemoryStoreEvictionPolicy</code> may cause an exception.</li>
+  <li>Replication-related attributes such as <code class="language-plaintext highlighter-rouge">replicateAsynchronously</code> and <code class="language-plaintext highlighter-rouge">replicatePuts</code>.</li>
+  <li>The attribute <code class="language-plaintext highlighter-rouge">MemoryStoreEvictionPolicy</code> is ignored (a clock eviction policy is used instead), however, if allowed to remain in a clustered cache configuration, the <code class="language-plaintext highlighter-rouge">MemoryStoreEvictionPolicy</code> may cause an exception.</li>
 </ul>
 
 <h2 id="exporting-configuration-from-the-terracotta-management-console-{#68288}">Exporting Configuration from the Terracotta Management Console {#68288}</h2>
@@ -601,14 +648,6 @@ foo.field++;
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -630,24 +669,32 @@ foo.field++;
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -655,7 +702,7 @@ foo.field++;
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -195,31 +198,36 @@
 <p>BigMemory Max’s Ehcache implementation includes Cache extensions. Cache extensions are a general-purpose mechanism to allow generic extensions to a Cache. Cache extensions are tied into the Cache lifecycle. For that reason, this interface has the lifecycle
 methods.</p>
 
-<p>Cache extensions are created using the <code class="highlighter-rouge">CacheExtensionFactory</code>, which has a <code class="highlighter-rouge">createCacheCacheExtension()</code> method that takes as a parameter a
+<p>Cache extensions are created using the <code class="language-plaintext highlighter-rouge">CacheExtensionFactory</code>, which has a <code class="language-plaintext highlighter-rouge">createCacheCacheExtension()</code> method that takes as a parameter a
 Cache and properties. It can thus call back into any public method on Cache, including, of
 course, the load methods. Cache extensions are suitable for timing services, where you want to create a timer to perform cache operations. (Another way of adding Cache behavior is to decorate a cache. See <a href="/documentation/4.1/bigmemorymax/api/constructs">Blocking Cache</a> for an example of how to do this.)</p>
 
-<p>Because a <code class="highlighter-rouge">CacheExtension</code> holds a reference to a Cache, the <code class="highlighter-rouge">CacheExtension</code> can do things such as registering a <code class="highlighter-rouge">CacheEventListener</code> or even a <code class="highlighter-rouge">CacheManagerEventListener</code>, all from within a <code class="highlighter-rouge">CacheExtension</code>, creating more opportunities for customization.</p>
+<p>Because a <code class="language-plaintext highlighter-rouge">CacheExtension</code> holds a reference to a Cache, the <code class="language-plaintext highlighter-rouge">CacheExtension</code> can do things such as registering a <code class="language-plaintext highlighter-rouge">CacheEventListener</code> or even a <code class="language-plaintext highlighter-rouge">CacheManagerEventListener</code>, all from within a <code class="language-plaintext highlighter-rouge">CacheExtension</code>, creating more opportunities for customization.</p>
 
 <h2 id="declarative-configuration">Declarative Configuration</h2>
 <p>Cache extensions are configured per cache. Each cache can have zero or more.
-A <code class="highlighter-rouge">CacheExtension</code> is configured by adding a <code class="highlighter-rouge">cacheExceptionHandlerFactory</code> element as shown in the following example:</p>
+A <code class="language-plaintext highlighter-rouge">CacheExtension</code> is configured by adding a <code class="language-plaintext highlighter-rouge">cacheExceptionHandlerFactory</code> element as shown in the following example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache ...&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache ...&gt;
     &lt;cacheExtensionFactory class="com.example.FileWatchingCacheRefresherExtensionFactory"
     properties="refreshIntervalMillis=18000, loaderTimeout=3000,
         flushPeriod=whatever, someOtherProperty=someValue ..."/&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="implementing-a-cache-extension-factory-and-cache-extension">Implementing a Cache Extension Factory and Cache Extension</h2>
-<p>A <code class="highlighter-rouge">CacheExtensionFactory</code> is an abstract factory for creating
+<p>A <code class="language-plaintext highlighter-rouge">CacheExtensionFactory</code> is an abstract factory for creating
 cache extension. Implementers should provide their own concrete
 factory, extending this abstract factory. It can then be configured in
 ehcache.xml.
 The factory class needs to be a concrete subclass of the abstract
-factory class <code class="highlighter-rouge">CacheExtensionFactory</code>, which is reproduced below:</p>
+factory class <code class="language-plaintext highlighter-rouge">CacheExtensionFactory</code>, which is reproduced below:</p>
 
 <pre>
    <code>/**
@@ -240,7 +248,7 @@ public abstract CacheExtension createCacheExtension(Ehcache cache, Properties pr
 </code>
 </pre>
 
-<p>The factory creates a concrete implementation of the <code class="highlighter-rouge">CacheExtension</code>
+<p>The factory creates a concrete implementation of the <code class="language-plaintext highlighter-rouge">CacheExtension</code>
 interface, which is reproduced below:</p>
 
 <pre>
@@ -352,14 +360,6 @@ cache.registerCacheExtension(testCacheExtension);
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -381,24 +381,32 @@ cache.registerCacheExtension(testCacheExtension);
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -406,7 +414,7 @@ cache.registerCacheExtension(testCacheExtension);
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

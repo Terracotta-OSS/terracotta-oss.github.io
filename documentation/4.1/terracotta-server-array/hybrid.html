@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -260,7 +263,7 @@
 
 <h2 id="configuration">Configuration</h2>
 
-<p>To configure BigMemory Hybrid, include the following elements in the <code class="highlighter-rouge">tc-config.xml</code> file:</p>
+<p>To configure BigMemory Hybrid, include the following elements in the <code class="language-plaintext highlighter-rouge">tc-config.xml</code> file:</p>
 
 <ul>
   <li><strong>dataStorage</strong> — Specifies the maximum amount of data you plan to store on the server, using either DRAM alone or both DRAM and SSD flash memory.</li>
@@ -270,7 +273,10 @@
 
 <p>For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;servers&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;servers&gt;
     ....
     &lt;server host="hostname" name="server1"&gt;
         ...
@@ -280,23 +286,25 @@
         &lt;/dataStorage&gt;
     &lt;/server&gt;
 &lt;/servers&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>For Terracotta servers, a minimum of 4 GB is recommended for the size attribute of the <code class="highlighter-rouge">offheap</code> element.</p>
+<p>For Terracotta servers, a minimum of 4 GB is recommended for the size attribute of the <code class="language-plaintext highlighter-rouge">offheap</code> element.</p>
 
-<p>If the <code class="highlighter-rouge">hybrid</code> element is present, then the BigMemory Hybrid functionality is enabled. With Hybrid enabled, the value of the size attribute for the <code class="highlighter-rouge">dataStorage</code> element can exceed that of the size attribute for the  <code class="highlighter-rouge">offheap</code> element. This enables SSD devices to supplement the DRAM and be many times larger than the DRAM.</p>
+<p>If the <code class="language-plaintext highlighter-rouge">hybrid</code> element is present, then the BigMemory Hybrid functionality is enabled. With Hybrid enabled, the value of the size attribute for the <code class="language-plaintext highlighter-rouge">dataStorage</code> element can exceed that of the size attribute for the  <code class="language-plaintext highlighter-rouge">offheap</code> element. This enables SSD devices to supplement the DRAM and be many times larger than the DRAM.</p>
 
-<p>If the <code class="highlighter-rouge">hybrid</code> element is absent, then BigMemory Hybrid functionality is off. With Hybrid off, the value of the size attribute for the <code class="highlighter-rouge">dataStorage</code> element must be less than or equal to the value of the size attribute for the <code class="highlighter-rouge">offheap</code> element. In this case, the <code class="highlighter-rouge">offheap</code> element is not required.</p>
+<p>If the <code class="language-plaintext highlighter-rouge">hybrid</code> element is absent, then BigMemory Hybrid functionality is off. With Hybrid off, the value of the size attribute for the <code class="language-plaintext highlighter-rouge">dataStorage</code> element must be less than or equal to the value of the size attribute for the <code class="language-plaintext highlighter-rouge">offheap</code> element. In this case, the <code class="language-plaintext highlighter-rouge">offheap</code> element is not required.</p>
 
-<p>If the <code class="highlighter-rouge">dataStorage</code> element is absent, <code class="highlighter-rouge">dataStorage</code> size and <code class="highlighter-rouge">offheap</code> size default to 512 MB.</p>
+<p>If the <code class="language-plaintext highlighter-rouge">dataStorage</code> element is absent, <code class="language-plaintext highlighter-rouge">dataStorage</code> size and <code class="language-plaintext highlighter-rouge">offheap</code> size default to 512 MB.</p>
 
-<p>Although the <code class="highlighter-rouge">dataStorage</code> element is optional, if included, this element must have a value assigned to its size attribute.</p>
+<p>Although the <code class="language-plaintext highlighter-rouge">dataStorage</code> element is optional, if included, this element must have a value assigned to its size attribute.</p>
 
-<p><strong>Note</strong>: If you are migrating from BigMemory Max 4.0 to 4.1, the <code class="highlighter-rouge">dataStorage</code> element has replaced the <code class="highlighter-rouge">maxDataSize</code> element. The old element is still compatible for pure DRAM operation, but to enable Hybrid mode, you must use the new 4.1-compatible dataStorage element with the <code class="highlighter-rouge">hybrid</code> tag.</p>
+<p><strong>Note</strong>: If you are migrating from BigMemory Max 4.0 to 4.1, the <code class="language-plaintext highlighter-rouge">dataStorage</code> element has replaced the <code class="language-plaintext highlighter-rouge">maxDataSize</code> element. The old element is still compatible for pure DRAM operation, but to enable Hybrid mode, you must use the new 4.1-compatible dataStorage element with the <code class="language-plaintext highlighter-rouge">hybrid</code> tag.</p>
 
 <p>###Disk Storage Path
-BigMemory Hybrid requires a unique and explicitly specified path. The default path is the Terracotta server’s home directory. You can customize the path using the <code class="highlighter-rouge">&lt;data&gt;</code> element in the server’s <code class="highlighter-rouge">tc-config.xml</code> configuration file.</p>
+BigMemory Hybrid requires a unique and explicitly specified path. The default path is the Terracotta server’s home directory. You can customize the path using the <code class="language-plaintext highlighter-rouge">&lt;data&gt;</code> element in the server’s <code class="language-plaintext highlighter-rouge">tc-config.xml</code> configuration file.</p>
 
 <p>###BigMemory Hybrid and Fast Restartability
 If <a href="/documentation/4.1/terracotta-server-array/server-arrays#fast-restartability">Fast Restartabillity</a> is enabled, then if you have a restart, data will be loaded into BigMemory Hybrid in the same way as for BigMemory, with no difference in behavior or time required to get the system running again.</p>
@@ -356,14 +364,6 @@ When the cache is operating at a steady state, the Data Used typically exceeds t
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -385,24 +385,32 @@ When the cache is operating at a steady state, the Data Used typically exceeds t
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -410,7 +418,7 @@ When the cache is operating at a steady state, the Data Used typically exceeds t
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -220,15 +223,14 @@ are also available in the BigMemory Max kit in the /code-samples directory.</p>
 
 <p>To run the code samples with Maven, you will need to add the Terracotta Maven repositories to your Maven settings.xml file. Add the following repository information to your settings.xml file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;repository&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;repository&gt;
     &lt;id&gt;terracotta-repository&lt;/id&gt;
     &lt;url&gt;http://www.terracotta.org/download/reflector/releases&lt;/url&gt;
     &lt;releases&gt;
         &lt;enabled&gt;true&lt;/enabled&gt;
     &lt;/releases&gt;
 &lt;/repository&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>For further information, refer to <a href="http://terracotta.org/documentation/more/apache-maven">Working with Apache Maven</a>.</p>
 
@@ -240,9 +242,9 @@ CacheManager instance, passing the a file name or an URL object to the
 constructor.</p>
 
 <p>The following example shows how to create a CacheManager with an URL of the XML
-file in the classpath at <code class="highlighter-rouge">/xml/ehcache.xml</code>.</p>
+file in the classpath at <code class="language-plaintext highlighter-rouge">/xml/ehcache.xml</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>CacheManager manager = CacheManager.newInstance(
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CacheManager manager = CacheManager.newInstance(
                           getClass().getResource("/xml/ehcache.xml"));
 try {
   Cache bigMemory = manager.getCache("BigMemory");
@@ -251,12 +253,11 @@ try {
 } finally {
   if (manager != null) manager.shutdown();
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here are the contents of the XML configuration file used by this sample:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
          name="config"&gt;
   &lt;cache name="BigMemory"
@@ -267,10 +268,9 @@ try {
          eternal="true"&gt;
   &lt;/cache&gt;
 &lt;/ehcache&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>The configuration element <code class="highlighter-rouge">maxBytesLocalOffHeap</code> lets you set how much off-heap
+<p>The configuration element <code class="language-plaintext highlighter-rouge">maxBytesLocalOffHeap</code> lets you set how much off-heap
 memory to use. BigMemory’s unique off-heap memory storage lets you use all of
 the memory available on a server in a single JVM—from gigabytes to
 multiple terabytes—without causing garbage
@@ -282,7 +282,7 @@ collection pauses.</p>
 <p>To configure BigMemory Max programmatically, use the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">Ehcache fluent
 configuration API</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration managerConfiguration = new Configuration()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration managerConfiguration = new Configuration()
     .name("bigmemory-config")
     .cache(new CacheConfiguration()
         .name("BigMemory")
@@ -301,8 +301,7 @@ try {
 } finally {
   if (manager != null) manager.shutdown();
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a id="example03-crud"></a></p>
 <h2 id="example-3-create-read-update-and-delete-crud">Example 3: Create, Read, Update and Delete (CRUD)</h2>
@@ -310,7 +309,7 @@ try {
 
 <p>First, we create a BigMemory data store configured to use 128 MB of heap memory:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration managerConfiguration = new Configuration();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration managerConfiguration = new Configuration();
 managerConfiguration.name("config")
     .terracotta(new TerracottaClientConfiguration().url("localhost:9510"))
     .cache(new CacheConfiguration()
@@ -321,49 +320,44 @@ managerConfiguration.name("config")
 
 CacheManager manager = CacheManager.create(managerConfiguration);
 Cache bigMemory = manager.getCache("bigMemory-crud");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now that we have a BigMemory instance configured and available, we can start
 creating data in it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>final Person timDoe = new Person("Tim Doe", 35, Person.Gender.MALE,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final Person timDoe = new Person("Tim Doe", 35, Person.Gender.MALE,
     "eck street", "San Mateo", "CA");
 bigMemory.put(new Element("1", timDoe));
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Then, we can read data from it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>final Element element = bigMemory.get("1");
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final Element element = bigMemory.get("1");
 System.out.println("The value for key 1 is  " + element.getObjectValue());
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And update it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>final Person pamelaJones = new Person("Pamela Jones", 23, Person.Gender.FEMALE,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final Person pamelaJones = new Person("Pamela Jones", 23, Person.Gender.FEMALE,
     "berry st", "Parsippany", "LA");
 bigMemory.put(new Element("1", pamelaJones));
 final Element updated = bigMemory.get("1");
 System.out.println("The value for key 1 is now " + updated.getObjectValue() +
                      ". key 1 has been updated.");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And delete it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bigMemory.remove("1");
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bigMemory.remove("1");
 System.out.println("Try to retrieve key 1.");
 final Element removed = bigMemory.get("1");
 System.out.println("Value for key 1 is " + removed +
                    ". Key 1 has been deleted.");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You can also create or update multiple entries at once:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Collection&lt;Element&gt; elements = new ArrayList&lt;Element&gt;();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Collection&lt;Element&gt; elements = new ArrayList&lt;Element&gt;();
 elements.add(new Element("1", new Person("Jane Doe", 35,
     Person.Gender.FEMALE, "eck street", "San Mateo", "CA")));
 elements.add(new Element("2", new Person("Marie Antoinette", 23,
@@ -376,27 +370,23 @@ elements.add(new Element("5", new Person("Juliet Capulet", 25,
     Person.Gender.FEMALE, "big wig", "Beverly Hills", "NJ")));
 
 bigMemory.putAll(elements);
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And read multiple entries at once:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>final Map&lt;Object, Element&gt; elementsMap = bigMemory.getAll(
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final Map&lt;Object, Element&gt; elementsMap = bigMemory.getAll(
     Arrays.asList("1", "2", "3"));
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And delete multiple entries at once:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bigMemory.removeAll(Arrays.asList("1", "2", "3"));
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bigMemory.removeAll(Arrays.asList("1", "2", "3"));
+</code></pre></div></div>
 
 <p>And delete everything at once:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bigMemory.removeAll();
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bigMemory.removeAll();
+</code></pre></div></div>
 
 <p><a id="example04-search"></a></p>
 <h2 id="example-4-search">Example 4: Search</h2>
@@ -406,7 +396,7 @@ You can also issue queries using BigMemory SQL, either from the command line or 
 
 <p>First, create an instance of BigMemory Max with searchable attributes:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration managerConfig = new Configuration()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration managerConfig = new Configuration()
     .cache(new CacheConfiguration().name("MySearchableDataStore")
         .eternal(true)
         .maxBytesLocalHeap(512, MemoryUnit.MEGABYTES)
@@ -424,12 +414,11 @@ You can also issue queries using BigMemory SQL, either from the command line or 
 
 CacheManager manager = CacheManager.create(managerConfig);
 Ehcache bigMemory = manager.getEhcache("MySearchableDataStore");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Next, insert data:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bigMemory.put(new Element(1, new Person("Jane Doe", 35, Gender.FEMALE,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bigMemory.put(new Element(1, new Person("Jane Doe", 35, Gender.FEMALE,
     "eck street", "San Mateo", "CA")));
 bigMemory.put(new Element(2, new Person("Marie Antoinette", 23, Gender.FEMALE,
     "berry st", "Parsippany", "LA")));
@@ -443,12 +432,11 @@ for (int i = 6; i &lt; 1000; i++) {
   bigMemory.put(new Element(i, new Person("Juliet Capulet" + i, 30,
       Person.Gender.MALE, "dah man", "Bangladesh", "NJ")));
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Create some search attributes and construct a query:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Attribute&lt;Integer&gt; age = bigMemory.getSearchAttribute("age");
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Attribute&lt;Integer&gt; age = bigMemory.getSearchAttribute("age");
 Attribute&lt;Gender&gt; gender = bigMemory.getSearchAttribute("gender");
 Attribute&lt;String&gt; name = bigMemory.getSearchAttribute("name");
 Attribute&lt;String&gt; state = bigMemory.getSearchAttribute("state");
@@ -458,12 +446,11 @@ query.includeKeys();
 query.includeValues();
 query.addCriteria(name.ilike("Jul*").and(gender.eq(Gender.FEMALE)))
     .addOrderBy(age, Direction.ASCENDING).maxResults(10);
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Execute the query and look at the results:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Results results = query.execute();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Results results = query.execute();
 System.out.println(" Size: " + results.size());
 System.out.println("----Results-----\n");
 for (Result result : results.all()) {
@@ -471,46 +458,42 @@ for (Result result : results.all()) {
                      + "] Value class [" + result.getValue().getClass()
                      + "] Value [" + result.getValue() + "]");
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>We can also use Aggregators to perform computations across query
 results. Here’s an example that computes the average age of all people in the
 data set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Query averageAgeQuery = bigMemory.createQuery();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Query averageAgeQuery = bigMemory.createQuery();
 averageAgeQuery.includeAggregator(Aggregators.average(age));
 System.out.println("Average age: "
                    + averageAgeQuery.execute().all().iterator().next()
                        .getAggregatorResults());
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>We can also restrict the calculation to a subset based on search
 attributes. Here’s an example that computes the average age of all people in
 the data set between the ages of 30 and 40:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Query agesBetween = bigMemory.createQuery();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Query agesBetween = bigMemory.createQuery();
 agesBetween.addCriteria(age.between(30, 40));
 agesBetween.includeAggregator(Aggregators.average(age));
 System.out.println("Average age between 30 and 40: "
                    + agesBetween.execute().all().iterator().next()
                        .getAggregatorResults());
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Using Aggregators, we can also find number of entries that match our search
 criteria.  Here’s an example that finds the number of people in the data set
 who live in New Jersey:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Query newJerseyCountQuery = bigMemory.createQuery().addCriteria(
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Query newJerseyCountQuery = bigMemory.createQuery().addCriteria(
                                 state.eq("NJ"));
 newJerseyCountQuery.includeAggregator(Aggregators.count());
 System.out.println("Count of people from NJ: "
                    + newJerseyCountQuery.execute().all().iterator().next()
                        .getAggregatorResults());
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a id="example05-nonstop"></a></p>
 <h2 id="example-5-nonstoprejoin">Example 5: Nonstop/Rejoin</h2>
@@ -518,7 +501,7 @@ System.out.println("Count of people from NJ: "
 
 <p>This example demonstrates the nonstop and rejoin features of BigMemory Max. After loading the configuration below, use the scripts provided to start and run the server. Then stop the server and verify that the nonstop feature is working. Start the server again and watch the rejoin feature in action.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration managerConfig = new Configuration()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration managerConfig = new Configuration()
     .terracotta(new TerracottaClientConfiguration().url("localhost:9510").rejoin(true))
     .cache(new CacheConfiguration().name("nonstop-sample")
         .persistence(new PersistenceConfiguration().strategy(DISTRIBUTED))
@@ -578,8 +561,7 @@ try {
 {
   if (manager != null) manager.shutdown();
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a id="example06-arc"></a></p>
 <h2 id="example-6-automatic-resource-control-arc">Example 6: Automatic Resource Control (ARC)</h2>
@@ -594,7 +576,7 @@ automatically move data into off-heap memory up to a maximum of 8 G.  The
 amount of off-heap memory you can use is limited only by the amount of physical
 RAM you have available.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
      updateCheck="false" monitoring="autodetect"
      dynamicConfig="true"
@@ -611,8 +593,7 @@ RAM you have available.</p>
   &lt;/cache&gt;
 
 &lt;/ehcache&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This instructs the ARC capability of BigMemory to keep a maximum of 512 MB of its data in heap
 for nanosecond to microsecond access.  In this example, as the 512 MB of heap memory fills up,
@@ -628,7 +609,7 @@ in-memory data in a single JVM. However, to avoid swapping take care not to conf
 an example of allocating 4 G of off-heap memory to the BigMemory1 data set and
 4 G of off-heap memory to the BigMemory2 data set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ehcache xmlns
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ehcache xmlns
  ...
      name="MyManager"
      maxBytesLocalHeap="512M"
@@ -644,8 +625,7 @@ an example of allocating 4 G of off-heap memory to the BigMemory1 data set and
   &lt;/cache&gt;
 
 &lt;/ehcache&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a id="example07-cache"></a></p>
 <h2 id="example-7-using-bigmemory-as-a-cache">Example 7: Using BigMemory As a Cache</h2>
@@ -659,7 +639,7 @@ features available in BigMemory Max.</p>
 <p>The following programmatic configuration snippet shows how to set time-to-live
 (TTL) and time-to-idle (TTI) policies on a data set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration managerConfiguration = new Configuration();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration managerConfiguration = new Configuration();
 managerConfiguration.name("cacheManagerCompleteExample")
     .terracotta(new TerracottaClientConfiguration().url("localhost:9510"))
     .cache(
@@ -673,15 +653,14 @@ managerConfiguration.name("cacheManagerCompleteExample")
 
 
 CacheManager manager = CacheManager.create(managerConfiguration);
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">timeToLiveSeconds</code> directive sets the maximum age of an element in the
+<p>The <code class="language-plaintext highlighter-rouge">timeToLiveSeconds</code> directive sets the maximum age of an element in the
 data set.  Elements older than the maximum TTL will not be returned from the
 data store.  This is useful when BigMemory is used as a cache of external data
 and you want to ensure the freshness of the cache.</p>
 
-<p>The <code class="highlighter-rouge">timeToIdleSeconds</code> directive sets the maximum time since last access of an
+<p>The <code class="language-plaintext highlighter-rouge">timeToIdleSeconds</code> directive sets the maximum time since last access of an
 element. Elements that have been idle longer than the maximum TTI will not be
 returned from the data store. This is useful when BigMemory is being used as a
 cache of external data and you want to bias the eviction algorithm towards
@@ -723,14 +702,6 @@ explicitly removed.</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -752,24 +723,32 @@ explicitly removed.</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -777,7 +756,7 @@ explicitly removed.</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

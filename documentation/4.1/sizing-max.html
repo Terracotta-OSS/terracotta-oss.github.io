@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -298,7 +301,7 @@
 <p>Use this worksheet to calculate the total data size by cache.</p>
 
 <p>####Procedure
-Load the cache, and then call <code class="highlighter-rouge">cache.calculateInMemorySize()</code> and <code class="highlighter-rouge">cache.calculateOffHeapSize()</code>. These methods will return the serialized memory consumption in bytes.</p>
+Load the cache, and then call <code class="language-plaintext highlighter-rouge">cache.calculateInMemorySize()</code> and <code class="language-plaintext highlighter-rouge">cache.calculateOffHeapSize()</code>. These methods will return the serialized memory consumption in bytes.</p>
 
 <p>For large caches, this exercise could be done with a percentage of the cache. Load Elements that are representative of the typical Element sizes for that cache, and then multiply by the factor needed to represent the entire cache.</p>
 
@@ -511,7 +514,7 @@ Load the cache, and then call <code class="highlighter-rouge">cache.calculateInM
 
 <p>Use this worksheet to account for the Terracotta servers that will be used in your TSA and WAN replication deployments.</p>
 
-<p>Note that Total TSA Size calculated in Worksheet 3 must equal the sum of the <code class="highlighter-rouge">dataStorage</code> allocations of the active servers in the TSA. <code class="highlighter-rouge">dataStorage</code> configured for additional servers in a mirror group is not counted when figuring the total TSA size.</p>
+<p>Note that Total TSA Size calculated in Worksheet 3 must equal the sum of the <code class="language-plaintext highlighter-rouge">dataStorage</code> allocations of the active servers in the TSA. <code class="language-plaintext highlighter-rouge">dataStorage</code> configured for additional servers in a mirror group is not counted when figuring the total TSA size.</p>
 
 <table>
   <thead>
@@ -727,7 +730,7 @@ Load the cache, and then call <code class="highlighter-rouge">cache.calculateInM
 
 <p>Local heap refers to the heap memory to be used by BigMemory on the application server (Terracotta client). The local heap allocation needs to be large enough to avoid out-of-memory errors but small enough to avoid excessive garbage collection. You should set maxEntriesLocalHeap to at least 100 elements when using an off-heap store to avoid performance degradation.</p>
 
-<p>Configuration concerns the maximum number of entries or bytes a data set can use of the local heap memory or, when set at the CacheManager level (<code class="highlighter-rouge">maxBytesLocalHeap</code> only), as a pool available to all data sets under that CacheManager.</p>
+<p>Configuration concerns the maximum number of entries or bytes a data set can use of the local heap memory or, when set at the CacheManager level (<code class="language-plaintext highlighter-rouge">maxBytesLocalHeap</code> only), as a pool available to all data sets under that CacheManager.</p>
 
 <table>
   <thead>
@@ -788,9 +791,8 @@ which can provide an estimate of the size (in bytes) of the memory store. It ret
 <p>####JVM heap size
 Allocate at least enough heap using the -Xmx Java option to accomodate the on-heap storage specified in your configuration, plus enough extra heap to run the rest of your application. This property is set by adding the parameter to the java invocation. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Xmx1g
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Xmx1g
+</code></pre></div></div>
 
 <p>For additional information about heap memory, see <a href="http://terracotta.org/documentation/4.1/bigmemorymax/best-practices#tuning-heap-memory-performance">Tuning Heap Memory Performance</a>.</p>
 
@@ -799,7 +801,7 @@ Local off-heap refers to the RAM to be used by BigMemory on the application serv
 
 <p>Part of successful sizing is to find the right balance between heap and off-heap. Heap storage is faster but has the disadvantage of being subject to garbage collection. Once GC is factored into the average TPS, the best strategy is usually to maximize off-heap and minimize heap memory, in order to reduce the drag that heap GC imposes on performance.</p>
 
-<p>Configuration concerns the maximum number of bytes a data set can use in off-heap memory, or when set at the CacheManager level, as a pool available to all data sets under that CacheManager. <code class="highlighter-rouge">maxBytesLocalOffHeap</code> sets the amount of off-heap memory available to the cache and is in effect only if overflowToOffHeap is true. The minimum amount that can be allocated is 1MB. There is no maximum.</p>
+<p>Configuration concerns the maximum number of bytes a data set can use in off-heap memory, or when set at the CacheManager level, as a pool available to all data sets under that CacheManager. <code class="language-plaintext highlighter-rouge">maxBytesLocalOffHeap</code> sets the amount of off-heap memory available to the cache and is in effect only if overflowToOffHeap is true. The minimum amount that can be allocated is 1MB. There is no maximum.</p>
 
 <table>
   <thead>
@@ -852,9 +854,8 @@ Local off-heap refers to the RAM to be used by BigMemory on the application serv
 <p>####Direct Memory Configuration
 The off-heap store uses the direct-memory portion of the JVM. Since direct memory may be shared with other processes, allocate at least 256MB (or preferably 1GB) more to direct memory than will be allocated to the off-heap store, while not exceeding physical RAM. This property is set by adding the parameter to the java invocation, for example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-XX:MaxDirectMemorySize=7G
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-XX:MaxDirectMemorySize=7G
+</code></pre></div></div>
 
 <p>For more information, refer to <a href="http://www.terracotta.org/documentation/4.1/bigmemorymax/configuration/storage-options#allocating-direct-memory">Allocating Direct Memory in the JVM</a>.</p>
 
@@ -872,7 +873,7 @@ The off-heap store uses the direct-memory portion of the JVM. Since direct memor
 A cache that is likely to be hit more often, or whose contents are more expensive to replace, may need to be allocated more space. ARC makes this kind of cache utility judgment automatically when you use CacheManager scoped sizing, but it can also be done manually at either the Cache or CacheManager level.  Exactly how important this balancing procedure is, and whether or not ARC can be trusted to perform it automatically, will depend on both the application’s workload and latency requirements.</p>
 
 <p>####Calculating Object Sizes
-When using Automatic Resource Control, BigMemory calculates object sizes using <code class="highlighter-rouge">net.sf.ehcache.pool.impl.DefaultSizeOfEngine</code>.</p>
+When using Automatic Resource Control, BigMemory calculates object sizes using <code class="language-plaintext highlighter-rouge">net.sf.ehcache.pool.impl.DefaultSizeOfEngine</code>.</p>
 
 <p>A new pluggable sizeof engine module is available at <a href="http://terracotta-oss.github.io/ehcache-sizeofengine/">http://terracotta-oss.github.io/ehcache-sizeofengine/</a>.</p>
 
@@ -892,7 +893,7 @@ When using Automatic Resource Control, BigMemory calculates object sizes using <
 
 <p>The Terracotta Server Array can be configured to be restartable in addition to including searchable caches, but both of these features require HDD space. When both are enabled, be sure that enough disk space is available. Depending upon the number of searchable attributes, the amount of disk space required might be 3 times the amount of in-memory data.</p>
 
-<p>It is highly recommended to store the search index (<code class="highlighter-rouge">&lt;index&gt;</code>) and the Fast Restart data (<code class="highlighter-rouge">&lt;data&gt;</code>) on separate disks.</p>
+<p>It is highly recommended to store the search index (<code class="language-plaintext highlighter-rouge">&lt;index&gt;</code>) and the Fast Restart data (<code class="language-plaintext highlighter-rouge">&lt;data&gt;</code>) on separate disks.</p>
 
 <p>####Disk usage (SSD) with hybrid servers</p>
 
@@ -908,7 +909,7 @@ When using Automatic Resource Control, BigMemory calculates object sizes using <
 
 <p>Note: It is strongly recommended to configure enough offheap to accommodate all cache keys in DRAM.</p>
 
-<p><strong>Note</strong>: The effective capacity of the TSA is not the sum of the offheap and disk. The offheap acts as a cache of the disk. The capacity is reflected in the <code class="highlighter-rouge">dataStorage</code> configuration which includes off-heap and SSD/Flash storage within it.</p>
+<p><strong>Note</strong>: The effective capacity of the TSA is not the sum of the offheap and disk. The offheap acts as a cache of the disk. The capacity is reflected in the <code class="language-plaintext highlighter-rouge">dataStorage</code> configuration which includes off-heap and SSD/Flash storage within it.</p>
 
 <p>###Server heap memory allocation</p>
 
@@ -944,7 +945,7 @@ When using Automatic Resource Control, BigMemory calculates object sizes using <
 </table>
 
 <p>####JVM heap size
-Allocate at least enough heap using the <code class="highlighter-rouge">-Xmx</code> Java option to accomodate the on-heap storage specified in your configuration, plus enough extra heap to run the rest of your application. This property is set by adding it to the command-line parameters for the server startup script.</p>
+Allocate at least enough heap using the <code class="language-plaintext highlighter-rouge">-Xmx</code> Java option to accomodate the on-heap storage specified in your configuration, plus enough extra heap to run the rest of your application. This property is set by adding it to the command-line parameters for the server startup script.</p>
 
 <p>###Server Off-heap</p>
 
@@ -952,28 +953,25 @@ Allocate at least enough heap using the <code class="highlighter-rouge">-Xmx</co
 
 <p>Server off-heap size is configured in the tc-config.xml file.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-config&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;tc-config&gt;
   &lt;servers&gt;
     &lt;server&gt;
       &lt;dataStorage&gt;
         &lt;offheap size="200g"/&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>Additional hybrid storage is optional. Specify the <code class="highlighter-rouge">&lt;dataStorage&gt;</code> size and the <code class="highlighter-rouge">&lt;offheap&gt;</code> size. The <code class="highlighter-rouge">&lt;offheap&gt;</code> size can be set to the amount of memory available in your server for data. If you enable <code class="highlighter-rouge">&lt;hybrid&gt;</code>, then the <code class="highlighter-rouge">&lt;dataStorage&gt;</code> size can exceed the <code class="highlighter-rouge">&lt;offheap&gt;</code> size.</p>
+<p>Additional hybrid storage is optional. Specify the <code class="language-plaintext highlighter-rouge">&lt;dataStorage&gt;</code> size and the <code class="language-plaintext highlighter-rouge">&lt;offheap&gt;</code> size. The <code class="language-plaintext highlighter-rouge">&lt;offheap&gt;</code> size can be set to the amount of memory available in your server for data. If you enable <code class="language-plaintext highlighter-rouge">&lt;hybrid&gt;</code>, then the <code class="language-plaintext highlighter-rouge">&lt;dataStorage&gt;</code> size can exceed the <code class="language-plaintext highlighter-rouge">&lt;offheap&gt;</code> size.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;dataStorage size=”800g”&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;dataStorage size=”800g”&gt;
        &lt;offheap size=”200g”/&gt;
        &lt;hybrid/&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>####Direct Memory and Off-heap Memory Allocations
-To accommodate server communications layer requirements, the value of <code class="highlighter-rouge">MaxDirectMemorySize</code> must be greater than the value of <code class="highlighter-rouge">offheap</code>. The exact amount greater depends upon the size of <code class="highlighter-rouge">offheap</code>. The minimum is 256MB, but if you allocate 1GB more to the <code class="highlighter-rouge">MaxDirectMemorySize</code>, it should be sufficient. The server will only use what it needs and the rest will remain available. This property is set by adding it to the command-line parameters for the server startup script.</p>
+To accommodate server communications layer requirements, the value of <code class="language-plaintext highlighter-rouge">MaxDirectMemorySize</code> must be greater than the value of <code class="language-plaintext highlighter-rouge">offheap</code>. The exact amount greater depends upon the size of <code class="language-plaintext highlighter-rouge">offheap</code>. The minimum is 256MB, but if you allocate 1GB more to the <code class="language-plaintext highlighter-rouge">MaxDirectMemorySize</code>, it should be sufficient. The server will only use what it needs and the rest will remain available. This property is set by adding it to the command-line parameters for the server startup script.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-XX:MaxDirectMemorySize=201G
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-XX:MaxDirectMemorySize=201G
+</code></pre></div></div>
 
 <p>For additional information about server off-heap, refer to <a href="http://terracotta.org/documentation/4.1/bigmemorymax/best-practices#general-memory-allocation">General Memory Allocation</a>.</p>
 
@@ -983,7 +981,7 @@ To accommodate server communications layer requirements, the value of <code clas
 
 <p>###Data Sizing Configurations</p>
 
-<p>The attribute <code class="highlighter-rouge">maxEntriesInCache</code> configures the maximum number of entries in a distributed cache. The <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> elements are used to constrain the amount of data stored in a given Terracotta Server.</p>
+<p>The attribute <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> configures the maximum number of entries in a distributed cache. The <code class="language-plaintext highlighter-rouge">dataStorage</code> and <code class="language-plaintext highlighter-rouge">offheap</code> elements are used to constrain the amount of data stored in a given Terracotta Server.</p>
 
 <table>
   <thead>
@@ -998,19 +996,19 @@ To accommodate server communications layer requirements, the value of <code clas
     <tr>
       <td style="text-align: left">Cache</td>
       <td style="text-align: left">Count</td>
-      <td style="text-align: left"><code class="highlighter-rouge">maxEntriesInCache</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">maxEntriesInCache</code></td>
       <td style="text-align: left">ehcache.xml</td>
     </tr>
     <tr>
       <td style="text-align: left">Server RAM</td>
       <td style="text-align: left">Byte</td>
-      <td style="text-align: left"><code class="highlighter-rouge">offheap</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">offheap</code></td>
       <td style="text-align: left">tc-config.xml</td>
     </tr>
     <tr>
       <td style="text-align: left">Server RAM plus SSD</td>
       <td style="text-align: left">Byte</td>
-      <td style="text-align: left"><code class="highlighter-rouge">dataStorage</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dataStorage</code></td>
       <td style="text-align: left">tc-config.xml</td>
     </tr>
   </tbody>
@@ -1025,11 +1023,11 @@ The Terracotta Server Array size should be large enough to hold the total data s
 
 <p>where:</p>
 
-<p>TSA size = the sum of the <code class="highlighter-rouge">dataStorage</code> size of all active servers in the server array</p>
+<p>TSA size = the sum of the <code class="language-plaintext highlighter-rouge">dataStorage</code> size of all active servers in the server array</p>
 
 <p>and</p>
 
-<p>Total data size = the sum of all of the distributed caches (all <code class="highlighter-rouge">maxEntriesInCache</code> configurations)</p>
+<p>Total data size = the sum of all of the distributed caches (all <code class="language-plaintext highlighter-rouge">maxEntriesInCache</code> configurations)</p>
 
 <p>The required additional space depends upon your configuration. The following are general guidelines:</p>
 
@@ -1099,7 +1097,7 @@ The following factors should be considered when determining the number of server
   <li>How much load will there be on the L1s? On the L2s?</li>
 </ul>
 
-<p>A TSA node follows SEDA architecture, therefore sockets and disk io are asynchronous, and the number of threads in the system does not grow linearly with the number of clients. In addition, the <code class="highlighter-rouge">concurrency</code> attribute may be tuned. This means that a TSA could theoretically handle tens of thousands of clients, depending on how far SEDA stages can be stretched. But while there is no theoretical limit of L1s connected to a TSA, the client count depends very much on what the clients does. If fewer clients are keeping TSA busy, then there is no benefit to adding more clients.</p>
+<p>A TSA node follows SEDA architecture, therefore sockets and disk io are asynchronous, and the number of threads in the system does not grow linearly with the number of clients. In addition, the <code class="language-plaintext highlighter-rouge">concurrency</code> attribute may be tuned. This means that a TSA could theoretically handle tens of thousands of clients, depending on how far SEDA stages can be stretched. But while there is no theoretical limit of L1s connected to a TSA, the client count depends very much on what the clients does. If fewer clients are keeping TSA busy, then there is no benefit to adding more clients.</p>
 
 <p>##Approach to Experimentation</p>
 
@@ -1159,14 +1157,6 @@ We evaluate a number of different categories. It is an art and is determined by 
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -1188,24 +1178,32 @@ We evaluate a number of different categories. It is an art and is determined by 
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -1213,7 +1211,7 @@ We evaluate a number of different categories. It is an art and is determined by 
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

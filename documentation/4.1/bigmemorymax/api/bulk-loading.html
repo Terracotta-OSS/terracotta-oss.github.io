@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -207,8 +210,8 @@
 <p>The bulk-load API optimizes bulk-loading of data by removing the requirement for locks and by adding transaction batching. The bulk-load API also allows applications to discover whether a cache is in bulk-load mode and to block based on that mode.</p>
 
 <h2 id="api">API</h2>
-<p>With bulk loading, the API for putting data into BigMemory Max stays the same. Just use <code class="highlighter-rouge">cache.put(...)</code>
-<code class="highlighter-rouge">cache.load(...)</code> or <code class="highlighter-rouge">cache.loadAll(...)</code>.
+<p>With bulk loading, the API for putting data into BigMemory Max stays the same. Just use <code class="language-plaintext highlighter-rouge">cache.put(...)</code>
+<code class="language-plaintext highlighter-rouge">cache.load(...)</code> or <code class="language-plaintext highlighter-rouge">cache.loadAll(...)</code>.
 What changes is that there is a special mode that suspends the normal distributed-cache consistency guarantees
 and provides optimised flushing to the TSA (the L2 cache).</p>
 
@@ -220,26 +223,26 @@ NOTE: The Bulk-Load API and the Configured Consistency Mode</caption>
 </td></tr>
 </table>
 
-<p>The following are the bulk-load API methods that are available in <code class="highlighter-rouge">org.terracotta.modules.ehcache.Cache</code>.</p>
+<p>The following are the bulk-load API methods that are available in <code class="language-plaintext highlighter-rouge">org.terracotta.modules.ehcache.Cache</code>.</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">public boolean isClusterBulkLoadEnabled()</code></p>
+    <p><code class="language-plaintext highlighter-rouge">public boolean isClusterBulkLoadEnabled()</code></p>
 
     <p>Returns true if a cache is in bulk-load mode (is not consistent) throughout the cluster. Returns false if the cache is not in bulk-load mode (is consistent) anywhere in the cluster.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">public boolean isNodeBulkLoadEnabled()</code></p>
+    <p><code class="language-plaintext highlighter-rouge">public boolean isNodeBulkLoadEnabled()</code></p>
 
     <p>Returns true if a cache is in bulk-load mode (is not consistent) on the current node. Returns false if the cache is not in bulk-load mode (is consistent) on the current node.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">public void setNodeBulkLoadEnabled(boolean)</code></p>
+    <p><code class="language-plaintext highlighter-rouge">public void setNodeBulkLoadEnabled(boolean)</code></p>
 
-    <p>Sets a cache’s consistency mode to the configured consistency mode (false) or to bulk load (true) on the local node. There is no operation if the cache is already in the mode specified by <code class="highlighter-rouge">setNodeBulkLoadEnabled()</code>. When using this method on a <a href="/documentation/4.1/configuration/non-stop-cache">nonstop cache</a>, a multiple of the nonstop cache’s timeout value applies. The bulk-load operation must complete within that timeout multiple to prevent the configured nonstop behavior from taking effect. For more information on tuning nonstop timeouts, see <a href="/documentation/4.1/configuration/non-stop-cache#78696">Tuning Nonstop Timeouts and Behaviors</a>.</p>
+    <p>Sets a cache’s consistency mode to the configured consistency mode (false) or to bulk load (true) on the local node. There is no operation if the cache is already in the mode specified by <code class="language-plaintext highlighter-rouge">setNodeBulkLoadEnabled()</code>. When using this method on a <a href="/documentation/4.1/configuration/non-stop-cache">nonstop cache</a>, a multiple of the nonstop cache’s timeout value applies. The bulk-load operation must complete within that timeout multiple to prevent the configured nonstop behavior from taking effect. For more information on tuning nonstop timeouts, see <a href="/documentation/4.1/configuration/non-stop-cache#78696">Tuning Nonstop Timeouts and Behaviors</a>.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">public void waitUntilBulkLoadComplete()</code></p>
+    <p><code class="language-plaintext highlighter-rouge">public void waitUntilBulkLoadComplete()</code></p>
 
     <p>Waits until a cache is consistent before returning. Changes are automatically batched and the cache is updated throughout the cluster. Returns immediately if a cache is consistent throughout the cluster.</p>
   </li>
@@ -248,9 +251,9 @@ NOTE: The Bulk-Load API and the Configured Consistency Mode</caption>
 <p>Notes on bulk-load mode:</p>
 
 <ul>
-  <li>Consistency cannot be guaranteed because <code class="highlighter-rouge">isClusterBulkLoadEnabled()</code> can return false in one node just before another node calls <code class="highlighter-rouge">setNodeBulkLoadEnabled(true)</code> on the same cache. Understanding exactly how your application uses the bulk-load API is crucial to effectively managing the integrity of cached data.</li>
+  <li>Consistency cannot be guaranteed because <code class="language-plaintext highlighter-rouge">isClusterBulkLoadEnabled()</code> can return false in one node just before another node calls <code class="language-plaintext highlighter-rouge">setNodeBulkLoadEnabled(true)</code> on the same cache. Understanding exactly how your application uses the bulk-load API is crucial to effectively managing the integrity of cached data.</li>
   <li>If a cache is not consistent, any ObjectNotFound exceptions that may occur are logged.</li>
-  <li><code class="highlighter-rouge">get()</code> methods that fail with ObjectNotFound return null.</li>
+  <li><code class="language-plaintext highlighter-rouge">get()</code> methods that fail with ObjectNotFound return null.</li>
   <li>Eviction is independent of consistency mode. Any configured or manually executed eviction proceeds unaffected by a cache’s consistency mode.</li>
 </ul>
 
@@ -318,7 +321,7 @@ a Terracotta cluster. Consider also that multi-threading is likely to improve pe
 
 <h4 id="are-there-any-alternatives-to-putting-the-cache-into-bulk-load-mode">Are there any alternatives to putting the cache into bulk-load mode?</h4>
 <ul>
-  <li>Bulk-loading Cache methods <code class="highlighter-rouge">putAll()</code>, <code class="highlighter-rouge">getAll()</code>, and <code class="highlighter-rouge">removeAll()</code> provide high-performance and eventual consistency. These can also be used with strong consistency. If you can use them, bulk-load mode might not be necessary. For details, see the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">API documentation</a>.</li>
+  <li>Bulk-loading Cache methods <code class="language-plaintext highlighter-rouge">putAll()</code>, <code class="language-plaintext highlighter-rouge">getAll()</code>, and <code class="language-plaintext highlighter-rouge">removeAll()</code> provide high-performance and eventual consistency. These can also be used with strong consistency. If you can use them, bulk-load mode might not be necessary. For details, see the <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">API documentation</a>.</li>
 </ul>
 
 <h4 id="why-does-the-bulk-loading-mode-only-apply-to-terracotta-clusters">Why does the bulk loading mode only apply to Terracotta clusters?</h4>
@@ -329,15 +332,20 @@ a Terracotta cluster. Consider also that multi-threading is likely to improve pe
 so bulk loading is efficiently replicated.</p>
 
 <h4 id="bulk-loading-and-nonstop">Bulk Loading and Nonstop</h4>
-<p>If a nonstop cache is bulk-loaded, a multiplier is applied to the configured nonstop timeout whenever the method <code class="highlighter-rouge">net.sf.ehcache.Ehcache.setNodeBulkLoadEnabled(boolean)</code> is used. The default value of the multiplier is 10. You can tune the multiplier using the <code class="highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code> system property:</p>
+<p>If a nonstop cache is bulk-loaded, a multiplier is applied to the configured nonstop timeout whenever the method <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.setNodeBulkLoadEnabled(boolean)</code> is used. The default value of the multiplier is 10. You can tune the multiplier using the <code class="language-plaintext highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code> system property:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dnet.sf.ehcache.nonstop.bulkOpsTimeoutMultiplyFactor=10
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>-Dnet.sf.ehcache.nonstop.bulkOpsTimeoutMultiplyFactor=10
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>For a bulk-loaded nonstop cache, the cache size displayed in the TMC is subject to the <code class="highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code>. Increasing this multiplier on the clients can facilitate more accurate size reporting.</p>
+<p>For a bulk-loaded nonstop cache, the cache size displayed in the TMC is subject to the <code class="language-plaintext highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code>. Increasing this multiplier on the clients can facilitate more accurate size reporting.</p>
 
-<p>This multiplier also affects the methods <code class="highlighter-rouge">net.sf.ehcache.Ehcache.getAll()</code>, <code class="highlighter-rouge">net.sf.ehcache.Ehcache.removeAll()</code>, and <code class="highlighter-rouge">net.sf.ehcache.Ehcache.removeAll(boolean)</code>.</p>
+<p>This multiplier also affects the methods <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.getAll()</code>, <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.removeAll()</code>, and <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.removeAll(boolean)</code>.</p>
 
 <h2 id="performance-tips">Performance Tips</h2>
 
@@ -380,14 +388,6 @@ so bulk loading is efficiently replicated.</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -409,24 +409,32 @@ so bulk loading is efficiently replicated.</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -434,7 +442,7 @@ so bulk loading is efficiently replicated.</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

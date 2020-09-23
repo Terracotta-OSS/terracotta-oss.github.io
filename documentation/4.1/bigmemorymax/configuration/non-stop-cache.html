@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -222,16 +225,21 @@
 
 <h2 id="configuring-nonstop-operation">Configuring Nonstop Operation</h2>
 
-<p>Nonstop is configured in a <code class="highlighter-rouge">&lt;cache&gt;</code> block under the <code class="highlighter-rouge">&lt;terracotta&gt;</code> subelement. In the following example, myCache has nonstop configuration:</p>
+<p>Nonstop is configured in a <code class="language-plaintext highlighter-rouge">&lt;cache&gt;</code> block under the <code class="language-plaintext highlighter-rouge">&lt;terracotta&gt;</code> subelement. In the following example, myCache has nonstop configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="myCache" maxEntriesLocalHeap="10000" eternal="false"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="myCache" maxEntriesLocalHeap="10000" eternal="false"&gt;
  &lt;terracotta&gt;
    &lt;nonstop immediateTimeout="false" timeoutMillis="30000"&gt;
      &lt;timeoutBehavior type="noop" /&gt;
    &lt;/nonstop&gt;
  &lt;/terracotta&gt;
 &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Nonstop is DISABLED by default unless the <nonstop> element appears in a cache's <terracotta> block, at which point it is enabled unless explicitly disabled using the attribute "enabled=false".</terracotta></nonstop></p>
@@ -241,13 +249,13 @@
 <p>Nonstop caches can be configured with the following attributes:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">enabled</code> –  Enables (“true” DEFAULT) or disables (“false”) the ability of a cache to execute certain actions after a Terracotta client disconnects. This attribute is optional for enabling nonstop.</li>
-  <li><code class="highlighter-rouge">immediateTimeout</code> –  Enables (“true”) or disables (“false” DEFAULT) an immediate timeout response if the Terracotta client detects a network interruption (the node is disconnected from the cluster). If enabled, this parameter overrides <code class="highlighter-rouge">timeoutMillis</code>, so that the option set in <code class="highlighter-rouge">timeoutBehavior</code> is in effect immediately.</li>
-  <li><code class="highlighter-rouge">timeoutMillis</code> –  Specifies the number of milliseconds an application waits for any cache operation to return before timing out. The default value is 30000 (thirty seconds). The behavior after the timeout occurs is determined by <code class="highlighter-rouge">timeoutBehavior</code>.</li>
-  <li><code class="highlighter-rouge">searchTimeoutMillis</code> – Specifies the number of milliseconds an application waits for <a href="/documentation/4.1/bigmemorymax/apis/search">search operations</a> to return before timing out. The default value is 30000 (thirty seconds). The behavior after the timeout occurs is determined by <code class="highlighter-rouge">timeoutBehavior</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">enabled</code> –  Enables (“true” DEFAULT) or disables (“false”) the ability of a cache to execute certain actions after a Terracotta client disconnects. This attribute is optional for enabling nonstop.</li>
+  <li><code class="language-plaintext highlighter-rouge">immediateTimeout</code> –  Enables (“true”) or disables (“false” DEFAULT) an immediate timeout response if the Terracotta client detects a network interruption (the node is disconnected from the cluster). If enabled, this parameter overrides <code class="language-plaintext highlighter-rouge">timeoutMillis</code>, so that the option set in <code class="language-plaintext highlighter-rouge">timeoutBehavior</code> is in effect immediately.</li>
+  <li><code class="language-plaintext highlighter-rouge">timeoutMillis</code> –  Specifies the number of milliseconds an application waits for any cache operation to return before timing out. The default value is 30000 (thirty seconds). The behavior after the timeout occurs is determined by <code class="language-plaintext highlighter-rouge">timeoutBehavior</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">searchTimeoutMillis</code> – Specifies the number of milliseconds an application waits for <a href="/documentation/4.1/bigmemorymax/apis/search">search operations</a> to return before timing out. The default value is 30000 (thirty seconds). The behavior after the timeout occurs is determined by <code class="language-plaintext highlighter-rouge">timeoutBehavior</code>.</li>
 </ul>
 
-<p><code class="highlighter-rouge">&lt;nonstop&gt;</code> has one self-closing subelement, &lt;timeoutBehavior&gt;. This subelement determines the response after a timeout occurs (<code class="highlighter-rouge">timeoutMillis</code> expires or an immediate timeout occurs). The response can be set by the &lt;timeoutBehavior&gt; attribute <code class="highlighter-rouge">type</code>. This attribute can have one of the values listed in the following table:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;nonstop&gt;</code> has one self-closing subelement, &lt;timeoutBehavior&gt;. This subelement determines the response after a timeout occurs (<code class="language-plaintext highlighter-rouge">timeoutMillis</code> expires or an immediate timeout occurs). The response can be set by the &lt;timeoutBehavior&gt; attribute <code class="language-plaintext highlighter-rouge">type</code>. This attribute can have one of the values listed in the following table:</p>
 
 <table>
 <tr>
@@ -293,37 +301,52 @@ For caches with Terracotta clustering, allow inconsistent reads of cache data, a
 <p>You can tune the default timeout values and behaviors of nonstop caches to fit your environment.</p>
 
 <h4 id="network-interruptions">Network Interruptions</h4>
-<p>For example, in an environment with regular network interruptions, consider disabling <code class="highlighter-rouge">immediateTimeout</code> and increasing <code class="highlighter-rouge">timeoutMillis</code> to prevent timeouts for most of the interruptions.</p>
+<p>For example, in an environment with regular network interruptions, consider disabling <code class="language-plaintext highlighter-rouge">immediateTimeout</code> and increasing <code class="language-plaintext highlighter-rouge">timeoutMillis</code> to prevent timeouts for most of the interruptions.</p>
 
-<p>For a cluster that experiences regular but short network interruptions, and in which caches clustered with Terracotta carry read-mostly data or there is tolerance of potentially stale data, you may want to set <code class="highlighter-rouge">timeoutBehavior</code> to <code class="highlighter-rouge">localReads</code>.</p>
+<p>For a cluster that experiences regular but short network interruptions, and in which caches clustered with Terracotta carry read-mostly data or there is tolerance of potentially stale data, you may want to set <code class="language-plaintext highlighter-rouge">timeoutBehavior</code> to <code class="language-plaintext highlighter-rouge">localReads</code>.</p>
 
 <h4 id="slow-cache-operations">Slow Cache Operations</h4>
-<p>In an environment where cache operations can be slow to return and data is required to always be in sync, increase <code class="highlighter-rouge">timeoutMillis</code> to prevent frequent timeouts. Set <code class="highlighter-rouge">timeoutBehavior</code> to <code class="highlighter-rouge">noop</code> to force the application to get data from another source or <code class="highlighter-rouge">exception</code> if the application should stop.</p>
+<p>In an environment where cache operations can be slow to return and data is required to always be in sync, increase <code class="language-plaintext highlighter-rouge">timeoutMillis</code> to prevent frequent timeouts. Set <code class="language-plaintext highlighter-rouge">timeoutBehavior</code> to <code class="language-plaintext highlighter-rouge">noop</code> to force the application to get data from another source or <code class="language-plaintext highlighter-rouge">exception</code> if the application should stop.</p>
 
-<p>For example, a <code class="highlighter-rouge">cache.acquireWriteLockOnKey(key)</code> operation may exceed the nonstop timeout while waiting for a lock. This would trigger nonstop mode only because the lock couldn’t be acquired in time. Using <code class="highlighter-rouge">cache.tryWriteLockOnKey(key, timeout)</code>, with the method’s timeout set to less than the nonstop timeout, avoids this problem.</p>
+<p>For example, a <code class="language-plaintext highlighter-rouge">cache.acquireWriteLockOnKey(key)</code> operation may exceed the nonstop timeout while waiting for a lock. This would trigger nonstop mode only because the lock couldn’t be acquired in time. Using <code class="language-plaintext highlighter-rouge">cache.tryWriteLockOnKey(key, timeout)</code>, with the method’s timeout set to less than the nonstop timeout, avoids this problem.</p>
 
 <h4 id="bulk-loading">Bulk Loading</h4>
-<p>If a nonstop cache is bulk-loaded using the <a href="http://terracotta.org/documentation/bigmemorymax/api/bulk-loading">Bulk-Load API</a>, a multiplier is applied to the configured nonstop timeout whenever the method <code class="highlighter-rouge">net.sf.ehcache.Ehcache.setNodeBulkLoadEnabled(boolean)</code> is used. The default value of the multiplier is 10. You can tune the multiplier using the <code class="highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code> system property:</p>
+<p>If a nonstop cache is bulk-loaded using the <a href="http://terracotta.org/documentation/bigmemorymax/api/bulk-loading">Bulk-Load API</a>, a multiplier is applied to the configured nonstop timeout whenever the method <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.setNodeBulkLoadEnabled(boolean)</code> is used. The default value of the multiplier is 10. You can tune the multiplier using the <code class="language-plaintext highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code> system property:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dnet.sf.ehcache.nonstop.bulkOpsTimeoutMultiplyFactor=10
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>-Dnet.sf.ehcache.nonstop.bulkOpsTimeoutMultiplyFactor=10
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Note that when nonstop is enabled, the cache size displayed in the TMC is subject to the <code class="highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code>. Increasing this multiplier on the clients can facilitate more accurate size reporting.</p>
+<p>Note that when nonstop is enabled, the cache size displayed in the TMC is subject to the <code class="language-plaintext highlighter-rouge">bulkOpsTimeoutMultiplyFactor</code>. Increasing this multiplier on the clients can facilitate more accurate size reporting.</p>
 
-<p>This multiplier also affects the methods <code class="highlighter-rouge">net.sf.ehcache.Ehcache.getAll()</code>, <code class="highlighter-rouge">net.sf.ehcache.Ehcache.removeAll()</code>, and <code class="highlighter-rouge">net.sf.ehcache.Ehcache.removeAll(boolean)</code>.</p>
+<p>This multiplier also affects the methods <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.getAll()</code>, <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.removeAll()</code>, and <code class="language-plaintext highlighter-rouge">net.sf.ehcache.Ehcache.removeAll(boolean)</code>.</p>
 
 <h4 id="printing-stack-traces-on-exceptions">Printing Stack Traces on Exceptions</h4>
 <p>You can turn on additional logging (at the INFO level) for nonstop timeouts using:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dnet.sf.ehcache.nonstop.printStackTraceOnException=true
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>-Dnet.sf.ehcache.nonstop.printStackTraceOnException=true
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This is a dynamic property that can also be managed programmatically:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>System.setProperty(PRINT_STACK_TRACE_ON_EXCEPTION_PROPERTY, "true")
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>System.setProperty(PRINT_STACK_TRACE_ON_EXCEPTION_PROPERTY, "true")
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This property logs the stack trace for the nonstop thread. Note that, with this property set, log files can become very large in environments in which a large number of timeouts occur.</p>
@@ -335,15 +358,20 @@ For caches with Terracotta clustering, allow inconsistent reads of cache data, a
 
 <p>NonStopCacheException is usually thrown when it is the configured behavior for a nonstop cache in a client that disconnects from the cluster. In the following example, the exception would be thrown 30 seconds after the disconnection (or the “cluster offline” event is received):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;nonstop immediateTimeout="false" timeoutMillis="30000"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;nonstop immediateTimeout="false" timeoutMillis="30000"&gt;
 &lt;timeoutBehavior type="exception" /&gt;
 &lt;/nonstop&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>However, under certain circumstances the NonStopCache exception can be thrown even if a nonstop cache’s timeout behavior is <em>not</em> set to throw the exception. This can happen when the cache goes into nonstop mode during an attempt to acquire or release a lock. These lock operations are associated with certain lock APIs and special cache types such as <a href="http://terracotta.org/documentation/bigmemorymax/api/api-guide#31478">Explicit Locking</a>, BlockingCache, SelfPopulatingCache, and UpdatingSelfPopulatingCache.</p>
 
-<p>A NonStopCacheException can also be thrown if the cache must fault in an element to satisfy a <code class="highlighter-rouge">get()</code> operation. If the Terracotta Server Array cannot respond within the configured nonstop timeout, the exception is thrown.</p>
+<p>A NonStopCacheException can also be thrown if the cache must fault in an element to satisfy a <code class="language-plaintext highlighter-rouge">get()</code> operation. If the Terracotta Server Array cannot respond within the configured nonstop timeout, the exception is thrown.</p>
 
 <p>A related exception, InvalidLockAfterRejoinException, can be thrown during or after client rejoin (see <a href="http://terracotta.org/documentation/bigmemorymax/configuration/reference-guide#71266">Using Rejoin to Automatically Reconnect Terracotta Clients</a>). This exception occurs when an unlock operation takes place on a lock obtained <em>before</em> the rejoin attempt completed.</p>
 
@@ -372,13 +400,18 @@ To ensure that locks are released properly, application code using Ehcache lock 
 
 <p>Another way to handle nonstop exceptions is by using a dedicated Ehcache decorator that manages the exception outside of the application framework. The following is an example of how the decorator might operate:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>try { cache.put(element); }
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>try { cache.put(element); }
 
 catch(NonStopCacheException e) {
 
   handler.handleException(cache, element, e);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
       </article>
@@ -414,14 +447,6 @@ catch(NonStopCacheException e) {
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -443,24 +468,32 @@ catch(NonStopCacheException e) {
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -468,7 +501,7 @@ catch(NonStopCacheException e) {
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

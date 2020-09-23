@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -228,9 +231,9 @@
 
 <ol>
   <li>
-    <p>Save the following configuration to the file <code class="highlighter-rouge">.java.login.config</code>:</p>
+    <p>Save the following configuration to the file <code class="language-plaintext highlighter-rouge">.java.login.config</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>Terracotta {
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Terracotta {
 com.sun.security.auth.module.LdapLoginModule REQUIRED
 java.naming.security.authentication="simple"
 userProvider="ldap://orgstage:389"
@@ -242,16 +245,15 @@ bindCredential="****"
 bindAuthenticationType="simple"
 debug=true;
 };
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
-    <p>Edit the values for <code class="highlighter-rouge">userProvider</code> (LDAP server), <code class="highlighter-rouge">authIdentity</code> (user identity), and <code class="highlighter-rouge">bindCredential</code> (encrypted password) to match the values for your environment.</p>
+    <p>Edit the values for <code class="language-plaintext highlighter-rouge">userProvider</code> (LDAP server), <code class="language-plaintext highlighter-rouge">authIdentity</code> (user identity), and <code class="language-plaintext highlighter-rouge">bindCredential</code> (encrypted password) to match the values for your environment.</p>
   </li>
-  <li>Save the file <code class="highlighter-rouge">.java.login.config</code> to the directory named in the Java property <code class="highlighter-rouge">user.home</code>.</li>
+  <li>Save the file <code class="language-plaintext highlighter-rouge">.java.login.config</code> to the directory named in the Java property <code class="language-plaintext highlighter-rouge">user.home</code>.</li>
   <li>
     <p>Add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
 ...
  &lt;authentication&gt;
    &lt;mode&gt;
@@ -260,8 +262,7 @@ debug=true;
  &lt;/authentication&gt;
 ...
 &lt;/server&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Start the Terracotta server and look for a log message containing “INFO - Credentials: loginConfig[Terracotta]” to confirm that LDAP security is in effect.</p>
@@ -279,27 +280,26 @@ If security is set up incorrectly, the Terracotta server can still be started. H
 
 <h2 id="configure-security-using-jmx-authentication">Configure Security Using JMX Authentication</h2>
 
-<p>Terracotta can use the standard Java security mechanisms for JMX authentication, which relies on the creation of <code class="highlighter-rouge">.access</code> and <code class="highlighter-rouge">.password</code> files with correct permissions. The default location for these files for JDK 1.5 or higher is <code class="highlighter-rouge">$JAVA_HOME/jre/lib/management</code>.</p>
+<p>Terracotta can use the standard Java security mechanisms for JMX authentication, which relies on the creation of <code class="language-plaintext highlighter-rouge">.access</code> and <code class="language-plaintext highlighter-rouge">.password</code> files with correct permissions. The default location for these files for JDK 1.5 or higher is <code class="language-plaintext highlighter-rouge">$JAVA_HOME/jre/lib/management</code>.</p>
 
 <p>To configure security using JMX authentication, follow these steps:</p>
 
 <ol>
-  <li>Ensure that the desired usernames and passwords for securing the target servers are in the JMX password file <code class="highlighter-rouge">jmxremote.password</code> and that the desired roles are in the JMX access file <code class="highlighter-rouge">jmxremote.access</code>.</li>
+  <li>Ensure that the desired usernames and passwords for securing the target servers are in the JMX password file <code class="language-plaintext highlighter-rouge">jmxremote.password</code> and that the desired roles are in the JMX access file <code class="language-plaintext highlighter-rouge">jmxremote.access</code>.</li>
   <li>
-    <p>If both <code class="highlighter-rouge">jmxremote.access</code> and <code class="highlighter-rouge">jmxremote.password</code> are in the default location (<code class="highlighter-rouge">$JAVA_HOME/jre/lib/management</code>), add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
+    <p>If both <code class="language-plaintext highlighter-rouge">jmxremote.access</code> and <code class="language-plaintext highlighter-rouge">jmxremote.password</code> are in the default location (<code class="language-plaintext highlighter-rouge">$JAVA_HOME/jre/lib/management</code>), add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
 ...
  &lt;authentication /&gt;
 ...
 &lt;/server&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>If <code class="highlighter-rouge">jmxremote.password</code> is not in the default location, add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
+    <p>If <code class="language-plaintext highlighter-rouge">jmxremote.password</code> is not in the default location, add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
 ...
  &lt;authentication&gt;
    &lt;mode&gt;
@@ -308,13 +308,12 @@ If security is set up incorrectly, the Terracotta server can still be started. H
  &lt;/authentication&gt;
 ...
 &lt;/server&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>If <code class="highlighter-rouge">jmxremote.access</code> is not in the default location, add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
+    <p>If <code class="language-plaintext highlighter-rouge">jmxremote.access</code> is not in the default location, add the following configuration to each &lt;server&gt; block in the Terracotta configuration file:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;server host="myHost" name="myServer"&gt;
 ...
  &lt;authentication&gt;
    &lt;mode&gt;
@@ -324,8 +323,7 @@ If security is set up incorrectly, the Terracotta server can still be started. H
  &lt;/authentication&gt;
 ...
 &lt;/server&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ol>
 
@@ -350,20 +348,30 @@ There are two roles available for Terracotta servers and clients:</p>
 </p>
 <h2 id="using-scripts-against-a-server-with-authentication">Using Scripts Against a Server with Authentication</h2>
 
-<p>A script that targets a secured Terracotta server must use the correct login credentials to access the server. If you run a Terracotta script such as <strong>backup-data</strong> or <strong>server-stat</strong> against a secured server, pass the credentials using the <code class="highlighter-rouge">-u</code> (followed by username) and <code class="highlighter-rouge">-w</code> (followed by password) flags.</p>
+<p>A script that targets a secured Terracotta server must use the correct login credentials to access the server. If you run a Terracotta script such as <strong>backup-data</strong> or <strong>server-stat</strong> against a secured server, pass the credentials using the <code class="language-plaintext highlighter-rouge">-u</code> (followed by username) and <code class="language-plaintext highlighter-rouge">-w</code> (followed by password) flags.</p>
 
 <p>For example, if Server1 is secured with username “user1” and password “password”, run the <strong>server-stat</strong> script by entering the following:</p>
 
 <h5 id="unixlinux">UNIX/LINUX</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[PROMPT]${TERRACOTTA_HOME}/server/bin/server-stat.sh -s Server1 -u user1 -w password
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>[PROMPT]${TERRACOTTA_HOME}/server/bin/server-stat.sh -s Server1 -u user1 -w password
+</code>
+      </pre>
+   </div>
 </div>
 
 <h5 id="microsoft-windows">MICROSOFT WINDOWS</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[PROMPT]%TERRACOTTA_HOME%\server\bin\server-stat.bat -s Server1 -u user1 -w password
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>[PROMPT]%TERRACOTTA_HOME%\server\bin\server-stat.bat -s Server1 -u user1 -w password
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="extending-server-security">Extending Server Security</h2>
@@ -410,14 +418,6 @@ There are two roles available for Terracotta servers and clients:</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -439,24 +439,32 @@ There are two roles available for Terracotta servers and clients:</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -464,7 +472,7 @@ There are two roles available for Terracotta servers and clients:</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

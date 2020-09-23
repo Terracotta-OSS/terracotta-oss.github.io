@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -187,7 +190,7 @@
 </table>
 
 <h2 id="introduction">Introduction</h2>
-<p>The <code class="highlighter-rouge">net.sf.ehcache.constructs</code> package contains some applied caching classes which use the core classes to solve everyday caching problems. Two of these are BlockingCache and SelfPopulatingCache.</p>
+<p>The <code class="language-plaintext highlighter-rouge">net.sf.ehcache.constructs</code> package contains some applied caching classes which use the core classes to solve everyday caching problems. Two of these are BlockingCache and SelfPopulatingCache.</p>
 
 <h2 id="blocking-cache">Blocking Cache</h2>
 <p>Imagine you have a very busy web site with thousands of concurrent users. Rather than being evenly distributed in
@@ -205,7 +208,7 @@ Enter the BlockingCache.
 It is blocking because all threads requesting the same key wait for the first thread to complete. Once the first
 thread has completed the other threads simply obtain the cache entry and return.
 The BlockingCache can scale up to very busy systems. Each thread can either wait indefinitely, or you can specify a timeout
-using the <code class="highlighter-rouge">timeoutMillis</code> constructor argument.</p>
+using the <code class="language-plaintext highlighter-rouge">timeoutMillis</code> constructor argument.</p>
 
 <p>For more information about Blocking Cache, refer to this <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">Javadoc</a>.</p>
 
@@ -214,8 +217,8 @@ using the <code class="highlighter-rouge">timeoutMillis</code> constructor argum
 want to think about what you are doing without thinking about the caching.
 Enter the SelfPopulatingCache. The name SelfPopulatingCache is synonymous with Pull-through cache, which is a
 common caching term. SelfPopulatingCache though always is in addition to a BlockingCache.
-SelfPopulatingCache uses a <code class="highlighter-rouge">CacheEntryFactory</code>, that given a key, knows how to populate the entry.
-Note: JCache inspired getWithLoader and getAllWithLoader directly in <code class="highlighter-rouge">Ehcache</code> which work with a <code class="highlighter-rouge">CacheLoader</code> may be used as an alternative
+SelfPopulatingCache uses a <code class="language-plaintext highlighter-rouge">CacheEntryFactory</code>, that given a key, knows how to populate the entry.
+Note: JCache inspired getWithLoader and getAllWithLoader directly in <code class="language-plaintext highlighter-rouge">Ehcache</code> which work with a <code class="language-plaintext highlighter-rouge">CacheLoader</code> may be used as an alternative
 to SelfPopulatingCache.</p>
 
 <p>For more information about Self-populating Cache, refer to this <a href="http://www.ehcache.org/apidocs/2.8.5/index.html">Javadoc</a>.</p>
@@ -253,14 +256,6 @@ to SelfPopulatingCache.</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -282,24 +277,32 @@ to SelfPopulatingCache.</p>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -307,7 +310,7 @@ to SelfPopulatingCache.</p>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

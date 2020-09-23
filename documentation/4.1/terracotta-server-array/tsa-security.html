@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -210,7 +213,7 @@
   <li>Java keystore – Contains the server’s <strong>private key and public-key</strong> certificate. The keystore is protected by a keystore/certificate-entry password.</li>
   <li>Truststore – A keystore file containing <strong>only the public keys</strong> of the certificates. This file is needed only if you are using self-signed certificates rather than a Certificate Authority (CA).</li>
   <li>Keychain – Stores passwords, including the passwords to the server’s keystore and to entries in other files. The tools for creating and managing the Terracotta keychain file are provided with the Terracotta kit.</li>
-  <li>Authorization – A <code class="highlighter-rouge">.ini</code> file with password-protected user accounts and their roles for servers and clients that connect to the server.</li>
+  <li>Authorization – A <code class="language-plaintext highlighter-rouge">.ini</code> file with password-protected user accounts and their roles for servers and clients that connect to the server.</li>
 </ul>
 
 <p>Note that <a href="tsa-ldap">Microsoft Active Directory and standard LDAP authentication/authorization</a> are available options.</p>
@@ -250,7 +253,7 @@
   <li>
     <p>The client uses a server URI that includes the client username.</p>
 
-    <p>A typical (non-secure) URI is <code class="highlighter-rouge">&lt;server-address&gt;:&lt;port&gt;</code>. A URI that initiates a secure connection takes the form <code class="highlighter-rouge">&lt;client-username&gt;@&lt;server-address&gt;:&lt;port&gt;</code>.</p>
+    <p>A typical (non-secure) URI is <code class="language-plaintext highlighter-rouge">&lt;server-address&gt;:&lt;port&gt;</code>. A URI that initiates a secure connection takes the form <code class="language-plaintext highlighter-rouge">&lt;client-username&gt;@&lt;server-address&gt;:&lt;port&gt;</code>.</p>
   </li>
   <li>A secure connection using SSL is established with the server.</li>
   <li>The client sends a password fetched from a local keychain file. The password is associated with the client username.</li>
@@ -259,7 +262,10 @@
 <h3 id="configuration-example">Configuration Example</h3>
 <p>The following configuration snippet is an example of how security can be set up for the servers in the illustration above:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"&gt;
 ...
   &lt;servers secure="true"&gt;
     &lt;server host="172.16.254.1" name="server1"&gt;
@@ -300,7 +306,9 @@
  &lt;/servers&gt;
 ...
 &lt;/tc:tc-config&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>For more information on the  configuration elements in the example, see the <a href="#server-config">configuration section</a> below.</p>
@@ -317,7 +325,7 @@
   </tbody>
 </table>
 
-<p><strong>NOTE:</strong> Script names in the examples given below are for UNIX or Linux systems. Equivalent scripts are available for Microsoft Windows in the same locations. For Windows, replace the <code class="highlighter-rouge">.sh</code> extension with <code class="highlighter-rouge">.bat</code> and convert path delimiters as appropriate.</p>
+<p><strong>NOTE:</strong> Script names in the examples given below are for UNIX or Linux systems. Equivalent scripts are available for Microsoft Windows in the same locations. For Windows, replace the <code class="language-plaintext highlighter-rouge">.sh</code> extension with <code class="language-plaintext highlighter-rouge">.bat</code> and convert path delimiters as appropriate.</p>
 
 <p>
    <a id="keystore"></a>
@@ -331,14 +339,14 @@
 
 <ul>
   <li>The keystore must be a Java keystore (JKS) compatible with JDK 1.6 or higher.</li>
-  <li>The certificate must be keyed with the alias named in the value of the <code class="highlighter-rouge">&lt;certificate&gt;</code> element of the <a href="#server-config">server’s configuration</a>.</li>
+  <li>The certificate must be keyed with the alias named in the value of the <code class="language-plaintext highlighter-rouge">&lt;certificate&gt;</code> element of the <a href="#server-config">server’s configuration</a>.</li>
   <li>The Common Name (CN) field in the Distinguished Name must contain the hostname of the server, as configured in the <a href="#server-config">server’s configuration</a>.</li>
   <li>The password securing the certificate must match the keystore’s main password. In other words, <strong>the store password and key passwords must be identical.</strong></li>
   <li>When using a self-signed certificate (not one signed by a trusted CA), create a <a href="#import-export-certs">custom truststore</a> for storing public keys.</li>
   <li>If security is not the most important consideration, you can set the following Java system properties as shown:
     <ul>
-      <li><code class="highlighter-rouge">-Dtc.ssl.trustAllCerts=true</code> (use any certificates)</li>
-      <li><code class="highlighter-rouge">-Dtc.ssl.disableHostnameVerifier=true</code> (bypass hostname verification)</li>
+      <li><code class="language-plaintext highlighter-rouge">-Dtc.ssl.trustAllCerts=true</code> (use any certificates)</li>
+      <li><code class="language-plaintext highlighter-rouge">-Dtc.ssl.disableHostnameVerifier=true</code> (bypass hostname verification)</li>
     </ul>
   </li>
 </ul>
@@ -358,18 +366,28 @@
 
 <p>The following could be used to create both public-private keys (including a certificate) and a keystore file for the server called “server1” in the configuration example above:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>keytool -genkey -keystore keystore-file.jks -dname "CN=172.16.254.1, OU=Terracotta, O=SAG, L=San Francisco, S=California, C=US" -alias server1alias -storepass server1pass -keypass server1pass
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>keytool -genkey -keystore keystore-file.jks -dname "CN=172.16.254.1, OU=Terracotta, O=SAG, L=San Francisco, S=California, C=US" -alias server1alias -storepass server1pass -keypass server1pass
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Note that the values passed to <code class="highlighter-rouge">-storepass</code> and <code class="highlighter-rouge">-keypass</code> match. Also, the field designating the Common Name (CN) must match the server’s hostname, which matches the value entered in the server’s configuration. This hostname can be an IP address or a resolvable domain name. If the <code class="highlighter-rouge">-dname</code> option is left out, a series of identity prompts (distinguished-name fields based on the X.500 standard) will appear before the server’s entry is created in the keystore. The CN prompt appears as shown:</p>
+<p>Note that the values passed to <code class="language-plaintext highlighter-rouge">-storepass</code> and <code class="language-plaintext highlighter-rouge">-keypass</code> match. Also, the field designating the Common Name (CN) must match the server’s hostname, which matches the value entered in the server’s configuration. This hostname can be an IP address or a resolvable domain name. If the <code class="language-plaintext highlighter-rouge">-dname</code> option is left out, a series of identity prompts (distinguished-name fields based on the X.500 standard) will appear before the server’s entry is created in the keystore. The CN prompt appears as shown:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>What is your first and last name?
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>What is your first and last name?
    [Unknown]:
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>There are a number of other keytool options to consider, including <code class="highlighter-rouge">-keyalg</code> (cryptographic algorithm; default is DSA) and <code class="highlighter-rouge">-validity</code> (number of days until the certificate expires; default is 90). These and other options are dependent on your environment and security requirements. For more information on using the keytool, see the JDK documentation.</p>
+<p>There are a number of other keytool options to consider, including <code class="language-plaintext highlighter-rouge">-keyalg</code> (cryptographic algorithm; default is DSA) and <code class="language-plaintext highlighter-rouge">-validity</code> (number of days until the certificate expires; default is 90). These and other options are dependent on your environment and security requirements. For more information on using the keytool, see the JDK documentation.</p>
 
 <p>Create a keystore and entry on each Terracotta server.</p>
 
@@ -381,16 +399,26 @@
 
 <p>The following could be used to export the certificate of the server called “server1” in the configuration example above.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>keytool -export -alias server1alias -keystore keystore-file.jks \
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>keytool -export -alias server1alias -keystore keystore-file.jks \
     -file server1SelfSignedCert.cert
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>This “cert” file can now be used to import server1’s certificate into the truststore of every other server. For example, to create a truststore and import server1’s certificate on server2, copy the cert file to the working directory on server2 and use the following command:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>keytool -import -alias server1alias -file server1SelfSignedCert.cert \
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>keytool -import -alias server1alias -file server1SelfSignedCert.cert \
     -keystore truststore.jks
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>After the password prompt, information about the certificate appears, and you are prompted to trust it. You must repeat this process until every server has a truststore containing the public-key certificate of every other server in the cluster.</p>
@@ -405,9 +433,9 @@
    <a id="keychain"></a>
 </p>
 <h3 id="set-up-the-server-keychain">Set Up the Server Keychain</h3>
-<p>The keystore and each certificate entry are protected by passwords stored in the server keychain file. The location of the keychain file is specified in the value of the <code class="highlighter-rouge">&lt;url&gt;</code> element under the <code class="highlighter-rouge">&lt;keychain&gt;</code> element of the server’s configuration file.</p>
+<p>The keystore and each certificate entry are protected by passwords stored in the server keychain file. The location of the keychain file is specified in the value of the <code class="language-plaintext highlighter-rouge">&lt;url&gt;</code> element under the <code class="language-plaintext highlighter-rouge">&lt;keychain&gt;</code> element of the server’s configuration file.</p>
 
-<p>For example, with this <a href="#server-config">server configuration</a>, when the server starts up, the keychain file would be searched for in the user’s (process owner’s) home directory. In the configuration example, a keychain file called <code class="highlighter-rouge">server1keychain.tkc</code> is searched for when server1 is started.</p>
+<p>For example, with this <a href="#server-config">server configuration</a>, when the server starts up, the keychain file would be searched for in the user’s (process owner’s) home directory. In the configuration example, a keychain file called <code class="language-plaintext highlighter-rouge">server1keychain.tkc</code> is searched for when server1 is started.</p>
 
 <p>The keychain file should have the following entries:</p>
 
@@ -416,70 +444,100 @@
   <li>An entry for every server that the local server will connect to.</li>
 </ul>
 
-<p>Entries are created using the keychain script found in the Terracotta kit’s <code class="highlighter-rouge">tools/security/bin</code> directory.</p>
+<p>Entries are created using the keychain script found in the Terracotta kit’s <code class="language-plaintext highlighter-rouge">tools/security/bin</code> directory.</p>
 
 <h4 id="creating-an-entry-for-the-local-server">Creating an Entry for the Local Server</h4>
 <p>Create an entry for the local server’s keystore password:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -O &lt;keychain-file&gt; &lt;certificate-URI&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/keychain.sh -O &lt;keychain-file&gt; &lt;certificate-URI&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>where <code class="highlighter-rouge">&lt;keychain-file&gt;</code> is the file named in the server configuration’s <code class="highlighter-rouge">&lt;keychain&gt;/&lt;url&gt;</code> element (including correct path), and <code class="highlighter-rouge">&lt;certificate-URI&gt;</code> is the URI value in the server configuration’s <code class="highlighter-rouge">&lt;ssl&gt;/&lt;certificate&gt;</code> element. <strong>Note</strong>: The <code class="highlighter-rouge">&lt;certificate-URI&gt;</code> must match the server configuration’s <code class="highlighter-rouge">&lt;ssl&gt;/&lt;certificate&gt;</code> element exactly, including the path to the keystore.</p>
+<p>where <code class="language-plaintext highlighter-rouge">&lt;keychain-file&gt;</code> is the file named in the server configuration’s <code class="language-plaintext highlighter-rouge">&lt;keychain&gt;/&lt;url&gt;</code> element (including correct path), and <code class="language-plaintext highlighter-rouge">&lt;certificate-URI&gt;</code> is the URI value in the server configuration’s <code class="language-plaintext highlighter-rouge">&lt;ssl&gt;/&lt;certificate&gt;</code> element. <strong>Note</strong>: The <code class="language-plaintext highlighter-rouge">&lt;certificate-URI&gt;</code> must match the server configuration’s <code class="language-plaintext highlighter-rouge">&lt;ssl&gt;/&lt;certificate&gt;</code> element exactly, including the path to the keystore.</p>
 
-<p>By default, the keychain file stores passwords using an obfuscation scheme, requiring the use of <code class="highlighter-rouge">-O</code> (hyphen capital letter O) with the keychain script for <em>any</em> operation on the file. To switch a more secure encryption-based scheme, see <a href="/documentation/4.1/terracotta-server-array/tsa-crypt-keychain">Using Encrypted Keychains</a>.</p>
+<p>By default, the keychain file stores passwords using an obfuscation scheme, requiring the use of <code class="language-plaintext highlighter-rouge">-O</code> (hyphen capital letter O) with the keychain script for <em>any</em> operation on the file. To switch a more secure encryption-based scheme, see <a href="/documentation/4.1/terracotta-server-array/tsa-crypt-keychain">Using Encrypted Keychains</a>.</p>
 
-<p>If the keychain file does not exist, add the <code class="highlighter-rouge">-c</code> option to create it:</p>
+<p>If the keychain file does not exist, add the <code class="language-plaintext highlighter-rouge">-c</code> option to create it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -O -c &lt;keychain-file&gt; &lt;certificate-URI&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/keychain.sh -O -c &lt;keychain-file&gt; &lt;certificate-URI&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>You will be prompted to enter a password to associate with the URI. <strong>You must enter the same password used to secure the server’s certificate in the keystore.</strong></p>
 
 <p>For example, to create an entry for server1 from the configuration example above, enter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -O server1keychain.tkc jks:server1alias@/the/path/keystore-file.jks
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/keychain.sh -O server1keychain.tkc jks:server1alias@/the/path/keystore-file.jks
 
 Terracotta Management Console - Keychain Client
 Enter the password you want to associate with this URL:   server1pass
 Confirm the password to associate with this URL:   server1pass
 Password for jks:server1alias@/the/path/keystore-file.jks successfully stored
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h4 id="creating-entries-for-remote-servers">Creating Entries for Remote Servers</h4>
-<p>Entries for remote servers have the format <code class="highlighter-rouge">tc://&lt;user&gt;@&lt;host&gt;:&lt;group-port&gt;</code>. Note that the value of <code class="highlighter-rouge">&lt;user&gt;</code> is specified in each server configuration’s <code class="highlighter-rouge">&lt;security&gt;/&lt;auth&gt;/&lt;user&gt;</code> and is <em>not</em> related to the user running as the process owner. If a value for <code class="highlighter-rouge">&lt;security&gt;/&lt;auth&gt;/&lt;user&gt;</code> is not specified, the username “terracotta” is used by default.</p>
+<p>Entries for remote servers have the format <code class="language-plaintext highlighter-rouge">tc://&lt;user&gt;@&lt;host&gt;:&lt;group-port&gt;</code>. Note that the value of <code class="language-plaintext highlighter-rouge">&lt;user&gt;</code> is specified in each server configuration’s <code class="language-plaintext highlighter-rouge">&lt;security&gt;/&lt;auth&gt;/&lt;user&gt;</code> and is <em>not</em> related to the user running as the process owner. If a value for <code class="language-plaintext highlighter-rouge">&lt;security&gt;/&lt;auth&gt;/&lt;user&gt;</code> is not specified, the username “terracotta” is used by default.</p>
 
 <p>For example, to create an entry for server2 in server1’s keychain, use:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -O server1keychain.tkc tc://server2username@172.16.254.2:9530
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/keychain.sh -O server1keychain.tkc tc://server2username@172.16.254.2:9530
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>If the keychain file does not exist, add the <code class="highlighter-rouge">-c</code> option:</p>
+<p>If the keychain file does not exist, add the <code class="language-plaintext highlighter-rouge">-c</code> option:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -O -c server1keychain.tkc tc://server2username@172.16.254.2:9530
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/keychain.sh -O -c server1keychain.tkc tc://server2username@172.16.254.2:9530
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>You will be prompted to enter a password to associate with the entry <code class="highlighter-rouge">server2username@172.16.254.2:9530</code>.</p>
+<p>You will be prompted to enter a password to associate with the entry <code class="language-plaintext highlighter-rouge">server2username@172.16.254.2:9530</code>.</p>
 
 <p>An entry for server1 must also be added to server2’s keychain:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/keychain.sh -O server2keychain.tkc tc://server1@172.16.254.1:9530
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/keychain.sh -O server2keychain.tkc tc://server1@172.16.254.1:9530
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>
    <a id="usermanagement"></a>
 </p>
 <h3 id="set-up-authenticationauthorization">Set Up Authentication/Authorization</h3>
-<p>Servers and clients that connect to a secured server must have credentials (usernames/passwords) and roles (authorization) defined. This section discusses the authentication/authorization mechanism based on using a <code class="highlighter-rouge">.ini</code> file. To use LDAP or Microsoft Active Directory instead, see the <a href="tsa-ldap">LDAP and Active Directory setup page</a>.</p>
+<p>Servers and clients that connect to a secured server must have credentials (usernames/passwords) and roles (authorization) defined. This section discusses the authentication/authorization mechanism based on using a <code class="language-plaintext highlighter-rouge">.ini</code> file. To use LDAP or Microsoft Active Directory instead, see the <a href="tsa-ldap">LDAP and Active Directory setup page</a>.</p>
 
-<p>Authentication and authorization are set up using the usermanagement script, located in the Terracotta kit’s <code class="highlighter-rouge">tools/security/bin</code> directory. This script also creates the <code class="highlighter-rouge">.ini</code> file that contains the required usernames and roles. The associated passwords are stored in the keychain file.</p>
+<p>Authentication and authorization are set up using the usermanagement script, located in the Terracotta kit’s <code class="language-plaintext highlighter-rouge">tools/security/bin</code> directory. This script also creates the <code class="language-plaintext highlighter-rouge">.ini</code> file that contains the required usernames and roles. The associated passwords are stored in the keychain file.</p>
 
-<p>All nodes in a secured Terracotta cluster must have an entry in the server’s <code class="highlighter-rouge">.ini</code> file:</p>
+<p>All nodes in a secured Terracotta cluster must have an entry in the server’s <code class="language-plaintext highlighter-rouge">.ini</code> file:</p>
 
 <ul>
   <li>The local server itself</li>
@@ -489,17 +547,25 @@ Password for jks:server1alias@/the/path/keystore-file.jks successfully stored
 
 <p>Use the usermanagement script with the following format:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tools/security/bin/usermanagement.sh -c &lt;file&gt; &lt;username&gt; terracotta
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>tools/security/bin/usermanagement.sh -c &lt;file&gt; &lt;username&gt; terracotta
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>where <code class="highlighter-rouge">-c</code> is required only if the file does not already exist. For servers, the <code class="highlighter-rouge">&lt;username&gt;</code> will be used as the value configured in <code class="highlighter-rouge">&lt;security&gt;/&lt;auth&gt;/&lt;user&gt;</code>. For clients, the username must match the one used to start the client.</p>
+<p>where <code class="language-plaintext highlighter-rouge">-c</code> is required only if the file does not already exist. For servers, the <code class="language-plaintext highlighter-rouge">&lt;username&gt;</code> will be used as the value configured in <code class="language-plaintext highlighter-rouge">&lt;security&gt;/&lt;auth&gt;/&lt;user&gt;</code>. For clients, the username must match the one used to start the client.</p>
 
 <p><strong>Note</strong>: While the “terracotta” role is appropriate for Terracotta servers and clients, the “admin” role is necessary for performing system functions such as stopping servers. For more information about roles, refer to the <a href="/documentation/4.1/terracotta-server-array/managing-security#user-roles">User Roles</a> section.</p>
 
 <p>For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Create the .ini file and add a server username and role.
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code># Create the .ini file and add a server username and role.
 tools/security/bin/usermanagement.sh -c my_auth.ini server1username terracotta
 
 # Add another server.
@@ -513,28 +579,38 @@ tools/security/bin/usermanagement.sh my_auth.ini admin1username admin
 
 # Add a user with a "terracotta" (read) role.
 tools/security/bin/usermanagement.sh my_auth.ini console1username operator
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The correct Apache Shiro Realm must be specified in the <a href="#server-config">server configuration</a>, along with the path to the .ini file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>...
 &lt;auth&gt;
   &lt;realm&gt;com.tc.net.core.security.ShiroIniRealm&lt;/realm&gt;
   &lt;url&gt;file:///%(user.dir)/my_auth.ini&lt;/url&gt;
   &lt;user&gt;server1username&lt;/user&gt;
 &lt;/auth&gt;
 ...
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>
    <a id="server-config"></a>
 </p>
 <h3 id="configure-server-security">Configure Server Security</h3>
-<p>Set up the security for the Terracotta Server Array in the Terracotta configuration file, which is named <code class="highlighter-rouge">tc-config.xml</code> by default. For example:</p>
+<p>Set up the security for the Terracotta Server Array in the Terracotta configuration file, which is named <code class="language-plaintext highlighter-rouge">tc-config.xml</code> by default. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"&gt;
 ...
   &lt;servers secure="true"&gt;
     &lt;server host="172.16.254.1" name="server1"&gt;
@@ -558,10 +634,12 @@ tools/security/bin/usermanagement.sh my_auth.ini console1username operator
  &lt;/servers&gt;
 ...
 &lt;/tc:tc-config&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>Every server participating in an SSL-based secured cluster must have a <code class="highlighter-rouge">&lt;security&gt;</code> block in which the security-related information is encapsulated and defined. The keystore, keychain, and .ini files named  in the configuration must be available to every server in the cluster. <a href="tsa-ldap">LDAP or Microsoft Active Directory</a> can be configured in place of file-based authentication and authorization.</p>
+<p>Every server participating in an SSL-based secured cluster must have a <code class="language-plaintext highlighter-rouge">&lt;security&gt;</code> block in which the security-related information is encapsulated and defined. The keystore, keychain, and .ini files named  in the configuration must be available to every server in the cluster. <a href="tsa-ldap">LDAP or Microsoft Active Directory</a> can be configured in place of file-based authentication and authorization.</p>
 
 <p>The following table defines some of the security-related elements and attributes shown in the configuration example.</p>
 
@@ -869,14 +947,6 @@ If servers start with no errors, but there are no messages indicating that secur
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -898,24 +968,32 @@ If servers start with no errors, but there are no messages indicating that secur
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -923,7 +1001,7 @@ If servers start with no errors, but there are no messages indicating that secur
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

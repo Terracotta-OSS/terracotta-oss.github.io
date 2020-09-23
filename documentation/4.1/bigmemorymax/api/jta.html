@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -235,7 +238,7 @@
 <h3 id="all-or-nothing">All or nothing</h3>
 
 <p>If a cache is enabled for transactions, all operations on it must happen within a transaction context
-otherwise a <code class="highlighter-rouge">TransactionException</code> will be thrown.</p>
+otherwise a <code class="language-plaintext highlighter-rouge">TransactionException</code> will be thrown.</p>
 
 <h3 id="transactional-methods">Transactional Methods</h3>
 <p>The following methods require a transactional context to run:</p>
@@ -262,14 +265,14 @@ otherwise a <code class="highlighter-rouge">TransactionException</code> will be 
 
 <h3 id="change-visibility">Change Visibility</h3>
 
-<p>The isolation level offered in BigMemory’s Ehcache API is <code class="highlighter-rouge">READ_COMMITTED</code>. Ehcache can work as an XAResource, in which case,
+<p>The isolation level offered in BigMemory’s Ehcache API is <code class="language-plaintext highlighter-rouge">READ_COMMITTED</code>. Ehcache can work as an XAResource, in which case,
 full two-phase commit is supported.
 Specifically:</p>
 
 <ul>
-  <li>All mutating changes to the cache are transactional including <code class="highlighter-rouge">put</code>, <code class="highlighter-rouge">remove</code>, <code class="highlighter-rouge">putWithWriter</code>, <code class="highlighter-rouge">removeWithWriter</code> and <code class="highlighter-rouge">removeAll</code>.</li>
-  <li>Mutating changes are not visible to other transactions in the local JVM or across the cluster until <code class="highlighter-rouge">COMMIT</code> has been called.</li>
-  <li>Until then, reads such as by <code class="highlighter-rouge">cache.get(...)</code> by other transactions return the old copy. Reads do not block.</li>
+  <li>All mutating changes to the cache are transactional including <code class="language-plaintext highlighter-rouge">put</code>, <code class="language-plaintext highlighter-rouge">remove</code>, <code class="language-plaintext highlighter-rouge">putWithWriter</code>, <code class="language-plaintext highlighter-rouge">removeWithWriter</code> and <code class="language-plaintext highlighter-rouge">removeAll</code>.</li>
+  <li>Mutating changes are not visible to other transactions in the local JVM or across the cluster until <code class="language-plaintext highlighter-rouge">COMMIT</code> has been called.</li>
+  <li>Until then, reads such as by <code class="language-plaintext highlighter-rouge">cache.get(...)</code> by other transactions return the old copy. Reads do not block.</li>
 </ul>
 
 <h2 id="when-to-use-transactional-modes">When to use Transactional Modes</h2>
@@ -292,28 +295,27 @@ get out of sync with the other resources participating in the transactions, even
 <p>The objects you are going to store in your transactional cache must:</p>
 
 <ul>
-  <li>implement <code class="highlighter-rouge">java.io.Serializable</code> — This is required to store cached objects when the cache is distributed in a Terracotta cluster, and it is also required by the
+  <li>implement <code class="language-plaintext highlighter-rouge">java.io.Serializable</code> — This is required to store cached objects when the cache is distributed in a Terracotta cluster, and it is also required by the
 copy-on-read / copy-on-write mechanism used to implement isolation.</li>
-  <li>override <code class="highlighter-rouge">equals</code> and <code class="highlighter-rouge">hashcode</code> — Those must be overridden because the transactional stores rely on element value comparison. See: <code class="highlighter-rouge">ElementValueComparator</code>
-and the <code class="highlighter-rouge">elementValueComparator</code> configuration setting.</li>
+  <li>override <code class="language-plaintext highlighter-rouge">equals</code> and <code class="language-plaintext highlighter-rouge">hashcode</code> — Those must be overridden because the transactional stores rely on element value comparison. See: <code class="language-plaintext highlighter-rouge">ElementValueComparator</code>
+and the <code class="language-plaintext highlighter-rouge">elementValueComparator</code> configuration setting.</li>
 </ul>
 
 <p>Additional restrictions:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">transactionalMode</code> can only be used with <code class="highlighter-rouge">terracotta consistency="strong"</code>.</li>
-  <li>Caches can be dynamically changed to bulk-load mode, but any attempt to perform a transaction when this is the case causes a <code class="highlighter-rouge">CacheException</code> to be thrown.</li>
+  <li><code class="language-plaintext highlighter-rouge">transactionalMode</code> can only be used with <code class="language-plaintext highlighter-rouge">terracotta consistency="strong"</code>.</li>
+  <li>Caches can be dynamically changed to bulk-load mode, but any attempt to perform a transaction when this is the case causes a <code class="language-plaintext highlighter-rouge">CacheException</code> to be thrown.</li>
   <li>
-    <p>If using “xa_strict”, set synchronous writes (in <code class="highlighter-rouge">ehcache.xml</code>) to prevent potential loss of unwritten data on the client:</p>
+    <p>If using “xa_strict”, set synchronous writes (in <code class="language-plaintext highlighter-rouge">ehcache.xml</code>) to prevent potential loss of unwritten data on the client:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &lt;terracotta synchronousWrites="true" /&gt;
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;terracotta synchronousWrites="true" /&gt;
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="configuration">Configuration</h2>
-<p>Transactions are enabled on a cache-by-cache basis with the <code class="highlighter-rouge">transactionalMode</code> cache attribute.
+<p>Transactions are enabled on a cache-by-cache basis with the <code class="language-plaintext highlighter-rouge">transactionalMode</code> cache attribute.
 The allowed values are:</p>
 
 <ul>
@@ -326,7 +328,10 @@ The allowed values are:</p>
 <p>The default value is “off”.
 Enabling a cache for “xa_strict” transactions is shown in the following example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="xaCache"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="xaCache"
    maxEntriesLocalHeap="500"
    eternal="false"
    timeToIdleSeconds="300"
@@ -334,7 +339,9 @@ Enabling a cache for “xa_strict” transactions is shown in the following exam
    diskExpiryThreadIntervalSeconds="1"
    transactionalMode="xa_strict"&gt;
  &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="transactional-caches-with-spring">Transactional Caches with Spring</h3>
@@ -344,7 +351,7 @@ Enabling a cache for “xa_strict” transactions is shown in the following exam
   <li>If you access the cache from an @Transactional Spring-annotated method, begin/commit/rollback statements are not required in application code because they are emitted by Spring.</li>
   <li>Both Spring and Ehcache need to access the transaction manager internally, and therefore you must inject your chosen transaction manager into Spring’s PlatformTransactionManager as well as use an appropriate lookup strategy for Ehcache.</li>
   <li>The Ehcache default lookup strategy might not be able to detect your chosen transaction manager. For example, it cannot detect the WebSphere transaction manager (see <a href="#transaction-managers">Transactions Managers</a>).</li>
-  <li>Configuring a <code class="highlighter-rouge">&lt;tx:method&gt;</code> with read-only=true could be problematic with certain transaction managers such as WebSphere.</li>
+  <li>Configuring a <code class="language-plaintext highlighter-rouge">&lt;tx:method&gt;</code> with read-only=true could be problematic with certain transaction managers such as WebSphere.</li>
 </ul>
 
 <h2 id="global-transactions">Global Transactions</h2>
@@ -358,7 +365,7 @@ To use Global Transactions, select either “xa_strict” or “xa” mode. The 
 an &lt;XAResouce&gt; implementation. The latter decorates a LocalTransactionStore-decorated cache to make it controllable by the standard JTA API
 instead of the proprietary TransactionController API.
 During its initialization, the Cache does a lookup of the TransactionManager using the provided TransactionManagerLookup implementation.
-Then, using the <code class="highlighter-rouge">TransactionManagerLookup.register(XAResouce)</code>, the newly created XAResource is registered.
+Then, using the <code class="language-plaintext highlighter-rouge">TransactionManagerLookup.register(XAResouce)</code>, the newly created XAResource is registered.
 The store is automatically configured to copy every Element read from the cache or written to it. Cache is copy-on-read and copy-on-write.</p>
 
 <h2 id="failure-recovery">Failure Recovery</h2>
@@ -367,8 +374,8 @@ Prepared data is persisted onto the cluster and locks on the memory are held. Th
 transaction data. Therefore, recovery errors after a crash might be reported by the transaction manager.</p>
 
 <h3 id="recovery">Recovery</h3>
-<p>At any time after something went wrong, an <code class="highlighter-rouge">XAResource</code> might be asked to recover. Data that has been prepared might either be committed or rolled back
-during recovery. XA data that has not yet been <code class="highlighter-rouge">prepared</code> is discarded.
+<p>At any time after something went wrong, an <code class="language-plaintext highlighter-rouge">XAResource</code> might be asked to recover. Data that has been prepared might either be committed or rolled back
+during recovery. XA data that has not yet been <code class="language-plaintext highlighter-rouge">prepared</code> is discarded.
 The recovery guarantee differs depending on the XA mode.</p>
 
 <h4 id="xa-mode">xa Mode</h4>
@@ -391,7 +398,10 @@ This mode supports the basic XA mechanism of the JTA standard.</p>
 JTA from within a Spring or EJB container rather than managing it themselves, this sample application is useful as a demonstration.
 The following snippet from our SimpleTX servlet shows a complete transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Ehcache cache = cacheManager.getEhcache("xaCache");
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>Ehcache cache = cacheManager.getEhcache("xaCache");
 UserTransaction ut = getUserTransaction();
 printLine(servletResponse, "Hello...");
 try {
@@ -409,7 +419,9 @@ try {
    }
    rollbackTransaction(ut);
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>The source code for the demo can be checked out from the <a href="http://svn.terracotta.org/svn/forge/projects/ehcache-jta-sample/trunk">Terracotta Forge</a>. A README.txt explains how to get the sample app going.</p>
@@ -427,8 +439,8 @@ This app is a Spring-based Java web app running in a Jetty container. It has (em
   <li>2 caches (transactional Ehcache)</li>
 </ul>
 
-<p>All XA Resources are managed by Atomikos TransactionManager. Transaction demarcation is done using Spring AOP’s <code class="highlighter-rouge">@Transactional</code> annotation. You can run it with: <code class="highlighter-rouge">mvn clean jetty:run</code>. Then point your browser at: <a href="http://localhost:9080">http://localhost:9080</a>.
-To see what happens without XA transactions: <code class="highlighter-rouge">mvn clean jetty:run -Dxa=no</code></p>
+<p>All XA Resources are managed by Atomikos TransactionManager. Transaction demarcation is done using Spring AOP’s <code class="language-plaintext highlighter-rouge">@Transactional</code> annotation. You can run it with: <code class="language-plaintext highlighter-rouge">mvn clean jetty:run</code>. Then point your browser at: <a href="http://localhost:9080">http://localhost:9080</a>.
+To see what happens without XA transactions: <code class="language-plaintext highlighter-rouge">mvn clean jetty:run -Dxa=no</code></p>
 
 <p>The source code for the demo can be checked out from the <a href="http://svn.terracotta.org/svn/forge/projects/ehcache-jta-banking/trunk">Terracotta Forge</a>. A README.txt explains how to get the sample app going.</p>
 
@@ -448,23 +460,33 @@ To see what happens without XA transactions: <code class="highlighter-rouge">mvn
 The first found is used.</p>
 
 <h3 id="configuring-a-transaction-manager">Configuring a Transaction Manager</h3>
-<p>If your Transaction Manager is not in the list above or you want to change the priority, provide your own lookup class based on an implementation of <code class="highlighter-rouge">net.sf.ehcache.transaction.manager.TransactionManagerLookup</code>
+<p>If your Transaction Manager is not in the list above or you want to change the priority, provide your own lookup class based on an implementation of <code class="language-plaintext highlighter-rouge">net.sf.ehcache.transaction.manager.TransactionManagerLookup</code>
 and specify it in place of
-the <code class="highlighter-rouge">DefaultTransactionManagerLookup</code> in <code class="highlighter-rouge">ehcache.xml</code>:</p>
+the <code class="language-plaintext highlighter-rouge">DefaultTransactionManagerLookup</code> in <code class="language-plaintext highlighter-rouge">ehcache.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;transactionManagerLookup
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;transactionManagerLookup
   class= "com.mycompany.transaction.manager.MyTransactionManagerLookupClass"
   properties="" propertySeparator=":"/&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>Another option is to provide a different location for the JNDI lookup by passing the jndiName property to the DefaultTransactionManagerLookup.
 The example below provides the proper location for the TransactionManager in GlassFish v3:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;transactionManagerLookup
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;transactionManagerLookup
   class="net.sf.ehcache.transaction.manager.DefaultTransactionManagerLookup"
   properties="jndiName=java:appserver/TransactionManager" propertySeparator=";"/&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="local-transactions">Local Transactions</h2>
@@ -474,22 +496,22 @@ This lets you apply multiple changes to a CacheManager all in your own transacti
 to other resources, such as a database, open a transaction to them and manually handle commit and rollback
 to ensure consistency.
 Local transactions are not controlled by a Transaction Manager. Instead there is an explicit API where a reference is obtained
-to a <code class="highlighter-rouge">TransactionController</code> for the CacheManager using <code class="highlighter-rouge">cacheManager.getTransactionController()</code> and the steps in the
+to a <code class="language-plaintext highlighter-rouge">TransactionController</code> for the CacheManager using <code class="language-plaintext highlighter-rouge">cacheManager.getTransactionController()</code> and the steps in the
 transaction are called explicitly.
 The steps in a local transaction are:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">transactionController.begin()</code> - This marks the beginning of the local transaction on the current thread. The changes are not visible to other threads or to
+  <li><code class="language-plaintext highlighter-rouge">transactionController.begin()</code> - This marks the beginning of the local transaction on the current thread. The changes are not visible to other threads or to
  other transactions.</li>
-  <li><code class="highlighter-rouge">transactionController.commit()</code> - Commits work done in the current transaction on the calling thread.</li>
-  <li><code class="highlighter-rouge">transactionController.rollback()</code> - Rolls back work done in the current transaction on the calling thread. The changes done since begin are not applied to
+  <li><code class="language-plaintext highlighter-rouge">transactionController.commit()</code> - Commits work done in the current transaction on the calling thread.</li>
+  <li><code class="language-plaintext highlighter-rouge">transactionController.rollback()</code> - Rolls back work done in the current transaction on the calling thread. The changes done since begin are not applied to
  the cache.
-These steps should be placed in a try-catch block which catches <code class="highlighter-rouge">TransactionException</code>. If any exceptions are thrown, rollback() should be
+These steps should be placed in a try-catch block which catches <code class="language-plaintext highlighter-rouge">TransactionException</code>. If any exceptions are thrown, rollback() should be
 called.
-Local Transactions has its own exceptions that can be thrown, which are all subclasses of <code class="highlighter-rouge">CacheException</code>. They are:</li>
-  <li><code class="highlighter-rouge">TransactionException</code> - a general exception</li>
-  <li><code class="highlighter-rouge">TransactionInterruptedException</code> - if Thread.interrupt() was called while the cache was processing a transaction.</li>
-  <li><code class="highlighter-rouge">TransactionTimeoutException</code> - if a cache operation or commit is called after the transaction timeout has elapsed.</li>
+Local Transactions has its own exceptions that can be thrown, which are all subclasses of <code class="language-plaintext highlighter-rouge">CacheException</code>. They are:</li>
+  <li><code class="language-plaintext highlighter-rouge">TransactionException</code> - a general exception</li>
+  <li><code class="language-plaintext highlighter-rouge">TransactionInterruptedException</code> - if Thread.interrupt() was called while the cache was processing a transaction.</li>
+  <li><code class="language-plaintext highlighter-rouge">TransactionTimeoutException</code> - if a cache operation or commit is called after the transaction timeout has elapsed.</li>
 </ul>
 
 <h3 id="introduction-video">Introduction Video</h3>
@@ -498,39 +520,57 @@ Local Transactions has its own exceptions that can be thrown, which are all subc
 <h3 id="configuration-1">Configuration</h3>
 <p>Local transactions are configured as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;cache name="sampleCache"
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;cache name="sampleCache"
    ...
    transactionalMode="local"
  &lt;/cache&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="isolation-level">Isolation Level</h3>
 <p>As with the other transaction modes, the isolation level is READ_COMMITTED.</p>
 
 <h3 id="transaction-timeouts">Transaction Timeouts</h3>
-<p>If a transaction cannot complete within the timeout period, a <code class="highlighter-rouge">TransactionTimeoutException</code> is thrown. To return the
-cache to a consistent state, call <code class="highlighter-rouge">transactionController.rollback()</code>.
-Because <code class="highlighter-rouge">TransactionController</code> is at the level of the CacheManager, a default timeout can be set which applies to all transactions
+<p>If a transaction cannot complete within the timeout period, a <code class="language-plaintext highlighter-rouge">TransactionTimeoutException</code> is thrown. To return the
+cache to a consistent state, call <code class="language-plaintext highlighter-rouge">transactionController.rollback()</code>.
+Because <code class="language-plaintext highlighter-rouge">TransactionController</code> is at the level of the CacheManager, a default timeout can be set which applies to all transactions
 across all caches in a CacheManager. The default is 15 seconds.
 To change the defaultTimeout:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>transactionController.setDefaultTransactionTimeout(int defaultTransactionTimeoutSeconds)
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>transactionController.setDefaultTransactionTimeout(int defaultTransactionTimeoutSeconds)
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The countdown starts when <code class="highlighter-rouge">begin()</code> is called. You might have another local transaction on a JDBC connection and you might
+<p>The countdown starts when <code class="language-plaintext highlighter-rouge">begin()</code> is called. You might have another local transaction on a JDBC connection and you might
 be making multiple changes. If you think it might take longer than 15 seconds for an individual transaction, you can override the
 default when you begin the transaction with:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>transactionController.begin(int transactionTimeoutSeconds) {
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>transactionController.begin(int transactionTimeoutSeconds) {
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="sample-code">Sample Code</h3>
 <p>This example shows a transaction which performs multiple operations across two caches.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>CacheManager cacheManager = CacheManager.getInstance();
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>CacheManager cacheManager = CacheManager.getInstance();
 try {
    cacheManager.getTransactionController().begin();
     cache1.put(new Element(1, "one"));
@@ -540,7 +580,9 @@ try {
 } catch (CacheException e) {
    cacheManager.getTransactionController().rollback()
 }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="performance">Performance</h2>
@@ -564,7 +606,7 @@ putIfAbsent and replace methods.)</p>
 <p>Ehcache uses soft locks stored in the Element itself and is on a key basis.</p>
 
 <h3 id="performance-comparisons">Performance Comparisons</h3>
-<p>Any transactional cache adds an overhead which is significant for writes and nearly negligible for reads. Compared to <code class="highlighter-rouge">transactionalMode="off"</code>, the time it takes to perform writes will be noticeably slower with either “xa” or “local” specified, and “xa_strict” will be the slowest.</p>
+<p>Any transactional cache adds an overhead which is significant for writes and nearly negligible for reads. Compared to <code class="language-plaintext highlighter-rouge">transactionalMode="off"</code>, the time it takes to perform writes will be noticeably slower with either “xa” or “local” specified, and “xa_strict” will be the slowest.</p>
 
 <p>Accordingly, “xa_strict” should only be used where full guarantees are required, otherwise one of the other modes should be used.</p>
 
@@ -579,7 +621,7 @@ implement against. However, “xa”, which uses TransactionManager callbacks an
 
 <p>When using Spring, make sure your configuration is set up correctly with respect to the PlatformTransactionManager and the Websphere TM.</p>
 
-<p>To confirm that Ehcache will succeed, try to manually register a <code class="highlighter-rouge">com.ibm.websphere.jtaextensions.SynchronizationCallback</code> in the <code class="highlighter-rouge">com.ibm.websphere.jtaextensions.ExtendedJTATransaction</code>. Get <code class="highlighter-rouge">java:comp/websphere/ExtendedJTATransaction</code> from JNDI, cast that to <code class="highlighter-rouge">com.ibm.websphere.jtaextensions.ExtendedJTATransaction</code> and call the <code class="highlighter-rouge">registerSynchronizationCallbackForCurrentTran</code> method. If you succeed, Ehcache should too.</p>
+<p>To confirm that Ehcache will succeed, try to manually register a <code class="language-plaintext highlighter-rouge">com.ibm.websphere.jtaextensions.SynchronizationCallback</code> in the <code class="language-plaintext highlighter-rouge">com.ibm.websphere.jtaextensions.ExtendedJTATransaction</code>. Get <code class="language-plaintext highlighter-rouge">java:comp/websphere/ExtendedJTATransaction</code> from JNDI, cast that to <code class="language-plaintext highlighter-rouge">com.ibm.websphere.jtaextensions.ExtendedJTATransaction</code> and call the <code class="language-plaintext highlighter-rouge">registerSynchronizationCallbackForCurrentTran</code> method. If you succeed, Ehcache should too.</p>
 
 <h3 id="how-do-transactions-interact-with-write-behind-and-write-through-caches">How do transactions interact with Write-behind and Write-through caches?</h3>
 <p>If your transactional enabled cache is being used with a writer, write operations are queued until transaction commit time. Solely
@@ -591,31 +633,41 @@ operations have been executed. On the other hand, any exception thrown during th
 transaction to be rolled back by having UserTransaction.commit() throw a RollbackException.</p>
 
 <h3 id="are-hibernate-transactions-supported">Are Hibernate Transactions supported?</h3>
-<p>Ehcache is a “transactional” cache for Hibernate purposes. The <code class="highlighter-rouge">net.sf.ehcache.hibernate.EhCacheRegionFactory</code>
+<p>Ehcache is a “transactional” cache for Hibernate purposes. The <code class="language-plaintext highlighter-rouge">net.sf.ehcache.hibernate.EhCacheRegionFactory</code>
 supports Hibernate entities configured with &lt;cache usage=”transactional”/&gt;.</p>
 
 <h3 id="how-do-i-make-weblogic-10-work-with-transactional-ehcache">How do I make WebLogic 10 work with transactional Ehcache?</h3>
 <p>WebLogic uses an optimization that is not supported by our implementation. By default WebLogic 10 spawns threads to
 start the Transaction on each XAResource in parallel. Because we need transaction work to be performed on the same Thread, you must
-turn off this optimization by setting the <code class="highlighter-rouge">parallel-xa-enabled</code> option to <code class="highlighter-rouge">false</code> in your domain configuration:</p>
+turn off this optimization by setting the <code class="language-plaintext highlighter-rouge">parallel-xa-enabled</code> option to <code class="language-plaintext highlighter-rouge">false</code> in your domain configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;jta&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;jta&gt;
   ...
   &lt;checkpoint-interval-seconds&gt;300&lt;/checkpoint-interval-seconds&gt;
   &lt;parallel-xa-enabled&gt;false&lt;/parallel-xa-enabled&gt;
   &lt;unregister-resource-grace-period&gt;30&lt;/unregister-resource-grace-period&gt;
   ...
 &lt;/jta&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="how-do-i-make-atomikos-work-with-the-ehcache-xa-mode">How do I make Atomikos work with the Ehcache “xa” mode?</h3>
 <p>Atomikos has <a href="http://fogbugz.atomikos.com/default.asp?community.6.802.3">a bug</a>, which makes the “xa” mode’s normal transaction termination mechanism unreliable,
-There is an alternative termination mechanism built in that transaction mode that is automatically enabled when <code class="highlighter-rouge">net.sf.ehcache.transaction.xa.alternativeTerminationMode</code> is set to true or when Atomikos is detected as the controlling transaction manager.
+There is an alternative termination mechanism built in that transaction mode that is automatically enabled when <code class="language-plaintext highlighter-rouge">net.sf.ehcache.transaction.xa.alternativeTerminationMode</code> is set to true or when Atomikos is detected as the controlling transaction manager.
 This alternative termination mode has strict requirement on the way threads are used by the transaction manager and Atomikos’s default settings will not work unless you configure the following property as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.atomikos.icatch.threaded_2pc=false
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>com.atomikos.icatch.threaded_2pc=false
+</code>
+      </pre>
+   </div>
 </div>
 
       </article>
@@ -651,14 +703,6 @@ This alternative termination mode has strict requirement on the way threads are 
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -680,24 +724,32 @@ This alternative termination mode has strict requirement on the way threads are 
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -705,7 +757,7 @@ This alternative termination mode has strict requirement on the way threads are 
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

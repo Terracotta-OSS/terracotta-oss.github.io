@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -189,7 +192,7 @@
 <p>{toc|2:3}</p>
 
 <h2 id="introduction">Introduction</h2>
-<p>This document is a reference to all of the Terracotta configuration elements in the Terracotta configuration file, which is named <code class="highlighter-rouge">tc-config.xml</code> by default.</p>
+<p>This document is a reference to all of the Terracotta configuration elements in the Terracotta configuration file, which is named <code class="language-plaintext highlighter-rouge">tc-config.xml</code> by default.</p>
 
 <p>You can use a sample configuration file provided in the kit as the basis for your Terracotta configuration. Some samples have inline comments describing the configuration elements. Be sure to start with a clean file for your configuration.</p>
 
@@ -220,7 +223,7 @@
 <p>These variables can be used where appropriate, including for elements or attributes that expect strings or paths for values:</p>
 
 <ul>
-  <li>the “name”, “host” and “bind” attributes of the <code class="highlighter-rouge">&lt;server&gt;</code> element</li>
+  <li>the “name”, “host” and “bind” attributes of the <code class="language-plaintext highlighter-rouge">&lt;server&gt;</code> element</li>
   <li>the password file location for JMX authentication</li>
   <li>client logs location</li>
   <li>server logs location</li>
@@ -240,59 +243,79 @@
 </p>
 <h2 id="overriding-tc.properties">Overriding tc.properties</h2>
 
-<p>Every Terracotta installation has a default <code class="highlighter-rouge">tc.properties</code> file containing system properties. Normally, the settings in <code class="highlighter-rouge">tc.properties</code> are pre-tuned and should not be edited.</p>
+<p>Every Terracotta installation has a default <code class="language-plaintext highlighter-rouge">tc.properties</code> file containing system properties. Normally, the settings in <code class="language-plaintext highlighter-rouge">tc.properties</code> are pre-tuned and should not be edited.</p>
 
-<p>If tuning is required, you can override certain properties in <code class="highlighter-rouge">tc.properties</code> using <code class="highlighter-rouge">tc-config.xml</code>. This can make a production environment more efficient by allowing system properties to be pushed out to clients with <code class="highlighter-rouge">tc-config.xml</code>. Those system properties would normally have to be configured separately on each client.</p>
+<p>If tuning is required, you can override certain properties in <code class="language-plaintext highlighter-rouge">tc.properties</code> using <code class="language-plaintext highlighter-rouge">tc-config.xml</code>. This can make a production environment more efficient by allowing system properties to be pushed out to clients with <code class="language-plaintext highlighter-rouge">tc-config.xml</code>. Those system properties would normally have to be configured separately on each client.</p>
 
 <h3 id="setting-system-properties-in-tc-config">Setting System Properties in tc-config</h3>
-<p>To set a system property with the same value for all clients, you can add it to the Terracotta server’s <code class="highlighter-rouge">tc-config.xml</code> file using a configuration element with the following format:</p>
+<p>To set a system property with the same value for all clients, you can add it to the Terracotta server’s <code class="language-plaintext highlighter-rouge">tc-config.xml</code> file using a configuration element with the following format:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property name="&lt;tc_system_property&gt;" value="&lt;new_value&gt;" /&gt;
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;property name="&lt;tc_system_property&gt;" value="&lt;new_value&gt;" /&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>All <code class="highlighter-rouge">&lt;property /&gt;</code> tags must be wrapped in a <code class="highlighter-rouge">&lt;tc-properties&gt;</code> section placed at the beginning of <code class="highlighter-rouge">tc-config.xml</code>.</p>
+<p>All <code class="language-plaintext highlighter-rouge">&lt;property /&gt;</code> tags must be wrapped in a <code class="language-plaintext highlighter-rouge">&lt;tc-properties&gt;</code> section placed at the beginning of <code class="language-plaintext highlighter-rouge">tc-config.xml</code>.</p>
 
-<p>For example, to override the values of the system properties <code class="highlighter-rouge">l1.cachemanager.enabled</code> and <code class="highlighter-rouge">l1.cachemanager.leastCount</code>, add the following to the beginning of <code class="highlighter-rouge">tc-config.xml</code>:</p>
+<p>For example, to override the values of the system properties <code class="language-plaintext highlighter-rouge">l1.cachemanager.enabled</code> and <code class="language-plaintext highlighter-rouge">l1.cachemanager.leastCount</code>, add the following to the beginning of <code class="language-plaintext highlighter-rouge">tc-config.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tc-properties&gt;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;tc-properties&gt;
   &lt;property name="l1.cachemanager.enabled" value="false" /&gt;
   &lt;property name="l1.cachemanager.leastCount" value="4" /&gt;
 &lt;/tc-properties&gt;
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="override-priority">Override Priority</h3>
-<p>System properties configured in <code class="highlighter-rouge">tc-config.xml</code> override the system properties in the default <code class="highlighter-rouge">tc.properties</code> file provided with the Terracotta kit. The default <code class="highlighter-rouge">tc.properties</code> file should <em>not</em> be edited or moved.</p>
+<p>System properties configured in <code class="language-plaintext highlighter-rouge">tc-config.xml</code> override the system properties in the default <code class="language-plaintext highlighter-rouge">tc.properties</code> file provided with the Terracotta kit. The default <code class="language-plaintext highlighter-rouge">tc.properties</code> file should <em>not</em> be edited or moved.</p>
 
-<p>If you create a <em>local</em> <code class="highlighter-rouge">tc.properties</code> file in the Terracotta <code class="highlighter-rouge">lib</code> directory, system properties set in that file are used by Terracotta and will override system properties in the <em>default</em> <code class="highlighter-rouge">tc.properties</code> file. System properties in the local <code class="highlighter-rouge">tc.properties</code> file are <em>not</em> overridden by system properties configured in <code class="highlighter-rouge">tc-config.xml</code>.</p>
+<p>If you create a <em>local</em> <code class="language-plaintext highlighter-rouge">tc.properties</code> file in the Terracotta <code class="language-plaintext highlighter-rouge">lib</code> directory, system properties set in that file are used by Terracotta and will override system properties in the <em>default</em> <code class="language-plaintext highlighter-rouge">tc.properties</code> file. System properties in the local <code class="language-plaintext highlighter-rouge">tc.properties</code> file are <em>not</em> overridden by system properties configured in <code class="language-plaintext highlighter-rouge">tc-config.xml</code>.</p>
 
-<p>System property values passed to Java using -D override all other configured values for that system property. In the example above, if <code class="highlighter-rouge">-Dcom.tc.l1.cachemanager.leastcount=5</code> was passed at the command line or through a script, it would override the value in <code class="highlighter-rouge">tc-config.xml</code> and <code class="highlighter-rouge">tc.properties</code>. The order of precedence is shown in the following list, with highest precedence shown last:</p>
+<p>System property values passed to Java using -D override all other configured values for that system property. In the example above, if <code class="language-plaintext highlighter-rouge">-Dcom.tc.l1.cachemanager.leastcount=5</code> was passed at the command line or through a script, it would override the value in <code class="language-plaintext highlighter-rouge">tc-config.xml</code> and <code class="language-plaintext highlighter-rouge">tc.properties</code>. The order of precedence is shown in the following list, with highest precedence shown last:</p>
 
 <ol>
-  <li>default <code class="highlighter-rouge">tc.properties</code></li>
-  <li><code class="highlighter-rouge">tc-config.xml</code></li>
-  <li>local, or user-created <code class="highlighter-rouge">tc.properties</code> in Terracotta <code class="highlighter-rouge">lib</code> directory</li>
+  <li>default <code class="language-plaintext highlighter-rouge">tc.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">tc-config.xml</code></li>
+  <li>local, or user-created <code class="language-plaintext highlighter-rouge">tc.properties</code> in Terracotta <code class="language-plaintext highlighter-rouge">lib</code> directory</li>
   <li>Java system properties set with -D</li>
 </ol>
 
 <h3 id="failure-to-override">Failure to Override</h3>
-<p>If system properties set in <code class="highlighter-rouge">tc-config.xml</code> fail to override default system properties, a warning is logged to the Terracotta logs. The warning has the following format:</p>
+<p>If system properties set in <code class="language-plaintext highlighter-rouge">tc-config.xml</code> fail to override default system properties, a warning is logged to the Terracotta logs. The warning has the following format:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>The property &lt;system_property_name&gt; was set by local settings to &lt;value&gt;.
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>The property &lt;system_property_name&gt; was set by local settings to &lt;value&gt;.
 This value will not be overridden to &lt;value&gt; from the tc-config.xml file.
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>System properties used early in the Terracotta initialization process may fail to be overridden. If this happens, a warning is logged to the Terracotta logs. The warning has the following format:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>The property &lt;system_property_name&gt; was read before initialization completed.
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>The property &lt;system_property_name&gt; was read before initialization completed.
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>The warning is followed by the value assigned to <code class="highlighter-rouge">&lt;system_property_name&gt;</code>.</p>
+<p>The warning is followed by the value assigned to <code class="language-plaintext highlighter-rouge">&lt;system_property_name&gt;</code>.</p>
 
-<p><strong>NOTE:</strong> The property <code class="highlighter-rouge">tc.management.mbeans.enabled</code> is known to load before initialization completes and cannot be overridden.</p>
+<p><strong>NOTE:</strong> The property <code class="language-plaintext highlighter-rouge">tc.management.mbeans.enabled</code> is known to load before initialization completes and cannot be overridden.</p>
 
 <p>
    <a id="servers"></a>
@@ -303,7 +326,7 @@ This value will not be overridden to &lt;value&gt; from the tc-config.xml file.
 <h3 id="tctc-configservers">/tc:tc-config/servers</h3>
 <p>This section defines the Terracotta server instances present in your cluster. One or more entries can be defined, either directly under the &lt;servers&gt; element or in <a href="#mirror-groups">mirror groups</a>. If this section is omitted, Terracotta configuration behaves as if there’s a single server instance with default values.</p>
 
-<p>This section also defines certain global settings that affect all servers, including the attribute <code class="highlighter-rouge">secure</code>. This is a global control for enabling (“true”) or disabling (“false” DEFAULT) <a href="tsa-security">SSL-based security</a> for the entire cluster.</p>
+<p>This section also defines certain global settings that affect all servers, including the attribute <code class="language-plaintext highlighter-rouge">secure</code>. This is a global control for enabling (“true”) or disabling (“false” DEFAULT) <a href="tsa-security">SSL-based security</a> for the entire cluster.</p>
 
 <h3 id="tctc-configserversserver">/tc:tc-config/servers/server</h3>
 
@@ -676,14 +699,6 @@ To set the logging level, see [this FAQ entry](/documentation/4.1/bigmemorymax/t
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -705,24 +720,32 @@ To set the logging level, see [this FAQ entry](/documentation/4.1/bigmemorymax/t
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -730,7 +753,7 @@ To set the logging level, see [this FAQ entry](/documentation/4.1/bigmemorymax/t
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

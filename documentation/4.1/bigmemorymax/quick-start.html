@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -200,29 +203,28 @@
 
     <ul>
       <li>
-        <p><code class="highlighter-rouge">apis/ehcache/lib/ehcache-ee-&lt;version&gt;.jar</code> – This file contains the API to BigMemory Max.</p>
+        <p><code class="language-plaintext highlighter-rouge">apis/ehcache/lib/ehcache-ee-&lt;version&gt;.jar</code> – This file contains the API to BigMemory Max.</p>
       </li>
       <li>
-        <p><code class="highlighter-rouge">apis/ehcache/lib/slf4j-api-&lt;version&gt;.jar</code> – This file is the bridge, or logging facade, to the BigMemory Max logging framework.</p>
+        <p><code class="language-plaintext highlighter-rouge">apis/ehcache/lib/slf4j-api-&lt;version&gt;.jar</code> – This file is the bridge, or logging facade, to the BigMemory Max logging framework.</p>
       </li>
       <li>
-        <p><code class="highlighter-rouge">apis/toolkit/lib/terracotta-toolkit-runtime-ee-&lt;version&gt;.jar</code> – This JAR contains the libraries for the Terracotta Server Array.</p>
+        <p><code class="language-plaintext highlighter-rouge">apis/toolkit/lib/terracotta-toolkit-runtime-ee-&lt;version&gt;.jar</code> – This JAR contains the libraries for the Terracotta Server Array.</p>
       </li>
     </ul>
   </li>
   <li>
-    <p>Save the BigMemory Max license-key file to the BigMemory Max home directory. This file, called <code class="highlighter-rouge">terracotta-license.key</code>, was attached to an email you received after registering for the BigMemory Max download.</p>
+    <p>Save the BigMemory Max license-key file to the BigMemory Max home directory. This file, called <code class="language-plaintext highlighter-rouge">terracotta-license.key</code>, was attached to an email you received after registering for the BigMemory Max download.</p>
 
     <p>Alternatively, you can add the license-key file to your application’s classpath, or specify it with the following Java system property:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> -Dcom.tc.productkey.path=/path/to/terracotta-license.key
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -Dcom.tc.productkey.path=/path/to/terracotta-license.key
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>BigMemory Max uses Ehcache as its user-facing interface. To configure BigMemory Max, create an <code class="highlighter-rouge">ehcache.xml</code> configuration file, or update the one that is provided in the config-samples/ directory of the BigMemory Max kit. For example:</p>
+    <p>BigMemory Max uses Ehcache as its user-facing interface. To configure BigMemory Max, create an <code class="language-plaintext highlighter-rouge">ehcache.xml</code> configuration file, or update the one that is provided in the config-samples/ directory of the BigMemory Max kit. For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
       name="myBigMemoryMaxConfig"&gt;
 
@@ -251,37 +253,34 @@
    &lt;terracottaConfig url="localhost:9510" /&gt;
 
  &lt;/ehcache&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
-    <p>Place your <code class="highlighter-rouge">ehcache.xml</code> file in the top-level of your classpath.</p>
+    <p>Place your <code class="language-plaintext highlighter-rouge">ehcache.xml</code> file in the top-level of your classpath.</p>
 
     <p>For more information on configuration options, see the configuration of
  <a href="/documentation/4.1/bigmemorymax/configuration/storage-options"> “Storage Tiers”</a>
- and to the reference ehcache.xml configuration file in the <code class="highlighter-rouge">config-samples</code>
+ and to the reference ehcache.xml configuration file in the <code class="language-plaintext highlighter-rouge">config-samples</code>
  directory of the BigMemory Max kit.</p>
   </li>
   <li>
-    <p>Use the <code class="highlighter-rouge">-XX:MaxDirectMemorySize</code> Java option to allocate
+    <p>Use the <code class="language-plaintext highlighter-rouge">-XX:MaxDirectMemorySize</code> Java option to allocate
 enough direct memory in the JVM to accomodate the off-heap storage specified
 in your configuration, plus at least 250MB to allow for other direct memory
 usage that might occur in your application. For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> -XX:MaxDirectMemorySize=9G
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -XX:MaxDirectMemorySize=9G
+</code></pre></div>    </div>
 
-    <p>Set <code class="highlighter-rouge">MaxDirectMemorySize</code> to the amount of BigMemory you have. For more
+    <p>Set <code class="language-plaintext highlighter-rouge">MaxDirectMemorySize</code> to the amount of BigMemory you have. For more
  information about this step, refer to
  <a href="/documentation/4.1/bigmemorymax/configuration/storage-options#allocating-direct-memory">Allocating Direct Memory in the JVM</a>.</p>
 
-    <p>Also, allocate at least enough heap using the <code class="highlighter-rouge">-Xmx</code> Java option to accomodate the
+    <p>Also, allocate at least enough heap using the <code class="language-plaintext highlighter-rouge">-Xmx</code> Java option to accomodate the
 on-heap storage specified in your configuration, plus enough extra heap to
 run the rest of your application.  For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> -Xmx1g
-</code></pre>
-    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -Xmx1g
+</code></pre></div>    </div>
 
     <p>Finally, if necessary, define the JAVA_HOME environment variable.</p>
   </li>
@@ -295,9 +294,9 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
 
 <ol>
   <li>
-    <p>To configure the Terracotta server, create a <code class="highlighter-rouge">tc-config.xml</code> configuration file, or update the one that is provided in the config-samples/ directory of the BigMemory Max kit. For example:</p>
+    <p>To configure the Terracotta server, create a <code class="language-plaintext highlighter-rouge">tc-config.xml</code> configuration file, or update the one that is provided in the config-samples/ directory of the BigMemory Max kit. For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
  &lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
@@ -323,10 +322,9 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
      &lt;logs&gt;logs-%i&lt;/logs&gt;
    &lt;/clients&gt;
  &lt;/tc:tc-config&gt;
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
-    <p>Place your <code class="highlighter-rouge">tc-config.xml</code> file in the Terracotta server/ directory.</p>
+    <p>Place your <code class="language-plaintext highlighter-rouge">tc-config.xml</code> file in the Terracotta server/ directory.</p>
 
     <p>For more information about configuration options, refer to the
  <a href="/documentation/4.1/terracotta-server-array/configuration-guide">TSA configuration documentation</a>.</p>
@@ -334,10 +332,9 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
   <li>
     <p>In a terminal, change to your Terracotta server/ directory. Then execute the start-tc-server command:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> %&gt; cd /path/to/bigmemory-max-&lt;version&gt;/server
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> %&gt; cd /path/to/bigmemory-max-&lt;version&gt;/server
  	%&gt; ./bin/start-tc-server.sh
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>You should see confirmation in the terminal that the server started.</p>
 
@@ -346,13 +343,12 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
   <li>
     <p>In a terminal, change to your Terracotta tools/management-console/ directory. Then execute the start-tmc command:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> %&gt; cd /path/to/bigmemory-max-&lt;version&gt;/tools/management-console
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> %&gt; cd /path/to/bigmemory-max-&lt;version&gt;/tools/management-console
  %&gt; ./bin/start-tmc.sh
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>In a browser, enter the URL <code class="highlighter-rouge">http://localhost:9889/tmc</code>. When you first connect to the TMC, the authentication setup page appears, where you can choose to run the TMC with authentication or without.</p>
+    <p>In a browser, enter the URL <code class="language-plaintext highlighter-rouge">http://localhost:9889/tmc</code>. When you first connect to the TMC, the authentication setup page appears, where you can choose to run the TMC with authentication or without.</p>
 
     <p><img src="/images/documentation/InitialTMCAuthenticationSetup2.png" alt="Terracotta Management Console" /></p>
   </li>
@@ -441,14 +437,6 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -470,24 +458,32 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -495,7 +491,7 @@ Large data sets in BigMemory Max can be distributed across the Terracotta Server
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

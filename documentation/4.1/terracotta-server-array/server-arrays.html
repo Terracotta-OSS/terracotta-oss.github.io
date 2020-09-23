@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -205,22 +208,27 @@
 
 <p>By default, a Terracotta server has Fast Restartability disabled, which means it will not persist data after a restart. Its configuration could look like the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
-<span class="nt">&lt;tc:tc-config</span> <span class="na">xmlns:tc=</span><span class="s">"http://www.terracotta.org/config"</span>
-<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-<span class="na">xsi:schemaLocation=</span><span class="s">"http://www.terracotta.org/schema/terracotta-9.xsd"</span><span class="nt">&gt;</span>
- <span class="nt">&lt;servers&gt;</span>
-   <span class="nt">&lt;server</span> <span class="na">name=</span><span class="s">"Server1"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;data&gt;</span>/opt/terracotta/server1-data<span class="nt">&lt;/data&gt;</span>
-     <span class="nt">&lt;tsa-port&gt;</span>9510<span class="nt">&lt;/tsa-port&gt;</span>
-     <span class="nt">&lt;dataStorage</span> <span class="na">size=</span><span class="s">”4g”</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;offheap</span> <span class="na">size=</span><span class="s">”4g”/</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;/dataStorage&gt;</span>
-   <span class="nt">&lt;/server&gt;</span>
-  <span class="nt">&lt;/servers&gt;</span>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
+ &lt;servers&gt;
+   &lt;server name="Server1"&gt;
+     &lt;data&gt;/opt/terracotta/server1-data&lt;/data&gt;
+     &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
+     &lt;dataStorage size=”4g”&gt;
+        &lt;offheap size=”4g”/&gt;
+     &lt;/dataStorage&gt;
+   &lt;/server&gt;
+  &lt;/servers&gt;
  ...
-<span class="nt">&lt;/tc:tc-config&gt;</span>
-</code></pre>
+&lt;/tc:tc-config&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>If this server goes down, the application state (all clustered data) in the shared memory is lost. In addition, when the server is up again, all clients must be restarted to rejoin the cluster. Note that servers are required to run with off-heap, and that shared data is also lost.</p>
@@ -239,30 +247,35 @@
 
 <p>The Fast Restart feature provides enterprise-ready crash resilience by keeping a fully consistent, real-time record of your in-memory data. After any kind of shutdown — planned or unplanned — the next time your application starts up, all of your BigMemory Max data is still available and very quickly accessible.</p>
 
-<p>The Fast Restart feature persists the real-time record of the in-memory data in a Fast Restart store on the server’s local disk. After any restart, the data that was last in memory (both heap and off-heap stores) automatically loads from the Fast Restart store back into memory. In addition, previously connected clients are allowed to rejoin the cluster within a window set by the <code class="highlighter-rouge">&lt;client-reconnect-window&gt;</code> element.</p>
+<p>The Fast Restart feature persists the real-time record of the in-memory data in a Fast Restart store on the server’s local disk. After any restart, the data that was last in memory (both heap and off-heap stores) automatically loads from the Fast Restart store back into memory. In addition, previously connected clients are allowed to rejoin the cluster within a window set by the <code class="language-plaintext highlighter-rouge">&lt;client-reconnect-window&gt;</code> element.</p>
 
-<p>To configure the Terracotta server for Fast Restartability, add and enable the <code class="highlighter-rouge">&lt;restartable&gt;</code> element in the tc-config.xml.</p>
+<p>To configure the Terracotta server for Fast Restartability, add and enable the <code class="language-plaintext highlighter-rouge">&lt;restartable&gt;</code> element in the tc-config.xml.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
-<span class="nt">&lt;tc:tc-config</span> <span class="na">xmlns:tc=</span><span class="s">"http://www.terracotta.org/config"</span>
- <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
- <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.terracotta.org/schema/terracotta-9.xsd"</span><span class="nt">&gt;</span>
- <span class="nt">&lt;servers&gt;</span>
-   <span class="nt">&lt;server</span> <span class="na">name=</span><span class="s">"Server1"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;data&gt;</span>/opt/terracotta/server1-data<span class="nt">&lt;/data&gt;</span>
-     <span class="nt">&lt;tsa-port&gt;</span>9510<span class="nt">&lt;/tsa-port&gt;</span>
-     <span class="nt">&lt;dataStorage</span> <span class="na">size=</span><span class="s">”4g”</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;offheap</span> <span class="na">size=</span><span class="s">”4g”/</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;/dataStorage&gt;</span>
-   <span class="nt">&lt;/server&gt;</span>
-   <span class="c">&lt;!-- Fast Restartability must be added explicitly. --&gt;</span>
-   <span class="nt">&lt;restartable</span> <span class="na">enabled=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
-   <span class="c">&lt;!-- By default the window is 120 seconds. --&gt;</span>
-   <span class="nt">&lt;client-reconnect-window&gt;</span>120<span class="nt">&lt;/client-reconnect-window&gt;</span>
- <span class="nt">&lt;/servers&gt;</span>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
+ &lt;servers&gt;
+   &lt;server name="Server1"&gt;
+     &lt;data&gt;/opt/terracotta/server1-data&lt;/data&gt;
+     &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
+     &lt;dataStorage size=”4g”&gt;
+        &lt;offheap size=”4g”/&gt;
+     &lt;/dataStorage&gt;
+   &lt;/server&gt;
+   &lt;!-- Fast Restartability must be added explicitly. --&gt;
+   &lt;restartable enabled="true"/&gt;
+   &lt;!-- By default the window is 120 seconds. --&gt;
+   &lt;client-reconnect-window&gt;120&lt;/client-reconnect-window&gt;
+ &lt;/servers&gt;
  ...
-<span class="nt">&lt;/tc:tc-config&gt;</span>
-</code></pre>
+&lt;/tc:tc-config&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
 <h4 id="terracotta-server-memory-allocation">Terracotta server memory allocation</h4>
@@ -298,14 +311,14 @@
 
 <h4 id="disk-usage">Disk usage</h4>
 
-<p>Fast Restartability requires a unique and explicitly specified path. The default path is the Terracotta server’s home directory. You can customize the path using the <code class="highlighter-rouge">&lt;data&gt;</code> element in the server’s <code class="highlighter-rouge">tc-config.xml</code> configuration file.</p>
+<p>Fast Restartability requires a unique and explicitly specified path. The default path is the Terracotta server’s home directory. You can customize the path using the <code class="language-plaintext highlighter-rouge">&lt;data&gt;</code> element in the server’s <code class="language-plaintext highlighter-rouge">tc-config.xml</code> configuration file.</p>
 
 <p>The Terracotta Server Array can be configured to be restartable in addition to including searchable caches, but both of these features require disk storage. When both are enabled, be sure that enough disk space is available. Depending upon the number of searchable attributes, the amount of disk storage required might be 3 times the amount of in-memory data.</p>
 
-<p>It is highly recommended to store the search index (<code class="highlighter-rouge">&lt;index&gt;</code>) and the Fast Restart data (<code class="highlighter-rouge">&lt;data&gt;</code>) on separate disks.</p>
+<p>It is highly recommended to store the search index (<code class="language-plaintext highlighter-rouge">&lt;index&gt;</code>) and the Fast Restart data (<code class="language-plaintext highlighter-rouge">&lt;data&gt;</code>) on separate disks.</p>
 
 <h4 id="client-reconnect-window">Client Reconnect Window</h4>
-<p>The <code class="highlighter-rouge">&lt;client-reconnect-window&gt;</code> does not have to be explicitly set if the default value is acceptable. However, in a single-server cluster, <code class="highlighter-rouge">&lt;client-reconnect-window&gt;</code> is in effect only if restartable mode is enabled.</p>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;client-reconnect-window&gt;</code> does not have to be explicitly set if the default value is acceptable. However, in a single-server cluster, <code class="language-plaintext highlighter-rouge">&lt;client-reconnect-window&gt;</code> is in effect only if restartable mode is enabled.</p>
 
 <h2 id="terracotta-server-array-with-high-availability-{#98641}">Terracotta Server Array with High Availability {#98641}</h2>
 
@@ -321,38 +334,43 @@
 
 <p>The following Terracotta configuration file demonstrates how to configure this two-server array:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
-<span class="nt">&lt;tc:tc-config</span> <span class="na">xmlns:tc=</span><span class="s">"http://www.terracotta.org/config"</span>
- <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-<span class="na">xsi:schemaLocation=</span><span class="s">"http://www.terracotta.org/schema/terracotta-9.xsd"</span><span class="nt">&gt;</span>
- <span class="nt">&lt;servers&gt;</span>
-   <span class="nt">&lt;server</span> <span class="na">name=</span><span class="s">"Server1"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;data&gt;</span>/opt/terracotta/server1-data<span class="nt">&lt;/data&gt;</span>
-     <span class="nt">&lt;tsa-port&gt;</span>9510<span class="nt">&lt;/tsa-port&gt;</span>
-     <span class="nt">&lt;tsa-group-port&gt;</span>9530<span class="nt">&lt;/tsa-group-port&gt;</span>
-     <span class="nt">&lt;dataStorage</span> <span class="na">size=</span><span class="s">”4g”</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;offheap</span> <span class="na">size=</span><span class="s">”4g”/</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;/dataStorage&gt;</span>
-   <span class="nt">&lt;/server&gt;</span>
-   <span class="nt">&lt;server</span> <span class="na">name=</span><span class="s">"Server2"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;data&gt;</span>/opt/terracotta/server2-data<span class="nt">&lt;/data&gt;</span>
-     <span class="nt">&lt;tsa-port&gt;</span>9510<span class="nt">&lt;/tsa-port&gt;</span>
-     <span class="nt">&lt;tsa-group-port&gt;</span>9530<span class="nt">&lt;/tsa-group-port&gt;</span>
-     <span class="nt">&lt;dataStorage</span> <span class="na">size=</span><span class="s">”4g”</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;offheap</span> <span class="na">size=</span><span class="s">”4g”/</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;/dataStorage&gt;</span>
-   <span class="nt">&lt;/server&gt;</span>
-   <span class="nt">&lt;restartable</span> <span class="na">enabled=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;client-reconnect-window&gt;</span>120<span class="nt">&lt;/client-reconnect-window&gt;</span>
- <span class="nt">&lt;/servers&gt;</span>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
+ &lt;servers&gt;
+   &lt;server name="Server1"&gt;
+     &lt;data&gt;/opt/terracotta/server1-data&lt;/data&gt;
+     &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
+     &lt;tsa-group-port&gt;9530&lt;/tsa-group-port&gt;
+     &lt;dataStorage size=”4g”&gt;
+        &lt;offheap size=”4g”/&gt;
+     &lt;/dataStorage&gt;
+   &lt;/server&gt;
+   &lt;server name="Server2"&gt;
+     &lt;data&gt;/opt/terracotta/server2-data&lt;/data&gt;
+     &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
+     &lt;tsa-group-port&gt;9530&lt;/tsa-group-port&gt;
+     &lt;dataStorage size=”4g”&gt;
+        &lt;offheap size=”4g”/&gt;
+     &lt;/dataStorage&gt;
+   &lt;/server&gt;
+   &lt;restartable enabled="true"/&gt;
+   &lt;client-reconnect-window&gt;120&lt;/client-reconnect-window&gt;
+ &lt;/servers&gt;
  ...
-<span class="nt">&lt;/tc:tc-config&gt;</span>
-</code></pre>
+&lt;/tc:tc-config&gt;
+</code>
+      </pre>
+   </div>
 </div>
 
-<p>You can add more mirror servers to this configuration by adding more <code class="highlighter-rouge">&lt;server&gt;</code> sections. However, a performance overhead may become evident when adding more mirror servers due to the load placed on the active server by having to synchronize with each mirror.</p>
+<p>You can add more mirror servers to this configuration by adding more <code class="language-plaintext highlighter-rouge">&lt;server&gt;</code> sections. However, a performance overhead may become evident when adding more mirror servers due to the load placed on the active server by having to synchronize with each mirror.</p>
 
-<p><strong>Note</strong>: Terracotta server instances must not share data directories. Each server’s <code class="highlighter-rouge">&lt;data&gt;</code> element should point to a different and preferably local data directory.</p>
+<p><strong>Note</strong>: Terracotta server instances must not share data directories. Each server’s <code class="language-plaintext highlighter-rouge">&lt;data&gt;</code> element should point to a different and preferably local data directory.</p>
 
 <h3 id="starting-the-servers">Starting the Servers</h3>
 
@@ -376,7 +394,7 @@
 
 <p>If the active server instance fails and two or more mirror server instances are available, an election determines the new active. Successful failover to a new active takes place only if at least one mirror server is fully synchronized with the failed active server; successful client failover (migration to the new active) can happen only if the server failover is successful. Shutting down the active server before a fully-synchronized mirror is available can result in a cluster-wide failure.</p>
 
-<p>If the <code class="highlighter-rouge">dataStorage</code> and/or <code class="highlighter-rouge">offheap</code> size on the mirror server is smaller than on the active server, then the mirror server will fail to start and the user will be alerted that the configuration is invalid. If there are multiple mirrors with differing amounts of storage configured, then the passive with the smallest <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> sizes (that are still greater than or equal to the active’s <code class="highlighter-rouge">dataStorage</code> and <code class="highlighter-rouge">offheap</code> sizes) will be elected to be the new active.</p>
+<p>If the <code class="language-plaintext highlighter-rouge">dataStorage</code> and/or <code class="language-plaintext highlighter-rouge">offheap</code> size on the mirror server is smaller than on the active server, then the mirror server will fail to start and the user will be alerted that the configuration is invalid. If there are multiple mirrors with differing amounts of storage configured, then the passive with the smallest <code class="language-plaintext highlighter-rouge">dataStorage</code> and <code class="language-plaintext highlighter-rouge">offheap</code> sizes (that are still greater than or equal to the active’s <code class="language-plaintext highlighter-rouge">dataStorage</code> and <code class="language-plaintext highlighter-rouge">offheap</code> sizes) will be elected to be the new active.</p>
 
 <table>
 <caption>TIP: Hot-Swapping Mirrors</caption>
@@ -406,7 +424,7 @@ The mirror server must already be configured in the Terracotta configuration fil
   <li>
     <p>Shut down the active server using the stop-tc-server script.</p>
 
-    <p>NOTE: If the script detects that the mirror server in STANDBY state isn’t reachable, it issues a warning and fails to shut down the active server. If failover is not a concern, you can override this behavior with the <code class="highlighter-rouge">--force</code> flag.</p>
+    <p>NOTE: If the script detects that the mirror server in STANDBY state isn’t reachable, it issues a warning and fails to shut down the active server. If failover is not a concern, you can override this behavior with the <code class="language-plaintext highlighter-rouge">--force</code> flag.</p>
 
     <p>Clients will connect to the new active server.</p>
   </li>
@@ -455,9 +473,12 @@ The Terracotta client will shut down when you shut down your application.</li>
    <img src="/images/documentation/ServerArrayMirrorGroup.png" alt="Multi-server Terracotta cluster with persistence, failover, and capacity." />
 </p>
 
-<p>Mirror groups are specified in the <code class="highlighter-rouge">&lt;servers&gt;</code> section of the Terracotta configuration file. Mirror groups work by assigning group memberships to Terracotta server instances. The following snippet from a Terracotta configuration file shows a mirror-group configuration with four servers:</p>
+<p>Mirror groups are specified in the <code class="language-plaintext highlighter-rouge">&lt;servers&gt;</code> section of the Terracotta configuration file. Mirror groups work by assigning group memberships to Terracotta server instances. The following snippet from a Terracotta configuration file shows a mirror-group configuration with four servers:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>...
 &lt;servers&gt;
   &lt;mirror-group election-time="10" group-name="groupA"&gt;
     &lt;server name="server1"&gt;
@@ -478,7 +499,9 @@ The Terracotta client will shut down when you shut down your application.</li>
   &lt;restartable enabled="true"/&gt;
 &lt;/servers&gt;
 ...
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>In this example, the cluster is configured to have two active servers, each with its own mirror. If server1 is elected active in groupA, server2 becomes its mirror. If server3 is elected active in groupB, server4 becomes its mirror. server1 and server3 automatically coordinate their work managing Terracotta clients and shared data across the cluster.</p>
@@ -498,7 +521,7 @@ Under &lt;servers&gt;, you may use either &lt;server&gt; or &lt;mirror-group&gt;
 
 <h3 id="election-time">Election Time</h3>
 
-<p>The <code class="highlighter-rouge">&lt;mirror-group&gt;</code> configuration allows you to declare the election time window. An active server is elected from the servers that cast a vote within this window. The value is specified in seconds and the default is 5 seconds. Network latency and the work load of the servers should be taken into consideration when choosing an appropriate window.</p>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;mirror-group&gt;</code> configuration allows you to declare the election time window. An active server is elected from the servers that cast a vote within this window. The value is specified in seconds and the default is 5 seconds. Network latency and the work load of the servers should be taken into consideration when choosing an appropriate window.</p>
 
 <p>In the above example, the servers in groupA can take up to 10 seconds to elect an active server, and the servers in groupB can take up to 15 seconds.</p>
 
@@ -541,14 +564,6 @@ Under &lt;servers&gt;, you may use either &lt;server&gt; or &lt;mirror-group&gt;
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -570,24 +585,32 @@ Under &lt;servers&gt;, you may use either &lt;server&gt; or &lt;mirror-group&gt;
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -595,7 +618,7 @@ Under &lt;servers&gt;, you may use either &lt;server&gt; or &lt;mirror-group&gt;
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>

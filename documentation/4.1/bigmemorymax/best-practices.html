@@ -72,7 +72,7 @@
           </button>
           <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
           <span style="vertical-align:bottom;color:gray;">By</span>
-          <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+          <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -84,8 +84,10 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">We Love Contributors</li>
                 <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
                 <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
                 <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Forums</li>
                 <li><a href="https://groups.google.com/forum/#!forum/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
@@ -99,10 +101,11 @@
               </ul>
             </li>
           </ul>
+          <!--
           <ul class="nav navbar-nav navbar-right">
             <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
             <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
-          </ul>
+          </ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -220,26 +223,31 @@
 
 <p>For 64-bit JVMs running Java 6 Update 14 or higher, consider enabling compressed references to improve overall performance. For heaps up to 32GB, this feature causes references to be stored at half the size, as if the JVM is running in 32-bit mode, freeing substantial amounts of heap for memory-intensive applications. The JVM, however, remains in 64-bit mode, retaining the advantages of that mode.</p>
 
-<p>For the Oracle HotSpot, compressed references are enabled using the option <code class="highlighter-rouge">-XX:+UseCompressedOops</code>. For IBM JVMs, use <code class="highlighter-rouge">-Xcompressedrefs</code>.</p>
+<p>For the Oracle HotSpot, compressed references are enabled using the option <code class="language-plaintext highlighter-rouge">-XX:+UseCompressedOops</code>. For IBM JVMs, use <code class="language-plaintext highlighter-rouge">-Xcompressedrefs</code>.</p>
 
 <h3 id="slow-off-heap-allocation">Slow Off-Heap Allocation</h3>
 <p>Based on configuration, usage, and memory requirements, BigMemory could allocate off-heap memory multiple times. If off-heap memory comes under pressure due to over-allocation, the host OS may begin paging to disk, thus slowing down allocation operations. As the situation worsens, an off-heap buffer too large to fit in memory can quickly deplete critical system resources such as RAM and swap space and crash the host OS.</p>
 
-<p>To stop this situation from degrading, off-heap allocation time is measured to avoid allocating buffers too large to fit in memory. If it takes more than 1.5 seconds to allocate a buffer, a warning is issued. If it takes more than 15 seconds, the JVM is halted with <code class="highlighter-rouge">System.exit()</code> (or a different method if the Security Manager prevents this).</p>
+<p>To stop this situation from degrading, off-heap allocation time is measured to avoid allocating buffers too large to fit in memory. If it takes more than 1.5 seconds to allocate a buffer, a warning is issued. If it takes more than 15 seconds, the JVM is halted with <code class="language-plaintext highlighter-rouge">System.exit()</code> (or a different method if the Security Manager prevents this).</p>
 
-<p>To prevent a JVM shutdown after a 15-second delay has occurred, set the <code class="highlighter-rouge">net.sf.ehcache.offheap.DoNotHaltOnCriticalAllocationDelay</code> system property to true. In this case, an error is logged instead.</p>
+<p>To prevent a JVM shutdown after a 15-second delay has occurred, set the <code class="language-plaintext highlighter-rouge">net.sf.ehcache.offheap.DoNotHaltOnCriticalAllocationDelay</code> system property to true. In this case, an error is logged instead.</p>
 
 <h3 id="increasing-serialized-size">Maximum Serialized Size of an Element</h3>
 <p>This section applies when using BigMemory through the Ehcache API.</p>
 
-<p>Unlike the memory and the disk stores, by default the off-heap store has a 4MB limit for classes with high quality hashcodes, and 256KB limit for those with pathologically bad hashcodes. The built-in classes such as <code class="highlighter-rouge">String</code> and the <code class="highlighter-rouge">java.lang.Number</code> subclasses Long and Integer have high quality hashcodes. This can issues when objects are expected to be larger than the default limits.</p>
+<p>Unlike the memory and the disk stores, by default the off-heap store has a 4MB limit for classes with high quality hashcodes, and 256KB limit for those with pathologically bad hashcodes. The built-in classes such as <code class="language-plaintext highlighter-rouge">String</code> and the <code class="language-plaintext highlighter-rouge">java.lang.Number</code> subclasses Long and Integer have high quality hashcodes. This can issues when objects are expected to be larger than the default limits.</p>
 
-<p>To override the default size limits, set the system property <code class="highlighter-rouge">net.sf.ehcache.offheap.cache_name.config.idealMaxSegmentSize</code> to the size you require.</p>
+<p>To override the default size limits, set the system property <code class="language-plaintext highlighter-rouge">net.sf.ehcache.offheap.cache_name.config.idealMaxSegmentSize</code> to the size you require.</p>
 
 <p>For example,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>net.sf.ehcache.offheap.com.company.domain.State.config.idealMaxSegmentSize=30M
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>net.sf.ehcache.offheap.com.company.domain.State.config.idealMaxSegmentSize=30M
+</code>
+      </pre>
+   </div>
 </div>
 
 <h3 id="reducing-faulting">Reducing Faulting</h3>
@@ -253,16 +261,16 @@
 
 <p>An OS could swap data from memory to disk even if memory is not running low. For the purpose of optimization, data that appears to be unused may be a target for swapping. Because BigMemory can store substantial amounts of data in RAM, its data may be swapped by the OS. But swapping can degrade overall cluster performance by introducing thrashing, the condition where data is frequently moved forth and back between memory and disk.</p>
 
-<p>To make heap memory use more efficient, Linux, Microsoft Windows, and Oracle Solaris users     should review their configuration and usage of swappiness as well as the size of the swapped   memory pages. In general, BigMemory benefits from lowered swappiness and the use of <em>huge pages</em> (also known as <em>big pages</em>, <em>large pages</em>, and <em>superpages</em>). Settings for these behaviors vary by OS and JVM. For Oracle HotSpot, <code class="highlighter-rouge">-XX:+UseLargePages</code> and  <code class="highlighter-rouge">-XX:LargePageSizeInBytes=&lt;size&gt;</code> (where &lt;size&gt; is a value allowed by the OS for specific   CPUs) can be used to control page size. However, note that this setting does not affect how    off-heap memory is allocated. Over-allocating huge pages while also configuring substantial   off-heap memory <em>can starve off-heap allocation and lead to memory and performance problems</em>.</p>
+<p>To make heap memory use more efficient, Linux, Microsoft Windows, and Oracle Solaris users     should review their configuration and usage of swappiness as well as the size of the swapped   memory pages. In general, BigMemory benefits from lowered swappiness and the use of <em>huge pages</em> (also known as <em>big pages</em>, <em>large pages</em>, and <em>superpages</em>). Settings for these behaviors vary by OS and JVM. For Oracle HotSpot, <code class="language-plaintext highlighter-rouge">-XX:+UseLargePages</code> and  <code class="language-plaintext highlighter-rouge">-XX:LargePageSizeInBytes=&lt;size&gt;</code> (where &lt;size&gt; is a value allowed by the OS for specific   CPUs) can be used to control page size. However, note that this setting does not affect how    off-heap memory is allocated. Over-allocating huge pages while also configuring substantial   off-heap memory <em>can starve off-heap allocation and lead to memory and performance problems</em>.</p>
 
 <h4 id="reduce-swapping">Reduce Swapping</h4>
 
 <p>Many tools are available to help you diagnose swapping. Popular options include using a built-in command-line utility. On Linux, for example:</p>
 
 <ul>
-  <li>See available RAM with <code class="highlighter-rouge">free -m</code> (display memory statistics in megabtyes). Pay attention to swap utilization.</li>
-  <li><code class="highlighter-rouge">vmstat</code> displays swap-in (“si”) and swap-out (“so”) numbers. Non-zero values indicate swapping activity. Set <code class="highlighter-rouge">vmstat</code> to refresh on a short interval to detect trends.</li>
-  <li>Process status can be used to get detailed information on all processes running on a node. For example, <code class="highlighter-rouge">ps -eo pid,ppid,rss,vsize,pcpu,pmem,cmd -ww --sort=pmem</code> displays processes ordered by memory use. You can also sort by virtual memory size (“vsize”) and real memory size (“rss”) to focus on both the most memory-consuming processes and their in-memory footprint.</li>
+  <li>See available RAM with <code class="language-plaintext highlighter-rouge">free -m</code> (display memory statistics in megabtyes). Pay attention to swap utilization.</li>
+  <li><code class="language-plaintext highlighter-rouge">vmstat</code> displays swap-in (“si”) and swap-out (“so”) numbers. Non-zero values indicate swapping activity. Set <code class="language-plaintext highlighter-rouge">vmstat</code> to refresh on a short interval to detect trends.</li>
+  <li>Process status can be used to get detailed information on all processes running on a node. For example, <code class="language-plaintext highlighter-rouge">ps -eo pid,ppid,rss,vsize,pcpu,pmem,cmd -ww --sort=pmem</code> displays processes ordered by memory use. You can also sort by virtual memory size (“vsize”) and real memory size (“rss”) to focus on both the most memory-consuming processes and their in-memory footprint.</li>
 </ul>
 
 <p><strong>NOTE:</strong> If the JVM is running in a guest virtual host, analyze swapping by both the virtual and underlying host.</p>
@@ -276,10 +284,10 @@
 <p>The most effective way to gain that understanding is to create a profile of GC in your application by using tools made for that purpose. Consider using JVM options to generate logs of GC activity:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-verbose:gc</code></li>
-  <li><code class="highlighter-rouge">-Xloggc:&lt;filename&gt;</code></li>
-  <li><code class="highlighter-rouge">-XX:+PrintGCDetails</code></li>
-  <li><code class="highlighter-rouge">-XX:+PrintGCTimeStamps</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-verbose:gc</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-Xloggc:&lt;filename&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-XX:+PrintGCDetails</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-XX:+PrintGCTimeStamps</code></li>
 </ul>
 
 <p>Apply an appropriate parsing and visualization tool to GC log files to help analyze their contents.</p>
@@ -287,8 +295,13 @@
 <h3 id="observing-gc-statistics-with-jstat">Observing GC Statistics With jstat</h3>
 <p>One way to observe GC statistics is by using the Java utility jstat. The following command will produce a log of GC statistics, updated every ten seconds:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>jstat -gcutil &lt;pid&gt; 10 1000000
-</code></pre>
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>jstat -gcutil &lt;pid&gt; 10 1000000
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>An important statistic is the Full Garbage Collection Time. The difference between the total time for each reading is the amount of time the system was paused. A jump of more than a few seconds will not be acceptable in most application contexts.</p>
@@ -310,14 +323,14 @@
   <li>
     <p>Tuning the GC parameters to change the way GC runs in the heap.</p>
 
-    <p>If running multi-core machines and no collector is specifically configured, consider <code class="highlighter-rouge">-XX:+UseParallelGC</code> and <code class="highlighter-rouge">-XX:+UseParallelOldGC</code>.</p>
+    <p>If running multi-core machines and no collector is specifically configured, consider <code class="language-plaintext highlighter-rouge">-XX:+UseParallelGC</code> and <code class="language-plaintext highlighter-rouge">-XX:+UseParallelOldGC</code>.</p>
 
-    <p>If running multiple JVMs or application processes on the same machine, tune the number of concurrent threads in the parallel collector with <code class="highlighter-rouge">-XX:ParallelGCThreads=&lt;number&gt;</code>.</p>
+    <p>If running multiple JVMs or application processes on the same machine, tune the number of concurrent threads in the parallel collector with <code class="language-plaintext highlighter-rouge">-XX:ParallelGCThreads=&lt;number&gt;</code>.</p>
 
     <p>Another collector is called Concurrent Mark Sweep (CMS). This collector is normally not recommended (especially for Terracotta servers) due to certain performance and operational issues it raises. However, under certain circumstances related to the type of hosting platform and application data usage characteristics, it may boost performance and may be worth testing with.</p>
   </li>
   <li>
-    <p>If running on a 64-bit JVM, and if your JDK supports it, use <code class="highlighter-rouge">-XX:+UseCompressedOops</code>.</p>
+    <p>If running on a 64-bit JVM, and if your JDK supports it, use <code class="language-plaintext highlighter-rouge">-XX:+UseCompressedOops</code>.</p>
 
     <p>This setting can reduce substantially the memory footprint of object pointer used by the JVM.</p>
   </li>
@@ -351,14 +364,19 @@
 <p>If the disconnections are due to long GC cycles or inconsistent network connections in the client, consider the remedies suggested in <a href="#gc-solutions">this section</a>. If disconnections continue to happen, consider configuring caches with <a href="/documentation/4.1/bigmemorymax/configuration/non-stop-cache">nonstop behavior</a> and enabling <a href="/documentation/4.1/bigmemorymax/configuration/reference-guide#71266">rejoin</a>.</p>
 
 <h3 id="detect-memory-pressure-using-the-terracotta-logs">Detect Memory Pressure Using the Terracotta Logs</h3>
-<p>Terracotta server and client logs contain messages that help you track memory usage. Locations of server and client logs are configured in the Terracotta configuration file, <code class="highlighter-rouge">tc-config.xml</code>.</p>
+<p>Terracotta server and client logs contain messages that help you track memory usage. Locations of server and client logs are configured in the Terracotta configuration file, <code class="language-plaintext highlighter-rouge">tc-config.xml</code>.</p>
 
 <p>You can view the state of memory usage in a node by finding messages similar to the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>2011-12-04 14:47:43,341 [Statistics Logger] ... memory free : 39.992699 MB
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>2011-12-04 14:47:43,341 [Statistics Logger] ... memory free : 39.992699 MB
 2011-12-04 14:47:43,341 [Statistics Logger] ... memory used : 1560.007301 MB
 2011-12-04 14:47:43,341 [Statistics Logger] ... memory max : 1600.000000 MB
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <p>These messages can indicate that the node is running low on memory.</p>
@@ -373,25 +391,27 @@ The TSA may be configured to be restartable in addition to including searchable 
     <p>Make sure the configured time zone and system time is consistent between all application servers. If they are different a session may appear expired when accessed on different nodes.</p>
   </li>
   <li>
-    <p>Set <code class="highlighter-rouge">-Dcom.tc.session.debug.sessions=true</code> and <code class="highlighter-rouge">-Dcom.tc.session.debug.invalidate=true</code> to generate more debugging information in the client logs.</p>
+    <p>Set <code class="language-plaintext highlighter-rouge">-Dcom.tc.session.debug.sessions=true</code> and <code class="language-plaintext highlighter-rouge">-Dcom.tc.session.debug.invalidate=true</code> to generate more debugging information in the client logs.</p>
   </li>
   <li>
     <p>All clustered session implementations (including terracotta Sessions) require a mutated session object be put back into the session after it’s mutated. If the call is missing, then the change isn’t known to the cluster, only to the local node. For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>   Session session = request.getSession();
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   Session session = request.getSession();
    Map m  = session.getAttribute("foo");
    m.clear();
    session.setAttribute("foo", m); // Without this call, the clear() is not effective across the cluster.
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
-<p>Without a <code class="highlighter-rouge">setAttribute()</code> call, the session becomes inconsistent across the cluster. Sticky sessions can mask this issue, but as soon as the session is accessed on another node, its state does not match the expected one. To view the inconsistency on a single client node, add the Terracotta property <code class="highlighter-rouge">-Dcom.tc.session.clear.on.access=true</code> to force locally cached sessions to be cleared with every access.</p>
+<p>Without a <code class="language-plaintext highlighter-rouge">setAttribute()</code> call, the session becomes inconsistent across the cluster. Sticky sessions can mask this issue, but as soon as the session is accessed on another node, its state does not match the expected one. To view the inconsistency on a single client node, add the Terracotta property <code class="language-plaintext highlighter-rouge">-Dcom.tc.session.clear.on.access=true</code> to force locally cached sessions to be cleared with every access.</p>
 
-<p>If third-party code cannot be refactored to fix this problem, and you are running Terracotta 3.6.0 or higher, you can write a servlet filter that calls <code class="highlighter-rouge">setAttribute()</code> at the end of every request. Note that this solution may substantially degrade performance.</p>
+<p>If third-party code cannot be refactored to fix this problem, and you are running Terracotta 3.6.0 or higher, you can write a servlet filter that calls <code class="language-plaintext highlighter-rouge">setAttribute()</code> at the end of every request. Note that this solution may substantially degrade performance.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    package controller.filter;
+<div class="language-plaintext highlighter-rouge">
+   <div class="highlight">
+      <pre class="highlight">
+         <code>    package controller.filter;
 
     import java.io.IOException;
     import java.util.Enumeration;
@@ -429,7 +449,9 @@ The TSA may be configured to be restartable in addition to including searchable 
         // TODO Auto-generated method stub
       }
     }
-</code></pre>
+</code>
+      </pre>
+   </div>
 </div>
 
 <h2 id="a-safe-failover-procedure-{#21339}">A Safe Failover Procedure {#21339}</h2>
@@ -443,7 +465,7 @@ The standby server must already be configured in the Terracotta configuration fi
   <li>
     <p>Shut down the active server using the stop-tc-server script.</p>
 
-    <p>NOTE: If the script detects that the mirror server in STANDBY state isn’t reachable, it issues a warning and fails to shut down the active server. If failover is not a concern, you can override this behavior with the <code class="highlighter-rouge">--force</code> flag.</p>
+    <p>NOTE: If the script detects that the mirror server in STANDBY state isn’t reachable, it issues a warning and fails to shut down the active server. If failover is not a concern, you can override this behavior with the <code class="language-plaintext highlighter-rouge">--force</code> flag.</p>
 
     <p>Clients will connect to the new active server.</p>
   </li>
@@ -498,14 +520,6 @@ The Terracotta client will shut down when you shut down your application.</li>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/terracotta-oss">
-              <i class="fa fa-github"></i> GitHub
-            </a>
-          </li>
-          
-
-          
-          <li>
             <a href="https://twitter.com/terracottatech">
               <i class="fa fa-twitter"></i> Twitter
             </a>
@@ -527,24 +541,32 @@ The Terracotta client will shut down when you shut down your application.</li>
             </a>
           </li>
           
-
+<!--
           <li>
             <a href="/feed.xml" title="Atom/RSS Feed">
               <i class="fa fa-rss-square"></i> Atom/RSS Feed
             </a>
           </li>
+          -->
         </ul>
       </div>
 
     <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
       <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
       <br/>
       <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
       <br/>
+      <!--
       <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
       <br/>
       <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
       <br/>
+      -->
       <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
     </div>
 
@@ -552,7 +574,7 @@ The Terracotta client will shut down when you shut down your application.</li>
 
     <div class="container-fluid">
         <hr/>
-        <a class="SAG-Logo" href="http://www.softwareag.com/corporate/products/terracotta"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <a class="SAG-Logo" href="https://www.softwareag.com/corporate/products/az/terracotta/default.html"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
         <div class="footer-text">
           <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
           <br/>
