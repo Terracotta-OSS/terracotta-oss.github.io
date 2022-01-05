@@ -83,5 +83,5 @@ jobs:
         env:
             NETLIFY_SITE_ID: $(netlify_site_id)
             NETLIFY_AUTH_TOKEN: $(netlify_auth_token)
-            GTOKEN: $(gh_token)
+            GTOKEN: $(gh.token)
         condition: eq(variables['Build.Reason'], 'PullRequest')
