@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://config.wan.terracottatech.com"
+           xmlns="http://config.wan.terracottatech.com"
+           elementFormDefault="qualified">
+
+  <xs:complexType name="address">
+    <xs:attribute name="host" type="path" use="required"/>
+    <xs:attribute name="port" type="xs:unsignedShort" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="cacheManager">
+    <xs:sequence>
+      <xs:element name="cache" type="cache" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="ehcacheConfigURI" type="path" use="required">
+      <xs:annotation>
+        <xs:documentation>Location of ehcache.xml for this cache manager.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="cache">
+    <xs:sequence>
+      <xs:element name="master" type="address" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="path" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="path">
+    <xs:restriction base="xs:token">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="replicaDisconnectBehaviorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="remainDisconnected"/>
+      <xs:enumeration value="reconnectResync"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="replicationModeType">
+    <xs:annotation>
+      <xs:documentation>Selects the type of replication, unidirectional or bidirectional.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="unidirectional"/>
+      <xs:enumeration value="bidirectional"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="schemaType">
+    <xs:sequence>
+      <xs:element name="cacheManager" type="cacheManager" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="wan-config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="bind" type="address" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Host and port of the Orchestrator instance.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="logs" type="path" minOccurs="0" maxOccurs="1" default="logs">
+          <xs:annotation>
+            <xs:documentation>Path to orchestrator's logs.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="connectTimeoutMillis" type="xs:unsignedInt" default="2000" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="tcpConnectTimeoutMillis" type="xs:unsignedInt" default="5000" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="requestTimeoutMillis" type="xs:unsignedInt" default="10000" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="connectionRetryDelayMillis" type="xs:unsignedInt" default="3000" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Specifies delay between successive connection attempts from replica to master</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="maxConnectionRetryCount" type="xs:unsignedInt" default="5" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Specifies the maximum number of connection attempts a disconnected replica cache should try for each
+              master cache, before attempting to connect to another master cache in the wan-config.xml. Only applies if
+              replicaDisconnect behavior is set for reconnectResync.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="replicatorCapacity" type="xs:unsignedInt" default="65536" minOccurs="0" maxOccurs="1">
+        	<xs:annotation>
+        		<xs:documentation>Deprecated: this element will be ignored.</xs:documentation>
+        	</xs:annotation></xs:element>
+        <xs:element name="replicatorOptimizationEnabled" type="xs:boolean" default="true" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="replicatorInflightTimeoutMillis" type="xs:unsignedInt" default="300" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="replicatorIntervalMillis" type="xs:unsignedInt" default="300" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Specifies how frequently masters should send replication updates to replicas, in milliseconds
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="replicaStoredAckIntervalMillis" type="xs:unsignedInt" default="500" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Specifies how often replica caches should store replication updates in TSA and send acknowledgments
+              to master.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="monitoringEnabled" type="xs:boolean" default="true" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="monitoringLogIntervalMillis" type="xs:unsignedInt" default="600000" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="monitoringPerEventMetricsEnabled" type="xs:boolean" default="true" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="syncBatchSize" type="xs:unsignedInt" default="4096" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="maxInFlightSyncUpdates" type="xs:unsignedInt" default="8" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="pingerIntervalMillis" type="xs:unsignedInt" default="750" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="pingerThreadCount" type="xs:unsignedShort" default="4" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="masterSynchronizerThreadCount" type="xs:unsignedShort" default="10" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="replicaSynchronizerThreadCount" type="xs:unsignedShort" default="4" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="conflictBufferCapacity" type="xs:unsignedInt" default="65536" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="waitForActiveMasterIntervalMillis" type="xs:unsignedInt" default="1000" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="clusterListenerCapacity" type="xs:unsignedInt" default="8192" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="clusterListenerIntervalMillis" type="xs:unsignedInt" default="300" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="replicaDisconnectBehavior" type="replicaDisconnectBehaviorType" default="reconnectResync" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Specifies the behavior of the Replica caches if they become disconnected from their Master cache
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="replicationMode" type="replicationModeType" default="unidirectional" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="cacheManager" type="cacheManager" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element name="userClassDirectory" type="path" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
