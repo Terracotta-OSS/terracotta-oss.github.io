@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <link rel="shortcut icon"  type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>Terracotta</title>
+
+  <meta name="description" content="Java's most widely used cache.">
+
+  <link rel="canonical" href="https://www.terracotta.org/index_tab.html">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Terracotta Feed">
+
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Global CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css">
+
+
+<!--
+  <link rel="stylesheet" href="/plugins/highlight/styles/idea.css">
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+-->
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.css"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+
+<body>
+
+
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="site-title" href="/"><img src="/images/Terracotta_Logo_sm.png" style="margin-top:12px;margin-bottom:6px;"/></a>
+          <span style="vertical-align:bottom;color:gray;">By</span>
+          <a class="SAG-Logo" href="https://www.softwareag.com/"><img src="/images/SAG_Logo.png" style="margin-top:12px;margin-bottom:6px;height:1.5em;width:9em;"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="tc_mnu_about"><a href="/about/"><i class="fa fa-info-circle"></i> About</a></li>
+            <li id="tc_mnu_docs"><a href="/documentation/"><i class="fa fa-book"></i> Docs</a></li>
+            <li id="tc_mnu_download"><a href="/downloads/"><i class="fa fa-download"></i> Download</a></li>
+            <li id="tc_mnu_community" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">We Love Contributors</li>
+                <li><a href="/community/contribute.html"><i class="fa fa-code"></i> Contributing</a></li>
+                <!--
+                <li><a href="/resources/"><i class="fa fa-external-link-square"></i> External Resources</a></li>
+                <li><a href="/blog" target="_blank"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+                -->
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Forums</li>
+                <li><a href="https://groups.google.com/g/terracotta-oss" target="_blank"><i class="fa fa-commenting"></i> Users' Forum</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Source Code</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-github"></i> GitHub  Repositories</a></li>
+                <li><a href="http://svn.terracotta.org/svn/tc/" target="_blank"><i class="fa fa-code-fork"></i> SVN  (Terracotta 4.x)</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Bug Tracking</li>
+                <li><a href="https://github.com/Terracotta-OSS" target="_blank"><i class="fa fa-bug"></i> GitHub  (use respective project)</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!--
+          <ul class="nav navbar-nav navbar-right">
+            <li id="tc_mnu_events"><a href="/events"><i class="fa fa-calendar"></i> News & Events</a></li>
+            <li><a href="/blog"><i class="fa fa-rss-square"></i> Terracotta Blog</a></li>
+          </ul>-->
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>
+
+
+    <div id="banner" class="jumbotron breaker">
+      <div class="container banner breaker">
+        <img src="/images/Terracotta_Logo_t.png">
+        <h1>Terracotta Server Platform</h1>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="/downloads/"><button type="button" class="btn btn-lg btn-success"><i class="fa fa-download"></i> Downloads</button></a>
+        <span>&nbsp;&nbsp;</span>
+        <a href="/documentation/"><button type="button" class="btn btn-lg btn-primary"><i class="fa fa-book"></i> Documentation</button></a>
+        <span>&nbsp;&nbsp;</span>
+          <!--
+        <a href="/resources/"><button type="button" class="btn btn-lg btn-primary"><i class="fa fa-external-link-square"></i> Resources</button></a>
+        <span>&nbsp;&nbsp;</span>
+        <a href="/resources/"><button type="button" class="btn btn-lg btn-primary"><i class="fa fa-rss-square"></i> Terracotta Blog</button></a>
+        <span>&nbsp;&nbsp;</span>
+        -->
+        <a href="https://github.com/terracotta-oss"><button type="button" class="btn btn-lg btn-default"><i class="fa fa-github"></i> GitHub Project</button></a>
+      </div>
+
+    </div>
+
+
+<div id="intro" class="jumbotron breaker">
+    <div class="container">
+        <p>The Terracotta Server provides powerful distributed in-memory data management capabilities for Terracotta products (such as <a href="https://www.ehcache.org">Ehcache</a>) and is the backbone for Terracotta clusters.</p>
+
+<p>A Terracotta Server Array can vary from a basic two-node tandem to a multi-node array (Terracotta Server Array (TSA)) providing configurable scale, high performance, and deep failover coverage.</p>
+
+<p>Add distributed caching capabilities to your Ehcache deployment today!</p>
+
+<p>Terracotta additionally offers various other open source projects and code libraries which may be of interest.</p>
+
+        <hr/>
+        <h2>Some key features of the Terracotta Server include:</h2>
+
+<ul>
+  <li><em>Distributed In-memory Data Management</em> &ndash;  Manages 10-100x more data in memory than traditional data grids - use <i>all</i> of the RAM you wish.</li>
+  <li><em>Scalability Without Complexity</em> &ndash;  Simple configuration to add server instances to meet growing demand and facilitate capacity planning</li>
+  <li><em>High Availability</em> &ndash;  Instant failover for continuous uptime and services</li>
+  <li><em>Configurable Health Monitoring</em> &ndash;  Terracotta HealthChecker for inter-node monitoring</li>
+  <li><em>Automatic Node Reconnection</em> &ndash;  Temporarily disconnected server instances and clients rejoin the cluster without operator intervention</li>
+</ul>
+
+Advanced features such as fast-restart persistence, advanced management features and security are available in commercially supported versions from <a href="https://www.softwareag.com/">Software AG</a>.
+
+    </div>
+</div>
+
+<div id="start" class="breaker">
+    <div class="container">
+        <h1></h1>
+        <h3>Choose a TC quick start guide depending upon your version:</h3>
+<ul id="startguide-tabs" class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a href="#first" data-toggle="tab"><b class="sgtab">4.x Quick Start</b></a></li>
+    <li><a href="#second" data-toggle="tab"><b class="sgtab">5.7/10.7 Quick Start</b></a></li>
+    <li><a href="#third" data-toggle="tab"><b class="sgtab">5.5/10.5 (and earlier) Quick Start</b></a></li>
+</ul>
+<div id="startguide-tab-content" class="tab-content">
+    <div class="tab-pane active" id="first">
+        
+      <h1>Getting Started With TC Server 4.3.x</h1>
+
+      Getting started with the Terracotta Server 4.x is a simple matter of downloading, changing a few configuration
+      items, and starting it up.
+
+      Because the server isn't very interesting without something using it, this guide will show you how to put
+      the Terracotta Server to its most common use: clustering an Ehcache cache.
+
+      <br/><br/>
+
+      <h2>Download and Install</h2>
+
+      Installing and using Terracotta Server is as easy as downloading the kit and ensuring that the correct files are on your application's classpath. The only platform requirement is using JDK 1.6 or higher.
+
+      <br/><br/>
+
+      <h3>1 - Download the Terracotta Server.</h3>
+
+      The kit is packaged as a tar.gz file. <a href="/downloads/">Download</a> it then unpack it on the command line or with the appropriate decompression application.
+
+      <br/><br/>
+
+      <h3>2 - Update Classpath</h3>
+
+      Add the following JARs from within the kit to your application's classpath (if they are not already there):
+
+      <ul>
+          <li> <code>apis/ehcache/lib/ehcache-&lt;version&gt;.jar</code> &ndash; This file contains the Ehcache API.</li>
+
+          <li> <code>apis/ehcache/lib/slf4j-api-&lt;version&gt;.jar</code> &ndash; This file is the bridge, or logging facade, to the BigMemory Max logging framework.</li>
+
+          <li> <code>apis/toolkit/lib/terracotta-toolkit-runtime-&lt;version&gt;.jar</code> &ndash; This JAR contains the libraries that enable connecting Ehcache to the Terracotta Server.</li>
+       </ul>
+
+       <h3>3 - Configure Ehcache</h3>
+
+       Configure Ehcache to utilize the Terracotta Server. Create an `ehcache.xml` configuration file, or modify your own existing Ehcache configuration, or update the one that is provided in the config-samples/ directory of the downloaded Terracotta Server kit. For example:
+
+       <pre class="pre-indented prettyprint"><code><span class="tag">&lt;ehcache</span><span class="pln"> </span><span class="atn">xmlns:xsi</span><span class="pun">=</span><span class="atv">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp;</span><span class="atn">xsi:noNamespaceSchemaLocation</span><span class="pun">=</span><span class="atv">"http://ehcache.org/ehcache.xsd"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp;</span><span class="atn">name</span><span class="pun">=</span><span class="atv">"myBigMemoryMaxConfig"</span><span class="tag">&gt;</span><span class="pln"><br><br>&nbsp; </span><span class="com">&lt;!-- Tell BigMemory where to write its data to disk. --&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;diskStore</span><span class="pln"> </span><span class="atn">path</span><span class="pun">=</span><span class="atv">"/path/to/my/disk/store/directory"</span><span class="tag">/&gt;</span><span class="pln"><br><br>&nbsp; </span><span class="com">&lt;!-- Set 'maxBytesLocalOffHeap' to the amount of off-heap in-memory <br>&nbsp; storage you want to use. This memory is invisible to the Java garbage <br>&nbsp; collector, providing for gigabytes to terabytes of in-memory data without <br>&nbsp; garbage collection pauses. --&gt;</span><span class="pln"> <br>&nbsp; </span><span class="tag">&lt;cache</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"myBigMemoryMaxStore"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="atn">maxBytesLocalHeap</span><span class="pun">=</span><span class="atv">"512M"</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="atn">maxBytesLocalOffHeap</span><span class="pun">=</span><span class="atv">"8G"</span><span class="tag">&gt;</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com">&lt;!-- Tell BigMemory to use the "localRestartable" persistence<br>&nbsp; &nbsp; strategy for fast restart (optional). --&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;persistence</span><span class="pln"> </span><span class="atn">strategy</span><span class="pun">=</span><span class="atv">"localRestartable"</span><span class="tag">/&gt;</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com">&lt;!-- Include the terracotta element so that the data set will be <br>&nbsp; &nbsp; managed as a client of the Terracotta server array. &nbsp;--&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;terracotta/&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/cache&gt;</span><span class="pln"><br><br>&nbsp; </span><span class="com">&lt;!-- Specify where to find the server array configuration. In this <br>&nbsp; case, the configuration is retrieved from the local server. --&gt;</span><span class="pln"> <br>&nbsp; </span><span class="tag">&lt;terracottaConfig</span><span class="pln"> </span><span class="atn">url</span><span class="pun">=</span><span class="atv">"localhost:9510"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln"><br><br></span><span class="tag">&lt;/ehcache&gt;</span><span class="pln"><br></span></code></pre>
+
+      Ensure that your `ehcache.xml` file is in the top-level of your classpath.
+      
+      <br/><br/>
+      <h3>Note</h3>
+
+      1 - Use the -XX:MaxDirectMemorySize Java option to allocate enough direct memory in the JVM to accomodate the off-heap storage specified in your configuration, plus at least 250MB to allow for other direct memory usage that might occur in your application. For example: <code>-XX:MaxDirectMemorySize=9G</code> Set MaxDirectMemorySize to the amount of BigMemory you have.
+      <br/>
+      2 - Also, allocate at least enough heap using the -Xmx Java option to accomodate the on-heap storage specified in your configuration, plus enough extra heap to run the rest of your application. For example: <code>-Xmx1g</code>
+      <br/>
+      3 - If necessary, define the JAVA_HOME environment variable.
+
+      <br/><br/>
+
+      <h2>Start The Terracotta Server</h2>
+
+      You should be able to run the server for testing without a configuration change, but we will give you
+      a pointer on where to find the configuration file before starting the server.
+
+      <br/><br/>
+
+      <h3>1 - Configure the Terracotta Server</h3>
+
+       To configure the Terracotta server, create a `tc-config.xml` configuration file, or update the one that is provided in the `config-samples/` directory of the terracotta kit. For example:
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;tc:tc-config xmlns:tc="http://www.terracotta.org/config"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-9.xsd"&gt;
+  &lt;servers&gt;
+    &lt;server host="localhost" name="My Server Name"&gt;
+       &lt;!-- Specify the port clients will connect to the server on. --&gt;
+       &lt;tsa-port&gt;9510&lt;/tsa-port&gt;
+       &lt;!-- Configure memory (off-heap) space to use on the server. --&gt;
+       &lt;dataStorage size=”4g”&gt;
+       &lt;/dataStorage&gt;
+    &lt;/server&gt;
+  &lt;/servers&gt;
+  &lt;clients&gt;
+    &lt;logs&gt;logs-%i&lt;/logs&gt;
+  &lt;/clients&gt;
+&lt;/tc:tc-config&gt;</code></pre>
+
+      	Place your `tc-config.xml` file in the Terracotta `server/` directory.
+
+      <br/><br/>
+
+      <h3>2 - Start the Terracotta Server</h3>
+
+      In a terminal, change to your Terracotta `server/` directory. Then execute the start-tc-server command.
+
+      For *nix systems:
+      <pre>%&gt; cd /path/to/terracotta-&lt;version&gt;/server
+%&gt; ./bin/start-tc-server.sh</pre>
+
+      For Windows systems:
+      <pre>&gt; cd \path\to\terracotta-&lt;version&gt;\server
+&gt; .\bin\start-tc-server.bat</pre>
+
+         You should see confirmation in the terminal that the server started.
+
+
+      <br/><br/>
+
+     <h2>Not quite ready yet?</h2>
+
+     Read the <a href="/documentation/">user documentation</a> for everything you've been wondering about the new API!
+
+    </div>
+    <div class="tab-pane" id="second">
+        
+      <h1>Getting Started with TC Server 5.5/10.5</h1>
+
+      Getting started with the Terracotta Server 5.0/10.0 through 5.5/10.5 is a simple matter of downloading, changing a few configuration
+      items, and starting it up.
+
+      Because the server isn't very interesting without something using it, this guide will show you how to put
+      the Terracotta Server to one of its most common uses: clustering an Ehcache cache.
+
+      <br/><br/>
+
+      <h2>Download and Install</h2>
+
+      Installing and using Terracotta Server is as easy as downloading the kit and ensuring that the correct files are on your application's classpath. The only platform requirement is using JDK 1.8 or higher.
+
+      <br/><br/>
+
+      <h3>1 - Download the Terracotta Server.</h3>
+
+      The kit is packaged as a .tar.gz file. <a href="/downloads/">Download</a> it then unpack it on the command line or with the appropriate decompression application.
+
+      <br/><br/>
+
+      <h3>2 - Update Classpath</h3>
+
+      Add the following JAR from within the kit to your application's classpath (if they are not already there):
+
+      <code>apis/ehcache-terracotta-client-all.jar</code> &ndash; This file contains the Ehcache API.</li>
+
+      <br/><br/>
+      <h3>3 - Configure Ehcache</h3>
+
+      <h4>3.1 - Through XML</h4>
+      Configure Ehcache to utilize the Terracotta Server. Create an <code>ehcache.xml</code> configuration file, or modify your own existing Ehcache configuration, or update the one that is provided in the <code>config-samples/</code> directory of the downloaded Terracotta Server kit. For example:<br/>
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">
+  .....
+  &lt;cache alias="foo"&gt; 
+    &lt;key-type&gt;java.lang.String&lt;/key-type&gt; 
+    &lt;resources&gt;
+      &lt;heap unit="entries"&gt;2000&lt;/heap&gt; 
+      &lt;offheap unit="MB"&gt;500&lt;/offheap&gt; 
+    &lt;/resources&gt;
+  &lt;/cache&gt;
+
+  &lt;cache-template name="myDefaults"&gt; 
+    &lt;key-type&gt;java.lang.Long&lt;/key-type&gt;
+    &lt;value-type&gt;java.lang.String&lt;/value-type&gt;
+    &lt;heap unit="entries"&gt;200&lt;/heap&gt;
+  &lt;/cache-template&gt;
+
+  &lt;cache alias="bar" uses-template="myDefaults"&gt; 
+    &lt;key-type&gt;java.lang.Number&lt;/key-type&gt;
+  &lt;/cache&gt;
+
+  &lt;cache alias="simpleCache" uses-template="myDefaults" /&gt;
+  .....
+       </code></pre>
+
+      Ensure that your <code>ehcache.xml</code> file is in the top-level of your classpath.
+
+      <br/><br/>
+
+      <h4>3.2 - Through Java</h4>
+      As with the previous versions of Ehcache, the canonical way of dealing with <code>Cache</code> is through a <code>CacheManager</code>:
+      <pre class="prettyprint highlight"><code class="language-java" data-lang="java">
+  .....
+  CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+    .withCache("preConfigured", CacheConfigurationBuilder
+      .newCacheConfigurationBuilder(Long.class, String.class, ResourcePoolsBuilder.heap(10))) 
+    .build(); 
+
+  cacheManager.init(); 
+
+  Cache&lt;Long, String&gt; preConfigured = cacheManager.getCache("preConfigured", Long.class, String.class); 
+
+  Cache&lt;Long, String&gt; myCache = cacheManager.createCache("myCache", 
+    CacheConfigurationBuilder.newCacheConfigurationBuilder(Long.class, String.class, ResourcePoolsBuilder.heap(10)).build());
+
+  myCache.put(1L, "da one!"); 
+  String value = myCache.get(1L); 
+
+  cacheManager.removeCache("preConfigured"); 
+
+  cacheManager.close();
+  .....
+      </code></pre>
+
+      Further, for creating the cache manager with <b>clustering support</b>, you will need to provide the clustering service configuration:
+      <pre class="prettyprint highlight"><code class="language-java" data-lang="java">
+  .....
+  final CacheManagerBuilder&lt;PersistentCacheManager&gt; clusteredCacheManagerBuilder =
+    CacheManagerBuilder.newCacheManagerBuilder() 
+      .with(ClusteringServiceConfigurationBuilder
+        .cluster(URI.create("terracotta://localhost:9510/my-application")).autoCreate()); 
+
+  final PersistentCacheManager cacheManager = clusteredCacheManagerBuilder.build(true); 
+
+  cacheManager.close();
+  .....
+      </code></pre>
+
+      <br/><br/>
+
+      <h2>Start The Terracotta Server</h2>
+
+      <h3>1 - Configure the Terracotta Server</h3>
+
+       To configure the Terracotta server, create a <code>tc-config.xml</code> configuration file, or update the one that is provided in the <code>config-samples/</code> directory of the terracotta kit. For example:
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;tc-config xmlns="http://www.terracotta.org/config" xmlns:ohr="http://www.terracotta.org/config/offheap-resource"&gt;
+    &lt;services&gt;
+      &lt;service id="resources"&gt;
+        &lt;ohr:offheap-resources&gt;
+          &lt;ohr:resource name="primary-server-resource" unit="MB"&gt;128&lt;/ohr:resource&gt;   
+          &lt;ohr:resource name="secondary-server-resource" unit="MB"&gt;96&lt;/ohr:resource&gt;  
+        &lt;/ohr:offheap-resources&gt;
+      &lt;/service&gt;
+    &lt;/services&gt;
+  &lt;/tc-config&gt;
+       </code></pre>
+
+      	The above configuration defines two named server <i>off-heap</i> resources:
+        <br/>
+        An <i>off-heap</i> resource of <code>128 MB</code> size named <code>primary-server-resource</code>.
+        <br/>
+        Another <i>off-heap</i> resource named <code>secondary-server-resource</code> with <code>96 MB</code> capacity.
+
+      <br/><br/>
+
+      <h3>2 - Start the Terracotta Server</h3>
+
+      Assuming that you have the clustered Ehcache kit available locally, start with extracting the <b>ehcache-clustered</b> kit. Change to your extracted directory and then execute the <b>start-tc-server</b> script as below to start the Terracotta server with the above configuration:
+      <br/><br/>
+
+      On Windows:
+      <pre><code>
+  cd &lt;path/to/terracotta/kit&gt;/server/bin
+  start-tc-server.bat -f &lt;path/to/server/config&gt;/tc-config.xml
+      </code></pre>
+
+      On Unix/Mac:
+      <pre><code>
+  cd &lt;path/to/terracotta/kit&gt;/server/bin
+  ./start-tc-server.sh -f &lt;path/to/server/config&gt;/tc-config.xml
+      </code></pre>
+      
+      <h3>Note</h3>
+      You will need to have <code>JAVA_HOME</code> set to <b>JDK8</b> while starting the Terracotta server.
+      <br/><br/>
+      Check for the below <code>INFO</code> log to confirm if the server started successfully, <code>Terracotta Server instance has started up as ACTIVE node on 0:0:0:0:0:0:0:0:9510 successfully, and is now ready for work</code>.
+
+      <br/><br/>
+
+     <h2>Not quite ready yet?</h2>
+
+     Read the <a href="/documentation/">user documentation</a> for everything you've been wondering about the new API!
+
+    </div>
+    <div class="tab-pane" id="third">
+        
+      <h1>Getting Started with TC Server 5.5/10.5</h1>
+
+      Getting started with the Terracotta Server 5.0/10.0 through 5.5/10.5 is a simple matter of downloading, changing a few configuration
+      items, and starting it up.
+
+      Because the server isn't very interesting without something using it, this guide will show you how to put
+      the Terracotta Server to one of its most common uses: clustering an Ehcache cache.
+
+      <br/><br/>
+
+      <h2>Download and Install</h2>
+
+      Installing and using Terracotta Server is as easy as downloading the kit and ensuring that the correct files are on your application's classpath. The only platform requirement is using JDK 1.8 or higher.
+
+      <br/><br/>
+
+      <h3>1 - Download the Terracotta Server.</h3>
+
+      The kit is packaged as a .tar.gz file. <a href="/downloads/">Download</a> it then unpack it on the command line or with the appropriate decompression application.
+
+      <br/><br/>
+
+      <h3>2 - Update Classpath</h3>
+
+      Add the following JAR from within the kit to your application's classpath (if they are not already there):
+
+      <code>apis/ehcache-terracotta-client-all.jar</code> &ndash; This file contains the Ehcache API.</li>
+
+      <br/><br/>
+      <h3>3 - Configure Ehcache</h3>
+
+      <h4>3.1 - Through XML</h4>
+      Configure Ehcache to utilize the Terracotta Server. Create an <code>ehcache.xml</code> configuration file, or modify your own existing Ehcache configuration, or update the one that is provided in the <code>config-samples/</code> directory of the downloaded Terracotta Server kit. For example:<br/>
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">
+  .....
+  &lt;cache alias="foo"&gt; 
+    &lt;key-type&gt;java.lang.String&lt;/key-type&gt; 
+    &lt;resources&gt;
+      &lt;heap unit="entries"&gt;2000&lt;/heap&gt; 
+      &lt;offheap unit="MB"&gt;500&lt;/offheap&gt; 
+    &lt;/resources&gt;
+  &lt;/cache&gt;
+
+  &lt;cache-template name="myDefaults"&gt; 
+    &lt;key-type&gt;java.lang.Long&lt;/key-type&gt;
+    &lt;value-type&gt;java.lang.String&lt;/value-type&gt;
+    &lt;heap unit="entries"&gt;200&lt;/heap&gt;
+  &lt;/cache-template&gt;
+
+  &lt;cache alias="bar" uses-template="myDefaults"&gt; 
+    &lt;key-type&gt;java.lang.Number&lt;/key-type&gt;
+  &lt;/cache&gt;
+
+  &lt;cache alias="simpleCache" uses-template="myDefaults" /&gt;
+  .....
+       </code></pre>
+
+      Ensure that your <code>ehcache.xml</code> file is in the top-level of your classpath.
+
+      <br/><br/>
+
+      <h4>3.2 - Through Java</h4>
+      As with the previous versions of Ehcache, the canonical way of dealing with <code>Cache</code> is through a <code>CacheManager</code>:
+      <pre class="prettyprint highlight"><code class="language-java" data-lang="java">
+  .....
+  CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+    .withCache("preConfigured", CacheConfigurationBuilder
+      .newCacheConfigurationBuilder(Long.class, String.class, ResourcePoolsBuilder.heap(10))) 
+    .build(); 
+
+  cacheManager.init(); 
+
+  Cache&lt;Long, String&gt; preConfigured = cacheManager.getCache("preConfigured", Long.class, String.class); 
+
+  Cache&lt;Long, String&gt; myCache = cacheManager.createCache("myCache", 
+    CacheConfigurationBuilder.newCacheConfigurationBuilder(Long.class, String.class, ResourcePoolsBuilder.heap(10)).build());
+
+  myCache.put(1L, "da one!"); 
+  String value = myCache.get(1L); 
+
+  cacheManager.removeCache("preConfigured"); 
+
+  cacheManager.close();
+  .....
+      </code></pre>
+
+      Further, for creating the cache manager with <b>clustering support</b>, you will need to provide the clustering service configuration:
+      <pre class="prettyprint highlight"><code class="language-java" data-lang="java">
+  .....
+  final CacheManagerBuilder&lt;PersistentCacheManager&gt; clusteredCacheManagerBuilder =
+    CacheManagerBuilder.newCacheManagerBuilder() 
+      .with(ClusteringServiceConfigurationBuilder
+        .cluster(URI.create("terracotta://localhost:9510/my-application")).autoCreate()); 
+
+  final PersistentCacheManager cacheManager = clusteredCacheManagerBuilder.build(true); 
+
+  cacheManager.close();
+  .....
+      </code></pre>
+
+      <br/><br/>
+
+      <h2>Start The Terracotta Server</h2>
+
+      <h3>1 - Configure the Terracotta Server</h3>
+
+       To configure the Terracotta server, create a <code>tc-config.xml</code> configuration file, or update the one that is provided in the <code>config-samples/</code> directory of the terracotta kit. For example:
+
+       <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;tc-config xmlns="http://www.terracotta.org/config" xmlns:ohr="http://www.terracotta.org/config/offheap-resource"&gt;
+    &lt;services&gt;
+      &lt;service id="resources"&gt;
+        &lt;ohr:offheap-resources&gt;
+          &lt;ohr:resource name="primary-server-resource" unit="MB"&gt;128&lt;/ohr:resource&gt;   
+          &lt;ohr:resource name="secondary-server-resource" unit="MB"&gt;96&lt;/ohr:resource&gt;  
+        &lt;/ohr:offheap-resources&gt;
+      &lt;/service&gt;
+    &lt;/services&gt;
+  &lt;/tc-config&gt;
+       </code></pre>
+
+      	The above configuration defines two named server <i>off-heap</i> resources:
+        <br/>
+        An <i>off-heap</i> resource of <code>128 MB</code> size named <code>primary-server-resource</code>.
+        <br/>
+        Another <i>off-heap</i> resource named <code>secondary-server-resource</code> with <code>96 MB</code> capacity.
+
+      <br/><br/>
+
+      <h3>2 - Start the Terracotta Server</h3>
+
+      Assuming that you have the clustered Ehcache kit available locally, start with extracting the <b>ehcache-clustered</b> kit. Change to your extracted directory and then execute the <b>start-tc-server</b> script as below to start the Terracotta server with the above configuration:
+      <br/><br/>
+
+      On Windows:
+      <pre><code>
+  cd &lt;path/to/terracotta/kit&gt;/server/bin
+  start-tc-server.bat -f &lt;path/to/server/config&gt;/tc-config.xml
+      </code></pre>
+
+      On Unix/Mac:
+      <pre><code>
+  cd &lt;path/to/terracotta/kit&gt;/server/bin
+  ./start-tc-server.sh -f &lt;path/to/server/config&gt;/tc-config.xml
+      </code></pre>
+      
+      <h3>Note</h3>
+      You will need to have <code>JAVA_HOME</code> set to <b>JDK8</b> while starting the Terracotta server.
+      <br/><br/>
+      Check for the below <code>INFO</code> log to confirm if the server started successfully, <code>Terracotta Server instance has started up as ACTIVE node on 0:0:0:0:0:0:0:0:9510 successfully, and is now ready for work</code>.
+
+      <br/><br/>
+
+     <h2>Not quite ready yet?</h2>
+
+     Read the <a href="/documentation/">user documentation</a> for everything you've been wondering about the new API!
+
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#startguide-tabs').tab();
+    });
+</script>
+
+    </div>
+</div>
+
+<br/>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        Related Projects:<br/>
+        <a href="https://www.ehcache.org"><img src="/images/ehcache.png" style=""></a><br/><br/>
+        <a href="https://www.quartz-scheduler.org"><img src="/images/logo-quartz-scheduler.png" style="max-height: 32px;"></a>
+
+        <!--
+        <ul class="contact-list">
+          <li>Terracotta</li>
+          <li><a href="mailto:tc-oss@softwareag.com">tc-oss@softwareag.com</a></li>
+        </ul>
+      -->
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://twitter.com/terracottatech">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.facebook.com/Terracotta">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="http://www.linkedin.com/company/terracotta">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          
+<!--
+          <li>
+            <a href="/feed.xml" title="Atom/RSS Feed">
+              <i class="fa fa-rss-square"></i> Atom/RSS Feed
+            </a>
+          </li>
+          -->
+        </ul>
+      </div>
+
+    <div class="footer-col  footer-col-3">
+      
+      <a href="https://github.com/terracotta-oss"><i class="fa fa-github"></i> GitHub</a>
+      <br/>
+      
+
+      <a href="/downloads/"><i class="fa fa-download"></i> Download Now</a>
+      <br/>
+      <a href="/documentation/"><i class="fa fa-book"></i> Documentation</a>
+      <br/>
+      <!--
+      <a href="/resources/"><i class="fa fa-external-link-square"></i> Resources</a>
+      <br/>
+      <a href="/blog/"><i class="fa fa-rss-square"></i> Terracotat Blog</a>
+      <br/>
+      -->
+      <a href="/community/"><i class="fa fa-users"></i> Join the Community</a>
+    </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <hr/>
+        <a class="SAG-Logo" href="https://www.softwareag.com/"><img src="/images/SAG_Logo.png" style="height:1.5em;width:9em;"/></a>
+        <div class="footer-text">
+          <em class="copyleft">Terracotta is Open Source and freely available under the Terracotta Public License 2.0</em>
+          <br/>
+          <em class="copyright">&copy; Terracotta, Inc., a wholly-owned subsidiary of Software AG USA, Inc. All rights reserved.</em>
+        </div>
+    </div>
+  </div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"/> -->
+
+<script type="text/javascript">
+        $('#').addClass("active");
+        $('#').addClass("active");
+</script>
+
+
+</body>
+
+</html>
