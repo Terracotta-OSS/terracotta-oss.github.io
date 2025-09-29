@@ -168,7 +168,7 @@ Advanced features such as fast-restart persistence, advanced management features
 <div class="sectionbody">
 <div class="paragraph">
 <p>Installing and using Terracotta is as easy as downloading the kit and ensuring that the correct files are on your application&#8217;s classpath for the client components like Ehcache, and then start the server.
-The only platform requirement is using JDK 1.8 or higher.</p>
+The only platform requirement is using JDK 17 or higher.</p>
 </div>
 </div>
 </div>
@@ -200,10 +200,10 @@ The only platform requirement is using JDK 1.8 or higher.</p>
 <pre class="prettyprint highlight"><code data-lang="shell">cd &lt;path/to/terracotta/kit&gt;/server/bin
 
 # On Windows:
-start-tc-server.bat -auto-activate -cluster-name tc-cluster -offheap-resources=offheap-1:512MB,offheap-2:512M
+start-tc-server.bat -auto-activate -cluster-name tc-cluster -offheap-resources=offheap-1:512MB,offheap-2:512MB
 
 # On Unix / Mac:
-./start-tc-server.sh -auto-activate -cluster-name tc-cluster -offheap-resources=offheap-1:512MB,offheap-2:512M</code></pre>
+./start-tc-server.sh -auto-activate -cluster-name tc-cluster -offheap-resources=offheap-1:512MB,offheap-2:512MB</code></pre>
 </div>
 </div>
 <div class="paragraph">
