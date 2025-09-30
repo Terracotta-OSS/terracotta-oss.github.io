@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.terracottatech.store</groupId>
+  <artifactId>terracotta-store-client</artifactId>
+  <version>11.1.0.5.5</version>
+  <name>Terracotta Store Client</name>
+  <organization>
+    <name>IBM Corporation</name>
+    <url>http://terracotta.org</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>Terracotta Engineers</name>
+      <email>dev-internal@terracottatech.com</email>
+      <organization>IBM Corporation</organization>
+    </developer>
+  </developers>
+  <dependencies>
+    <dependency>
+      <groupId>com.terracottatech.internal</groupId>
+      <artifactId>terracotta-common-client</artifactId>
+      <version>11.1.0.5.5</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.36</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>

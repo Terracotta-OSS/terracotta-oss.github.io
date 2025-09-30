@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Title: store-client
+Built-JDK: 21.0.7
+provider: gradle
+Implementation-Version: 11.1.0.5.5
+Implementation-Vendor-Id: terracotta-enterprise.terracotta
+Built-By: jenkins-slave
+

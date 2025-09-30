@@ -1,0 +1,11 @@
+com.terracottatech.store
+com.terracottatech.store.async
+com.terracottatech.store.configuration
+com.terracottatech.store.coordination
+com.terracottatech.store.definition
+com.terracottatech.store.function
+com.terracottatech.store.function.selections
+com.terracottatech.store.indexing
+com.terracottatech.store.manager
+com.terracottatech.store.stream
+com.terracottatech.store.usage
