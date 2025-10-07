@@ -149,28 +149,28 @@
 <p>The <code>Coordinator</code> API provides a simple way to coordinate services that are utilizing Terracotta.</p>
 </div>
 <div class="paragraph">
-<p>For instance, in a microservice architecture, the services may deployed redundantly (for HA) and/or for horizontal
-scale. As the service instances receive "work" to perform, it may be necessary to ensure work is not performced
+<p>For instance, in a microservice architecture, the services may be deployed redundantly (for HA) and/or for horizontal
+scale. As the service instances receive "work" to perform, it may be necessary to ensure work is not performed
 redundantly by multiple service instances, or that units of work are performed in proper sequencing.</p>
 </div>
 <div class="paragraph">
-<p>The Coordinator API provides a way for arbitrary groups of services to coordate with each other as a "logical cluster"
+<p>The Coordinator API provides a way for arbitrary groups of services to coordinate with each other as a "logical cluster"
 by assuming particular roles with the group or "scope".</p>
 </div>
 <div class="paragraph">
-<p>Within the Coordinate API, groupings are created by Coordinator instances using the same group/scope "token".  The
-token is an arbitrary text string as definied/agreed by the services that want to coordinate together.  This might be
+<p>Within the Coordinator API, groupings are created by Coordinator instances using the same group/scope "token".  The
+token is an arbitrary text string as defined/agreed by the services that want to coordinate together.  This might be
 a string such as "PO_Processing_Services" or "message_receivers" or "worker_nodes" or "foo".</p>
 </div>
 <div class="paragraph">
-<p>Once one or more services have joined the group by creating a Coordinator using the given token, the serivce can
+<p>Once one or more services have joined the group by creating a Coordinator using the given token, the service can
 utilize the Coordinator service to do things such as getting a list of all other members of the group or to attempt to
 assume a special role withing the group.</p>
 </div>
 <div class="paragraph">
 <p>Roles represent exclusive responsibilities that only one member may hold at a time. Roles are also arbitrary text
 strings and defined/agreed by the services that want to coordinate together. This might be a string such as "master",
-or "leader" or "standby" or etc.  Only one group member can "acquire" a given role at any given time, and other must
+or "leader" or "standby" or etc.  Only one group member can "acquire" a given role at any given time, and others must
 wait for the role owner to relinquish it before they can assume the role.  There can be many different roles within
 the same group, as coordination needs may require.</p>
 </div>
